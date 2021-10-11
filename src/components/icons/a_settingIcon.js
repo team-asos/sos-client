@@ -1,6 +1,8 @@
 import React from 'react';
+
 import * as AiIcon from "react-icons/ai"
-import './IconStyle.css'
+
+import '../../assets/styles/IconStyle.css'
 
 class SettingIcon extends React.Component{
 

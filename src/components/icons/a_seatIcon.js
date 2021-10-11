@@ -1,6 +1,8 @@
 import React from 'react';
+
 import * as FaIcon from "react-icons/fa"
-import './IconStyle.css'
+
+import '../../assets/styles/IconStyle.css'
 
 class SeatIcon extends React.Component{
     render(){

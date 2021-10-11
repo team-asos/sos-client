@@ -1,5 +1,8 @@
 import React from 'react';
+
 import * as HiIcon from "react-icons/hi"
+
+import '../../assets/styles/IconStyle.css'
 
 class AccountIcon extends React.Component{
    render(){

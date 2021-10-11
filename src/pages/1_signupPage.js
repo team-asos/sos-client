@@ -1,6 +1,8 @@
 import React from 'react';
-import './SignUp.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
+
+import '../assets/styles/1_signupPage.css'
+import '../assets/styles/1_containerStyle.css'
+
 import * as MdIcon from 'react-icons/md';
 import { Link } from 'react-router-dom';
 
@@ -14,7 +16,7 @@ class SignUp extends React.Component {
   }
   render() {
     return (
-      <div className="registerContainer">
+      <div className="container register">
         <div className="upper">
           <Link to="/">
             <MdIcon.MdArrowBackIos className="goBackIcon" size={20} />

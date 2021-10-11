@@ -1,5 +1,8 @@
 import React from 'react';
+
 import * as HiIcon from "react-icons/hi"
+
+import '../../assets/styles/IconStyle.css'
 
 class MemberIcon extends React.Component{
     render(){

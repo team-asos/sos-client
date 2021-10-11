@@ -1,12 +1,13 @@
 import React from 'react';
-import Logo from '../images/logo.png';
 import { Link } from 'react-router-dom';
-import './Login.css';
+
+import Logo from '../assets/images/logo.png';
+import '../assets/styles/1_loginPage.css'
 
 class Login extends React.Component {
   render() {
     return (
-      <div className="loginContainer">
+      <div className="container login">
         <div className="left">
           <img src={Logo} alt="Logo Image" style={{ width: '80%' }} />
         </div>

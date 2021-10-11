@@ -1,25 +1,14 @@
-.registerContainer {
-  position: absolute;
-  width: 55vw; /*55%*/
-  height: 60vh; /*60%*/
-  margin-top: 9%;
-  margin-left: 22%;
-
+.register {
   display: flex;
   flex-direction: column;
   align-content: flex-start;
 
-  background: #c4c4c4;
-  box-shadow: 1px rgba(64, 64, 64, 0.4);
-  border-radius: 44px;
-
   /*밑 이미지 설정(로고)*/
-  background-image: url("../images/logo_transparent.png");
+  background-image: url('../images/logo_transparent.png');
   background-repeat: no-repeat;
   background-size: 25vw; /*300px*/
   background-position: center;
 }
-
 /*회원가입 텍스트 영역*/
 .upper {
   position: relative;
@@ -47,11 +36,11 @@
 /*회원가입 텍스트 영역*/
 .upper p {
   color: #c00000;
-  font-size: 1.3em;
+  font-size: 1.2em;
 }
 /*관리자 확인 체크박스 영역*/
 .checkbox_admin {
-  font-size: 0.7em;
+  font-size: 0.6em;
   margin-left: 1vw;
 }
 .checkbox_admin input {
@@ -66,7 +55,7 @@
   flex-direction: column;
   align-items: center;
 
-  font-size: 0.8em; /*12px*/
+  font-size: 0.6em; /*12px*/
   font-weight: bolder;
 }
 /*각 줄 스타일 넣기*/
@@ -84,18 +73,17 @@
 .form-control {
   width: 21vw; /*250px*/
   height: 5vh; /*30px*/
-  font-size: 0.9em; /*14px*/
+  font-size: 0.7em; /*14px*/
 }
 /*버튼 스타일링*/
 .registerButton {
-  margin-top: 10%;
   width: 21vw; /*250px*/
   height: 5vh; /*30px*/
   color: #ffffff;
   background: #c00000;
   border: none;
   border-radius: 5px;
-  font-size: 0.9em; /*14px*/
+  font-size: 0.7em; /*14px*/
   font-weight: bolder;
 }
 .registerButton:hover {
