@@ -1,0 +1,77 @@
+.login {
+  /*포함 컨텐츠들 정렬*/
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+/*화면 중앙 기준 왼쪽*/
+.left {
+  width: 50vw; /*80%*/
+  text-align: center;
+}
+/*화면 중앙 기준 가운데*/
+.line {
+  width: 0.2vw;
+  height: 40vh;
+  background-color: #c00000;
+}
+/*화면 중앙 기준 오른쪽*/
+.right {
+  width: 50vw;
+  text-align: center;
+}
+
+/*Input형식 크기,위치, 글자크기 지정*/
+.form-control-login {
+  display: block;
+  margin: 5px auto;
+  width: 22vw; /*80%*/
+  height: 5vh; /*30px*/
+  font-size: 0.6em; /*12px*/
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+}
+
+/*Button 요소와 이벤트 지정*/
+.Button {
+  width: 22vw; /*80%*/
+  height: 5vh; /*30px*/
+  border-radius: 5px;
+  font-size: 0.6em; /*12px*/
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+.Login {
+  background: #c00000;
+  color: white;
+  border: none;
+}
+.Register {
+  background: transparent;
+  color: #c00000;
+  border: 2px solid #c00000;
+  margin-top: 1px;
+}
+.Button:hover {
+  transition: ease 0.2s;
+  transform: scale(1.02);
+}
+.Login:hover {
+  background: #8f0202;
+}
+.Register:hover {
+  color: white;
+  border: none;
+  box-shadow: 0 0 40px 40px #8f0202 inset;
+}
+
+/*계정이 없으신가요? 텍스트 스타일 지정*/
+.or {
+  text-align: center;
+  font-size: 0.6em; /*10px*/
+  font-weight: bolder;
+  margin-top: 14px;
+  margin-bottom: 2px;
+}
