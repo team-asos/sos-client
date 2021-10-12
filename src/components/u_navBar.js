@@ -1,6 +1,6 @@
 import React from 'react';
 
-import AppBar from './2_appBar';
+import AppBar from './u_appBar';
 import TimeBar from './2_timeBar';
 import '../assets/styles/2_navBar.css';
 

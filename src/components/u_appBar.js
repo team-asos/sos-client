@@ -1,18 +1,18 @@
 import React from 'react';
+
 import AccountIcon from './icons/a_accountIcon';
-import MemberIcon from './icons/a_memberIcon';
+import SeatReservationIcon from './icons/u_seatReservationIcon';
+import RoomReservationIcon from './icons/u_roomReservationIcon';
 import NotificationIcon from './icons/a_notificationIcon';
-import SeatIcon from './icons/a_seatIcon';
 import SettingIcon from './icons/a_settingIcon';
 
 class AppBox extends React.Component {
   render() {
-    var HoverIconStyle = {};
     return (
       <div>
         <AccountIcon />
-        <MemberIcon />
-        <SeatIcon />
+        <SeatReservationIcon />
+        <RoomReservationIcon />
         <NotificationIcon />
         <SettingIcon />
       </div>

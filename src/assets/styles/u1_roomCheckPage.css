@@ -1,0 +1,30 @@
+/*회의실 조회 헤더*/
+.header1 {
+  position: relative;
+  width: 100%;
+  height: 97px;
+  left: 0%;
+  background: #d34d4d;
+  z-index: -1;
+}
+
+/*회의실 조회*/
+.rcp-textStyle {
+  position: absolute;
+
+  left: 6%;
+  top: 20%;
+
+  font-weight: bold;
+  font-size: 40px;
+}
+
+/*회의실 조회 작은 글씨*/
+.rcp- {
+  position: absolute;
+  color: #c00000;
+  font-weight: bold;
+  left: 7%;
+
+  font-size: 24px;
+}
