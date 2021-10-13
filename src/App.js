@@ -7,7 +7,8 @@ import Login from "./pages/1_loginPage";
 import SignUp from "./pages/1_signupPage";
 import Loading from "./pages/1_loadingPage";
 import SignUpLoading from "./pages/1_signuploadingPage";
-import MainPage from "./pages/2_mainPage";
+import MainPage from "./pages/2a_mainPage";
+import NotificationPage from "./pages/3a_notificationPage";
 
 
 function App() {
@@ -17,10 +18,12 @@ function App() {
         <Switch>
           <Route exact path="/" component={Login} />
           <Route path="/sign-in" component={Login} />
-          <Route path="/sign-up" component={SignUp} />
           <Route path="/loading" component={Loading} />
-          <Route path="/main" component={MainPage} />
+          <Route path="/sign-up" component={SignUp} />
           <Route path="/sign-up-loading" component={SignUpLoading} />
+          
+          <Route path="/main" component={MainPage} />
+          <Route path="/notification" component={NotificationPage}/>
         </Switch>
       </div>
     </Router>

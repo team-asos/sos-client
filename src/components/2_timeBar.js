@@ -24,7 +24,7 @@ class DateTimeBox extends React.Component{
             alignItems: "center",
             justifyContent:"center",
             lineHeight: "40%",
-            fontSize: "small"
+            fontSize: "0.7em"
         }
         return(
             <div style={boxStyle}> 
