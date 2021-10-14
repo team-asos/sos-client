@@ -1,9 +1,5 @@
-@import url(//fonts.googleapis.com/earlyaccess/nanumgothiccoding.css);
-
 /*전체 메세지 박스*/
 .messageBox {
-  font-family: 'Nanum Gothic Coding', monospace;
-
   width: 90vw;
   height: 100vh;
 

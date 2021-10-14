@@ -1,15 +1,15 @@
-import React from "react";
-import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
-import "./App.css";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import React from 'react';
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import './App.css';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
-import Login from "./pages/1_loginPage";
-import SignUp from "./pages/1_signupPage";
-import Loading from "./pages/1_loadingPage";
-import SignUpLoading from "./pages/1_signuploadingPage";
-import MainPage from "./pages/2a_mainPage";
-import NotificationPage from "./pages/3a_notificationPage";
-
+import Login from './pages/1_loginPage';
+import SignUp from './pages/1_signupPage';
+import Loading from './pages/1_loadingPage';
+import SignUpLoading from './pages/1_signuploadingPage';
+import MainPage from './pages/2a_mainPage';
+import NotificationPage from './pages/3a_notificationPage';
+import UserManagePage from './pages/4a_userManagePage';
 
 function App() {
   return (
@@ -21,9 +21,10 @@ function App() {
           <Route path="/loading" component={Loading} />
           <Route path="/sign-up" component={SignUp} />
           <Route path="/sign-up-loading" component={SignUpLoading} />
-          
+
           <Route path="/main" component={MainPage} />
-          <Route path="/notification" component={NotificationPage}/>
+          <Route path="/notification" component={NotificationPage} />
+          <Route path="/seat-management" component={UserManagePage} />
         </Switch>
       </div>
     </Router>

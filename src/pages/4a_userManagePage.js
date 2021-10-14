@@ -1,11 +1,11 @@
 import React from 'react';
 
-import '../assets/styles/3a_notificationPage.css';
+import '../assets/styles/4a_userManagePage.css';
 
 import NavBox from '../components/2a_navBox';
-import MessageBox from '../components/3a_messageBox';
+import UserManageBox from '../components/4a_userManageBox';
 
-class NotificationPage extends React.Component {
+class userManagePage extends React.Component {
   render() {
     return (
       <div className="notificationPage">
@@ -13,11 +13,11 @@ class NotificationPage extends React.Component {
           <NavBox />
         </div>
         <div>
-          <MessageBox />
+          <UserManageBox />
         </div>
       </div>
     );
   }
 }
 
-export default NotificationPage;
+export default userManagePage;

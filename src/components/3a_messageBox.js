@@ -30,7 +30,7 @@ class MessageBox extends React.Component {
               </span>
             </button>
           </div>
-          <div style={{ background: 'pink', width: '85vw' }}>Hello</div>
+          <div style={{ background: 'pink', width: '85vw' }}>아직이야...</div>
         </div>
       </div>
     );

@@ -12,7 +12,9 @@ class AppBar extends React.Component {
     return (
       <div>
         <AccountIcon />
-        <MemberIcon />
+        <Link to="/seat-management" style={{ color: 'black' }}>
+          <MemberIcon />
+        </Link>
         <SeatIcon />
         <Link to="/notification" style={{ color: 'black' }}>
           <NotificationIcon />
