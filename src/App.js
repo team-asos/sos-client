@@ -3,13 +3,18 @@ import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
+//공통 페이지
 import Login from './pages/1_loginPage';
 import SignUp from './pages/1_signupPage';
 import Loading from './pages/1_loadingPage';
 import SignUpLoading from './pages/1_signuploadingPage';
+import LoginNoti from './pages/1_loginNotificationPage';
+
+//사용자 페이지
 import RoomReservationPage from './pages/u2_roomReservationPage';
 import RoomCheckPage from './pages/u1_roomCheckPage';
-import LoginNoti from './pages/1_loginNotificationPage';
+
+//관리자 페이지
 import MainPage from './pages/a2_mainPage';
 import NotificationPage from './pages/a3_notificationPage';
 import UserManagePage from './pages/a4_userManagePage';
@@ -21,13 +26,13 @@ function App() {
         <Switch>
           <Route exact path="/" component={Login} />
           <Route path="/sign-in" component={Login} />
+          <Route path="/sign-up" component={SignUp} />
           <Route path="/loading" component={Loading} />
           <Route path="/login-noti" component={LoginNoti} />
           <Route path="/sign-up-loading" component={SignUpLoading} />
+
           <Route path="/room-reservation" component={RoomReservationPage} />
           <Route path="/room-check" component={RoomCheckPage} />
-          <Route path="/sign-up" component={SignUp} />
-          <Route path="/sign-up-loading" component={SignUpLoading} />
 
           <Route path="/main" component={MainPage} />
           <Route path="/notification" component={NotificationPage} />
