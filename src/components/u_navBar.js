@@ -2,7 +2,7 @@ import React from 'react';
 
 import AppBar from './u_appBar';
 import TimeBar from './2_timeBar';
-import '../assets/styles/2_navBar.css';
+import '../assets/styles/2a_navBox.css';
 
 class NavBar extends React.Component {
   render() {
