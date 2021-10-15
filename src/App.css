@@ -1,10 +1,16 @@
+<<<<<<< HEAD
 @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
 
 .App {
   font-family: 'Nanum Gothic', sans-serif;
 }
 
+=======
+@import '//cdn.jsdelivr.net/npm/font-applesdgothicneo@1.0/all.min.css';
+>>>>>>> 11fb9eb6c2b9e4431b9f2ba9d3d4502bd80bf5aa
 .App {
+  font-family: 'Apple SD Gothic Neo';
+
   width: 100vw;
   height: 100vh;
 }
