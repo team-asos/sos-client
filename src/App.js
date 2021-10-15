@@ -10,9 +10,9 @@ import SignUpLoading from './pages/1_signuploadingPage';
 import RoomReservationPage from './pages/u2_roomReservationPage';
 import RoomCheckPage from './pages/u1_roomCheckPage';
 import LoginNoti from './pages/1_loginNotificationPage';
-import MainPage from './pages/2a_mainPage';
-import NotificationPage from './pages/3a_notificationPage';
-import UserManagePage from './pages/4a_userManagePage';
+import MainPage from './pages/a2_mainPage';
+import NotificationPage from './pages/a3_notificationPage';
+import UserManagePage from './pages/a4_userManagePage';
 
 function App() {
   return (

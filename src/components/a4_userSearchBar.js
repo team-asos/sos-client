@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import * as BiIcons from 'react-icons/bi';
 
 import membersData from '../assets/data/memberList';
-import '../assets/styles/4a_userSearchBar.css';
+import '../assets/styles/a4_userSearchBar.css';
 
 const UserSearchBar = () => {
   const [filter, setFilter] = useState('');
@@ -56,10 +56,6 @@ const UserSearchBar = () => {
                   {item.name} | {item.email} | {item.tel} | {item.dept} |{' '}
                   {item.job}
                 </p>
-              </div>
-              <div class="editDeleteButton">
-                <button>수정</button>
-                <button>삭제</button>
               </div>
             </div>
           );

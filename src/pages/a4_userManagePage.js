@@ -1,9 +1,9 @@
 import React from 'react';
 
-import '../assets/styles/4a_userManagePage.css';
+import '../assets/styles/a4_userManagePage.css';
 
-import NavBox from '../components/2a_navBox';
-import UserManageBox from '../components/4a_userManageBox';
+import NavBox from '../components/a2_navBox';
+import UserManageBox from '../components/a4_userManageBox';
 
 class userManagePage extends React.Component {
   render() {

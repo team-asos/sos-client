@@ -1,5 +1,5 @@
 import React from 'react';
-import '../assets/styles/3a_messageBox.css';
+import '../assets/styles/a3_messageBox.css';
 
 class MessageBox extends React.Component {
   render() {
