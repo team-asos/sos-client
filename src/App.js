@@ -7,9 +7,9 @@ import Login from './pages/1_loginPage';
 import SignUp from './pages/1_signupPage';
 import Loading from './pages/1_loadingPage';
 import SignUpLoading from './pages/1_signuploadingPage';
-import MainPage from './pages/2a_mainPage';
-import NotificationPage from './pages/3a_notificationPage';
-import UserManagePage from './pages/4a_userManagePage';
+import MainPage from './pages/a2_mainPage';
+import NotificationPage from './pages/a3_notificationPage';
+import UserManagePage from './pages/a4_userManagePage';
 
 function App() {
   return (
