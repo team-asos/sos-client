@@ -9,21 +9,20 @@ import RoomReservationTable from '../components/u2_roomReservationTable';
 class RoomReservationPage extends React.Component {
   render() {
     return (
-      <div>
+      <div className="roomReservationPage">
         <div>
           <NavBarUser />
         </div>
+
         <div className="reservationForm">
           <div className="reservationHeader">
             <br></br>
             <p className="rrp_titleTextStyle">회의실 예약</p>
           </div>
-
           <div className="srTable">
             <SelectedRoomTable />
             <RoomReservationTable />
           </div>
-
           <p className="rrp_centerTextStyle">회의 참석자를 입력하세요.</p>
         </div>
       </div>

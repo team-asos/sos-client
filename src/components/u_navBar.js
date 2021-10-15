@@ -2,12 +2,12 @@ import React from 'react';
 
 import AppBar from './u_appBar';
 import TimeBar from './2_timeBar';
-import '../assets/styles/2a_navBox.css';
+import '../assets/styles/a2_navBox.css';
 
 class NavBar extends React.Component {
   render() {
     return (
-      <div className="navBar">
+      <div className="navBox">
         <div className="logoBar"></div>
         <div className="appBar">
           <AppBar />
