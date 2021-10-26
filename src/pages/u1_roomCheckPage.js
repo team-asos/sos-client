@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import NavBarUser from '../components/u_navBar';
-import { Table } from 'react-bootstrap';
+import { Table, Dropdown } from 'react-bootstrap';
 import '../assets/styles/u1_roomCheckPage.css';
 
 //회의실 조회 페이지
-class RoomCheckPage extends Component {
+class RoomCheckPage extends React.Component {
   render() {
     return (
       <div>

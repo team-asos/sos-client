@@ -1,11 +1,18 @@
+.reservationForm {
+  display: flex;
+  flex-direction: column;
+}
+
 /*회의실 예약 페이지 헤더*/
-.header1 {
+.reservationHeader {
   position: relative;
   width: 100%;
   height: 97px;
   left: 0%;
   background: #d34d4d;
   z-index: -1;
+  display: flex;
+  flex-direction: column;
 }
 /*회의실 예약*/
 .rrp_titleTextStyle {
@@ -17,18 +24,18 @@
   font-weight: bold;
   font-size: 40px;
 }
-/*선택한 회의실 정보*/
+/*회의실 예약 테이블*/
 .srTable {
-  position: absolute;
+  position: relative;
   width: 95.4%;
   left: 4.6%;
-  z-index: -1;
+
   text-align: start;
 }
-/*회의실 예약*/
+/*회의 참석자를 입력하세요*/
 .rrp_centerTextStyle {
-  position: absolute;
+  position: relative;
   font-size: 20px;
   font-weight: bold;
-  left: 1%;
+  left: 4.6%;
 }

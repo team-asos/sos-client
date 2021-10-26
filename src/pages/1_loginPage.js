@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import Logo from '../assets/images/logo.png';
-import '../assets/styles/1_loginPage.css'
+import '../assets/styles/1_loginPage.css';
 
 class Login extends React.Component {
   render() {
@@ -25,6 +25,9 @@ class Login extends React.Component {
               placeholder="비밀번호"
             />
           </div>
+
+          <div></div>
+
           <button className="Button Login">로그인</button>
           <p className="or">계정이 없으신가요?</p>
           <Link to="/sign-up">
