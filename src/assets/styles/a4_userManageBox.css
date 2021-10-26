@@ -1,0 +1,21 @@
+.userManageBox {
+  width: 90vw;
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+}
+
+/*"알림" 텍스트 설정*/
+.userManageUpperBox p {
+  margin-top: 1%;
+  vertical-align: middle;
+  height: 7vh;
+  font-size: 2em;
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.userManageUpperBoxChild {
+}

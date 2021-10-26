@@ -1,0 +1,9 @@
+.u_userSearchForm {
+  width: 27vw;
+  height: 10vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.u_userSearch {
+}

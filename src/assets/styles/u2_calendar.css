@@ -1,7 +1,8 @@
 .customPicker {
-  background-color: steelblue;
-  border-radius: 10px;
-  color: white;
+  background-color: #d6d6d6;
+  font-size: 1.1em;
+  width: 35%;
+  border-radius: 4px;
 }
 .pickers {
   display: flex;

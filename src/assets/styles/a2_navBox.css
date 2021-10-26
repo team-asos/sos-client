@@ -1,10 +1,12 @@
-.navBar {
-  position: absolute;
-  width: 86px;
+.navBox {
+  position: relative;
+  /*width: 70px;*/
+  width: max-content;
   height: 100vh;
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: 1px 1px 1px 1px white;
   border-radius: 10px;
 }
+
 .logoBar {
   position: relative;
   height: 10vh;
@@ -14,13 +16,15 @@
   background-image: url('../images/logo.png');
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 70px;
+  background-size: contain;
 }
+
 .appBar {
   position: relative;
   height: 70vh;
   background-color: #858585;
 }
+
 .dateBar {
   position: relative;
   display: block;

@@ -1,14 +1,17 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-import AppBar from './u_appBar';
+import AppBar from './a2_appBar';
 import TimeBar from './2_timeBar';
 import '../assets/styles/a2_navBox.css';
 
-class NavBar extends React.Component {
+class NavBox extends React.Component {
   render() {
     return (
       <div className="navBox">
-        <div className="logoBar"></div>
+        <Link to="/main">
+          <div className="logoBar"></div>
+        </Link>
         <div className="appBar">
           <AppBar />
         </div>
@@ -20,4 +23,4 @@ class NavBar extends React.Component {
   }
 }
 
-export default NavBar;
+export default NavBox;

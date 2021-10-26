@@ -1,0 +1,42 @@
+.userMyPage {
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+  flex-direction: row;
+}
+.u_myPageForm {
+  width: 95vw;
+  display: flex;
+  flex-direction: column;
+}
+.u_myPageHeader {
+  position: relative;
+  height: 10vh;
+  background: #c4c4c4;
+  display: flex;
+  flex-direction: row;
+  /*justify-content: center;*/
+  /*align-content: center;*/
+  align-items: center;
+}
+.u_myPageHeaderTextStyle {
+  position: relative;
+  font-weight: bold;
+  font-size: 2em;
+  /*left: 2%;*/
+  margin-left: 2%;
+}
+.u_myPageMenu {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  justify-content: space-evenly;
+  font-size: 1.2em;
+}
+.myRLMenuTextStyle,
+.myInfoMenuTextStyle {
+  font-weight: bold;
+  cursor: pointer;
+  margin-left: 2%;
+}
