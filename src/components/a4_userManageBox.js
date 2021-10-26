@@ -9,7 +9,9 @@ class userManageBox extends React.Component {
       <div className="userManageBox">
         {/* 위, 텍스트 부분 */}
         <div className="userManageUpperBox">
-          <p>사용자 관리</p>
+          <div className="userManageUpperBoxChild">
+            <p>사용자 관리</p>
+          </div>
         </div>
         {/* 아래,  부분 */}
         <div className="userManageBottomBox">

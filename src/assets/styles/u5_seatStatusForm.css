@@ -1,0 +1,60 @@
+/*leftForm*/
+.seatForm {
+  /* background-color: lightcoral;*/
+  width: 65vw;
+  height: 88vh;
+  display: flex;
+  flex-direction: column;
+}
+/*시설, 예약가능, 사용중*/
+.u_seatFormUpper {
+  display: flex;
+  flex-direction: row;
+  height: 13vh;
+  justify-content: flex-end;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+.showFacility {
+}
+.showFacilityButton {
+  font-size: 1.4em;
+  font-weight: bold;
+  border: none;
+  width: 6vw;
+  height: 6vh;
+  margin-bottom: 1vh;
+  margin-left: 1vw;
+  border-radius: 100%;
+  background-color: salmon;
+}
+.seatsStatusForm {
+  display: flex;
+}
+.reservedSeats,
+.ableSeats {
+  display: flex;
+  margin-right: 2vw;
+}
+.reservedSeatShape {
+  width: 2vw;
+  height: 2vw;
+  background-color: #646464;
+}
+.ableSeatShape {
+  width: 2vw;
+  height: 2vw;
+  background-color: #00a023;
+}
+.reservedSeatsTextStyle,
+.ableSeatsTextStyle {
+  font-size: 1.4em;
+  font-weight: bold;
+}
+/*좌석 도면*/
+.u_seatFormBottom {
+  width: 63vw;
+  height: 100vh;
+  background-color: #820101;
+  margin-left: 1vw;
+}

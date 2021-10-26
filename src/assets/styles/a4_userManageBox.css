@@ -10,7 +10,17 @@
 }
 /*"알림" 텍스트 설정*/
 .userManageUpperBox p {
+<<<<<<< HEAD
+=======
+  margin-top: 1%;
+  vertical-align: middle;
+>>>>>>> 120ef3d67bef22fa430354d56ca6df79741dbffd
   height: 7vh;
   font-size: 2em;
   font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.userManageUpperBoxChild {
 }

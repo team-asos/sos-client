@@ -4,6 +4,7 @@ import { Table, Dropdown } from 'react-bootstrap';
 import '../assets/styles/u2_roomReservationPage.css';
 import SelectedRoomTable from '../components/u2_selectedRoomTable';
 import RoomReservationTable from '../components/u2_roomReservationTable';
+import AddParticipant from '../components/u2_addParticipant';
 
 //회의실 예약 페이지
 class RoomReservationPage extends React.Component {
@@ -24,6 +25,9 @@ class RoomReservationPage extends React.Component {
             <RoomReservationTable />
           </div>
           <p className="rrp_centerTextStyle">회의 참석자를 입력하세요.</p>
+          <div>
+            <AddParticipant />
+          </div>
         </div>
       </div>
     );

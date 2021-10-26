@@ -1,6 +1,6 @@
 import React from 'react';
 import * as MdIcon from 'react-icons/md';
-import '../../assets/images/logo.png';
+import { Link } from 'react-router-dom';
 
 class RoomIcon extends React.Component {
   constructor() {
@@ -24,7 +24,14 @@ class RoomIcon extends React.Component {
         onMouseEnter={this.onMouseOver.bind(this)}
         onMouseLeave={this.onMouseOut.bind(this)}
       >
-        <MdIcon.MdMeetingRoom className="icon" size={35} />
+        <Link
+          to="/room-check"
+          style={{
+            color: 'inherit',
+          }}
+        >
+          <MdIcon.MdMeetingRoom className="icon" size={35} />
+        </Link>
         <p className="text"> {text}</p>
       </div>
     );

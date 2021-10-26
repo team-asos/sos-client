@@ -1,14 +1,14 @@
 import React from 'react';
-import * as AiIcon from 'react-icons/ai';
-import '../../assets/styles/IconStyle.css';
+import * as MdIcon from 'react-icons/md';
+import { Link } from 'react-router-dom';
 
-class SettingIcon extends React.Component {
+class InquireIcon extends React.Component {
   constructor() {
     super();
     this.state = { text: '' };
   }
   onMouseOver(e) {
-    this.setState({ text: '설정' });
+    this.setState({ text: '문의' });
     e.target.style.color = '#820101';
     //e.target.style.transform='scale(1.1)'
   }
@@ -25,11 +25,18 @@ class SettingIcon extends React.Component {
         onMouseEnter={this.onMouseOver.bind(this)}
         onMouseLeave={this.onMouseOut.bind(this)}
       >
-        <AiIcon.AiFillSetting className="icon" size={35} />
-        <p className="text">{text}</p>
+        <Link
+          to="/inquire"
+          style={{
+            color: 'inherit',
+          }}
+        >
+          <MdIcon.MdQuestionAnswer className="icon" size={35} />
+        </Link>
+        <p className="text"> {text}</p>
       </div>
     );
   }
 }
 
-export default SettingIcon;
+export default InquireIcon;

@@ -1,0 +1,30 @@
+.myReservationListForm {
+  margin: 1%;
+}
+
+.myReservationListFormTitleTextStyle {
+  font-size: 2em;
+  color: #646464;
+  font-weight: bold;
+}
+.myReservationList {
+  display: flex;
+  flex-direction: column;
+  width: 80vw;
+}
+.myReservationDetail {
+  background-color: #c4c4c4;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin-top: 1%;
+}
+.rvDate,
+.rvTime,
+.rvFloor,
+.rvSeatNum,
+.rvStatus {
+  font-weight: bold;
+  font-size: 1.5em;
+  text-align: center;
+}
