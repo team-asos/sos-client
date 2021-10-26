@@ -1,6 +1,7 @@
 .navBox {
   position: relative;
-  width: 70px;
+  /*width: 70px;*/
+  width: max-content;
   height: 100vh;
   box-shadow: 1px 1px 1px 1px white;
   border-radius: 10px;
@@ -15,7 +16,7 @@
   background-image: url('../images/logo.png');
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 70px;
+  background-size: contain;
 }
 
 .appBar {

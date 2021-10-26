@@ -1,29 +1,29 @@
-.roomCheckPage {
+.inquirePage {
   width: 100vw;
   height: 100vh;
 
   display: flex;
   flex-direction: row;
 }
-.roomCheckForm {
+.inquireForm_main {
   width: 95vw;
   display: flex;
   flex-direction: column;
 }
-.checkHeader {
-  background: #820101;
-
+.inquireHeader {
   position: relative;
   height: 10vh;
-
+  left: 0%;
+  /*background: #d34d4d;*/
   display: flex;
   flex-direction: column;
-  justify-content: center;
 }
-.roomCheck_titleTextStyle {
+.inquire_titleTextStyle {
   position: absolute;
-  left: 2%;
-  color: white;
+
+  left: 3%;
+  top: 20%;
+
   font-weight: bold;
   font-size: 2em;
 }

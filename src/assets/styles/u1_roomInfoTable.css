@@ -1,0 +1,13 @@
+.roomReservationButton {
+  background: rgba(204, 0, 0, 0.5);
+  border-radius: 50px;
+}
+.roomStatusButton {
+  background: #c4c4c4;
+  border-radius: 50px;
+}
+.reservationTable {
+  position: relative;
+
+  text-align: start;
+}
