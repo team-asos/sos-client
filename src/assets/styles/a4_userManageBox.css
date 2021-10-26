@@ -1,16 +1,16 @@
 .userManageBox {
   width: 90vw;
   height: 100vh;
-
   display: flex;
   flex-direction: column;
 }
 
+.userManageUpperBox {
+  height: 7vh;
+}
 /*"알림" 텍스트 설정*/
 .userManageUpperBox p {
-  margin-top: 1%;
-  vertical-align: middle;
-
-  font-size: 1.5em;
+  height: 7vh;
+  font-size: 2em;
   font-weight: bold;
 }

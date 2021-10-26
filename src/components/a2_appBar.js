@@ -19,7 +19,6 @@ class AppBar extends React.Component {
         <Link to="/notification" style={{ color: 'black' }}>
           <NotificationIcon />
         </Link>
-        <SettingIcon />
       </div>
     );
   }
