@@ -9,7 +9,15 @@ function ButtonForm() {
 
   return (
     <>
-      <Button variant="success" onClick={handleShow} size="lg">
+      <Button
+        variant="success"
+        onClick={handleShow}
+        size="lg"
+        style={{
+          width: '10vw',
+          alignSelf: 'center',
+        }}
+      >
         예약하기
       </Button>
 

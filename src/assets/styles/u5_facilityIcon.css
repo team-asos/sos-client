@@ -1,0 +1,36 @@
+.facilityicon {
+  width: 5vw;
+  height: 5vh;
+}
+.facility-icon-box {
+  height: 6vh; /*54px*/
+  position: relative;
+}
+/*.facility-icon-box:hover,
+:visited {
+  color: #820101;
+  transition: ease-in 0.1s;
+  transform: scale(1.05);
+  cursor: pointer;
+}*/
+
+.facility-icon-box:hover .text {
+  visibility: visible;
+}
+.facility-text {
+  font-size: 1.2em;
+  font-weight: 1000;
+  color: rgb(143, 143, 143);
+  text-align: center;
+  cursor: pointer;
+  /*visibility: hidden;*/
+}
+.facility-text-div {
+  position: absolute;
+  width: inherit;
+  left: 1vw;
+  top: 1vh;
+}
+.facility-icon-div {
+  position: relative;
+}

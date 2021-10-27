@@ -16,10 +16,7 @@ class SeatPage extends React.Component {
 
         <div className="userSeatForm">
           <div className="u_seatHeader">
-            <div className="u_seatHeaderTextStyle">2F</div>
-            {/*층 리스트*/}
-            <button className="u_floorNameButton">1F</button>
-            <button className="u_floorNameButton_selected">2F</button>
+            <div className="u_seatHeaderTextStyle">좌석 예약</div>
           </div>
 
           <div className="userSeatReservationForm">
@@ -32,7 +29,7 @@ class SeatPage extends React.Component {
             <div className="u_rightForm">
               <UserSearchForm />
               <DateTimeForm />
-              <ButtonForm />
+
               {/*<button
                 className="u_seatReservationButton"
               >

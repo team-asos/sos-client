@@ -10,7 +10,10 @@ class SeatStatusForm extends React.Component {
           <Select
             menuPosition={'center'}
             options={MembersData.listData.map(item => {
-              return { value: item.name, label: item.name };
+              return {
+                value: [item.name, item.email, item.tel],
+                label: [item.name, item.email, item.tel],
+              };
             })}
             placeholder="회원 검색"
             //onChange={onchange.bind(this)}

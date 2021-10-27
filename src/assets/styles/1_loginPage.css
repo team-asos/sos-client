@@ -28,7 +28,7 @@
   margin: 5px auto;
   width: 22vw; /*80%*/
   height: 5vh; /*30px*/
-  font-size: 0.6em; /*12px*/
+  font-size: 0.8em; /*12px*/
   font-weight: bold;
   border: none;
   border-radius: 5px;
@@ -39,7 +39,7 @@
   width: 22vw; /*80%*/
   height: 5vh; /*30px*/
   border-radius: 5px;
-  font-size: 0.6em; /*12px*/
+  font-size: 0.8em; /*12px*/
   font-weight: bold;
   margin-bottom: 12px;
 }
