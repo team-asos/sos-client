@@ -1,6 +1,6 @@
 import React from 'react';
 import '../assets/styles/u3_inquiryForm.css';
-
+//문의 작성 폼
 class InquiryForm extends React.Component {
   render() {
     return (

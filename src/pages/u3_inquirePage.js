@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import NavBarUser from '../components/u_navBar';
 import '../assets/styles/u3_inquirePage.css';
 import TabMenu from '../components/u3_tabMenu';
@@ -14,7 +15,17 @@ class InquirePage extends React.Component {
 
         <div className="inquireForm_main">
           <div className="inquireHeader">
-            <p className="inquire_titleTextStyle">문의하기</p>
+            <p className="inquire_titleTextStyle">
+              <Link
+                to="/inquire"
+                style={{
+                  color: 'inherit',
+                  textDecoration: 'none',
+                }}
+              >
+                문의하기
+              </Link>
+            </p>
           </div>
           <div>
             <TabMenu />

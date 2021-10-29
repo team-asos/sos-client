@@ -6,8 +6,8 @@
   background: #c4c4c4;
   border-radius: 50px;
 }
-.reservationTable {
+.infoTable {
   position: relative;
-
-  text-align: start;
+  text-align: center;
+  font-size: 1.5em;
 }

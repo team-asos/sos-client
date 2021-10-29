@@ -5,7 +5,6 @@
 
 /*제목 폼(제목, 날짜, 상태, 화살표)*/
 .inquiryTitle {
-  background-color: pink;
 }
 
 /*제목 폼에서 화살표 버튼 제외한 부분*/
@@ -35,5 +34,5 @@
 }
 /*답변 여부*/
 .isReply {
-  color: rgba(133, 133, 133);
+  color: rgb(40, 40, 40);
 }

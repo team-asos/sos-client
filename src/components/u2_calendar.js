@@ -4,7 +4,7 @@ import { ko } from 'date-fns/esm/locale';
 import { addDays } from 'date-fns';
 import '../assets/styles/u2_calendar.css';
 
-//회의실 예약 페이지-> 이용시간
+//회의실 예약 페이지-> 이용시간 선택
 const Calendar = () => {
   const [startDate, setStartDate] = useState(new Date()); //DatePicker
   const [endDate, setEndDate] = useState(new Date());

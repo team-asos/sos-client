@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import { Nav, Table, Dropdown } from 'react-bootstrap';
+import React from 'react';
+import { Table } from 'react-bootstrap';
 import '../assets/styles/u2_selectedRoomTable.css';
 
-//회의실 예약 페이지-> 선택된 회의실 설명 테이블
+//회의실 예약 페이지-> 선택된 회의실 설명 테이블(room-check에서 정보 받아오기)
 class SelectedRoomTable extends React.Component {
   render() {
     return (

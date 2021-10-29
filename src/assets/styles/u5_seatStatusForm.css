@@ -76,6 +76,17 @@
   background: #737272;
   height: 8vh;
 }
+.u_floorNameButton_first {
+  width: 5vw;
+  height: inherit;
+  background: #820101;
+  border: 0.4px solid #eeeeee;
+  box-sizing: border-box;
+  font-size: 2em;
+  font-weight: bold;
+  color: white;
+}
+
 .u_floorNameButton {
   width: 5vw;
   height: inherit;
@@ -86,14 +97,7 @@
   font-weight: bold;
   color: white;
 }
-/*선택된 층*/
-.u_floorNameButton_selected {
-  width: 5vw;
-  height: inherit;
+.u_floorNameButton:focus {
   background: #820101;
-  border: 0.4px solid #eeeeee;
-  box-sizing: border-box;
-  font-size: 2em;
-  font-weight: bold;
-  color: white;
 }
+/*선택된 층*/

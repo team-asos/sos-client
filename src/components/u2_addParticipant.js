@@ -4,6 +4,7 @@ import Select from 'react-select';
 import '../assets/styles/u2_addParticipant.css';
 import '../assets/data/memberList';
 import MembersData from '../assets/data/memberList';
+//회의실 인원 검색해서 추가
 
 const AddParticipant = () => {
   /*const options = [
