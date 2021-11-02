@@ -19,9 +19,10 @@ import SeatReservationPage from './pages/u5_seatPage';
 import MyInfo from './components/u4_myInfoForm';
 
 //관리자 페이지
-import MainPage from './pages/a2_mainPage';
 import NotificationPage from './pages/a3_notificationPage';
+import UserDetailPage from './pages/a4_userDetailPage';
 import UserManagePage from './pages/a4_userManagePage';
+import SeatManagePage from './pages/a5_seatManagePage';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
       <div className="App">
         <Switch>
           <Route exact path="/" component={Login} />
+
           <Route path="/sign-in" component={Login} />
           <Route path="/sign-up" component={SignUp} />
           <Route path="/loading" component={Loading} />
@@ -42,9 +44,10 @@ function App() {
           <Route path="/user-mypage/myinfo" component={MyInfo} />
           <Route path="/seat-reservation" component={SeatReservationPage} />
 
-          <Route path="/main" component={MainPage} />
+          <Route exact path="/user-management" component={UserManagePage} />
+          <Route path="/user-management/:id" component={UserDetailPage} />
           <Route path="/notification" component={NotificationPage} />
-          <Route path="/seat-management" component={UserManagePage} />
+          <Route path="/seat-management" component={SeatManagePage} />
         </Switch>
       </div>
     </Router>

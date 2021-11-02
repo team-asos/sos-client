@@ -34,6 +34,10 @@
   border-radius: 5px;
 }
 
+.form-control-login:focus {
+  outline: none;
+}
+
 /*Button 요소와 이벤트 지정*/
 .Button {
   width: 22vw; /*80%*/

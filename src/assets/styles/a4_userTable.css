@@ -1,0 +1,19 @@
+tr {
+}
+
+.userInfoBtn {
+  cursor: pointer;
+  font-size: smaller;
+  font-weight: bold;
+  border: 1px solid #c00000;
+  border-radius: 2px;
+  color: #c00000;
+  background: transparent;
+}
+.userInfoBtn:hover {
+  transition: ease-in 0.05s;
+  transform: scale(1.04);
+  background: #c00000;
+  color: whitesmoke;
+  border: none;
+}

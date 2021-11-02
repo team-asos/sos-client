@@ -1,5 +1,4 @@
 //임의로 만든 멤버들 데이터
-
 const MembersData = {
   listData: [
     {
@@ -10,6 +9,7 @@ const MembersData = {
       tel: '010 1234 3264',
       dept: '마케팅',
       job: '사장',
+      companyId: '2021M03',
     },
     {
       id: 2,
@@ -19,6 +19,7 @@ const MembersData = {
       tel: '010 3432 3213',
       dept: '마케팅',
       job: '부사장',
+      companyId: '2021M03',
     },
     {
       id: 3,
@@ -28,6 +29,7 @@ const MembersData = {
       tel: '010 3432 6164',
       dept: '엔지니어링',
       job: '사장',
+      companyId: '2021M03',
     },
     {
       id: 4,
@@ -37,6 +39,7 @@ const MembersData = {
       tel: '010 5432 3264',
       dept: '엔지니어링',
       job: '부장',
+      companyId: '2021M03',
     },
     {
       id: 5,
@@ -46,6 +49,7 @@ const MembersData = {
       tel: '010 3432 3264',
       dept: '인사팀',
       job: '파트장',
+      companyId: '2021M03',
     },
     {
       id: 6,
@@ -55,6 +59,7 @@ const MembersData = {
       tel: '010 3092 3264',
       dept: '마케팅',
       job: '사원',
+      companyId: '2021M03',
     },
     {
       id: 7,
@@ -64,6 +69,7 @@ const MembersData = {
       tel: '010 3432 3624',
       dept: '엔진 설계',
       job: '사장',
+      companyId: '2021M03',
     },
     {
       id: 8,
@@ -73,6 +79,7 @@ const MembersData = {
       tel: '010 3432 3264',
       dept: '기획팀',
       job: '사원',
+      companyId: '2021M03',
     },
     {
       id: 9,
@@ -82,6 +89,7 @@ const MembersData = {
       tel: '010 8092 3264',
       dept: '기획팀',
       job: '차장',
+      companyId: '2021M03',
     },
     {
       id: 10,
@@ -91,6 +99,7 @@ const MembersData = {
       tel: '010 3432 7901',
       dept: '엔진 설계',
       job: '책임연구원',
+      companyId: '2021M03',
     },
   ],
 };

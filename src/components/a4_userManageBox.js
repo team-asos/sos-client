@@ -1,6 +1,7 @@
 import React from 'react';
 
 import '../assets/styles/a4_userManageBox.css';
+
 import UserSearchBar from './a4_userSearchBar';
 
 class userManageBox extends React.Component {

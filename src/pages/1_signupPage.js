@@ -1,7 +1,7 @@
 import React from 'react';
 
-import '../assets/styles/1_signupPage.css'
-import '../assets/styles/1_containerStyle.css'
+import '../assets/styles/1_signupPage.css';
+import '../assets/styles/1_containerStyle.css';
 
 import * as MdIcon from 'react-icons/md';
 import { Link } from 'react-router-dom';
@@ -22,12 +22,6 @@ class SignUp extends React.Component {
             <MdIcon.MdArrowBackIos className="goBackIcon" size={20} />
           </Link>
           <p>회원 가입</p>
-          <div className="checkbox_admin">
-            <label>
-              <input type="checkbox" onChange={this.isUserAdmin.bind(this)} />
-              저는 관리자입니다
-            </label>
-          </div>
         </div>
 
         <div className="bottom">
@@ -67,6 +61,14 @@ class SignUp extends React.Component {
 
           <div className="column">
             <div>
+              <label>사원번호</label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="사원번호"
+              />
+            </div>
+            <div>
               <label>전화번호</label>
               <input
                 type="text"
@@ -74,31 +76,21 @@ class SignUp extends React.Component {
                 placeholder="- 를 제외하고 입력하세요"
               />
             </div>
-            <div>
-              <label>부서</label>
-              <input
-                type="text"
-                className="form-control"
-                placeholder="부서"
-                disabled={this.state.disabled ? 'disabled' : ''}
-              />
-            </div>
           </div>
 
           <div className="column">
             <div>
-              <label>직급</label>
-              <input
-                type="text"
-                className="form-control"
-                placeholder="직급"
-                disabled={this.state.disabled ? 'disabled' : ''}
-              />
-              {/* <Select className="position" options={positionList}/> */}
+              <label>부서</label>
+              <input type="text" className="form-control" placeholder="부서" />
             </div>
             <div>
-              <button className="registerButton">가입</button>
+              <label>직급</label>
+              <input type="text" className="form-control" placeholder="직급" />
+              {/* <Select className="position" options={positionList}/> */}
             </div>
+          </div>
+          <div>
+            <button className="registerButton">가입</button>
           </div>
         </div>
       </div>

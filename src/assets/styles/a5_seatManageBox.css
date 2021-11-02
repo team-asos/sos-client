@@ -1,4 +1,4 @@
-.userManageBox {
+.seatManageBox {
   width: 90vw;
   height: 100vh;
 
@@ -6,8 +6,8 @@
   flex-direction: column;
 }
 
-/*"사용자 관리" 텍스트 설정*/
-.userManageUpperBox {
+/*"좌석 관리" 텍스트 설정*/
+.seatManageUpperBox {
   margin-top: 1%;
   height: 7vh;
 
