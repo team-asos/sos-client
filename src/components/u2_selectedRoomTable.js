@@ -1,8 +1,12 @@
+import { getYear } from 'date-fns';
+import getDate from 'date-fns/getDate';
+import getMonth from 'date-fns/getMonth';
 import React from 'react';
 import { Table } from 'react-bootstrap';
 import '../assets/styles/u2_selectedRoomTable.css';
 
 //회의실 예약 페이지-> 선택된 회의실 설명 테이블(room-check에서 정보 받아오기)
+const today = new Date();
 class SelectedRoomTable extends React.Component {
   render() {
     return (
@@ -18,7 +22,10 @@ class SelectedRoomTable extends React.Component {
           <tbody>
             <tr>
               <td>회의실7</td>
-              <td>2021/10/01~2021/10/08</td>
+              <td>
+                {getYear(today)}.{getMonth(today) + 1}.{getDate(today)}-
+                {getYear(today)}.{getMonth(today) + 1}.{getDate(today) + 6}
+              </td>
               <td>4명</td>
             </tr>
           </tbody>

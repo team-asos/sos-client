@@ -35,8 +35,8 @@ const DateTimeForm = () => {
           />
         </div>
         <div>
-          {getYear(startDate)}년{getMonth(startDate)}월{getDate(startDate)}일
-          {getHours(startDate)}시{getMinutes(startDate)}분
+          {getYear(startDate)}년{getMonth(startDate) + 1}월{getDate(startDate)}
+          일{getHours(startDate)}시{getMinutes(startDate)}분
         </div>
         <div className="reservationDatePicker_end">
           <p className="startTimeTextStyle">사용 일시(종료)</p>
@@ -55,7 +55,7 @@ const DateTimeForm = () => {
           />
         </div>
         <div>
-          {getYear(endDate)}년{getMonth(endDate)}월{getDate(endDate)}일
+          {getYear(endDate)}년{getMonth(endDate) + 1}월{getDate(endDate)}일
           {getHours(endDate)}시{getMinutes(endDate)}
         </div>
       </div>

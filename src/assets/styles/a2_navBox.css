@@ -21,7 +21,7 @@
 
 .appBar {
   position: relative;
-  height: 70vh;
+  height: 60vh;
   background-color: #858585;
 }
 
@@ -33,4 +33,21 @@
   bottom: 0;
   background-color: #820101;
   border-radius: 2px;
+}
+.logOutBar {
+  position: relative;
+  background-color: #858585;
+  height: 10vh;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+}
+.logOutTextStyle {
+  font-weight: bold;
+  font-size: 1em;
+  cursor: pointer;
+}
+.logOutTextStyle:hover {
+  color: white;
 }

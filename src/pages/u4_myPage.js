@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 import NavBarUser from '../components/u_navBar';
 import { Link } from 'react-router-dom';
 import MyInfo from '../components/u4_myInfoForm';
+import MyInfoLogin from '../components/u4_myInfoLogin';
 import ConfirmLogin from './1_loginPage';
 import MyReservationList from '../components/u4_myReservationListForm';
 import '../assets/styles/u4_myPage.css';
 
 const tabBar = {
   0: <MyReservationList />,
-  1: <MyInfo />,
+  1: <MyInfoLogin />,
 };
 
 //유저 마이페이지
