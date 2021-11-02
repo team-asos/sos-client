@@ -1,13 +1,13 @@
 .navBox {
   position: relative;
-<<<<<<< HEAD
-=======
-  /*width: 70px;*/
->>>>>>> 120ef3d67bef22fa430354d56ca6df79741dbffd
   width: max-content;
   height: 100vh;
   box-shadow: 1px 1px 1px 1px white;
   border-radius: 10px;
+
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 }
 
 .logoBar {

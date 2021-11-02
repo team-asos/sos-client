@@ -1,3 +1,4 @@
+//삭제해도 될 듯하다
 import * as React from 'react';
 import '../assets/styles/a2_mainPage.css';
 import NavBox from '../components/a2_navBox';

@@ -9,7 +9,7 @@ class NavBox extends React.Component {
   render() {
     return (
       <div className="navBox">
-        <Link to="/main">
+        <Link to="/user-management">
           <div className="logoBar"></div>
         </Link>
         <div className="appBar">

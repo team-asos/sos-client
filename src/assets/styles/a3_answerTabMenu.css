@@ -1,0 +1,7 @@
+.nav-tabs {
+  cursor: pointer;
+  font-size: smaller;
+}
+.nav-tabs a {
+  color: #c00000;
+}
