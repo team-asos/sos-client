@@ -2,6 +2,7 @@ import React from 'react';
 import Select from 'react-select';
 import MembersData from '../assets/data/memberList';
 import '../assets/styles/u5_userSearchForm.css';
+//좌석 예약 페이지->직원 검색
 class SeatStatusForm extends React.Component {
   render() {
     return (
@@ -10,10 +11,12 @@ class SeatStatusForm extends React.Component {
           <Select
             menuPosition={'center'}
             options={MembersData.listData.map(item => {
-              return { value: item.name, label: item.name };
+              return {
+                value: [item.name, item.email, item.tel],
+                label: [item.name, item.email, item.tel],
+              };
             })}
             placeholder="회원 검색"
-            //onChange={onchange.bind(this)}
             onChange={e => {
               console.log(e);
             }}

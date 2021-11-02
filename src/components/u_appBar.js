@@ -14,7 +14,6 @@ class AppBox extends React.Component {
         <RoomReservationIcon />
         <InquireIcon />
         <AccountIcon />
-        {/*<SettingIcon />*/}
       </div>
     );
   }

@@ -1,14 +1,15 @@
 import React from 'react';
 import { Table } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import RoomData from '../assets/data/roomList';
 import '../assets/styles/u1_roomInfoTable.css';
 
-//회의실 예약 테이블
+//전체 회의실 리스트 조회
 class RoomInfoTable extends React.Component {
   render() {
     return (
       <div>
-        <Table className="reservationTable">
+        <Table className="infoTable">
           <thead className="rHeader">
             <tr>
               <th>회의실 명</th>
@@ -18,23 +19,22 @@ class RoomInfoTable extends React.Component {
               <th></th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td>
-                <ul>회의실2</ul>
-                <ul>회의실5</ul>
-              </td>
-              <td>3층</td>
-              <td>2021/10/01-2021/10/08</td>
-              <td>8명</td>
-              <td>
-                <Link to="/room-reservation">
-                  <button className="roomReservationButton">예약하기</button>
-                </Link>
-                <button className="roomStatusButton">예약현황</button>
-              </td>
-            </tr>
-          </tbody>
+          {RoomData.listData.map(item => (
+            <tbody>
+              <tr>
+                <td>{item.name}</td>
+                <td>{item.floor_id}층</td>
+                <td>2021/10/01-2021/10/08</td>
+                <td>{item.max_user}명</td>
+                <td>
+                  <Link to="/room-reservation">
+                    <button className="roomReservationButton">예약하기</button>
+                  </Link>
+                  <button className="roomStatusButton">예약현황</button>
+                </td>
+              </tr>
+            </tbody>
+          ))}
         </Table>
       </div>
     );

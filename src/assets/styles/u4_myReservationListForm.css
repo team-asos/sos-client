@@ -11,13 +11,18 @@
   display: flex;
   flex-direction: column;
   width: 80vw;
+  flex-wrap: nowrap;
 }
 .myReservationDetail {
+  width: 80vw;
   background-color: #c4c4c4;
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  /*justify-content: space-around;*/
   margin-top: 1%;
+  cursor: pointer;
+  flex-wrap: nowrap;
+  align-content: center;
 }
 .rvDate,
 .rvTime,
@@ -27,4 +32,21 @@
   font-weight: bold;
   font-size: 1.5em;
   text-align: center;
+  flex-grow: 1;
+}
+.reservationCancelBtn,
+.checkOutBtn {
+  width: 7vw;
+  height: inherit;
+  font-size: 1.2em;
+  font-weight: bold;
+  background-color: #820101;
+  border-radius: 10px;
+  color: ivory;
+}
+.noneBtn {
+  width: 7vw;
+  height: inherit;
+  text-align: center;
+  font-size: 1.2em;
 }

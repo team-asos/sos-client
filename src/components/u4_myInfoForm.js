@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form } from 'react-bootstrap';
 import '../assets/styles/u4_myInfoForm.css';
-
+//마이페이지->나의 정보
 class MyInfoForm extends React.Component {
   render() {
     return (

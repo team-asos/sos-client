@@ -14,7 +14,7 @@
   position: relative;
   height: 10vh;
   left: 0%;
-  /*background: #d34d4d;*/
+  background: #c4c4c4;
   display: flex;
   flex-direction: column;
 }

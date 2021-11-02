@@ -25,32 +25,11 @@
 .u_seatHeaderTextStyle {
   position: relative;
   font-weight: bold;
-  font-size: 3em;
+  font-size: 2em;
   margin-left: 2%;
   margin-right: 4%;
 }
-/*헤더 층 리스트의 버튼*/
-.u_floorNameButton {
-  width: 6vw;
-  height: inherit;
-  background: #737272;
-  border: 0.4px solid #eeeeee;
-  box-sizing: border-box;
-  font-size: 2em;
-  font-weight: bold;
-  color: white;
-}
-/*선택된 층*/
-.u_floorNameButton_selected {
-  width: 6vw;
-  height: inherit;
-  background: #820101;
-  border: 0.4px solid #eeeeee;
-  box-sizing: border-box;
-  font-size: 2em;
-  font-weight: bold;
-  color: white;
-}
+
 .userSeatReservationForm {
   display: flex;
   flex-direction: row;

@@ -15,6 +15,11 @@
   align-items: flex-end;
   justify-content: space-between;
 }
+.selectedFloorNameTextStyle {
+  font-weight: bold;
+  font-size: 2.5em;
+  margin-left: 2vw;
+}
 .showFacility {
 }
 .showFacilityButton {
@@ -22,14 +27,16 @@
   font-weight: bold;
   border: none;
   width: 6vw;
-  height: 6vh;
-  margin-bottom: 1vh;
+  height: max-content;
+
   margin-left: 1vw;
   border-radius: 100%;
   background-color: salmon;
 }
-.seatsStatusForm {
+.statusForm {
   display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }
 .reservedSeats,
 .ableSeats {
@@ -51,10 +58,46 @@
   font-size: 1.4em;
   font-weight: bold;
 }
-/*좌석 도면*/
+
 .u_seatFormBottom {
   width: 63vw;
   height: 100vh;
   background-color: #820101;
   margin-left: 1vw;
+  display: flex;
+  flex-direction: column;
 }
+.seatLayout {
+  height: 70vh;
+}
+.floorList {
+  display: flex;
+  flex-direction: row;
+  background: #737272;
+  height: 8vh;
+}
+.u_floorNameButton_first {
+  width: 5vw;
+  height: inherit;
+  background: #820101;
+  border: 0.4px solid #eeeeee;
+  box-sizing: border-box;
+  font-size: 2em;
+  font-weight: bold;
+  color: white;
+}
+
+.u_floorNameButton {
+  width: 5vw;
+  height: inherit;
+  background: #737272;
+  border: 0.4px solid #eeeeee;
+  box-sizing: border-box;
+  font-size: 2em;
+  font-weight: bold;
+  color: white;
+}
+.u_floorNameButton:focus {
+  background: #820101;
+}
+/*선택된 층*/

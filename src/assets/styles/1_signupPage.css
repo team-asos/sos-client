@@ -36,7 +36,7 @@
 /*회원가입 텍스트 영역*/
 .upper p {
   color: #c00000;
-  font-size: 1.2em;
+  font-size: 1.5em;
 }
 
 /*Form 영역*/
@@ -47,7 +47,7 @@
   flex-direction: column;
   align-items: center;
 
-  font-size: 0.6em; /*12px*/
+  font-size: 0.8em; /*12px*/
   font-weight: bolder;
 }
 /*각 줄 스타일 넣기*/

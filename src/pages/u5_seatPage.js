@@ -1,11 +1,12 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import NavBarUser from '../components/u_navBar';
 import SeatStatusForm from '../components/u5_seatStatusForm';
 import UserSearchForm from '../components/u5_userSearchForm';
 import DateTimeForm from '../components/u5_dateTimeForm';
-import ButtonForm from '../components/u5_confirmButton';
-import '../assets/styles/u5_seatPage.css';
 
+import '../assets/styles/u5_seatPage.css';
+//좌석 예약 페이지
 class SeatPage extends React.Component {
   render() {
     return (
@@ -16,10 +17,17 @@ class SeatPage extends React.Component {
 
         <div className="userSeatForm">
           <div className="u_seatHeader">
-            <div className="u_seatHeaderTextStyle">2F</div>
-            {/*층 리스트*/}
-            <button className="u_floorNameButton">1F</button>
-            <button className="u_floorNameButton_selected">2F</button>
+            <div className="u_seatHeaderTextStyle">
+              <Link
+                to="/seat-reservation"
+                style={{
+                  color: 'inherit',
+                  textDecoration: 'none',
+                }}
+              >
+                좌석 예약
+              </Link>
+            </div>
           </div>
 
           <div className="userSeatReservationForm">
@@ -32,7 +40,7 @@ class SeatPage extends React.Component {
             <div className="u_rightForm">
               <UserSearchForm />
               <DateTimeForm />
-              <ButtonForm />
+
               {/*<button
                 className="u_seatReservationButton"
               >

@@ -1,6 +1,6 @@
 import { Modal, Button } from 'react-bootstrap';
 import React, { useState } from 'react';
-
+//좌석 예약페이지->예약하기 버튼, 모달창
 function ButtonForm() {
   const [show, setShow] = useState(false);
 
@@ -9,7 +9,15 @@ function ButtonForm() {
 
   return (
     <>
-      <Button variant="success" onClick={handleShow} size="lg">
+      <Button
+        variant="success"
+        onClick={handleShow}
+        size="lg"
+        style={{
+          width: '10vw',
+          alignSelf: 'center',
+        }}
+      >
         예약하기
       </Button>
 
