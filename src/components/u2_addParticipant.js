@@ -15,8 +15,6 @@ class AddParticipant extends React.Component {
     console.log(selectedMembers);
   };
 
-  useEffect(()=>{},[])
-  
   render() {
     const { selectedMembers } = this.state;
     return (
