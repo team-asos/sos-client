@@ -18,7 +18,12 @@ class InquiryListForm extends React.Component {
                   <p className="inquiryDateStyle">{item.created_at}</p>
                 </div>
                 <div className="inquiryTitleBottom">
-                  <p className="isReply">
+                  <p
+                    className="isReply"
+                    style={{
+                      color: item.status ? 'green' : 'gray',
+                    }}
+                  >
                     {item.status ? '답변완료' : '답변대기'}
                   </p>
                 </div>

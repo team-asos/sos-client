@@ -114,7 +114,7 @@
   background: #737272;
   height: 8vh;
 }
-.u_floorNameButton_first {
+.u_firstFloorNameBtn {
   width: 5vw;
   height: inherit;
   background: #820101;
@@ -135,7 +135,8 @@
   font-weight: bold;
   color: white;
 }
+
 .u_floorNameButton:focus {
-  background: #820101;
+  background: #820101 !important;
 }
 /*선택된 층*/

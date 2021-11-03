@@ -55,6 +55,7 @@ const SeatStatusForm = () => {
                   className="facilityicon"
                   size={35}
                   onClick={handleClick}
+                  style={{ cursor: 'pointer' }}
                 ></BsIcon.BsFillInfoCircleFill>
               </div>
             </div>
@@ -78,10 +79,20 @@ const SeatStatusForm = () => {
                     첫 번째 버튼은 눌려져 있게 구현해야함
                     버튼에 맞게 해당 층의 좌석 컴포넌트를 불러와야함
                      */}
-          {FloorData.floorList.map(item => (
+          {FloorData.floorList.map((item, idx) => (
             <button
+              key={idx}
               className="u_floorNameButton"
               onClick={() => changeFloorText(item.name)}
+              style={
+                idx === 0
+                  ? {
+                      backgroundColor: '#820101',
+                    }
+                  : {
+                      backgroundColor: '#737272',
+                    }
+              }
             >
               {item.name}
             </button>

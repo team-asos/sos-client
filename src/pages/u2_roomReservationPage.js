@@ -17,8 +17,7 @@ class RoomReservationPage extends React.Component {
 
         <div className="reservationForm">
           <div className="reservationHeader">
-            <br></br>
-            <p className="rrp_titleTextStyle">
+            <div className="rrp_titleTextStyle">
               <Link
                 to="/room-reservation"
                 style={{
@@ -28,7 +27,7 @@ class RoomReservationPage extends React.Component {
               >
                 회의실 예약
               </Link>
-            </p>
+            </div>
           </div>
           <div className="srTable">
             <SelectedRoomTable />

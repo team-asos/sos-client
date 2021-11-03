@@ -7,26 +7,11 @@ import '../assets/styles/u2_addParticipant.css';
 
 const AddParticipant = () => {
   //useEffect(()=>{},[])
-  const [data, setData] = useState([
-    //{
-    //이렇게 정의 안하면 data[0].name 같이 못 불러오는 이유
-    // createdAt: '',
-    // deletedAt: null,
-    // department: '',
-    // email: '',
-    // employeeId: '',
-    // id: 1,
-    // name: '',
-    // position: '',
-    // role: 0,
-    // tel: '',
-    // updatedAt: '',
-    //},
-  ]);
+  const maxMember = 5; //db연결해야함
+  const [data, setData] = useState([]);
   const [selectedMembers, setSelectedMembers] = useState([]);
   const handleChange = res => {
     setSelectedMembers(res);
-    console.log(selectedMembers);
   };
 
   useEffect(() => {
@@ -48,20 +33,20 @@ const AddParticipant = () => {
     setSelectedMembers(
       selectedMembers.filter(selectedMembers => selectedMembers.value !== id),
     );
-    console.log(selectedMembers);
   };
-  console.log(data[4]);
+
   const participantInfo = id => {
     for (let i = 0; i < data.length; i++) {
-      if (id == data[i].id) {
-        console.log('이거랑 같음' + i);
+      if (data[i].id == id) {
         return i;
       }
     }
   };
   return (
     <div className="addParticipantForm">
-      <p className="rrp_centerTextStyle">회의 참석자를 입력하세요.</p>
+      <p className="rrp_centerTextStyle">
+        회의 참석자를 입력하세요. (사용 가능 인원 : {maxMember}명)
+      </p>
 
       <div className="searchForm">
         <Select
@@ -76,6 +61,7 @@ const AddParticipant = () => {
           noOptionsMessage={() => '검색 결과가 없습니다.'}
           className="searchParticipant"
           value={selectedMembers}
+          isDisabled={selectedMembers.length < maxMember ? 0 : 1}
         />
       </div>
       <div className="participantForm">
@@ -92,9 +78,9 @@ const AddParticipant = () => {
             {selectedMembers.map((item, idx) => (
               <tr key={idx}>
                 <td>{idx + 1}</td>
-                {/*<td>{}</td>
-                {/*<td>{data[() => participantInfo(item.id)].email}</td>
-                <td>{data[() => participantInfo(item.id)].employeeId}</td> */}
+                <td>{data[participantInfo(item.value)].name}</td>
+                <td>{data[participantInfo(item.value)].email}</td>
+                <td>{data[participantInfo(item.value)].department}</td>
                 <td>
                   <AiIcon.AiOutlineMinus
                     style={{

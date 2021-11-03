@@ -31,7 +31,7 @@ class UserMyPage extends React.Component {
 
         <div className="u_myPageForm">
           <div className="u_myPageHeader">
-            <p className="u_myPageHeaderTextStyle">
+            <div className="u_myPageHeaderTextStyle">
               <Link
                 to="/user-mypage"
                 style={{
@@ -41,20 +41,20 @@ class UserMyPage extends React.Component {
               >
                 마이페이지
               </Link>
-            </p>
+            </div>
 
-            <p
+            <div
               onClick={() => this.clickHandler(0)}
               className="myRLMenuTextStyle"
             >
               나의 예약 내역
-            </p>
-            <p
+            </div>
+            <div
               onClick={() => this.clickHandler(1)}
               className="myInfoMenuTextStyle"
             >
               나의 정보 수정
-            </p>
+            </div>
           </div>
 
           <div className="myPageContents">{tabBar[this.state.activeId]}</div>

@@ -15,7 +15,7 @@ class RoomCheckPage extends React.Component {
 
         <div className="roomCheckForm">
           <div className="checkHeader">
-            <p className="roomCheck_titleTextStyle">
+            <div className="roomCheck_titleTextStyle">
               <Link
                 to="/room-check"
                 style={{
@@ -25,7 +25,7 @@ class RoomCheckPage extends React.Component {
               >
                 회의실 조회
               </Link>
-            </p>
+            </div>
           </div>
 
           <div className="roomInfoTable">

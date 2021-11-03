@@ -13,17 +13,15 @@
 .inquireHeader {
   position: relative;
   height: 10vh;
-  left: 0%;
   background: #c4c4c4;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  align-items: center;
 }
 .inquire_titleTextStyle {
-  position: absolute;
-
-  left: 3%;
-  top: 20%;
-
+  position: relative;
   font-weight: bold;
   font-size: 2em;
+  margin-left: 2%;
+  margin-right: 4%;
 }

@@ -1,31 +1,62 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Select from 'react-select';
-import MembersData from '../assets/data/memberList';
 import '../assets/styles/u5_userSearchForm.css';
 //좌석 예약 페이지->직원 검색
-class SeatStatusForm extends React.Component {
-  render() {
-    return (
-      <div className="u_userSearchForm">
-        <div>
-          <Select
-            menuPosition={'center'}
-            options={MembersData.listData.map(item => {
-              return {
-                value: [item.name, item.email, item.tel],
-                label: [item.name, item.email, item.tel],
-              };
-            })}
-            placeholder="회원 검색"
-            onChange={e => {
-              console.log(e);
-            }}
-            noOptionsMessage={() => '검색 결과가 없습니다.'}
-            className="u_userSearch"
-          />
-        </div>
+const UserSearchForm = () => {
+  const [data, setData] = useState([]);
+  const [ID, setID] = useState();
+
+  const handleChange = value => {
+    console.log('dkdk' + value);
+    setID(value);
+  };
+
+  useEffect(() => {
+    const res = () => {
+      fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/users`, {
+        method: 'GET',
+      })
+        .then(response => response.json())
+        .then(json => {
+          setData(json);
+        });
+    };
+    res();
+  }, []);
+
+  // const userInfo = () => {
+  //   for (let i = 0; i < data.length; i++) {
+  //     if (data[i].id == ID) {
+  //       return i;
+  //     }
+  //   }
+  // };
+  return (
+    <div className="u_userSearchForm">
+      <div>
+        <Select
+          menuPosition={'center'}
+          options={data.map(item => ({
+            value: item.id,
+            label: [item.department + '  ' + item.name + '  ' + item.position],
+          }))}
+          placeholder="회원 검색"
+          onChange={e => handleChange(e.value)}
+          noOptionsMessage={() => '검색 결과가 없습니다.'}
+          className="u_userSearch"
+          //value={selectedUser}
+        />
       </div>
-    );
-  }
-}
-export default SeatStatusForm;
+      <div>
+        {data.map(item =>
+          item.id == ID ? (
+            <p>{item.name}의 위치.....(층이름, 좌석이름) </p>
+          ) : (
+            ''
+          ),
+        )}
+      </div>
+    </div>
+  );
+};
+export default UserSearchForm;
