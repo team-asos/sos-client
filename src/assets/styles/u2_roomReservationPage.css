@@ -36,9 +36,3 @@
 
   text-align: start;
 }
-/*회의 참석자를 입력하세요*/
-.rrp_centerTextStyle {
-  position: relative;
-  font-size: 20px;
-  font-weight: bold;
-}

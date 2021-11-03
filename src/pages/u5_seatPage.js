@@ -38,8 +38,8 @@ class SeatPage extends React.Component {
 
             {/*임직원 검색창, 예약시간, 예약하기 버튼*/}
             <div className="u_rightForm">
-              <UserSearchForm />
               <DateTimeForm />
+              <UserSearchForm />
 
               {/*<button
                 className="u_seatReservationButton"

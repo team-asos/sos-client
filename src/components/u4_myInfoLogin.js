@@ -3,7 +3,7 @@ import MyInfo from './u4_myInfoForm';
 import { Link } from 'react-router-dom';
 import '../assets/styles/u4_myInfoLogin.css';
 //마이페이지->나의 정보 수정
-const myInfoForm = () => <MyInfo />;
+//const myInfoForm = () => <MyInfo />;
 
 class MyInfoLoginForm extends React.Component {
   render() {

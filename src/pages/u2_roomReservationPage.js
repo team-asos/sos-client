@@ -34,7 +34,6 @@ class RoomReservationPage extends React.Component {
             <SelectedRoomTable />
             <RoomReservationTable />
           </div>
-          <p className="rrp_centerTextStyle">회의 참석자를 입력하세요.</p>
           <div>
             <AddParticipant />
           </div>

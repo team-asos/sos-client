@@ -33,4 +33,5 @@
 }
 .facility-icon-div {
   position: relative;
+  cursor: pointer;
 }
