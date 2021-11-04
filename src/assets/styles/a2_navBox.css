@@ -48,7 +48,7 @@
 }
 .logOutTextStyle {
   font-weight: bold;
-  font-size: 1em;
+  font-size: 0.8em;
   cursor: pointer;
 }
 .logOutTextStyle:hover {

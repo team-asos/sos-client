@@ -1,6 +1,7 @@
 import React from 'react';
 
 import '../assets/styles/a5_seatManageBox.css';
+import SeatBoard from './a5_seatBoard';
 
 class seatManageBox extends React.Component {
   render() {
@@ -14,7 +15,7 @@ class seatManageBox extends React.Component {
         </div>
         {/* 아래,  부분 */}
         <div className="seatManageBottomBox">
-          <div></div>
+          <SeatBoard />
         </div>
       </div>
     );
