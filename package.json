@@ -54,5 +54,17 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "description": "",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/team-asos/sos-client.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/team-asos/sos-client/issues"
+  },
+  "homepage": "https://github.com/team-asos/sos-client#readme"
 }
