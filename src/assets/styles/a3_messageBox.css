@@ -1,0 +1,43 @@
+/*전체 메세지 박스*/
+.messageBox {
+  width: 90vw;
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+}
+
+/*"알림" 텍스트 설정*/
+.messageUpperBox p {
+  margin-top: 1%;
+  height: 7vh;
+
+  font-size: 2em;
+  font-weight: bold;
+
+  display: flex;
+  flex-direction: row;
+}
+
+/*받은 전체 메세지 개수 텍스트 설정*/
+.count {
+  display: inline-block;
+  text-align: center;
+}
+.total {
+  width: 3vw;
+  height: fit-content;
+
+  margin-left: 1%;
+  font-size: 0.9em;
+
+  color: white;
+  background: #c00000;
+  border-radius: 3px;
+}
+
+/*콘텐츠 설정*/
+.messageBottomBox {
+  width: 85vw;
+  height: fit-content;
+}

@@ -1,0 +1,67 @@
+.myInfoLoginForm {
+  margin: 1%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.myInfoLoginTitleTextStyle {
+  font-size: 2em;
+  color: #646464;
+  font-weight: bold;
+  text-align: center;
+}
+.myInfoLoginDetailTextStyle {
+  margin-top: 2vh;
+
+  font-weight: bold;
+  text-align: center;
+}
+
+.u4_loginForm {
+  width: 45vw;
+  height: 50vh;
+  margin-top: 8vh;
+
+  background: #c4c4c4;
+  box-shadow: 1px rgba(64, 64, 64, 0.4);
+  border-radius: 44px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/*Input형식 크기,위치, 글자크기 지정*/
+.u4_loginControl {
+  display: block;
+  margin: 5px auto;
+  width: 25vw; /*80%*/
+  height: 5vh; /*30px*/
+  font-size: 0.8em; /*12px*/
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+}
+.u4_loginBtns {
+  display: flex;
+  margin-top: 5vh;
+}
+.u4_cancelBtn {
+  width: 10vw; /*80%*/
+  height: 5vh; /*30px*/
+  border-radius: 5px;
+  font-size: 0.8em; /*12px*/
+  font-weight: bold;
+  margin-right: 2vw;
+  border: none;
+}
+.u4_confirmBtn {
+  width: 10vw; /*80%*/
+  height: 5vh; /*30px*/
+  border-radius: 5px;
+  font-size: 0.8em; /*12px*/
+  font-weight: bold;
+  background: #c00000;
+  color: white;
+  border: none;
+}

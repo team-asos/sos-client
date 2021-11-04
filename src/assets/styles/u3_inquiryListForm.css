@@ -1,0 +1,38 @@
+/*전체 리스트 폼*/
+.inquiryListTotal {
+  width: 75vw;
+}
+
+/*제목 폼(제목, 날짜, 상태, 화살표)*/
+.inquiryTitle {
+}
+
+/*제목 폼에서 화살표 버튼 제외한 부분*/
+.inquiryTitleMain {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  flex: 1;
+}
+/*제목 폼에서 윗 부분(제목, 날짜)*/
+.inquiryTitleUpper {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  justify-content: space-between;
+}
+/*제목*/
+.inquiryTitleStyle {
+  font-size: 1.5em;
+}
+/*날짜*/
+.inquiryDateStyle {
+  align-content: flex-end;
+}
+/*제목 폼에서 아랫부분*/
+.inquiryTitleBottom {
+}
+/*답변 여부*/
+.isReply {
+  color: rgb(40, 40, 40);
+}

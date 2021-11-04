@@ -1,0 +1,37 @@
+.dateTimeForm {
+  background: #c4c4c4;
+  width: 27vw;
+  /*height: 65vh;*/
+  height: 25vh;
+  display: flex;
+  margin-top: 10vh;
+  flex-direction: column;
+}
+.seatNameTextStyle {
+  font-weight: bold;
+  font-size: 2em;
+  text-align: center;
+  margin-top: 3%;
+  margin-bottom: 3%;
+}
+.reservationDatePicker_start {
+  display: flex;
+  flex-direction: column;
+  /*margin-left: 6%;
+  margin-top: 3%;*/
+}
+.startTimeTextStyle {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+.reservationDatePicker {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-left: 0.5vw;
+  margin-right: 0.5vw;
+  margin-bottom: 3vh;
+}
+.startPicker {
+  border-radius: 50px;
+}

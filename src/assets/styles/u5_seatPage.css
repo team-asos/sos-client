@@ -1,0 +1,50 @@
+/*전체 페이지*/
+.userSeatPage {
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+  flex-direction: row;
+}
+/*네비바 제외한 페이지*/
+.userSeatForm {
+  width: 95vw;
+  display: flex;
+  flex-direction: column;
+}
+/*헤더*/
+.u_seatHeader {
+  position: relative;
+  height: 10vh;
+  background: #c4c4c4;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+/*헤더 글씨(층 이름)*/
+.u_seatHeaderTextStyle {
+  position: relative;
+  font-weight: bold;
+  font-size: 2em;
+  margin-left: 2%;
+  margin-right: 4%;
+}
+
+.userSeatReservationForm {
+  display: flex;
+  flex-direction: row;
+}
+.u_rightForm,
+.u_leftForm {
+  display: flex;
+  flex-direction: column;
+}
+.u_seatReservationButton {
+  background: #155924;
+  font-size: 2em;
+  font-weight: bold;
+  color: white;
+  width: 70%;
+  height: 13%;
+  align-self: center;
+}

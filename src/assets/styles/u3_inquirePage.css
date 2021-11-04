@@ -1,0 +1,27 @@
+.inquirePage {
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+  flex-direction: row;
+}
+.inquireForm_main {
+  width: 95vw;
+  display: flex;
+  flex-direction: column;
+}
+.inquireHeader {
+  position: relative;
+  height: 10vh;
+  background: #c4c4c4;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.inquire_titleTextStyle {
+  position: relative;
+  font-weight: bold;
+  font-size: 2em;
+  margin-left: 2%;
+  margin-right: 4%;
+}

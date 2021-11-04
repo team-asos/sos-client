@@ -12,7 +12,7 @@
 /*회원가입 텍스트 영역*/
 .upper {
   position: relative;
-  padding-top: 4.5vh;
+  padding-top: 3vh;
   padding-left: 2vw;
 
   display: flex;
@@ -36,17 +36,9 @@
 /*회원가입 텍스트 영역*/
 .upper p {
   color: #c00000;
-  font-size: 1.2em;
+  font-size: 1.5em;
 }
-/*관리자 확인 체크박스 영역*/
-.checkbox_admin {
-  font-size: 0.6em;
-  margin-left: 1vw;
-}
-.checkbox_admin input {
-  vertical-align: -2px;
-  margin-right: 3px;
-}
+
 /*Form 영역*/
 .bottom {
   position: relative;
@@ -55,7 +47,7 @@
   flex-direction: column;
   align-items: center;
 
-  font-size: 0.6em; /*12px*/
+  font-size: 0.8em; /*12px*/
   font-weight: bolder;
 }
 /*각 줄 스타일 넣기*/
@@ -66,24 +58,24 @@
 }
 .column div {
   display: block;
-  margin: auto 2%;
+  margin: auto 1%;
 }
 
 /*입력 폼 크기와 글씨 지정*/
 .form-control {
   width: 21vw; /*250px*/
   height: 5vh; /*30px*/
-  font-size: 0.7em; /*14px*/
+  font-size: 0.9em; /*14px*/
 }
 /*버튼 스타일링*/
 .registerButton {
-  width: 21vw; /*250px*/
+  width: 10vw; /*250px*/
   height: 5vh; /*30px*/
   color: #ffffff;
   background: #c00000;
   border: none;
   border-radius: 5px;
-  font-size: 0.7em; /*14px*/
+  font-size: 0.9em; /*14px*/
   font-weight: bolder;
 }
 .registerButton:hover {

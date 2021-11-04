@@ -1,0 +1,8 @@
+.notification {
+  width: 40vw;
+  height: 90vh;
+  border: 1px solid #c00000;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+}

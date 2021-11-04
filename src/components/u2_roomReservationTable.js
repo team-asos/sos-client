@@ -1,10 +1,10 @@
-import React, { Component, useState } from 'react';
-import { Table, Dropdown } from 'react-bootstrap';
+import React from 'react';
+import { Table } from 'react-bootstrap';
+import Calendar from './u2_calendar';
 import 'react-datepicker/dist/react-datepicker.css'; // css import
 import '../assets/styles/u2_roomReservationTable.css';
 
-import Calendar from './u2_calendar';
-//회의실 예약 테이블
+//회의실 예약 테이블(내 정보, 이용시간 선택하기)
 class RoomReservationTable extends React.Component {
   render() {
     return (

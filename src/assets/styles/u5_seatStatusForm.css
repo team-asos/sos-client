@@ -1,0 +1,142 @@
+/*leftForm*/
+.seatForm {
+  /* background-color: lightcoral;*/
+  width: 65vw;
+  height: 88vh;
+  display: flex;
+  flex-direction: column;
+}
+/*시설, 예약가능, 사용중*/
+.u_seatFormUpper {
+  display: flex;
+  flex-direction: row;
+  height: 13vh;
+  justify-content: flex-end;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+.selectedFloorNameTextStyle {
+  font-weight: bold;
+  font-size: 2.5em;
+  margin-left: 2vw;
+}
+.showFacility {
+}
+.showFacilityButton {
+  font-size: 1.4em;
+  font-weight: bold;
+  border: none;
+  width: 6vw;
+  height: max-content;
+
+  margin-left: 1vw;
+  border-radius: 100%;
+  background-color: salmon;
+}
+.statusForm {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+/*아이콘*/
+.facilityicon {
+  width: 5vw;
+  height: 5vh;
+}
+.facility-icon-box {
+  height: 6vh; /*54px*/
+  position: relative;
+}
+/*.facility-icon-box:hover,
+:visited {
+  color: #820101;
+  transition: ease-in 0.1s;
+  transform: scale(1.05);
+  cursor: pointer;
+}*/
+
+.facility-icon-box:hover .text {
+  visibility: visible;
+}
+.facility-text {
+  font-size: 1.2em;
+  font-weight: 1000;
+  color: rgb(143, 143, 143);
+  text-align: center;
+  cursor: pointer;
+  /*visibility: hidden;*/
+}
+.facility-text-div {
+  position: absolute;
+  width: inherit;
+  left: 1vw;
+  top: 1vh;
+}
+.facility-icon-div {
+  position: relative;
+}
+
+.reservedSeats,
+.ableSeats {
+  display: flex;
+  margin-right: 2vw;
+}
+.reservedSeatShape {
+  width: 2vw;
+  height: 2vw;
+  background-color: #646464;
+}
+.ableSeatShape {
+  width: 2vw;
+  height: 2vw;
+  background-color: #00a023;
+}
+.reservedSeatsTextStyle,
+.ableSeatsTextStyle {
+  font-size: 1.4em;
+  font-weight: bold;
+}
+
+.u_seatFormBottom {
+  width: 63vw;
+  height: 100vh;
+  background-color: #820101;
+  margin-left: 1vw;
+  display: flex;
+  flex-direction: column;
+}
+.seatLayout {
+  height: 70vh;
+}
+.floorList {
+  display: flex;
+  flex-direction: row;
+  background: #737272;
+  height: 8vh;
+}
+.u_firstFloorNameBtn {
+  width: 5vw;
+  height: inherit;
+  background: #820101;
+  border: 0.4px solid #eeeeee;
+  box-sizing: border-box;
+  font-size: 2em;
+  font-weight: bold;
+  color: white;
+}
+
+.u_floorNameButton {
+  width: 5vw;
+  height: inherit;
+  background: #737272;
+  border: 0.4px solid #eeeeee;
+  box-sizing: border-box;
+  font-size: 2em;
+  font-weight: bold;
+  color: white;
+}
+
+.u_floorNameButton:focus {
+  background: #820101 !important;
+}
+/*선택된 층*/

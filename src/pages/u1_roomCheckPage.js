@@ -1,20 +1,36 @@
 import React from 'react';
 import NavBarUser from '../components/u_navBar';
-import { Table, Dropdown } from 'react-bootstrap';
+import RoomInfoTable from '../components/u1_roomInfoTable';
+import { Link } from 'react-router-dom';
 import '../assets/styles/u1_roomCheckPage.css';
 
 //회의실 조회 페이지
 class RoomCheckPage extends React.Component {
   render() {
     return (
-      <div>
-        <NavBarUser />
-        <div className="header1">
-          <br></br>
-          <p className="rcp-textStyle">회의실 조회</p>
-        </div>
+      <div className="roomCheckPage">
         <div>
-          <p className="rcp-">회의실 조회</p>
+          <NavBarUser />
+        </div>
+
+        <div className="roomCheckForm">
+          <div className="checkHeader">
+            <div className="roomCheck_titleTextStyle">
+              <Link
+                to="/room-check"
+                style={{
+                  color: 'inherit',
+                  textDecoration: 'none',
+                }}
+              >
+                회의실 조회
+              </Link>
+            </div>
+          </div>
+
+          <div className="roomInfoTable">
+            <RoomInfoTable />
+          </div>
         </div>
       </div>
     );
