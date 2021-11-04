@@ -1,6 +1,7 @@
 /*전체 리스트 폼*/
 .inquiryListTotal {
-  width: 75vw;
+  width: inherit;
+  height: 80vh;
 }
 
 /*제목 폼(제목, 날짜, 상태, 화살표)*/

@@ -6,17 +6,16 @@ import '../assets/styles/u4_myReservationListForm.css';
 
 function MyReservationListForm() {
   const [show, setShow] = useState(false);
-
+  const [message, setMessage] = useState('');
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const clickHandler = id => {
     if (MyReservationData.listData[id].status == 0) {
-      return '예약 취소';
+      setMessage('예약을 취소하시겠습니까?');
     } else if (MyReservationData.listData[id].status == 1) {
-      return '퇴실 하기';
+      setMessage('퇴실하시겠습니까?');
     } else return null;
   };
-
   return (
     <div className="myReservationListForm">
       <p className="myReservationListFormTitleTextStyle">나의 예약 조회/취소</p>
@@ -26,7 +25,7 @@ function MyReservationListForm() {
           <div
             key={idx}
             className="myReservationDetail"
-            onClick={clickHandler => idx}
+            onClick={() => clickHandler(idx)}
           >
             <p className="rvDate">{item.reseration_date}</p>
 
@@ -50,7 +49,7 @@ function MyReservationListForm() {
                   <Modal.Header closeButton>
                     <Modal.Title>좌석 {item.seat_id}번</Modal.Title>
                   </Modal.Header>
-                  <Modal.Body>예약을 취소하시겠습니까?</Modal.Body>
+                  <Modal.Body>{message}</Modal.Body>
                   <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
                       취소
@@ -70,7 +69,7 @@ function MyReservationListForm() {
                   <Modal.Header closeButton>
                     <Modal.Title>좌석 {item.seat_id}번</Modal.Title>
                   </Modal.Header>
-                  <Modal.Body>퇴실하시겠습니까?</Modal.Body>
+                  <Modal.Body>{message}</Modal.Body>
                   <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
                       취소

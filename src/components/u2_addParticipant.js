@@ -15,8 +15,8 @@ const AddParticipant = () => {
   };
 
   useEffect(() => {
-    const res = () => {
-      fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/users`, {
+    const res = async () => {
+      await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/users`, {
         method: 'GET',
       })
         .then(response => response.json())

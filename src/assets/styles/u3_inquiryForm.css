@@ -33,24 +33,30 @@
   background-color: rgba(133, 133, 133, 0.92);
   display: flex;
   flex-direction: column;
-  width: 75vw;
-  height: 65vh;
+  /*width: 75vw;*/
+  width: inherit;
+  height: 80vh;
   flex: 1;
   justify-content: center;
   align-items: center;
+  justify-content: space-evenly;
+  padding-top: 5vh;
+  padding-bottom: 5vh;
 }
 /*제목 input*/
 .inquiryFormTitleStyle {
   width: 65vw;
+  height: 6vh;
+  font-size: 1.2em;
   border-radius: 5px;
   position: relative;
 }
 /*문의 textarea*/
 .inquiryFormContentStyle {
   width: 65vw;
-  height: 40vh;
+  height: 50vh;
   border-radius: 10px;
-
+  font-size: 1.1em;
   position: relative;
 }
 /*문의하기 버튼*/

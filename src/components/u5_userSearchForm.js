@@ -12,18 +12,20 @@ const UserSearchForm = () => {
   };
 
   useEffect(() => {
-    const res = () => {
-      fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/users`, {
+    const res = async () => {
+      //await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/users/${}`, {
+      await fetch('http://localhost:3000/users/11', {
         method: 'GET',
       })
         .then(response => response.json())
         .then(json => {
           setData(json);
+          console.log(json);
         });
     };
     res();
   }, []);
-
+  console.log('여기' + data);
   // const userInfo = () => {
   //   for (let i = 0; i < data.length; i++) {
   //     if (data[i].id == ID) {
@@ -36,10 +38,10 @@ const UserSearchForm = () => {
       <div>
         <Select
           menuPosition={'center'}
-          options={data.map(item => ({
-            value: item.id,
-            label: [item.department + '  ' + item.name + '  ' + item.position],
-          }))}
+          // options={data.map(item => ({
+          //   value: item.id,
+          //   label: [item.department + '  ' + item.name + '  ' + item.position],
+          // }))}
           placeholder="회원 검색"
           onChange={e => handleChange(e.value)}
           noOptionsMessage={() => '검색 결과가 없습니다.'}
@@ -47,14 +49,14 @@ const UserSearchForm = () => {
           //value={selectedUser}
         />
       </div>
-      <div>
-        {data.map(item =>
+      <div className="userLocation">
+        {/* {data.map(item =>
           item.id == ID ? (
-            <p>{item.name}의 위치.....(층이름, 좌석이름) </p>
+            <div>{item.name}의 위치.....(층이름, 좌석이름) </div>
           ) : (
             ''
           ),
-        )}
+        )} */}
       </div>
     </div>
   );

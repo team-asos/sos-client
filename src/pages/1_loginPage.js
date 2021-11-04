@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-
+import axios from 'axios';
 import Logo from '../assets/images/logo.png';
 import '../assets/styles/1_loginPage.css';
 
@@ -36,7 +36,14 @@ const Login = () => {
     };
     res();
   }, []);
-
+  // const res = async () => {
+  //   const response = await axios.get(
+  //     `${process.env.REACT_APP_SERVER_BASE_URL}/users`,
+  //   );
+  //   setData(response.data);
+  //   console.log(data);
+  // };
+  // res();
   const loginClickHandler = async () => {
     const result = await fetch(
       `${process.env.REACT_APP_SERVER_BASE_URL}/auth`,
@@ -54,6 +61,7 @@ const Login = () => {
 
     //pw검사도 해야함..........
     for (let i = 0; i < data.length; i++) {
+      console.log(data);
       if (email == data[i].email /*||password != data[i].password*/) {
         //사용자or관리자 페이지 이동
         if (!data[i].role) window.location.href = '/seat-reservation';
