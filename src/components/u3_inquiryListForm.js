@@ -31,8 +31,8 @@ const InquiryListForm = () => {
     };
     res2();
   }, []);
-  console.log(answer);
-
+  console.log(answer); //뜸
+  console.log('1:' + answer);
   return (
     /*전체 문의 리스트 */
     <Accordion

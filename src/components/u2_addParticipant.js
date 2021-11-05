@@ -11,12 +11,17 @@ const AddParticipant = () => {
   const [data, setData] = useState([]);
   const [selectedMembers, setSelectedMembers] = useState([]);
   const handleChange = res => {
+    console.log(res);
     setSelectedMembers(res);
   };
 
   useEffect(() => {
     const res = async () => {
-      await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/users`, {
+      await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/users/search`, {
+        headers: {
+          Authorization:
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6InN0cmluZyIsInJvbGUiOjAsImlhdCI6MTYzNjA4OTk0OSwiZXhwIjoxNjM2MTc2MzQ5fQ.gWk0A9ljaz1YS6SN-U_31tpGe3TdWKN-wTtcq7tgh5U',
+        },
         method: 'GET',
       })
         .then(response => response.json())
@@ -58,6 +63,7 @@ const AddParticipant = () => {
           }))}
           placeholder="회원 검색"
           onChange={e => handleChange(e)}
+          onInputChange={e => console.log(e)}
           noOptionsMessage={() => '검색 결과가 없습니다.'}
           className="searchParticipant"
           value={selectedMembers}
