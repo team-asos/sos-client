@@ -1,14 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import Logo from '../assets/images/logo.png';
-import '../assets/styles/1_loginPage.css';
 import { useCookies } from 'react-cookie';
+import { Link, useHistory } from 'react-router-dom';
+
+import Logo from '../assets/images/logo.png';
+
+import '../assets/styles/1_loginPage.css';
 
 const Login = () => {
+  const history = useHistory();
+
   const [cookie, setCookie] = useCookies(['access_token']);
 
   useEffect(() => {
-    if (cookie.access_token !== undefined) {
+    if (cookie.access_token !== 'undefined') {
       loginCheckHandler(cookie.access_token);
     }
   }, [cookie]);
@@ -33,8 +37,8 @@ const Login = () => {
     const res = await result.json();
 
     if (result.status === 200) {
-      if (res.role === 0) window.location.href = '/seat-reservation';
-      else if (res.role === 1) window.location.href = '/user-management';
+      if (res.role === 0) history.push('/seat-reservation');
+      else if (res.role === 1) history.push('/user-management');
     }
   };
 
