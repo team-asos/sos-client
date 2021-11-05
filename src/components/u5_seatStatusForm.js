@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import FacilityForm from '../components/u5_facilityForm';
 import * as BsIcon from 'react-icons/bs';
 import '../assets/styles/u5_seatStatusForm.css';
@@ -15,6 +15,7 @@ const FloorData = {
 };
 
 const SeatStatusForm = () => {
+  //const button = React.createRef();
   const [isToggleOn, setIsToggleOn] = useState(1);
   const [myfloorList, setmyFloorList] = useState([]); //db 데이터
   const res = () => {
@@ -26,6 +27,7 @@ const SeatStatusForm = () => {
         setmyFloorList(json);
       });
   };
+
   console.log(myfloorList);
   const handleClick = e => {
     setIsToggleOn(!isToggleOn);
@@ -33,11 +35,16 @@ const SeatStatusForm = () => {
       ? (e.target.style.color = '#820101')
       : (e.target.style.color = 'black');
   };
-
   const [floorName, setFloorName] = useState(FloorData.floorList[0].name);
-  const changeFloorText = name => {
-    setFloorName(name);
-  };
+  // const changeFloorText = name => {
+  //   setFloorName(name);
+  //   button.current.focus();
+  // };
+  const changeFloorText = useCallback(e => {
+    setFloorName(e.name);
+    //button.current.focus();
+    console.log('값 바귀었ㅇㅁ');
+  });
   return (
     <div className="seatForm">
       <div className="u_seatFormUpper">
@@ -82,12 +89,15 @@ const SeatStatusForm = () => {
           {FloorData.floorList.map((item, idx) => (
             <button
               key={idx}
+              //ref={button}
               className="u_floorNameButton"
-              onClick={() => changeFloorText(item.name)}
+              onClick={() => changeFloorText(item)}
               style={
                 idx === 0
                   ? {
-                      backgroundColor: '#820101',
+                      //backgroundColor: '#820101',
+
+                      backgroundColor: '#737272',
                     }
                   : {
                       backgroundColor: '#737272',

@@ -27,7 +27,12 @@ class InquirePage extends React.Component {
               </Link>
             </div>
           </div>
-          <div>
+          <div
+            style={{
+              display: 'flex',
+              alignSelf: 'center',
+            }}
+          >
             <TabMenu />
           </div>
         </div>
