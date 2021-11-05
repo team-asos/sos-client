@@ -1,29 +1,60 @@
 .seatBoard {
-  width: 80%;
+  width: 100%;
   height: 100%;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 }
 
-.board {
-  width: 80%;
-  height: 90%;
-  padding-top: 1.3%;
+.seatBoardLeft {
+  width: 75%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: maroon;
 }
 
-.board .row {
+.seatBoardRight {
+  width: 25%;
+  height: 100%;
+
   margin-left: 1%;
+}
+
+.row {
   width: max-content;
+
   border-right: 1px solid lightgray;
   border-top: 1px solid lightgray;
+
   background-color: white;
 }
 
-.board .row .cell {
-  border-left: 1px solid lightgray;
+.row .cell {
   width: 20px;
-  height: 20px;
+  height: 25px;
+
   border-bottom: 1px solid lightgray;
+  border-left: 1px solid lightgray;
 }
 
-.board .row .cell:hover {
-  background-color: #eeeeee;
+.row .cell:hover {
+  background-color: rgb(76, 148, 76);
+}
+
+.addBtn {
+  display: block;
+  width: fit-content;
+  margin: auto;
+
+  color: white;
+  background-color: #c00000;
+
+  border: none;
+  border-radius: 2px;
 }
