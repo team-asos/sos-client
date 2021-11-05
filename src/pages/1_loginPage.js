@@ -1,49 +1,47 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
+import { useCookies } from 'react-cookie';
+import { Link, useHistory } from 'react-router-dom';
+
 import Logo from '../assets/images/logo.png';
+
 import '../assets/styles/1_loginPage.css';
 
 const Login = () => {
-  // const [asd, setAsd] = useState({});
+  const history = useHistory();
 
-  // const registerHandler = async () => {
-  //   const result = await fetch(`${REACT_APP_SERVER_BASE_URL}/users`, {
-  //     headers: {
-  //       'Content-type': 'application/json'
-  //     }
-  //     method: 'POST',
-  //     body: JSON.stringfy(asd)
+  const [cookie, setCookie] = useCookies(['access_token']);
 
-  //   })
-
-  //   if (result.status === 201) {
-  //     alert('회원가입 성공')
-  //   }
-  // }
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [data, setData] = useState([]); //유저 정보 불러오는거
   useEffect(() => {
-    const res = async () => {
-      await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/users`, {
+    if (cookie.access_token !== 'undefined') {
+      loginCheckHandler(cookie.access_token);
+    }
+  }, [cookie]);
+
+  const [login, setLogin] = useState({
+    email: '',
+    password: '',
+  });
+
+  const loginCheckHandler = async access_token => {
+    const result = await fetch(
+      `${process.env.REACT_APP_SERVER_BASE_URL}/auth`,
+      {
+        headers: {
+          'Content-type': 'application/json',
+          Authorization: `Bearer ${access_token}`,
+        },
         method: 'GET',
-      })
-        .then(response => response.json())
-        .then(json => {
-          setData(json);
-        });
-    };
-    res();
-  }, []);
-  // const res = async () => {
-  //   const response = await axios.get(
-  //     `${process.env.REACT_APP_SERVER_BASE_URL}/users`,
-  //   );
-  //   setData(response.data);
-  //   console.log(data);
-  // };
-  // res();
+      },
+    );
+
+    const res = await result.json();
+
+    if (result.status === 200) {
+      if (res.role === 0) history.push('/seat-reservation');
+      else if (res.role === 1) history.push('/user-management');
+    }
+  };
+
   const loginClickHandler = async () => {
     const result = await fetch(
       `${process.env.REACT_APP_SERVER_BASE_URL}/auth`,
@@ -52,41 +50,31 @@ const Login = () => {
           'Content-type': 'application/json',
         },
         method: 'POST',
-        body: JSON.stringify({
-          email,
-          password,
-        }),
+        body: JSON.stringify(login),
       },
     );
 
-    //pw검사도 해야함..........
-    for (let i = 0; i < data.length; i++) {
-      console.log(data);
-      if (email == data[i].email /*||password != data[i].password*/) {
-        //사용자or관리자 페이지 이동
-        if (!data[i].role) window.location.href = '/seat-reservation';
-        else window.location.href = '/user-management';
-        break;
-      }
-      if (
-        i == data.length - 1 &&
-        email != data[i].email /*||password != data[i].password*/
-      ) {
-        alert('아이디 또는 비밀번호가 일치하지 않습니다.');
-      }
+    const res = await result.json();
+
+    if (result.status === 200) {
+      setCookie('access_token', res.access_token);
+    } else {
+      alert(res.message);
     }
   };
+
   const inputEmail = e => {
-    setEmail(e.target.value);
+    setLogin({ ...login, email: e.target.value });
   };
 
   const inputPw = e => {
-    setPassword(e.target.value);
+    setLogin({ ...login, password: e.target.value });
   };
+
   return (
     <div className="container login">
       <div className="left">
-        <img src={Logo} alt="Logo Image" style={{ width: '80%' }} />
+        <img src={Logo} alt="Logo" style={{ width: '80%' }} />
       </div>
       <div className="line"> </div>
       <div className="right">
@@ -96,14 +84,14 @@ const Login = () => {
             className="form-control-login"
             placeholder="이메일"
             onChange={inputEmail}
-            value={email}
+            value={login.email}
           />
           <input
             type="password"
             className="form-control-login"
             placeholder="비밀번호"
             onChange={inputPw}
-            value={password}
+            value={login.password}
           />
         </div>
 
