@@ -8,42 +8,37 @@ import '../assets/styles/1_loginPage.css';
 
 const Login = () => {
   const history = useHistory();
-
   const [cookie, setCookie] = useCookies(['access_token']);
-
-  useEffect(() => {
-    if (cookie.access_token !== 'undefined') {
-      loginCheckHandler(cookie.access_token);
-    }
-  }, [cookie]);
 
   const [login, setLogin] = useState({
     email: '',
     password: '',
   });
 
-  const loginCheckHandler = async access_token => {
-    const result = await fetch(
+  const getAuth = async () => {
+    const response = await fetch(
       `${process.env.REACT_APP_SERVER_BASE_URL}/auth`,
       {
         headers: {
           'Content-type': 'application/json',
-          Authorization: `Bearer ${access_token}`,
+          Authorization: `Bearer ${cookie.access_token}`,
         },
         method: 'GET',
       },
     );
 
-    const res = await result.json();
+    const data = await response.json();
 
-    if (result.status === 200) {
-      if (res.role === 0) history.push('/seat-reservation');
-      else if (res.role === 1) history.push('/user-management');
-    }
+    if (data.role === 0) history.push('/seat-reservation');
+    else if (data.role === 1) history.push('/user-management');
   };
 
+  useEffect(() => {
+    if (cookie.access_token !== 'undefined') getAuth();
+  }, [cookie]);
+
   const loginClickHandler = async () => {
-    const result = await fetch(
+    const response = await fetch(
       `${process.env.REACT_APP_SERVER_BASE_URL}/auth`,
       {
         headers: {
@@ -54,12 +49,12 @@ const Login = () => {
       },
     );
 
-    const res = await result.json();
+    const data = await response.json();
 
-    if (result.status === 200) {
-      setCookie('access_token', res.access_token);
+    if (response.status === 200) {
+      setCookie('access_token', data.access_token);
     } else {
-      alert(res.message);
+      alert(data.message);
     }
   };
 

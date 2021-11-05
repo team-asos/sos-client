@@ -9,7 +9,6 @@ import '../assets/styles/a2_navBox.css';
 
 const NavBar = () => {
   const history = useHistory();
-
   const [cookie, removeCookie] = useCookies(['access_token']);
 
   useEffect(() => {
