@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Select from 'react-select';
+import { Table } from 'react-bootstrap';
 import '../assets/styles/u5_userSearchForm.css';
 //좌석 예약 페이지->직원 검색
 const UserSearchForm = () => {
@@ -27,13 +28,7 @@ const UserSearchForm = () => {
     };
     res();
   }, []);
-  // const userInfo = () => {
-  //   for (let i = 0; i < data.length; i++) {
-  //     if (data[i].id == ID) {
-  //       return i;
-  //     }
-  //   }
-  // };
+
   return (
     <div className="u_userSearchForm">
       <div>
@@ -53,7 +48,27 @@ const UserSearchForm = () => {
       <div className="userLocation">
         {data.map(item =>
           item.id == ID ? (
-            <div>{item.name}의 위치.....(층이름, 좌석이름) </div>
+            <>
+              <div>{item.name}의 위치.....(층이름, 좌석이름) </div>
+              <Table striped hover className="selectedMembersList">
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th>이름</th>
+                    <th>이메일</th>
+                    <th>부서</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td />
+                    <td>{item.name}</td>
+                    <td>{item.email}</td>
+                    <td>{item.department}</td>
+                  </tr>
+                </tbody>
+              </Table>
+            </>
           ) : (
             ''
           ),
