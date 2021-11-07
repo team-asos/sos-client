@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Select from 'react-select';
 import { Table } from 'react-bootstrap';
+import * as MdIcon from 'react-icons/md';
 import '../assets/styles/u5_userSearchForm.css';
 //좌석 예약 페이지->직원 검색
 const UserSearchForm = () => {
@@ -17,7 +18,7 @@ const UserSearchForm = () => {
       await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/users/search`, {
         headers: {
           Authorization:
-            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6InN0cmluZyIsInJvbGUiOjAsImlhdCI6MTYzNjA4OTk0OSwiZXhwIjoxNjM2MTc2MzQ5fQ.gWk0A9ljaz1YS6SN-U_31tpGe3TdWKN-wTtcq7tgh5U',
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsIm5hbWUiOiLquYDsubTtgqQiLCJyb2xlIjowLCJpYXQiOjE2MzYyOTA0NDQsImV4cCI6MTYzNjM3Njg0NH0.t2s5c_QsXxFk9oeAYrj3MnqxsEKRrVj_mOkv0__9-YI',
         },
         method: 'GET',
       })
@@ -31,6 +32,10 @@ const UserSearchForm = () => {
 
   return (
     <div className="u_userSearchForm">
+      <div className="searchUserTextStyle">
+        직원 검색
+        <MdIcon.MdPersonSearch size={35} />
+      </div>
       <div>
         <Select
           menuPosition={'center'}
@@ -38,7 +43,7 @@ const UserSearchForm = () => {
             value: item.id,
             label: [item.department + '  ' + item.name + '  ' + item.position],
           }))}
-          placeholder="회원 검색"
+          placeholder="이름을 입력해주세요."
           onChange={e => handleChange(e.value)}
           noOptionsMessage={() => '검색 결과가 없습니다.'}
           className="u_userSearch"
@@ -49,8 +54,7 @@ const UserSearchForm = () => {
         {data.map(item =>
           item.id == ID ? (
             <>
-              <div>{item.name}의 위치.....(층이름, 좌석이름) </div>
-              <Table striped hover className="selectedMembersList">
+              <Table striped hover className="userLocationInfo">
                 <thead>
                   <tr>
                     <th></th>

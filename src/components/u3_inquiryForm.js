@@ -21,13 +21,12 @@ const InquiryForm = () => {
         body: JSON.stringify({
           title,
           message,
-          userId: 11,
         }),
       },
     );
     if (res.status === 201) {
       alert('문의가 등록되었습니다.');
-      window.location.href = '/inquire';
+      window.location.href = '/inquire'; //수정해야함
     }
   };
   return (
