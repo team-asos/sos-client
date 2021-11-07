@@ -32,7 +32,21 @@ const InquiryListForm = () => {
     res2();
   }, []);
   console.log(answer); //뜸
-  console.log('1:' + answer);
+  //console.log(answer[0]);
+  const getAnswerMessage = id => {
+    for (let i = 0; i < answer.length; i++) {
+      if (i == id) {
+        return answer[i].message;
+      }
+    }
+  };
+  const getAnswerCreatedAt = id => {
+    for (let i = 0; i < answer.length; i++) {
+      if (i == id) {
+        return answer[i].createdAt.slice(0, 10);
+      }
+    }
+  };
   return (
     /*전체 문의 리스트 */
     <Accordion
@@ -74,14 +88,14 @@ const InquiryListForm = () => {
           <Accordion.Body className="inquiryAnswer">
             <hr></hr>
             <div className="inquiryTitleUpper">
-              {/* <p>{answer[idx].message}</p>
+              <p>{getAnswerMessage(idx)}</p>
               <p
                 style={{
                   marginLeft: '3vw',
                 }}
               >
-                {answer[idx].createdAt.slice(0, 10)}
-              </p> */}
+                {getAnswerCreatedAt(idx)}
+              </p>
             </div>
           </Accordion.Body>
         </Accordion.Item>
