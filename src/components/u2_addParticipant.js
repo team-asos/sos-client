@@ -5,22 +5,22 @@ import * as AiIcon from 'react-icons/ai';
 import '../assets/styles/u2_addParticipant.css';
 //회의실 인원 검색해서 추가
 
-const AddParticipant = () => {
-  //useEffect(()=>{},[])
+const AddParticipant = ({ START, END }) => {
   const maxMember = 5; //db연결해야함
   const [data, setData] = useState([]);
   const [selectedMembers, setSelectedMembers] = useState([]);
-  const handleChange = res => {
-    console.log(res);
-    setSelectedMembers(res);
+  const [membersId, setMembersId] = useState([]);
+  /*참석자 선택 */
+  const handleChange = e => {
+    setSelectedMembers(e);
   };
-
+  /*회원 검색 */
   useEffect(() => {
     const res = async () => {
       await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/users/search`, {
         headers: {
           Authorization:
-            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6InN0cmluZyIsInJvbGUiOjAsImlhdCI6MTYzNjA4OTk0OSwiZXhwIjoxNjM2MTc2MzQ5fQ.gWk0A9ljaz1YS6SN-U_31tpGe3TdWKN-wTtcq7tgh5U',
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsIm5hbWUiOiLquYDsubTtgqQiLCJyb2xlIjowLCJpYXQiOjE2MzYyOTA0NDQsImV4cCI6MTYzNjM3Njg0NH0.t2s5c_QsXxFk9oeAYrj3MnqxsEKRrVj_mOkv0__9-YI',
         },
         method: 'GET',
       })
@@ -30,16 +30,40 @@ const AddParticipant = () => {
         });
     };
     res();
-    // setData(result.json);
-    // .then(response => response.json())
-    // .then(json => setData(json));
   }, []);
+
+  /*예약하기 */
+  const reservationClickHandler = async () => {
+    for (let i = 0; i < selectedMembers.length; i++) {
+      //setMembersId(selectedMembers[i].value);
+      membersId.push(selectedMembers[i].value);
+    }
+    const response = await fetch(
+      `${process.env.REACT_APP_SERVER_BASE_URL}/reservations/room`,
+      {
+        headers: {
+          'Content-type': 'application/json',
+        },
+        method: 'POST',
+        body: JSON.stringify({
+          startTime: START,
+          endTime: END,
+          status: 0,
+          seatId: 0,
+          roomId: 7,
+          userId: 2,
+          participantIds: membersId,
+        }),
+      },
+    );
+  };
+  /*마이너스 누르면 참석자 삭제 */
   const deleteParticipant = id => {
     setSelectedMembers(
       selectedMembers.filter(selectedMembers => selectedMembers.value !== id),
     );
   };
-
+  /* id 접근 안돼서 만든 함수 */
   const participantInfo = id => {
     for (let i = 0; i < data.length; i++) {
       if (data[i].id == id) {
@@ -47,6 +71,7 @@ const AddParticipant = () => {
       }
     }
   };
+
   return (
     <div className="addParticipantForm">
       <p className="rrp_centerTextStyle">
@@ -63,7 +88,7 @@ const AddParticipant = () => {
           }))}
           placeholder="회원 검색"
           onChange={e => handleChange(e)}
-          onInputChange={e => console.log(e)}
+          // onInputChange={e => console.log(e)}
           noOptionsMessage={() => '검색 결과가 없습니다.'}
           className="searchParticipant"
           value={selectedMembers}
@@ -100,6 +125,7 @@ const AddParticipant = () => {
           </tbody>
         </Table>
       </div>
+      <button onClick={reservationClickHandler}>예약하기</button>
     </div>
   );
 };

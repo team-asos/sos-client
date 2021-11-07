@@ -33,9 +33,7 @@ class RoomReservationPage extends React.Component {
             <SelectedRoomTable />
             <RoomReservationTable />
           </div>
-          <div>
-            <AddParticipant />
-          </div>
+          <div>{/* <AddParticipant /> */}</div>
         </div>
       </div>
     );

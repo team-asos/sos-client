@@ -5,7 +5,6 @@ import '../assets/styles/u3_inquiryListForm.css';
 const InquiryListForm = () => {
   const [question, setquestion] = useState([]);
   const [answer, setAnswer] = useState([]);
-  const [answerMessage, setAnswerMessage] = useState([]);
   useEffect(() => {
     const res = async () => {
       await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/questions`, {
@@ -31,22 +30,30 @@ const InquiryListForm = () => {
     };
     res2();
   }, []);
-  console.log(answer); //뜸
-  //console.log(answer[0]);
-  const getAnswerMessage = id => {
+  const getAnswerMessage = questionID => {
+    //console.log(question);
+    //console.log(question.length);
+    //question.length로 바꿔야 하는데 에러 뜬다
     for (let i = 0; i < answer.length; i++) {
-      if (i == id) {
+      if (questionID == answer[i].id) {
         return answer[i].message;
       }
     }
   };
-  const getAnswerCreatedAt = id => {
+  const getAnswerCreatedAt = questionID => {
+    //question.length로 바꿔야 함
     for (let i = 0; i < answer.length; i++) {
-      if (i == id) {
+      if (questionID == answer[i].id) {
         return answer[i].createdAt.slice(0, 10);
       }
     }
   };
+  const isReplied = questionID => {
+    for (let i = 0; i < answer.length; i++) {
+      if (questionID == answer[i].id && answer[i].message) return 1;
+    }
+  };
+  console.log(answer);
   return (
     /*전체 문의 리스트 */
     <Accordion
@@ -57,49 +64,59 @@ const InquiryListForm = () => {
       }}
     >
       {/*하나의 문의 제목, 내용/답변*/}
-      {question.map((item, idx) => (
-        <Accordion.Item eventKey={item.id} className="inquiryTitleAndAnswer">
-          <Accordion.Header className="inquiryTitle">
-            <div className="inquiryTitleMain">
-              <div className="inquiryTitleUpper">
-                <p key={idx} className="inquiryTitleStyle">
-                  {item.title}
-                </p>
-                <p className="inquiryDateStyle">
-                  {item.createdAt.slice(0, 10)}
-                </p>
-              </div>
-              <div className="inquiryTitleBottom">
-                <p
-                  className="isReply"
-                  style={{
-                    color: item.status ? 'green' : 'gray',
-                  }}
-                >
-                  {item.status ? '답변완료' : '답변대기'}
-                </p>
-              </div>
-            </div>
-          </Accordion.Header>
-          <Accordion.Body className="inquiryContent">
-            {item.message}
-          </Accordion.Body>
-          {/*답변*/}
-          <Accordion.Body className="inquiryAnswer">
-            <hr></hr>
-            <div className="inquiryTitleUpper">
-              <p>{getAnswerMessage(idx)}</p>
-              <p
-                style={{
-                  marginLeft: '3vw',
-                }}
-              >
-                {getAnswerCreatedAt(idx)}
-              </p>
-            </div>
-          </Accordion.Body>
-        </Accordion.Item>
-      ))}
+      {question &&
+        question
+          .slice(0)
+          .reverse()
+          .map((item, idx) => (
+            <Accordion.Item
+              eventKey={item.id}
+              className="inquiryTitleAndAnswer"
+            >
+              <Accordion.Header className="inquiryTitle">
+                <div className="inquiryTitleMain">
+                  <div className="inquiryTitleUpper">
+                    <p key={idx} className="inquiryTitleStyle">
+                      {item.title}
+                    </p>
+                    <p className="inquiryDateStyle">
+                      {item.createdAt.slice(0, 10)}
+                    </p>
+                  </div>
+
+                  <div className="inquiryTitleBottom">
+                    <p
+                      className="isReply"
+                      style={
+                        isReplied(item.id)
+                          ? { color: '#62AB72' }
+                          : { color: 'gray' }
+                      }
+                    >
+                      {isReplied(item.id) ? '답변완료' : '답변대기'}
+                    </p>
+                  </div>
+                </div>
+              </Accordion.Header>
+              <Accordion.Body className="inquiryContent">
+                {item.message}
+              </Accordion.Body>
+              {/*답변*/}
+              <Accordion.Body className="inquiryAnswer">
+                <hr></hr>
+                <div className="inquiryTitleUpper">
+                  <p>{getAnswerMessage(item.id)}</p>
+                  <p
+                    style={{
+                      marginLeft: '3vw',
+                    }}
+                  >
+                    {getAnswerCreatedAt(item.id)}
+                  </p>
+                </div>
+              </Accordion.Body>
+            </Accordion.Item>
+          ))}
     </Accordion>
   );
 };
