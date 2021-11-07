@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from 'react';
-<<<<<<< HEAD
-import { Link } from 'react-router-dom';
-=======
 import { useCookies } from 'react-cookie';
 import { Link, useHistory } from 'react-router-dom';
 
->>>>>>> 208599c848a6701d1449d7f4515b939736237ab6
 import Logo from '../assets/images/logo.png';
 
 import '../assets/styles/1_loginPage.css';
