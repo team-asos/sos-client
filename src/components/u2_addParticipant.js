@@ -5,7 +5,7 @@ import * as AiIcon from 'react-icons/ai';
 import '../assets/styles/u2_addParticipant.css';
 //회의실 인원 검색해서 추가
 
-const AddParticipant = ({ START, END }) => {
+const AddParticipant = ({ START, END, MAXUSER }) => {
   const maxMember = 5; //db연결해야함
   const [data, setData] = useState([]);
   const [selectedMembers, setSelectedMembers] = useState([]);
@@ -75,7 +75,7 @@ const AddParticipant = ({ START, END }) => {
   return (
     <div className="addParticipantForm">
       <p className="rrp_centerTextStyle">
-        회의 참석자를 입력하세요. (사용 가능 인원 : {maxMember}명)
+        회의 참석자를 입력하세요. (사용 가능 인원 : {MAXUSER}명)
       </p>
 
       <div className="searchForm">
@@ -125,7 +125,9 @@ const AddParticipant = ({ START, END }) => {
           </tbody>
         </Table>
       </div>
-      <button onClick={reservationClickHandler}>예약하기</button>
+      <button className="roomReservationBtn" onClick={reservationClickHandler}>
+        예약하기
+      </button>
     </div>
   );
 };

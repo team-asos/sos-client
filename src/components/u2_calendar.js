@@ -15,9 +15,10 @@ import AddParticipant from './u2_addParticipant';
 import '../assets/styles/u2_calendar.css';
 
 //회의실 예약 페이지-> 이용시간 선택
-const Calendar = () => {
+const Calendar = props => {
   const [startDate, setStartDate] = useState(new Date()); //DatePicker
   const [endDate, setEndDate] = useState(new Date());
+  const roomMAXUSER = props.roomMAXUSER;
   //new Date(new Date().getTime() + 3 * 24 * 60 * 60 * 1000),
 
   /*const MyCustom = forwardRef(({ value, onClick }, ref) => (
@@ -72,6 +73,7 @@ const Calendar = () => {
 
         START={formatISO(startDate)}
         END={formatISO(endDate)}
+        MAXUSER={roomMAXUSER}
       />
     </>
   );

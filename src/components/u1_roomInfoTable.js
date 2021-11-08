@@ -1,20 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Table } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import RoomData from '../assets/data/roomList';
 import '../assets/styles/u1_roomInfoTable.css';
-
+import { getMonth, getDate, getYear } from 'date-fns';
 //전체 회의실 리스트 조회
-const RoomInfoTable = props => {
+const RoomInfoTable = () => {
   const [idx, setIdx] = useState();
+  const [data, setData] = useState([]);
+
   const handleClick = e => {
-    console.log(e);
     setIdx(e);
-    return e;
+    const idx = e;
+    window.location.href = `/room-reservation/${idx}`;
   };
-  // export function roomIdx(idx) {
-  //   return idx;
-  // }
+  useEffect(() => {
+    const res = async () => {
+      await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/rooms`, {
+        headers: {
+          Authorization:
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsIm5hbWUiOiLquYDsubTtgqQiLCJyb2xlIjowLCJpYXQiOjE2MzYyOTA0NDQsImV4cCI6MTYzNjM3Njg0NH0.t2s5c_QsXxFk9oeAYrj3MnqxsEKRrVj_mOkv0__9-YI',
+        },
+        method: 'GET',
+      })
+        .then(response => response.json())
+        .then(json => {
+          setData(json);
+        });
+    };
+    res();
+  }, []);
   return (
     <div>
       <Table className="infoTable">
@@ -27,18 +41,34 @@ const RoomInfoTable = props => {
             <th></th>
           </tr>
         </thead>
-        {RoomData.listData.map((item, idx) => (
+        {data.map((item, idx) => (
           <tbody>
             <tr key={idx}>
               <td>{item.name}</td>
-              <td>{item.floor_id}층</td>
-              <td>2021/10/01-2021/10/08</td>
-              <td>{item.max_user}명</td>
+              <td>{item.floorId}층</td>
               <td>
-                <Link to="/room-reservation">
+                {getYear(new Date()) +
+                  '-' +
+                  (getMonth(new Date()) + 1) +
+                  '-' +
+                  getDate(new Date()) +
+                  ' ~ ' +
+                  getYear(new Date()) +
+                  '-' +
+                  (getMonth(new Date()) + 1) +
+                  '-' +
+                  (getDate(new Date()) + 6)}
+              </td>
+              <td>{item.maxUser}명</td>
+              <td>
+                <Link
+                  to={{
+                    pathname: '/room-reservation',
+                  }}
+                >
                   <button
                     className="roomReservationButton"
-                    onClick={() => handleClick(idx)}
+                    onClick={() => handleClick(item.id)}
                   >
                     예약하기
                   </button>
