@@ -29,12 +29,10 @@ export default class SeatBoard extends React.Component {
         });
       }
     }
-    console.table(board);
     return board;
   };
 
   createRow = row => {
-    console.log('createRow called');
     let cells = row.map((data, index) => {
       return <Cell key={index} data={data} clickCell={this.clickCell} />;
     });
@@ -42,8 +40,10 @@ export default class SeatBoard extends React.Component {
   };
 
   //cell(좌석, 회의실, 시설)을 클릭할 때
-  clickCell = cell => {
+  clickCell = (cell, e) => {
     console.log(cell.y, cell.x, cell.status);
+
+    e.target.style.backgroundColor = 'rgb(76, 148, 76';
 
     if (cell.status === 0) {
       cell.status = 1;

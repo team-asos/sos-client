@@ -6,4 +6,5 @@ export default function tableHeadertoKR(header) {
   else if (header === 'tel') return '전화번호';
   else if (header === 'createdAt') return '생성일자';
   else if (header === 'updatedAt') return '수정일자';
+  else if (header === 'employeeId') return '사원번호';
 }

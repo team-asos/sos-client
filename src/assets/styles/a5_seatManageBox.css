@@ -8,16 +8,54 @@
 
 /*"좌석 관리" 텍스트 설정*/
 .seatManageUpperBox {
-  font-size: 2em;
   font-weight: bold;
 
+  height: 10vh;
+
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
+  align-items: center;
 }
 
+.seatManageUpperFirstChild {
+  font-size: 2.2em;
+}
+
+.seatManageUpperSecondChild {
+  margin-left: 2%;
+  font-size: 1em;
+}
+.seatManageUpperLastChild {
+  margin-left: 0.5%;
+}
+.seatManageUpperLastChild button {
+  width: 30px;
+  height: 30px;
+
+  color: #860000;
+  text-align: center;
+  font-size: 1em;
+
+  border-radius: 15px;
+  border: 1px double #860000;
+
+  background: transparent;
+}
+.seatManageUpperLastChild button:hover {
+  background-color: #860000;
+  color: white;
+}
+.selectFloor {
+  width: 14vw;
+  font-weight: 600;
+}
 .seatManageBottomBox {
   width: 99%;
-  height: 85%;
+  height: 87%;
   background: #c4c4c4;
+}
+
+.floorInputForm::placeholder {
+  font-style: italic;
+  font-size: smaller;
 }

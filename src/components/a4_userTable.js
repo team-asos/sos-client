@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import '../assets/styles/a4_userTable.css';
 
-import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
+import moment from 'moment';
 import UserDetailModalContent from './a4_userDetailModal';
 import tableHeadertoKR from './a4_tableHeadertoKR';
 import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
@@ -45,7 +45,7 @@ export default function UserTable({ data }) {
                   size="sm"
                   animation="false"
                   onClick={e => {
-                    console.log(row);
+                    //console.log(row); 확인 완료
                     setModalInfo(row);
                     toggleTrueFalse();
                   }}

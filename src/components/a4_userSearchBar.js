@@ -13,7 +13,7 @@ const UserSearchBar = () => {
 
   useEffect(() => {
     const asd = async () => {
-      await fetch('http://localhost:3000/users', {
+      await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/users`, {
         method: 'GET',
       })
         .then(response => response.json())
@@ -24,11 +24,8 @@ const UserSearchBar = () => {
     asd();
   }, []);
 
-  console.log(data);
-
   function search(rows) {
     const columns = rows[0] && Object.keys(rows[0]);
-
     return rows.filter(row =>
       columns.some(column =>
         row[column] === null

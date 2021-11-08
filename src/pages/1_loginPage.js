@@ -4,23 +4,67 @@ import { Link } from 'react-router-dom';
 import Logo from '../assets/images/logo.png';
 import '../assets/styles/1_loginPage.css';
 
-function Login() {
-  const [inputId, setInputId] = useState('');
-  const [inputPw, setInputPw] = useState('');
+const Login = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [data, setData] = useState([]); //유저 정보 불러오는거
+  useEffect(() => {
+    const res = async () => {
+      await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/users`, {
+        method: 'GET',
+      })
+        .then(response => response.json())
+        .then(json => {
+          setData(json);
+        });
+    };
+    res();
+  }, []);
 
-  // input data 의 변화가 있을 때마다 value 값을 변경해서 useState 해준다
-  const handleInputId = e => {
-    setInputId(e.target.value);
+  const loginClickHandler = async () => {
+    const result = await fetch(
+      `${process.env.REACT_APP_SERVER_BASE_URL}/auth`,
+      {
+        headers: {
+          'Content-type': 'application/json',
+        },
+        method: 'POST',
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      },
+    );
+
+    //pw검사도 해야함..........
+    for (let i = 0; i < data.length; i++) {
+      if (email === data[i].email /*||password != data[i].password*/) {
+        //사용자or관리자 페이지 이동
+        if (!data[i].role) window.location.href = '/seat-reservation';
+        else window.location.href = '/user-management';
+        break;
+      }
+      if (
+        i === data.length - 1 &&
+        email !== data[i].email /*||password != data[i].password*/
+      ) {
+        alert('아이디 또는 비밀번호가 일치하지 않습니다.');
+      }
+    }
+  };
+  const inputEmail = e => {
+    setEmail(e.target.value);
   };
 
-  const handleInputPw = e => {
-    setInputPw(e.target.value);
+  const inputPw = e => {
+    setPassword(e.target.value);
   };
 
-  const onClickLogin = (inputId, inputPw) => {
-    console.log(inputId + ' : ' + inputPw);
+  const onKeyPress = e => {
+    if (e.key === 'Enter') {
+      loginClickHandler();
+    }
   };
-
   return (
     <div className="container login">
       <div className="left">
@@ -33,24 +77,20 @@ function Login() {
             type="text"
             className="form-control-login"
             placeholder="이메일"
-            value={inputId}
-            onChange={handleInputId}
+            onChange={inputEmail}
+            value={email}
           />
           <input
-            type="text"
+            type="password"
             className="form-control-login"
             placeholder="비밀번호"
-            value={inputPw}
-            onChange={handleInputPw}
+            onChange={inputPw}
+            value={password}
+            onKeyPress={onKeyPress}
           />
         </div>
 
-        <div></div>
-
-        <button
-          className="Button Login"
-          onClick={(inputId, inputPw => onClickLogin(inputId, inputPw))}
-        >
+        <button className="Button Login" onClick={loginClickHandler}>
           로그인
         </button>
         <p className="or">계정이 없으신가요?</p>
@@ -60,6 +100,6 @@ function Login() {
       </div>
     </div>
   );
-}
+};
 
 export default Login;
