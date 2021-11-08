@@ -20,7 +20,7 @@ const AddParticipant = ({ START, END, MAXUSER }) => {
       await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/users/search`, {
         headers: {
           Authorization:
-            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsIm5hbWUiOiLquYDsubTtgqQiLCJyb2xlIjowLCJpYXQiOjE2MzYyOTA0NDQsImV4cCI6MTYzNjM3Njg0NH0.t2s5c_QsXxFk9oeAYrj3MnqxsEKRrVj_mOkv0__9-YI',
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsIm5hbWUiOiLquYDsubTtgqQiLCJyb2xlIjowLCJpYXQiOjE2MzYzODQ5OTcsImV4cCI6MTYzNjQ3MTM5N30.U9xQrCi51sBaempL6yQa3boHV8ZiO0si0OHD-vkqDK4',
         },
         method: 'GET',
       })
@@ -73,61 +73,68 @@ const AddParticipant = ({ START, END, MAXUSER }) => {
   };
 
   return (
-    <div className="addParticipantForm">
-      <p className="rrp_centerTextStyle">
-        회의 참석자를 입력하세요. (사용 가능 인원 : {MAXUSER}명)
-      </p>
+    <div style={{ display: 'flex', flexDirection: 'row' }}>
+      <div className="addParticipantForm">
+        <p className="rrp_centerTextStyle">
+          회의 참석자를 입력하세요. (사용 가능 인원 : {MAXUSER}명)
+        </p>
 
-      <div className="searchForm">
-        <Select
-          menuPosition={'center'}
-          isMulti
-          options={data.map(item => ({
-            value: item.id,
-            label: [item.name, ' (', item.employeeId, ')'],
-          }))}
-          placeholder="회원 검색"
-          onChange={e => handleChange(e)}
-          // onInputChange={e => console.log(e)}
-          noOptionsMessage={() => '검색 결과가 없습니다.'}
-          className="searchParticipant"
-          value={selectedMembers}
-          isDisabled={selectedMembers.length < maxMember ? 0 : 1}
-        />
-      </div>
-      <div className="participantForm">
-        <Table striped hover className="selectedMembersList">
-          <thead>
-            <tr>
-              <th></th>
-              <th>이름</th>
-              <th>이메일</th>
-              <th>부서</th>
-            </tr>
-          </thead>
-          <tbody>
-            {selectedMembers.map((item, idx) => (
-              <tr key={idx}>
-                <td>{idx + 1}</td>
-                <td>{data[participantInfo(item.value)].name}</td>
-                <td>{data[participantInfo(item.value)].email}</td>
-                <td>{data[participantInfo(item.value)].department}</td>
-                <td>
-                  <AiIcon.AiOutlineMinus
-                    style={{
-                      cursor: 'pointer',
-                    }}
-                    onClick={() => deleteParticipant(item.value)}
-                  ></AiIcon.AiOutlineMinus>
-                </td>
+        <div className="searchForm">
+          <Select
+            menuPosition={'center'}
+            isMulti
+            options={data.map(item => ({
+              value: item.id,
+              label: [item.name, ' (', item.employeeId, ')'],
+            }))}
+            placeholder="회원 검색"
+            onChange={e => handleChange(e)}
+            // onInputChange={e => console.log(e)}
+            noOptionsMessage={() => '검색 결과가 없습니다.'}
+            className="searchParticipant"
+            value={selectedMembers}
+            // isDisabled={selectedMembers.length < MAXUSER ? 0 : 1}
+          />
+        </div>
+        <div className="participantForm">
+          <Table striped hover className="selectedMembersList">
+            <thead>
+              <tr>
+                <th></th>
+                <th>이름</th>
+                <th>이메일</th>
+                <th>부서</th>
               </tr>
-            ))}
-          </tbody>
-        </Table>
+            </thead>
+            <tbody>
+              {selectedMembers.map((item, idx) => (
+                <tr key={idx}>
+                  <td>{idx + 1}</td>
+                  <td>{data[participantInfo(item.value)].name}</td>
+                  <td>{data[participantInfo(item.value)].email}</td>
+                  <td>{data[participantInfo(item.value)].department}</td>
+                  <td>
+                    <AiIcon.AiOutlineMinus
+                      style={{
+                        cursor: 'pointer',
+                      }}
+                      onClick={() => deleteParticipant(item.value)}
+                    ></AiIcon.AiOutlineMinus>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        </div>
       </div>
-      <button className="roomReservationBtn" onClick={reservationClickHandler}>
-        예약하기
-      </button>
+      <div style={{ marginTop: '7vh', marginLeft: '10vw' }}>
+        <button
+          className="roomReservationBtn"
+          onClick={reservationClickHandler}
+        >
+          예약하기
+        </button>
+      </div>
     </div>
   );
 };

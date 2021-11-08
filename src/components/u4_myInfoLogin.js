@@ -1,6 +1,7 @@
 import React from 'react';
 import MyInfo from './u4_myInfoForm';
 import { Link } from 'react-router-dom';
+import Logo from '../assets/images/logo.png';
 import '../assets/styles/u4_myInfoLogin.css';
 //마이페이지->나의 정보 수정
 //const myInfoForm = () => <MyInfo />;
@@ -15,6 +16,7 @@ class MyInfoLoginForm extends React.Component {
         </p>
 
         <div className="u4_loginForm">
+          <img src={Logo} alt="Logo" style={{ width: '35%' }} />
           <div className="loginInput">
             <input
               type="text"
