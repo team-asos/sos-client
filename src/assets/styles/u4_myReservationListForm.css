@@ -49,7 +49,7 @@
 .checkOutBtn:hover {
   background: #8f0202;
   transition: ease 0.2s;
-  transform: scale(1.02);
+  transform: scale(1.01);
 }
 .noneBtn {
   width: 7vw;

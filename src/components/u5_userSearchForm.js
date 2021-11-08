@@ -18,7 +18,7 @@ const UserSearchForm = () => {
       await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/users/search`, {
         headers: {
           Authorization:
-            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsIm5hbWUiOiLquYDsubTtgqQiLCJyb2xlIjowLCJpYXQiOjE2MzYyOTA0NDQsImV4cCI6MTYzNjM3Njg0NH0.t2s5c_QsXxFk9oeAYrj3MnqxsEKRrVj_mOkv0__9-YI',
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsIm5hbWUiOiLquYDsubTtgqQiLCJyb2xlIjowLCJpYXQiOjE2MzYzODQ5OTcsImV4cCI6MTYzNjQ3MTM5N30.U9xQrCi51sBaempL6yQa3boHV8ZiO0si0OHD-vkqDK4',
         },
         method: 'GET',
       })
@@ -69,6 +69,24 @@ const UserSearchForm = () => {
                     <td>{item.name}</td>
                     <td>{item.email}</td>
                     <td>{item.department}</td>
+                  </tr>
+                </tbody>
+              </Table>
+              <Table striped hover className="userLocationInfo">
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th>층</th>
+                    <th>위치</th>
+                    <th>상태</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td />
+                    <td>1층</td>
+                    <td>좌석/회의실 이름</td>
+                    <td>사용중/미팅중/퇴실?</td>
                   </tr>
                 </tbody>
               </Table>
