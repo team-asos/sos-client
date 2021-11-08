@@ -29,20 +29,27 @@
 .rvFloor,
 .rvSeatNum,
 .rvStatus {
-  font-weight: bold;
   font-size: 1.5em;
   text-align: center;
   flex-grow: 1;
 }
 .reservationCancelBtn,
 .checkOutBtn {
-  width: 7vw;
+  width: fit-content;
   height: inherit;
   font-size: 1.2em;
   font-weight: bold;
   background-color: #820101;
   border-radius: 10px;
   color: ivory;
+  border: 0;
+  outline: 0;
+}
+.reservationCancelBtn:hover,
+.checkOutBtn:hover {
+  background: #8f0202;
+  transition: ease 0.2s;
+  transform: scale(1.02);
 }
 .noneBtn {
   width: 7vw;
