@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 
-import { Modal, OverlayTrigger, Tooltip, Button } from 'react-bootstrap';
+import { Modal, OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 import '../assets/styles/a5_seatManageBox.css';
 import SeatBoard from './a5_seatBoard';
@@ -25,10 +25,10 @@ const SeatManageBox = () => {
   }, []);
 
   //층 생성하기
+  //안됨 이유? 모름
   const [name, setName] = useState('');
 
-  const newFloorHandler = async () => {
-    console.log('hello'); //안됨. 버튼에 무슨 문제가 있나요?
+  const registerClickHandler = async () => {
     const result = await fetch(
       `${process.env.REACT_APP_SERVER_BASE_URL}/floors`,
       {
@@ -41,10 +41,7 @@ const SeatManageBox = () => {
         }),
       },
     );
-    if (result.status === 201) {
-      console.log('completed!');
-      window.location.href = '/seat-management';
-    }
+    window.location.href = '/seat-management';
   };
 
   const inputName = e => {
@@ -58,8 +55,8 @@ const SeatManageBox = () => {
 
   return (
     <div className="seatManageBox">
-      {/* 위, 텍스트 부분 */}
       <div className="seatManageUpperBox">
+        {/* 위, 텍스트 부분 */}
         <div className="seatManageUpperFirstChild">좌석 관리</div>
         <div className="seatManageUpperSecondChild">
           <Dropdown
@@ -89,6 +86,7 @@ const SeatManageBox = () => {
       <div className="seatManageBottomBox">
         <SeatBoard />
       </div>
+
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>새로운 층 생성하기</Modal.Title>
@@ -98,17 +96,19 @@ const SeatManageBox = () => {
           <input
             className="floorInputForm"
             type="text"
-            placeholder="(숫자+층)으로 입력해주세요."
+            placeholder="(숫자+층)으로 입력해주세요. 예) 1층"
             onChange={inputName}
+            style={{ width: '20vw' }}
           />
         </Modal.Body>
         <Modal.Footer>
           <button
-            onClick={newFloorHandler}
+            onClick={registerClickHandler}
             style={{
               backgroundColor: '#c00000',
               color: 'white',
               border: 'none',
+              borderRadius: '2px',
             }}
           >
             생성하기

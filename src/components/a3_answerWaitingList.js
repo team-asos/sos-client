@@ -5,16 +5,11 @@ import '../assets/styles/a3_answerWaitingList.css';
 
 const AnswerWaitingList = () => {
   const [question, setQestion] = useState([]);
-
+  const [answer, setAnswer] = useState([]);
   const [selectQuestion, setSelectQuestion] = useState([]);
   const [showDetail, setShowDetail] = useState(false);
   const [show, setShow] = useState(true);
   const handleShow = () => setShow(true);
-  const [answer, setAnswer] = useState([]);
-
-  const toggleTrueFalse = () => {
-    setShowDetail(handleShow);
-  };
 
   useEffect(() => {
     const res = async () => {
@@ -41,11 +36,14 @@ const AnswerWaitingList = () => {
     };
     res2();
   }, []);
-  console.log(question[0]);
+
+  const toggleTrueFalse = () => {
+    setShowDetail(handleShow);
+  };
 
   const isReplied = questionID => {
     for (let i = 0; i < answer.length; i++) {
-      if (questionID == answer[i].id && answer[i].message) return 1;
+      if (questionID === answer[i].id && answer[i].message) return 1;
     }
   };
 
@@ -80,7 +78,6 @@ const AnswerWaitingList = () => {
           </ul>
         ))}
       </div>
-
       <div className="answerWaitingListRight">
         {show ? (
           <MessageDetailBox show={show} messageInfo={selectQuestion} />
