@@ -13,7 +13,11 @@ const UserSearchBar = () => {
 
   useEffect(() => {
     const asd = async () => {
-      await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/users`, {
+      await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/users/search`, {
+        headers: {
+          Authorization:
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IuyKpO2OgOyngOuwpSIsInJvbGUiOjAsImlhdCI6MTYzNjQzNDQzMSwiZXhwIjoxNjM2NTIwODMxfQ.IQU8OkiENv1gtf88GTngwk-Rya51_USgY-GWFL-zU2E',
+        },
         method: 'GET',
       })
         .then(response => response.json())
@@ -23,7 +27,7 @@ const UserSearchBar = () => {
     };
     asd();
   }, []);
-
+  console.log(data);
   function search(rows) {
     const columns = rows[0] && Object.keys(rows[0]);
     return rows.filter(row =>

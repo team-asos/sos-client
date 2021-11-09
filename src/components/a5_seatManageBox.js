@@ -7,6 +7,7 @@ import { Modal, OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 import '../assets/styles/a5_seatManageBox.css';
 import SeatBoard from './a5_seatBoard';
+import set from 'date-fns/esm/set/index';
 
 const SeatManageBox = () => {
   //층 불러오기
@@ -27,6 +28,8 @@ const SeatManageBox = () => {
   //층 생성하기
   //안됨 이유? 모름
   const [name, setName] = useState('');
+  const [width, setwidth] = useState('');
+  const [height, setheight] = useState('');
 
   const registerClickHandler = async () => {
     const result = await fetch(
@@ -46,6 +49,12 @@ const SeatManageBox = () => {
 
   const inputName = e => {
     setName(e.target.value);
+  };
+  const inputWidth = e => {
+    setwidth(e.target.value);
+  };
+  const inputHeight = e => {
+    setheight(e.target.value);
   };
 
   //층 생성 모달창 관련 변수 정의
@@ -92,14 +101,36 @@ const SeatManageBox = () => {
           <Modal.Title>새로운 층 생성하기</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          층 이름 : {'   '}
-          <input
-            className="floorInputForm"
-            type="text"
-            placeholder="(숫자+층)으로 입력해주세요. 예) 1층"
-            onChange={inputName}
-            style={{ width: '20vw' }}
-          />
+          <div>
+            층 이름 : {'   '}
+            <input
+              className="floorInputForm"
+              type="text"
+              placeholder="(숫자+층)으로 입력해주세요. 예) 1층"
+              onChange={inputName}
+              style={{ width: '20vw' }}
+            />
+          </div>
+          <div>
+            층의 가로 길이 :{' '}
+            <input
+              className="floorInputForm"
+              type="text"
+              placeholder="숫자로 입력해주세요. 예) 30"
+              onChange={inputWidth}
+              style={{ width: '20vw' }}
+            />
+          </div>
+          <div>
+            층의 세로 길이 :{' '}
+            <input
+              className="floorInputForm"
+              type="text"
+              placeholder="숫자로 입력해주세요. 예) 30"
+              onChange={inputHeight}
+              style={{ width: '20vw' }}
+            />
+          </div>
         </Modal.Body>
         <Modal.Footer>
           <button

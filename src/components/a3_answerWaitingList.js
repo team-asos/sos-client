@@ -14,6 +14,10 @@ const AnswerWaitingList = () => {
   useEffect(() => {
     const res = async () => {
       await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/questions`, {
+        headers: {
+          Authorization:
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IuyKpO2OgOyngOuwpSIsInJvbGUiOjAsImlhdCI6MTYzNjQzNDQzMSwiZXhwIjoxNjM2NTIwODMxfQ.IQU8OkiENv1gtf88GTngwk-Rya51_USgY-GWFL-zU2E',
+        },
         method: 'GET',
       })
         .then(response => response.json())
@@ -27,6 +31,10 @@ const AnswerWaitingList = () => {
   useEffect(() => {
     const res2 = async () => {
       await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/answers`, {
+        headers: {
+          Authorization:
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IuyKpO2OgOyngOuwpSIsInJvbGUiOjAsImlhdCI6MTYzNjQzNDQzMSwiZXhwIjoxNjM2NTIwODMxfQ.IQU8OkiENv1gtf88GTngwk-Rya51_USgY-GWFL-zU2E',
+        },
         method: 'GET',
       })
         .then(response => response.json())

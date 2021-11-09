@@ -9,8 +9,8 @@ export default class SeatBoard extends React.Component {
     super();
     this.state = {
       status: 0, //0 : !isOccupied, 1: isOccupied
-      rows: 20,
-      columns: 35,
+      rows: 20, //가로
+      columns: 35, //세로
       clickedRow: -1,
       clickedColumn: -1,
     };
