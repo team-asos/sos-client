@@ -37,7 +37,10 @@ function App() {
           <Route path="/login-noti" component={LoginNoti} />
           <Route path="/sign-up-loading" component={SignUpLoading} />
 
-          <Route path="/room-reservation" component={RoomReservationPage} />
+          <Route
+            path="/room-reservation/:idx"
+            component={RoomReservationPage}
+          />
           <Route path="/room-check" component={RoomCheckPage} />
           <Route path="/inquire" component={InquirePage} />
           <Route path="/user-mypage" component={UserMyPage} />

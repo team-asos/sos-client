@@ -1,29 +1,25 @@
+/*datetime+예약버튼*/
+.dateTimeAndBtnForm {
+  display: flex;
+  flex-direction: column;
+}
 .dateTimeForm {
   background: #c4c4c4;
   width: 27vw;
-  /*height: 65vh;*/
-  height: 25vh;
+  height: 18vh;
   display: flex;
   margin-top: 10vh;
   flex-direction: column;
 }
+/*좌석 이름*/
 .seatNameTextStyle {
   font-weight: bold;
-  font-size: 2em;
+  font-size: 1.6em;
   text-align: center;
   margin-top: 3%;
   margin-bottom: 3%;
 }
-.reservationDatePicker_start {
-  display: flex;
-  flex-direction: column;
-  /*margin-left: 6%;
-  margin-top: 3%;*/
-}
-.startTimeTextStyle {
-  font-size: 1.5em;
-  font-weight: bold;
-}
+/*시작+종료 가로 정렬*/
 .reservationDatePicker {
   display: flex;
   flex-direction: row;
@@ -32,6 +28,39 @@
   margin-right: 0.5vw;
   margin-bottom: 3vh;
 }
-.startPicker {
-  border-radius: 50px;
+/*시작만*/
+.reservationDatePicker_start {
+  display: flex;
+  flex-direction: column;
+}
+/*시작/종료 글씨*/
+.startTimeTextStyle {
+  font-size: 1.4em;
+  font-weight: bold;
+  text-align: center;
+}
+.customPicker2 {
+  background-color: white;
+  border: 0;
+  font-size: 1.2em;
+  font-weight: bold;
+  width: fit-content;
+  height: 4vh;
+  padding-left: 1vw;
+  padding-right: 1vw;
+}
+.seatReservationBtn {
+  margin-top: 1vh;
+  width: 27vw;
+  height: 6vh;
+  font-size: 1.4em;
+  font-weight: bold;
+  background-color: #155924;
+  color: white;
+  border: 0;
+}
+.seatReservationBtn:hover {
+  background-color: #0f4119;
+  transition: ease 0.2s;
+  transform: scale(1.01);
 }

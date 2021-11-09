@@ -1,84 +1,75 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
+import { Link, useHistory } from 'react-router-dom';
 
 import Logo from '../assets/images/logo.png';
+
 import '../assets/styles/1_loginPage.css';
 
 const Login = () => {
-  // const [asd, setAsd] = useState({});
+  const history = useHistory();
+  const [cookie, setCookie] = useCookies(['access_token']);
 
-  // const registerHandler = async () => {
-  //   const result = await fetch(`${REACT_APP_SERVER_BASE_URL}/users`, {
-  //     headers: {
-  //       'Content-type': 'application/json'
-  //     }
-  //     method: 'POST',
-  //     body: JSON.stringfy(asd)
+  const [login, setLogin] = useState({
+    email: '',
+    password: '',
+  });
 
-  //   })
-
-  //   if (result.status === 201) {
-  //     alert('회원가입 성공')
-  //   }
-  // }
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [data, setData] = useState([]); //유저 정보 불러오는거
-  useEffect(() => {
-    const res = async () => {
-      await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/users`, {
+  const getAuth = async () => {
+    const response = await fetch(
+      `${process.env.REACT_APP_SERVER_BASE_URL}/auth`,
+      {
+        headers: {
+          'Content-type': 'application/json',
+          Authorization: `Bearer ${cookie.access_token}`,
+        },
         method: 'GET',
-      })
-        .then(response => response.json())
-        .then(json => {
-          setData(json);
-        });
-    };
-    res();
-  }, []);
+      },
+    );
+
+    const data = await response.json();
+
+    if (data.role === 0) history.push('/seat-reservation');
+    else if (data.role === 1) history.push('/user-management');
+  };
+
+  useEffect(() => {
+    if (cookie.access_token !== 'undefined') getAuth();
+  }, [cookie]);
 
   const loginClickHandler = async () => {
-    const result = await fetch(
+    const response = await fetch(
       `${process.env.REACT_APP_SERVER_BASE_URL}/auth`,
       {
         headers: {
           'Content-type': 'application/json',
         },
         method: 'POST',
-        body: JSON.stringify({
-          email,
-          password,
-        }),
+        body: JSON.stringify(login),
       },
     );
 
-    //pw검사도 해야함..........
-    for (let i = 0; i < data.length; i++) {
-      if (email == data[i].email /*||password != data[i].password*/) {
-        //사용자or관리자 페이지 이동
-        if (!data[i].role) window.location.href = '/seat-reservation';
-        else window.location.href = '/user-management';
-        break;
-      }
-      if (
-        i == data.length - 1 &&
-        email != data[i].email /*||password != data[i].password*/
-      ) {
-        alert('아이디 또는 비밀번호가 일치하지 않습니다.');
-      }
+    const data = await response.json();
+
+    if (response.status === 200) {
+      setCookie('access_token', data.access_token);
+    } else {
+      alert(data.message);
     }
   };
+
   const inputEmail = e => {
-    setEmail(e.target.value);
+    setLogin({ ...login, email: e.target.value });
   };
 
   const inputPw = e => {
-    setPassword(e.target.value);
+    setLogin({ ...login, password: e.target.value });
   };
+
   return (
     <div className="container login">
       <div className="left">
-        <img src={Logo} alt="Logo Image" style={{ width: '80%' }} />
+        <img src={Logo} alt="Logo" style={{ width: '80%' }} />
       </div>
       <div className="line"> </div>
       <div className="right">
@@ -88,14 +79,14 @@ const Login = () => {
             className="form-control-login"
             placeholder="이메일"
             onChange={inputEmail}
-            value={email}
+            value={login.email}
           />
           <input
             type="password"
             className="form-control-login"
             placeholder="비밀번호"
             onChange={inputPw}
-            value={password}
+            value={login.password}
           />
         </div>
 

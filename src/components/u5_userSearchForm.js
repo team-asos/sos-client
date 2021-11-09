@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Select from 'react-select';
+import { Table } from 'react-bootstrap';
+import * as MdIcon from 'react-icons/md';
 import '../assets/styles/u5_userSearchForm.css';
 //좌석 예약 페이지->직원 검색
 const UserSearchForm = () => {
@@ -7,13 +9,17 @@ const UserSearchForm = () => {
   const [ID, setID] = useState();
 
   const handleChange = value => {
-    console.log('dkdk' + value);
     setID(value);
   };
 
   useEffect(() => {
-    const res = () => {
-      fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/users`, {
+    const res = async () => {
+      //await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/users/${}`, {
+      await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/users/search`, {
+        headers: {
+          Authorization:
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsIm5hbWUiOiLquYDsubTtgqQiLCJyb2xlIjowLCJpYXQiOjE2MzYzODQ5OTcsImV4cCI6MTYzNjQ3MTM5N30.U9xQrCi51sBaempL6yQa3boHV8ZiO0si0OHD-vkqDK4',
+        },
         method: 'GET',
       })
         .then(response => response.json())
@@ -24,15 +30,12 @@ const UserSearchForm = () => {
     res();
   }, []);
 
-  // const userInfo = () => {
-  //   for (let i = 0; i < data.length; i++) {
-  //     if (data[i].id == ID) {
-  //       return i;
-  //     }
-  //   }
-  // };
   return (
     <div className="u_userSearchForm">
+      <div className="searchUserTextStyle">
+        직원 검색
+        <MdIcon.MdPersonSearch size={35} />
+      </div>
       <div>
         <Select
           menuPosition={'center'}
@@ -40,17 +43,54 @@ const UserSearchForm = () => {
             value: item.id,
             label: [item.department + '  ' + item.name + '  ' + item.position],
           }))}
-          placeholder="회원 검색"
+          placeholder="이름을 입력해주세요."
           onChange={e => handleChange(e.value)}
           noOptionsMessage={() => '검색 결과가 없습니다.'}
           className="u_userSearch"
           //value={selectedUser}
         />
       </div>
-      <div>
+      <div className="userLocation">
         {data.map(item =>
           item.id == ID ? (
-            <p>{item.name}의 위치.....(층이름, 좌석이름) </p>
+            <>
+              <Table striped hover className="userLocationInfo">
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th>이름</th>
+                    <th>이메일</th>
+                    <th>부서</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td />
+                    <td>{item.name}</td>
+                    <td>{item.email}</td>
+                    <td>{item.department}</td>
+                  </tr>
+                </tbody>
+              </Table>
+              <Table striped hover className="userLocationInfo">
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th>층</th>
+                    <th>위치</th>
+                    <th>상태</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td />
+                    <td>1층</td>
+                    <td>좌석/회의실 이름</td>
+                    <td>사용중/미팅중/퇴실?</td>
+                  </tr>
+                </tbody>
+              </Table>
+            </>
           ) : (
             ''
           ),
