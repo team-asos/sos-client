@@ -21,6 +21,7 @@ const InquiryForm = () => {
         body: JSON.stringify({
           title,
           message,
+          userId: 1,
         }),
       },
     );

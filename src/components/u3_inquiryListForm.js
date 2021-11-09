@@ -30,30 +30,28 @@ const InquiryListForm = () => {
     };
     res2();
   }, []);
+  console.log(answer);
   const getAnswerMessage = questionID => {
-    //console.log(question);
-    //console.log(question.length);
-    //question.length로 바꿔야 하는데 에러 뜬다
-    for (let i = 0; i < answer.length; i++) {
-      if (questionID == answer[i].id) {
-        return answer[i].message;
+    answer.map((item, idx) => {
+      if (questionID === item.questionID) {
+        return item.message;
       }
-    }
+    });
   };
   const getAnswerCreatedAt = questionID => {
-    //question.length로 바꿔야 함
-    for (let i = 0; i < answer.length; i++) {
-      if (questionID == answer[i].id) {
-        return answer[i].createdAt.slice(0, 10);
+    answer.map((item, idx) => {
+      if (questionID === item.questionID) {
+        return item.createdAt.slice(0, 10);
       }
-    }
+    });
   };
   const isReplied = questionID => {
-    for (let i = 0; i < answer.length; i++) {
-      if (questionID == answer[i].id && answer[i].message) return 1;
-    }
+    answer.map((item, idx) => {
+      if (questionID === item.questionID && item.message) {
+        return 1;
+      }
+    });
   };
-  console.log(answer);
   return (
     /*전체 문의 리스트 */
     <Accordion
@@ -78,6 +76,7 @@ const InquiryListForm = () => {
                   <div className="inquiryTitleUpper">
                     <p key={idx} className="inquiryTitleStyle">
                       {item.title}
+                      {item.id}
                     </p>
                     <p className="inquiryDateStyle">
                       {item.createdAt.slice(0, 10)}
