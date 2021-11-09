@@ -1,6 +1,8 @@
 import React, { useState, forwardRef } from 'react';
 import DatePicker from 'react-datepicker';
 import { ko } from 'date-fns/esm/locale';
+import * as FaIcon from 'react-icons/fa';
+
 import {
   getMonth,
   getDate,
@@ -19,10 +21,11 @@ const Calendar = props => {
   const [startDate, setStartDate] = useState(new Date()); //DatePicker
   const [endDate, setEndDate] = useState(new Date());
   const roomMAXUSER = props.roomMAXUSER;
-
+  const roomID = props.roomID;
   const MyCustom = forwardRef(({ value, onClick }, ref) => (
     <button className="customPicker" onClick={onClick} ref={ref}>
       {value}
+      <FaIcon.FaRegCalendarAlt size={30} style={{ marginLeft: '0.5vw' }} />
     </button>
   ));
 
@@ -57,21 +60,10 @@ const Calendar = props => {
         />
       </div>
       <AddParticipant
-        // START={
-        //   getYear(startDate) +
-        //   '-' +
-        //   (getMonth(startDate) + 1) +
-        //   '-' +
-        //   getDate(startDate) +
-        //   ' ' +
-        //   getHours(startDate) +
-        //   ':' +
-        //   getMinutes(startDate)
-        // }
-
         START={formatISO(startDate)}
         END={formatISO(endDate)}
         MAXUSER={roomMAXUSER}
+        ROOMID={roomID}
       />
     </>
   );
