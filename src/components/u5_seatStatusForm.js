@@ -19,6 +19,7 @@ const SeatStatusForm = () => {
   //const button = React.createRef();
   const [isToggleOn, setIsToggleOn] = useState(1);
   const [myfloorList, setmyFloorList] = useState([]); //db 데이터
+  //특정 층의 좌석 도면을 가져오도록 수정해야함
   useEffect(() => {
     const res = async () => {
       await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/floors`, {

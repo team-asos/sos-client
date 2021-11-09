@@ -9,7 +9,6 @@ import '../assets/styles/u2_roomReservationPage.css';
 //회의실 예약 페이지
 const RoomReservationPage = props => {
   const roomId = props.match.params.idx;
-  console.log(roomId);
   return (
     <div className="roomReservationPage">
       <div>

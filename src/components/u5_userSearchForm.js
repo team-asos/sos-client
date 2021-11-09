@@ -18,7 +18,7 @@ const UserSearchForm = () => {
       await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/users/search`, {
         headers: {
           Authorization:
-            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsIm5hbWUiOiLquYDsubTtgqQiLCJyb2xlIjowLCJpYXQiOjE2MzYzODQ5OTcsImV4cCI6MTYzNjQ3MTM5N30.U9xQrCi51sBaempL6yQa3boHV8ZiO0si0OHD-vkqDK4',
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6Iuq5gOyngOybkCIsInJvbGUiOjAsImlhdCI6MTYzNjQ3MTQ2MywiZXhwIjoxNjM2NTU3ODYzfQ.n9OTcUPdHgdJ47vt2_jIAVmGZ8Rk5ndLb2TCLuHzkzI',
         },
         method: 'GET',
       })
@@ -33,8 +33,7 @@ const UserSearchForm = () => {
   return (
     <div className="u_userSearchForm">
       <div className="searchUserTextStyle">
-        직원 검색
-        <MdIcon.MdPersonSearch size={35} />
+        <hr></hr>직원 검색
       </div>
       <div>
         <Select
@@ -52,7 +51,7 @@ const UserSearchForm = () => {
       </div>
       <div className="userLocation">
         {data.map(item =>
-          item.id == ID ? (
+          item.id === ID ? (
             <>
               <Table striped hover className="userLocationInfo">
                 <thead>
