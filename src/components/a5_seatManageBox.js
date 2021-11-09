@@ -41,6 +41,8 @@ const SeatManageBox = () => {
         method: 'POST',
         body: JSON.stringify({
           name,
+          width,
+          height,
         }),
       },
     );
@@ -108,7 +110,7 @@ const SeatManageBox = () => {
               type="text"
               placeholder="(숫자+층)으로 입력해주세요. 예) 1층"
               onChange={inputName}
-              style={{ width: '20vw' }}
+              style={{ width: '20vw', marginTop: '2%' }}
             />
           </div>
           <div>
@@ -118,7 +120,7 @@ const SeatManageBox = () => {
               type="text"
               placeholder="숫자로 입력해주세요. 예) 30"
               onChange={inputWidth}
-              style={{ width: '20vw' }}
+              style={{ width: '20vw', marginTop: '2%' }}
             />
           </div>
           <div>
@@ -128,7 +130,7 @@ const SeatManageBox = () => {
               type="text"
               placeholder="숫자로 입력해주세요. 예) 30"
               onChange={inputHeight}
-              style={{ width: '20vw' }}
+              style={{ width: '20vw', marginTop: '2%' }}
             />
           </div>
         </Modal.Body>
