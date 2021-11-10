@@ -38,7 +38,6 @@ const SignUp = () => {
     );
     window.location.href = '/'; //확인 작업이 필요한지
   };
-
   const confirmHandler = () => {
     if (password != confirmPw) {
       setDisable(1); //다름
@@ -47,7 +46,6 @@ const SignUp = () => {
       setDisable(0);
     }
   };
-
   const inputEmail = e => {
     setEmail(e.target.value);
   };

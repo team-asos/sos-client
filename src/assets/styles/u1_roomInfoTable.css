@@ -1,13 +1,18 @@
 .roomReservationButton {
-  background: rgba(204, 0, 0, 0.5);
-  border-radius: 50px;
+  background-color: #820101;
+  color: ivory;
+  border-radius: 10px;
+  border: 0;
+  outline: 0;
+  height: 4vh;
 }
-.roomStatusButton {
-  background: #c4c4c4;
-  border-radius: 50px;
+.roomReservationButton:hover {
+  background: #8f0202;
+  transition: ease 0.2s;
+  transform: scale(1.01);
 }
 .infoTable {
   position: relative;
   text-align: center;
-  font-size: 1.5em;
+  font-size: 1.2em;
 }

@@ -4,15 +4,12 @@ import '../assets/styles/u3_inquiryForm.css';
 const InquiryForm = () => {
   const [title, setTitle] = useState('');
   const [message, setMessage] = useState('');
-
   const titleHandler = e => {
     setTitle(e.target.value);
   };
-
   const messageHandler = e => {
     setMessage(e.target.value);
   };
-
   const submitHandler = async () => {
     const res = await fetch(
       `${process.env.REACT_APP_SERVER_BASE_URL}/questions`,
@@ -24,6 +21,7 @@ const InquiryForm = () => {
         body: JSON.stringify({
           title,
           message,
+          userId: 1,
         }),
       },
     );

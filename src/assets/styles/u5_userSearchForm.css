@@ -3,7 +3,17 @@
   height: 10vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
 }
-.u_userSearch {
+.userLocation {
+  width: inherit;
+}
+.userLocationInfo {
+  margin-top: 3vh;
+}
+.searchUserTextStyle {
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #494949;
 }

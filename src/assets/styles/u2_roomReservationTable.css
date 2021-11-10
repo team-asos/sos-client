@@ -1,5 +1,8 @@
 .reservationTable {
+  position: relative;
+  text-align: center;
+  font-size: 1.2em;
 }
 .rHeader {
-  background: #cccccc;
+  /* background: #cccccc; */
 }

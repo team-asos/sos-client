@@ -20,7 +20,7 @@ const InquiryListForm = () => {
 
   useEffect(() => {
     const res2 = async () => {
-      await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/answers`, {
+      await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/answers/search`, {
         method: 'GET',
       })
         .then(response => response.json())
@@ -30,30 +30,29 @@ const InquiryListForm = () => {
     };
     res2();
   }, []);
+
   const getAnswerMessage = questionID => {
-    //console.log(question);
-    //console.log(question.length);
-    //question.length로 바꿔야 하는데 에러 뜬다
     for (let i = 0; i < answer.length; i++) {
-      if (questionID == answer[i].id) {
+      if (questionID === answer[i].question.id && answer[i].message) {
         return answer[i].message;
       }
     }
   };
+
   const getAnswerCreatedAt = questionID => {
-    //question.length로 바꿔야 함
     for (let i = 0; i < answer.length; i++) {
-      if (questionID == answer[i].id) {
+      if (questionID === answer[i].question.id && answer[i].message) {
         return answer[i].createdAt.slice(0, 10);
       }
     }
   };
   const isReplied = questionID => {
     for (let i = 0; i < answer.length; i++) {
-      if (questionID == answer[i].id && answer[i].message) return 1;
+      if (questionID === answer[i].question.id && answer[i].message) {
+        return 1;
+      }
     }
   };
-  console.log(answer);
   return (
     /*전체 문의 리스트 */
     <Accordion
@@ -83,7 +82,6 @@ const InquiryListForm = () => {
                       {item.createdAt.slice(0, 10)}
                     </p>
                   </div>
-
                   <div className="inquiryTitleBottom">
                     <p
                       className="isReply"

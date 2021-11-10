@@ -13,32 +13,24 @@
 
 /*회의실 예약 페이지 헤더*/
 .reservationHeader {
-  background: #c4c4c4;
   position: relative;
   height: 10vh;
-
+  background: #c4c4c4;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
+  align-items: center;
 }
 /*회의실 예약*/
 .rrp_titleTextStyle {
-  position: absolute;
-
+  position: relative;
   font-weight: bold;
-  color: black;
   font-size: 2em;
-  left: 2%;
+  margin-left: 2%;
+  margin-right: 4%;
 }
 /*회의실 예약 테이블*/
 .srTable {
   position: relative;
 
   text-align: start;
-}
-/*회의 참석자를 입력하세요*/
-.rrp_centerTextStyle {
-  position: relative;
-  font-size: 20px;
-  font-weight: bold;
 }

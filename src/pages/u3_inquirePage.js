@@ -15,7 +15,7 @@ class InquirePage extends React.Component {
 
         <div className="inquireForm_main">
           <div className="inquireHeader">
-            <p className="inquire_titleTextStyle">
+            <div className="inquire_titleTextStyle">
               <Link
                 to="/inquire"
                 style={{
@@ -25,9 +25,14 @@ class InquirePage extends React.Component {
               >
                 문의하기
               </Link>
-            </p>
+            </div>
           </div>
-          <div>
+          <div
+            style={{
+              display: 'flex',
+              alignSelf: 'center',
+            }}
+          >
             <TabMenu />
           </div>
         </div>
