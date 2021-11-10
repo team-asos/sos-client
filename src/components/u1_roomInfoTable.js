@@ -29,7 +29,6 @@ const RoomInfoTable = () => {
     };
     res();
   }, []);
-  console.log(data);
   return (
     <div>
       <Table striped hover className="infoTable">
@@ -46,7 +45,7 @@ const RoomInfoTable = () => {
           <tbody>
             <tr key={idx}>
               <td>{item.name}</td>
-              <td>{item.floorId}층</td>
+              <td>{item.floor.name}</td>
               <td>
                 {getYear(new Date()) +
                   '-' +

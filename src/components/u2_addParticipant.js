@@ -47,7 +47,6 @@ const AddParticipant = ({ START, END, MAXUSER, ROOMID }) => {
           startTime: START,
           endTime: END,
           status: 0, //물어보기
-          seatId: null, //회의실 예약인데 0으로 하면 에러 뜸
           roomId: Number(ROOMID),
           userId: 1,
           participantIds: membersId,
