@@ -4,7 +4,7 @@ import moment from 'moment';
 import '../assets/styles/a3_answerWaitingList.css';
 
 //답변 내용 컴포넌트만 분리해서 사용할까 고민중 ¯\_( ͡❛ ͜ʖ ͡❛)_/¯
-const MessageCompleteBox = ({ messageInfo, show }) => {
+const MessageCompleteBox = ({ messageInfo, answerInfo, show }) => {
   const [answer, setAnswer] = useState('');
 
   return (
@@ -30,7 +30,7 @@ const MessageCompleteBox = ({ messageInfo, show }) => {
         <ListGroup.Item>
           <span style={{ fontWeight: '650' }}>답변 내용 </span>
           <br />
-          서버에서 데이터 받아와야 해....
+          {answerInfo.message}
         </ListGroup.Item>
       </ListGroup>
     </div>

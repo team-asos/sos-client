@@ -4,10 +4,10 @@ import moment from 'moment';
 import '../assets/styles/a3_answerWaitingList.css';
 
 const MessageDetailBox = ({ messageInfo, show }) => {
-  const [answer, setAnswer] = useState('');
+  const [message, setMessage] = useState('');
 
-  const inputAnswer = e => {
-    setAnswer(e.target.value);
+  const inputMessage = e => {
+    setMessage(e.target.value);
   };
 
   const submitHandler = async () => {
@@ -20,14 +20,22 @@ const MessageDetailBox = ({ messageInfo, show }) => {
         method: 'POST',
         body: JSON.stringify({
           //answer에 필요한 변수 : message, userId, questionId
-          answer,
-          questionId: messageInfo.id,
+          message,
+          userId: Number(1),
+          questionId: Number(messageInfo.id),
         }),
       },
     );
+
+    if (result.status === 201) {
+      alert('답변을 보냈습니다.');
+      console.log('Submit the answer');
+    }
   };
 
   console.log(messageInfo);
+  console.log('2: ', messageInfo.status);
+
   return (
     <div className="messageDetailBox" show={show}>
       <ListGroup variant="flush" className="detailList">
@@ -54,7 +62,7 @@ const MessageDetailBox = ({ messageInfo, show }) => {
             className="answerInput"
             placeholder="답변 
             내용을 입력해주세요."
-            onChange={inputAnswer}
+            onChange={inputMessage}
           />
           <button className="sendBtn" onClick={submitHandler}>
             보내기

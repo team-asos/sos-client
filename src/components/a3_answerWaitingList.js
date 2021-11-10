@@ -49,23 +49,19 @@ const AnswerWaitingList = () => {
     setShowDetail(handleShow);
   };
 
-  const isReplied = questionID => {
-    for (let i = 0; i < answer.length; i++) {
-      if (questionID === answer[i].id && answer[i].message) return 1;
+  //답변대기 불러오기
+  const isReplied = item => {
+    if (item.status === 0) {
+      return 1;
     }
   };
-
-  //가장 위에 있는 값으로 초기설정하고 싶다..
-  //setSelectQuestion(question[0]);
 
   return (
     <div className="answerWaitingList">
       <div className="answerWaitingListLeft">
         {question.map((item, idx) => (
           <ul>
-            {isReplied(item.id) ? (
-              ''
-            ) : (
+            {isReplied(item) ? (
               <li
                 key={idx}
                 onClick={e => {
@@ -74,7 +70,7 @@ const AnswerWaitingList = () => {
                 }}
               >
                 <div className="waitinglistStyle">
-                  <div style={{ width: '5%' }}>{idx}</div>
+                  <div style={{ width: '5%' }}>-</div>
                   <div style={{ width: '10%' }}>{item.id}</div>
                   <div style={{ width: '70%' }}>{item.title}</div>
                   <div style={{ width: '17%' }}>
@@ -82,6 +78,8 @@ const AnswerWaitingList = () => {
                   </div>
                 </div>
               </li>
+            ) : (
+              ''
             )}
           </ul>
         ))}

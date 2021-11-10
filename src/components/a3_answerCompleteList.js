@@ -1,22 +1,11 @@
 import React, { useState, useEffect } from 'react';
 
-import MessageDetailBox from './a3_messageDetailBox';
 import '../assets/styles/a3_answerWaitingList.css';
 import MessageCompleteBox from './a3_messageCompleteBox';
 
 const AnswerCompleteList = () => {
+  //문의 받아오기
   const [question, setQestion] = useState([]);
-
-  const [selectQuestion, setSelectQuestion] = useState([]);
-  const [showDetail, setShowDetail] = useState(false);
-  const [show, setShow] = useState(true);
-  const handleShow = () => setShow(true);
-  const [answer, setAnswer] = useState([]);
-
-  const toggleTrueFalse = () => {
-    setShowDetail(handleShow);
-  };
-
   useEffect(() => {
     const res = async () => {
       await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/questions`, {
@@ -33,7 +22,13 @@ const AnswerCompleteList = () => {
     };
     res();
   }, []);
+  //답변완료 목록 가져오기
+  const isReplied = item => {
+    if (item.status === 1) return 1;
+  };
 
+  //질문 받아오기
+  const [answer, setAnswer] = useState([]);
   useEffect(() => {
     const res2 = async () => {
       await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/answers`, {
@@ -46,12 +41,27 @@ const AnswerCompleteList = () => {
     };
     res2();
   }, []);
-  console.log(question[0]);
 
-  const isReplied = questionID => {
-    for (let i = 0; i < answer.length; i++) {
-      if (questionID == answer[i].id && answer[i].message) return 1;
-    }
+  //선택된 질문, 답변 받아오는 변수 선언
+  const [selectQuestion, setSelectQuestion] = useState([]);
+  const [selectAnswer, setSelectAnswer] = useState([]);
+
+  const findAnswer = id => {
+    answer.map((item, idx) => {
+      if (item.id === id) {
+        console.log(item.id, id, item.message, 'find it');
+        return setSelectAnswer(item);
+      }
+    });
+  };
+
+  //Datail 창 띄우기
+  const [showDetail, setShowDetail] = useState(false);
+  const [show, setShow] = useState(true);
+  const handleShow = () => setShow(true);
+
+  const toggleTrueFalse = () => {
+    setShowDetail(handleShow);
   };
 
   return (
@@ -59,16 +69,17 @@ const AnswerCompleteList = () => {
       <div className="answerWaitingListLeft">
         {question.map((item, idx) => (
           <ul>
-            {isReplied(item.id) ? (
+            {isReplied(item) ? (
               <li
                 key={idx}
                 onClick={e => {
                   setSelectQuestion(item);
                   toggleTrueFalse();
+                  findAnswer(item.id);
                 }}
               >
                 <div className="waitinglistStyle">
-                  <div style={{ width: '5%' }}>{idx}</div>
+                  <div style={{ width: '5%' }}>-</div>
                   <div style={{ width: '10%' }}>{item.id}</div>
                   <div style={{ width: '70%' }}>{item.title}</div>
                   <div style={{ width: '17%' }}>
@@ -85,7 +96,11 @@ const AnswerCompleteList = () => {
 
       <div className="answerWaitingListRight">
         {show ? (
-          <MessageCompleteBox show={show} messageInfo={selectQuestion} />
+          <MessageCompleteBox
+            show={show}
+            messageInfo={selectQuestion}
+            answerInfo={selectAnswer}
+          />
         ) : (
           ''
         )}
