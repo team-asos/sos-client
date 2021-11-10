@@ -47,7 +47,6 @@ const SeatStatusForm = () => {
   const changeFloorText = e => {
     setFloorName(e.name);
     //button.current.focus();
-    console.log('값 바귀었ㅇㅁ');
   };
   return (
     <div className="seatForm">
