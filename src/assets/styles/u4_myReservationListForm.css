@@ -7,6 +7,14 @@
   color: #646464;
   font-weight: bold;
 }
+.seatReservationList,
+.roomReservationList {
+}
+.u4seatTextStyle,
+.u4roomTextStyle {
+  font-size: 1.4em;
+  font-weight: bold;
+}
 .myReservationListTable {
   /* position: relative; */
   font-size: 1.2em;
