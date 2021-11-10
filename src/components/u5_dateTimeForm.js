@@ -6,6 +6,8 @@ import { addDays, getDate, getHours, getMinutes, getYear } from 'date-fns';
 import '../assets/styles/u5_dateTimeForm.css';
 import '../assets/styles/u2_calendar.css';
 import getMonth from 'date-fns/getMonth';
+import * as FaIcon from 'react-icons/fa';
+
 //좌석 예약 페이지->이용 시간 선택
 const DateTimeForm = () => {
   const [startDate, setStartDate] = useState(new Date()); //DatePicker
@@ -16,6 +18,7 @@ const DateTimeForm = () => {
   const MyCustom = forwardRef(({ value, onClick }, ref) => (
     <button className="customPicker2" onClick={onClick} ref={ref}>
       {value}
+      <FaIcon.FaRegCalendarAlt size={30} style={{ marginLeft: '0.5vw' }} />
     </button>
   ));
   return (

@@ -12,10 +12,10 @@ const SelectedRoomTable = props => {
   const [data, setData] = useState([]); //db 회의실 정보
   useEffect(() => {
     const res = async () => {
-      await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/rooms`, {
+      await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/rooms/${roomID}`, {
         headers: {
           Authorization:
-            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsIm5hbWUiOiLquYDsubTtgqQiLCJyb2xlIjowLCJpYXQiOjE2MzYzODQ5OTcsImV4cCI6MTYzNjQ3MTM5N30.U9xQrCi51sBaempL6yQa3boHV8ZiO0si0OHD-vkqDK4',
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6Iuq5gOyngOybkCIsInJvbGUiOjAsImlhdCI6MTYzNjQ3MTQ2MywiZXhwIjoxNjM2NTU3ODYzfQ.n9OTcUPdHgdJ47vt2_jIAVmGZ8Rk5ndLb2TCLuHzkzI',
         },
         method: 'GET',
       })
@@ -27,22 +27,10 @@ const SelectedRoomTable = props => {
     res();
   }, []);
 
-  const roomName = () => {
-    for (let i = 0; i < data.length; i++) {
-      if (roomID == data[i].id) {
-        console.log(data);
-        return data[i].name;
-      }
-    }
-  };
-  const roomMaxUser = () => {
-    for (let i = 0; i < data.length; i++) {
-      if (roomID == data[i].id) return data[i].maxUser;
-    }
-  };
+  console.log(data);
   return (
     <div>
-      <Table className="selectedTable">
+      <Table striped hover className="selectedTable">
         <thead className="sHeader">
           <tr>
             <th>회의실명</th>
@@ -52,16 +40,16 @@ const SelectedRoomTable = props => {
         </thead>
         <tbody>
           <tr>
-            <td>{roomName()}</td>
+            <td>{data.name}</td>
             <td>
               {getYear(today)}.{getMonth(today) + 1}.{getDate(today)}-
               {getYear(today)}.{getMonth(today) + 1}.{getDate(today) + 6}
             </td>
-            <td>{roomMaxUser()}명</td>
+            <td>{data.maxUser}명</td>
           </tr>
         </tbody>
       </Table>
-      <Calendar roomMAXUSER={roomMaxUser()} />
+      <Calendar roomMAXUSER={data.maxUser} roomID={roomID} />
     </div>
   );
 };

@@ -38,3 +38,7 @@
   cursor: pointer;
   margin-left: 2%;
 }
+/*마이페이지에서 헤더 빼고 나머지 부분*/
+.myPageContents {
+  height: 90vh;
+}
