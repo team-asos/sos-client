@@ -30,26 +30,28 @@ const InquiryListForm = () => {
     };
     res2();
   }, []);
+
   const getAnswerMessage = questionID => {
-    answer.map((item, idx) => {
-      //console.log(item.question.id);
-      if (questionID === item.question.id) {
-        console.log(item.message);
-        return item.message;
+    for (let i = 0; i < answer.length; i++) {
+      if (questionID === answer[i].question.id && answer[i].message) {
+        return answer[i].message;
       }
-    });
+    }
   };
+
   const getAnswerCreatedAt = questionID => {
-    answer.map((item, idx) => {
-      if (questionID === item.question.id) {
-        return item.createdAt.slice(0, 10);
+    for (let i = 0; i < answer.length; i++) {
+      if (questionID === answer[i].question.id && answer[i].message) {
+        return answer[i].createdAt.slice(0, 10);
       }
-    });
+    }
   };
   const isReplied = questionID => {
-    answer.map((item, idx) => {
-      if (questionID == item.question.id && item.message) return 1;
-    });
+    for (let i = 0; i < answer.length; i++) {
+      if (questionID === answer[i].question.id && answer[i].message) {
+        return 1;
+      }
+    }
   };
   return (
     /*전체 문의 리스트 */
@@ -75,7 +77,6 @@ const InquiryListForm = () => {
                   <div className="inquiryTitleUpper">
                     <p key={idx} className="inquiryTitleStyle">
                       {item.title}
-                      {item.id}
                     </p>
                     <p className="inquiryDateStyle">
                       {item.createdAt.slice(0, 10)}
