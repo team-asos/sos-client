@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../assets/styles/a4_userTable.css';
 
 import Button from 'react-bootstrap/Button';
@@ -19,6 +19,10 @@ export default function UserTable({ data }) {
   const toggleTrueFalse = () => {
     setShowModal(handleShow);
   };
+
+  useEffect(() => {
+    console.log(modalInfo);
+  }, [modalInfo]);
 
   return (
     <div>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import tableHeadertoKR from './a4_tableHeadertoKR';
 import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
@@ -10,6 +10,26 @@ export default function UserDetailModalContent({
   data,
   columns,
 }) {
+  const [reservation, setReservation] = useState([]);
+
+  const reservationTitle = ['타입', '번호', '사용시간'];
+
+  useEffect(() => {
+    const res = async id => {
+      await fetch(
+        `${process.env.REACT_APP_SERVER_BASE_URL}/reservations/search?userId=${id}`,
+        {
+          method: 'GET',
+        },
+      )
+        .then(response => response.json())
+        .then(json => {
+          setReservation(json);
+        });
+    };
+    res(modalInfo.id);
+  }, []);
+
   return (
     <Modal
       show={show}
@@ -55,7 +75,28 @@ export default function UserDetailModalContent({
           </MDBTableBody>
         </MDBTable>
         <h5 style={{ fontWeight: 'bold', color: '#c00000' }}>예약 내역</h5>
-        <p>DB연결 후 불러오기</p>
+        {/* 예약내역 존재여부 판별 */}
+        {reservation.length === 0 ? (
+          <p>예약 내역이 존재하지 않습니다.</p>
+        ) : (
+          <MDBTable hover className="userTable" cellPadding={0} cellSpacing={0}>
+            <MDBTableHead>
+              <tr>
+                {reservationTitle.map(heading => (
+                  <th>{heading}</th>
+                ))}
+              </tr>
+            </MDBTableHead>
+            <MDBTableBody>
+              <tr>
+                {reservation.map((item, idx) =>
+                  item.roomId === null ? <td>회의실</td> : <td>좌석</td>,
+                )}
+              </tr>
+            </MDBTableBody>
+          </MDBTable>
+        )}
+
         <h5 style={{ fontWeight: 'bold', color: '#c00000' }}>문의 내역</h5>
         <p>DB연결 후 불러오기</p>
       </Modal.Body>

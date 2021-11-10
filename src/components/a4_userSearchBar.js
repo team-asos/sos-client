@@ -27,7 +27,7 @@ const UserSearchBar = () => {
     };
     asd();
   }, []);
-  console.log(data);
+
   function search(rows) {
     const columns = rows[0] && Object.keys(rows[0]);
     return rows.filter(row =>
