@@ -20,7 +20,7 @@ const InquiryListForm = () => {
 
   useEffect(() => {
     const res2 = async () => {
-      await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/answers`, {
+      await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/answers/search`, {
         method: 'GET',
       })
         .then(response => response.json())
@@ -30,26 +30,25 @@ const InquiryListForm = () => {
     };
     res2();
   }, []);
-  console.log(answer);
   const getAnswerMessage = questionID => {
     answer.map((item, idx) => {
-      if (questionID === item.questionID) {
+      //console.log(item.question.id);
+      if (questionID === item.question.id) {
+        console.log(item.message);
         return item.message;
       }
     });
   };
   const getAnswerCreatedAt = questionID => {
     answer.map((item, idx) => {
-      if (questionID === item.questionID) {
+      if (questionID === item.question.id) {
         return item.createdAt.slice(0, 10);
       }
     });
   };
   const isReplied = questionID => {
     answer.map((item, idx) => {
-      if (questionID === item.questionID && item.message) {
-        return 1;
-      }
+      if (questionID == item.question.id && item.message) return 1;
     });
   };
   return (
@@ -82,7 +81,6 @@ const InquiryListForm = () => {
                       {item.createdAt.slice(0, 10)}
                     </p>
                   </div>
-
                   <div className="inquiryTitleBottom">
                     <p
                       className="isReply"
