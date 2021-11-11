@@ -1,14 +1,33 @@
 import React, { useState, useEffect } from 'react';
 import Select from 'react-select';
+import { useCookies } from 'react-cookie';
 import { Table } from 'react-bootstrap';
 import * as AiIcon from 'react-icons/ai';
 import '../assets/styles/u2_addParticipant.css';
 //회의실 인원 검색해서 추가
 
 const AddParticipant = ({ START, END, MAXUSER, ROOMID }) => {
+  const [cookie] = useCookies(['access_token']);
   const [data, setData] = useState([]);
   const [selectedMembers, setSelectedMembers] = useState([]);
   const [membersId, setMembersId] = useState([]);
+  const [myId, setMyId] = useState();
+  /*내 정보 */
+  useEffect(() => {
+    const res = async () => {
+      await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/auth`, {
+        headers: {
+          Authorization: `Bearer ${cookie.access_token}`,
+        },
+        method: 'GET',
+      })
+        .then(response => response.json())
+        .then(json => {
+          setMyId(json.id);
+        });
+    };
+    res();
+  }, []);
   /*참석자 선택 */
   const handleChange = e => {
     setSelectedMembers(e);
@@ -18,8 +37,7 @@ const AddParticipant = ({ START, END, MAXUSER, ROOMID }) => {
     const res = async () => {
       await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/users/search`, {
         headers: {
-          Authorization:
-            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6Iuq5gOyngOybkCIsInJvbGUiOjAsImlhdCI6MTYzNjQ3MTQ2MywiZXhwIjoxNjM2NTU3ODYzfQ.n9OTcUPdHgdJ47vt2_jIAVmGZ8Rk5ndLb2TCLuHzkzI',
+          Authorization: `Bearer ${cookie.access_token}`,
         },
         method: 'GET',
       })
@@ -48,7 +66,7 @@ const AddParticipant = ({ START, END, MAXUSER, ROOMID }) => {
           endTime: END,
           status: 0, //물어보기
           roomId: Number(ROOMID),
-          userId: 1,
+          userId: Number(myId),
           participantIds: membersId,
         }),
       },
@@ -68,7 +86,7 @@ const AddParticipant = ({ START, END, MAXUSER, ROOMID }) => {
   /* id 접근 안돼서 만든 함수 */
   const participantInfo = id => {
     for (let i = 0; i < data.length; i++) {
-      if (data[i].id == id) {
+      if (data[i].id === id) {
         return i;
       }
     }
