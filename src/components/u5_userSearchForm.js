@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import Select from 'react-select';
+import { useCookies } from 'react-cookie';
 import { Table } from 'react-bootstrap';
-import * as MdIcon from 'react-icons/md';
 import '../assets/styles/u5_userSearchForm.css';
 //좌석 예약 페이지->직원 검색
 const UserSearchForm = () => {
   const [data, setData] = useState([]);
   const [ID, setID] = useState();
+  const [cookie] = useCookies(['access_token']);
 
   const handleChange = value => {
     setID(value);
@@ -17,8 +18,8 @@ const UserSearchForm = () => {
       //await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/users/${}`, {
       await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/users/search`, {
         headers: {
-          Authorization:
-            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6Iuq5gOyngOybkCIsInJvbGUiOjAsImlhdCI6MTYzNjQ3MTQ2MywiZXhwIjoxNjM2NTU3ODYzfQ.n9OTcUPdHgdJ47vt2_jIAVmGZ8Rk5ndLb2TCLuHzkzI',
+          Authorization: `Bearer ${cookie.access_token}`,
+          //'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6Iuq5gOyngOybkCIsInJvbGUiOjAsImlhdCI6MTYzNjYzMjAyNywiZXhwIjoxNjM5MjI0MDI3fQ.z7hJl0nLbgWs2HCrzzhfLMhcxDG-a6eM30a3CiPS1tQ',
         },
         method: 'GET',
       })

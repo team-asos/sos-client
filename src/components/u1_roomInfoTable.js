@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { useCookies } from 'react-cookie';
 import { Table } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import '../assets/styles/u1_roomInfoTable.css';
 import { getMonth, getDate, getYear } from 'date-fns';
 //전체 회의실 리스트 조회
 const RoomInfoTable = () => {
+  const [cookie] = useCookies(['access_token']);
   const [idx, setIdx] = useState();
   const [data, setData] = useState([]);
 
@@ -17,8 +19,8 @@ const RoomInfoTable = () => {
     const res = async () => {
       await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/rooms`, {
         headers: {
-          Authorization:
-            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6Iuq5gOyngOybkCIsInJvbGUiOjAsImlhdCI6MTYzNjQ3NzQ3MSwiZXhwIjoxNjM2NTYzODcxfQ.NJJnkUwA2_y45ZMR5o3GVDh6TlUCkBsMn5hdWsh6pyw',
+          Authorization: `Bearer ${cookie.access_token}`,
+          //'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6Iuq5gOyngOybkCIsInJvbGUiOjAsImlhdCI6MTYzNjYzMjAyNywiZXhwIjoxNjM5MjI0MDI3fQ.z7hJl0nLbgWs2HCrzzhfLMhcxDG-a6eM30a3CiPS1tQ',
         },
         method: 'GET',
       })

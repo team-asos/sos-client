@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import '../assets/styles/u3_inquiryForm.css';
 //문의 작성 폼
-const InquiryForm = () => {
+const InquiryForm = props => {
   const [title, setTitle] = useState('');
   const [message, setMessage] = useState('');
   const titleHandler = e => {
@@ -21,7 +21,7 @@ const InquiryForm = () => {
         body: JSON.stringify({
           title,
           message,
-          userId: 1,
+          userId: Number(props.user.id),
         }),
       },
     );
