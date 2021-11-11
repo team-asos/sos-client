@@ -16,7 +16,7 @@ import RoomCheckPage from './pages/u1_roomCheckPage';
 import InquirePage from './pages/u3_inquirePage';
 import UserMyPage from './pages/u4_myPage';
 import SeatReservationPage from './pages/u5_seatPage';
-import MyInfo from './components/u4_myInfoForm';
+import MyInfo from './pages/u4_myInfoForm';
 
 //관리자 페이지
 import NotificationPage from './pages/a3_notificationPage';
