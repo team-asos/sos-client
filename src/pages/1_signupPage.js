@@ -39,7 +39,7 @@ const SignUp = () => {
     window.location.href = '/'; //확인 작업이 필요한지
   };
   const confirmHandler = () => {
-    if (password != confirmPw) {
+    if (password !== confirmPw) {
       setDisable(1); //다름
       alert('비밀번호가 다릅니다.');
     } else {
