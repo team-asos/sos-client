@@ -113,6 +113,8 @@
   flex-direction: row;
   background: #737272;
   height: 8vh;
+  /* white-space: nowrap;
+  overflow: auto; */
 }
 .u_firstFloorNameBtn {
   width: 5vw;
@@ -131,8 +133,7 @@
   background: #737272;
   border: 0.4px solid #eeeeee;
   box-sizing: border-box;
-  font-size: 2em;
-  font-weight: bold;
+  font-size: 1.8em;
   color: white;
 }
 

@@ -1,61 +1,68 @@
 import React, { useState, useEffect } from 'react';
 import { Accordion } from 'react-bootstrap';
 import '../assets/styles/u3_inquiryListForm.css';
-//문의 리스트 폼
-const InquiryListForm = () => {
+//문의 리스트 폼 /get할 때 권한 안써도 되는지?
+const InquiryListForm = props => {
   const [question, setquestion] = useState([]);
   const [answer, setAnswer] = useState([]);
-  useEffect(() => {
-    const res = async () => {
-      await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/questions`, {
-        method: 'GET',
-      })
-        .then(response => response.json())
-        .then(json => {
-          setquestion(json);
-        });
-    };
-    res();
-  }, []);
 
-  useEffect(() => {
-    const res2 = async () => {
-      await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/answers`, {
+  const res = async () => {
+    await fetch(
+      `${process.env.REACT_APP_SERVER_BASE_URL}/questions/search?userId=${props.user.id}`,
+      {
         method: 'GET',
-      })
-        .then(response => response.json())
-        .then(json => {
-          setAnswer(json);
-        });
-    };
-    res2();
-  }, []);
+      },
+    )
+      .then(response => response.json())
+      .then(json => {
+        setquestion(json);
+      });
+  };
+
+  const res2 = async () => {
+    await fetch(
+      `${process.env.REACT_APP_SERVER_BASE_URL}/answers/search?userId=${props.user.id}`,
+      {
+        method: 'GET',
+      },
+    )
+      .then(response => response.json())
+      .then(json => {
+        setAnswer(json);
+      });
+  };
+  useEffect(() => {
+    if (props.user.id !== 'undefined') {
+      res();
+      res2();
+    }
+  }, [props.user.id]);
+
   const getAnswerMessage = questionID => {
-    //console.log(question);
-    //console.log(question.length);
-    //question.length로 바꿔야 하는데 에러 뜬다
     for (let i = 0; i < answer.length; i++) {
-      if (questionID == answer[i].id) {
+      if (questionID === answer[i].question.id && answer[i].message) {
         return answer[i].message;
       }
     }
   };
+
   const getAnswerCreatedAt = questionID => {
-    //question.length로 바꿔야 함
     for (let i = 0; i < answer.length; i++) {
-      if (questionID == answer[i].id) {
+      if (questionID === answer[i].question.id && answer[i].message) {
         return answer[i].createdAt.slice(0, 10);
       }
     }
   };
   const isReplied = questionID => {
     for (let i = 0; i < answer.length; i++) {
-      if (questionID == answer[i].id && answer[i].message) return 1;
+      if (questionID === answer[i].question.id && answer[i].message) {
+        return 1;
+      }
     }
   };
-  console.log(answer);
   return (
     /*전체 문의 리스트 */
+
     <Accordion
       flush
       className="inquiryListTotal"
@@ -63,6 +70,7 @@ const InquiryListForm = () => {
         overflow: 'auto',
       }}
     >
+      <div>{question.length === 0 ? '질문내역이없습니다' : ''}</div>
       {/*하나의 문의 제목, 내용/답변*/}
       {question &&
         question
@@ -83,7 +91,6 @@ const InquiryListForm = () => {
                       {item.createdAt.slice(0, 10)}
                     </p>
                   </div>
-
                   <div className="inquiryTitleBottom">
                     <p
                       className="isReply"

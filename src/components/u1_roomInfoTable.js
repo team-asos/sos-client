@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { useCookies } from 'react-cookie';
 import { Table } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import '../assets/styles/u1_roomInfoTable.css';
 import { getMonth, getDate, getYear } from 'date-fns';
 //전체 회의실 리스트 조회
 const RoomInfoTable = () => {
+  const [cookie] = useCookies(['access_token']);
   const [idx, setIdx] = useState();
   const [data, setData] = useState([]);
 
@@ -17,8 +19,8 @@ const RoomInfoTable = () => {
     const res = async () => {
       await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/rooms`, {
         headers: {
-          Authorization:
-            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsIm5hbWUiOiLquYDsubTtgqQiLCJyb2xlIjowLCJpYXQiOjE2MzYzODQ5OTcsImV4cCI6MTYzNjQ3MTM5N30.U9xQrCi51sBaempL6yQa3boHV8ZiO0si0OHD-vkqDK4',
+          Authorization: `Bearer ${cookie.access_token}`,
+          //'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6Iuq5gOyngOybkCIsInJvbGUiOjAsImlhdCI6MTYzNjYzMjAyNywiZXhwIjoxNjM5MjI0MDI3fQ.z7hJl0nLbgWs2HCrzzhfLMhcxDG-a6eM30a3CiPS1tQ',
         },
         method: 'GET',
       })
@@ -31,7 +33,7 @@ const RoomInfoTable = () => {
   }, []);
   return (
     <div>
-      <Table className="infoTable">
+      <Table striped hover className="infoTable">
         <thead className="rHeader">
           <tr>
             <th>회의실 명</th>
@@ -45,7 +47,7 @@ const RoomInfoTable = () => {
           <tbody>
             <tr key={idx}>
               <td>{item.name}</td>
-              <td>{item.floorId}층</td>
+              <td>{item.floor.name}</td>
               <td>
                 {getYear(new Date()) +
                   '-' +

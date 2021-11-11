@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import * as BiIcons from 'react-icons/bi';
 
 import UserTable from './a4_userTable';
-
-//import membersData from '../assets/data/memberList';
 import '../assets/styles/a4_userSearchBar.css';
 
 require('es6-promise').polyfill();
@@ -14,20 +12,30 @@ const UserSearchBar = () => {
   const [q, setQ] = useState('');
 
   useEffect(() => {
-    fetch('https://jsonplaceholder.typicode.com/albums')
-      .then(response => response.json())
-      .then(json => setData(json));
+    const asd = async () => {
+      await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/users/search`, {
+        headers: {
+          Authorization:
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IuyKpO2OgOyngOuwpSIsInJvbGUiOjAsImlhdCI6MTYzNjUyMjQ0NCwiZXhwIjoxNjM2NjA4ODQ0fQ.VHVQXsQjzuAuvAehWiiqbcwJ82VfppLfRsQDeH2-iJE',
+        },
+        method: 'GET',
+      })
+        .then(response => response.json())
+        .then(json => {
+          setData(json);
+        });
+    };
+    asd();
   }, []);
 
   function search(rows) {
     const columns = rows[0] && Object.keys(rows[0]);
-
-    return rows.filter(
-      //row.<필터하고 싶은 key이름>
-      row =>
-        columns.some(
-          column => row[column].toString().toLowerCase().indexOf(q) > -1,
-        ),
+    return rows.filter(row =>
+      columns.some(column =>
+        row[column] === null
+          ? ''
+          : row[column].toString().toLowerCase().indexOf(q) > -1,
+      ),
     );
   }
 

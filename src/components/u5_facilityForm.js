@@ -20,7 +20,7 @@ const FacilityForm = () => {
   return (
     <div className="facilityFormStyle" show={show}>
       {facilityData.listData.map(item =>
-        item.type == 'toilet' ? (
+        item.type === 'toilet' ? (
           <img
             src={Toilet}
             alt="Logo Image"
@@ -30,7 +30,7 @@ const FacilityForm = () => {
               top: item.y,
             }}
           />
-        ) : item.type == 'airc' ? (
+        ) : item.type === 'airc' ? (
           <img
             src={AirConditioner}
             alt="Logo Image"

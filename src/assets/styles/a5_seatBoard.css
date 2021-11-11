@@ -1,0 +1,60 @@
+.seatBoard {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.seatBoardLeft {
+  width: 75%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: maroon;
+}
+
+.seatBoardRight {
+  width: 25%;
+  height: 100%;
+
+  margin-left: 1%;
+}
+
+.row {
+  width: max-content;
+
+  border-right: 1px solid lightgray;
+  border-top: 1px solid lightgray;
+
+  background-color: white;
+}
+
+.row .cell {
+  width: 20px;
+  height: 25px;
+
+  border-bottom: 1px solid lightgray;
+  border-left: 1px solid lightgray;
+}
+
+.row .cell:hover {
+  background-color: rgb(76, 148, 76);
+}
+
+.addBtn {
+  display: block;
+  width: fit-content;
+  margin: auto;
+
+  color: white;
+  background-color: #c00000;
+
+  border: none;
+  border-radius: 2px;
+}

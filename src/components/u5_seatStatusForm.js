@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import FacilityForm from '../components/u5_facilityForm';
 import * as BsIcon from 'react-icons/bs';
 import '../assets/styles/u5_seatStatusForm.css';
@@ -15,10 +15,10 @@ const FloorData = {
 };
 
 const SeatStatusForm = () => {
-  const [data, setData] = useState([]);
   //const button = React.createRef();
   const [isToggleOn, setIsToggleOn] = useState(1);
   const [myfloorList, setmyFloorList] = useState([]); //db 데이터
+  //특정 층의 좌석 도면을 가져오도록 수정해야함
   useEffect(() => {
     const res = async () => {
       await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/floors`, {
@@ -46,7 +46,6 @@ const SeatStatusForm = () => {
   const changeFloorText = e => {
     setFloorName(e.name);
     //button.current.focus();
-    console.log('값 바귀었ㅇㅁ');
   };
   return (
     <div className="seatForm">

@@ -3,6 +3,7 @@ import React from 'react';
 import AnswerTabMenu from './a3_answerTabMenu';
 import Tab from './a3_tab';
 import AnswerWaitingList from './a3_answerWaitingList';
+import AnswerCompleteList from './a3_answerCompleteList';
 
 import '../assets/styles/a3_messageBox.css';
 
@@ -12,8 +13,6 @@ class MessageBox extends React.Component {
     super(props);
     this.state = {
       selected: '답변대기',
-      /*임의 설정 - 서버에서 받아올 값 */
-      count: 4,
     };
   }
   setSelected = tab => {
@@ -26,10 +25,7 @@ class MessageBox extends React.Component {
         {/* 위, 텍스트 부분 */}
         <div className="messageUpperBox">
           <div className="messageUpperBoxChild">
-            <p>
-              알림
-              <span className="count total"> {this.state.count} </span>
-            </p>
+            <p>문의 답변</p>
           </div>
         </div>
 
@@ -42,13 +38,14 @@ class MessageBox extends React.Component {
               selected={this.state.selected}
               setSelected={this.setSelected}
             >
+              {/* 답변 대기 목록 */}
               <Tab isSelected={this.state.selected === '답변대기'}>
-                {/* 답변 대기 목록 */}
                 <AnswerWaitingList />
               </Tab>
+
+              {/* 답변 대기 목록 */}
               <Tab isSelected={this.state.selected === '답변완료'}>
-                {/* 답변 대기 목록 */}
-                <h1>More Text Test</h1>
+                <AnswerCompleteList />
               </Tab>
             </AnswerTabMenu>
           </div>
