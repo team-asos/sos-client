@@ -4,8 +4,8 @@ import DatePicker from 'react-datepicker';
 import { ko } from 'date-fns/esm/locale';
 import { addDays, getDate, getHours, getMinutes, getYear } from 'date-fns';
 import '../assets/styles/u5_dateTimeForm.css';
+import 'react-datepicker/dist/react-datepicker.css';
 import '../assets/styles/u2_calendar.css';
-import getMonth from 'date-fns/getMonth';
 import * as FaIcon from 'react-icons/fa';
 
 //좌석 예약 페이지->이용 시간 선택
