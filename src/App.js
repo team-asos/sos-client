@@ -44,7 +44,7 @@ function App() {
           <Route path="/room-check" component={RoomCheckPage} />
           <Route path="/inquire" component={InquirePage} />
           <Route path="/user-mypage" component={UserMyPage} />
-          <Route path="/user-mypage/myinfo" component={MyInfo} />
+          <Route path="/user-mypage-myinfo" component={MyInfo} />
           <Route path="/seat-reservation" component={SeatReservationPage} />
 
           <Route exact path="/user-management" component={UserManagePage} />
