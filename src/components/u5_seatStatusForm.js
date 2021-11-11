@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import FacilityForm from '../components/u5_facilityForm';
 import * as BsIcon from 'react-icons/bs';
 import '../assets/styles/u5_seatStatusForm.css';
@@ -15,7 +15,6 @@ const FloorData = {
 };
 
 const SeatStatusForm = () => {
-  const [data, setData] = useState([]);
   //const button = React.createRef();
   const [isToggleOn, setIsToggleOn] = useState(1);
   const [myfloorList, setmyFloorList] = useState([]); //db 데이터
