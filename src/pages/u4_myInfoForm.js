@@ -1,16 +1,118 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useCookies } from 'react-cookie';
+
 import NavBarUser from '../components/u_navBar';
-import { Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import '../assets/styles/u4_myInfoForm.css';
 //마이페이지->나의 정보
 const MyInfoForm = props => {
+  const [cookie] = useCookies(['access_token']);
+  const [myData, setMyData] = useState([]);
+  const [disable, setDisable] = useState(1);
+  const [editData, setEditData] = useState({
+    name: '',
+    email: '',
+    employeeId: '',
+    tel: '',
+    department: '',
+    position: '',
+  });
+  useEffect(() => {
+    const res = async () => {
+      await fetch(
+        `${process.env.REACT_APP_SERVER_BASE_URL}/users/${props.match.params.idx}`,
+        {
+          headers: {
+            Authorization: `Bearer ${cookie.access_token}`,
+          },
+          method: 'GET',
+        },
+      )
+        .then(response => response.json())
+        .then(json => {
+          setMyData(json);
+          console.log(json.email);
+          setEditData({
+            name: json.name,
+            email: json.email,
+            employeeId: json.employeeId,
+            tel: json.tel,
+            department: json.department,
+            position: json.position,
+          });
+        });
+    };
+    res();
+  }, []);
+  /*정보 수정 */
+  const confirmHandler = async () => {
+    const response = await fetch(
+      `${process.env.REACT_APP_SERVER_BASE_URL}/users/${props.match.params.idx}`,
+      {
+        headers: {
+          'Content-type': 'application/json',
+          Authorization: `Bearer ${cookie.access_token}`,
+        },
+        method: 'PATCH',
+        body: JSON.stringify({
+          name: editData.name,
+          email: editData.email,
+          employeeId: editData.employeeId,
+          tel: editData.tel,
+          department: editData.department,
+          position: editData.position,
+        }),
+      },
+    );
+    alert(response.status);
+  };
+
+  const editHandler = () => {
+    setDisable(!disable);
+  };
+
+  const editName = e => {
+    setEditData({
+      ...editData,
+      name: e.target.value,
+    });
+  };
+  const editEmail = e => {
+    setEditData({
+      ...editData,
+      email: e.target.value,
+    });
+    console.log(editData);
+  };
+  const editEmployeeId = e => {
+    setEditData({
+      ...editData,
+      employeeId: e.target.value,
+    });
+  };
+  const editTel = e => {
+    setEditData({
+      ...editData,
+      tel: e.target.value,
+    });
+  };
+  const editDepartment = e => {
+    setEditData({
+      ...editData,
+      department: e.target.value,
+    });
+  };
+  const editPosition = e => {
+    setEditData({
+      ...editData,
+      position: e.target.value,
+    });
+  };
   return (
     <div className="userMyPage">
       <div>
         <NavBarUser />
       </div>
-
       <div className="u_myPageForm">
         <div className="u_myPageHeader">
           <div className="u_myPageHeaderTextStyle">
@@ -42,36 +144,121 @@ const MyInfoForm = props => {
           <p className="myInfoFormTitleTextStyle">나의 정보 수정</p>
 
           <div className="myInfoDetailForm">
-            <Form>
-              <Form.Group className="mb-3" controlId="formGroupName">
-                <Form.Label>이름</Form.Label>
-                <Form.Control type="name" placeholder="홍길동" />
-              </Form.Group>
-              <Form.Group className="mb-3" controlId="formGroupEmail">
-                <Form.Label>이메일</Form.Label>
-                <Form.Control type="email" placeholder="asdf@asg.com" />
-              </Form.Group>
-              <Form.Group className="mb-3" controlId="formGroupPassword">
-                <Form.Label>비밀번호</Form.Label>
-                <Form.Control type="password" placeholder="Password" />
-              </Form.Group>
-              <Form.Group className="mb-3" controlId="formGroupName">
-                <Form.Label>전화번호</Form.Label>
-                <Form.Control type="name" placeholder="010-1223-4456" />
-              </Form.Group>
-              <Form.Group className="mb-3" controlId="formGroupName">
-                <Form.Label>부서</Form.Label>
-                <Form.Control type="name" placeholder="개발팀" />
-              </Form.Group>
-              <Form.Group className="mb-3" controlId="formGroupName">
-                <Form.Label>직급</Form.Label>
-                <Form.Control type="name" placeholder="팀장" />
-              </Form.Group>
-            </Form>
-          </div>
-          <div>
-            <button>수정</button>
-            <button>회원 탈퇴</button>
+            <div className="column">
+              <div>
+                <label>이름</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder={myData.name}
+                  disabled={disable}
+                  onChange={editName}
+                  value={myData.name}
+                />
+              </div>
+              <div>
+                <label>이메일</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder={myData.email}
+                  disabled={disable}
+                  onChange={editEmail}
+                  // value={email}
+                />
+              </div>
+            </div>
+
+            <div className="column">
+              <div>
+                <label>비밀번호</label>
+                <input
+                  type="password"
+                  className="form-control"
+                  placeholder="대소문자와 숫자를 포함한 8~12자리"
+                  disabled={disable}
+
+                  //onChange={inputPw}
+                  // value={password}
+                />
+              </div>
+              <div>
+                <label>비밀번호 확인</label>
+                <input
+                  type="password"
+                  className="form-control"
+                  placeholder="비밀번호 확인"
+                  disabled={disable}
+
+                  // onBlur={confirmHandler}
+                  //onChange={inputConfirmPw}
+                  // value={confirmPw}
+                />
+              </div>
+            </div>
+
+            <div className="column">
+              <div>
+                <label>사원번호</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder={myData.employeeId}
+                  disabled={disable}
+                  onChange={editEmployeeId}
+                  //value={employeeId}
+                />
+              </div>
+              <div>
+                <label>전화번호</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder={myData.tel}
+                  disabled={disable}
+                  onChange={editTel}
+                  //value={tel}
+                />
+              </div>
+            </div>
+
+            <div className="column">
+              <div>
+                <label>부서</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder={myData.department}
+                  disabled={disable}
+                  onChange={editDepartment}
+                  //value={department}
+                />
+              </div>
+              <div>
+                <label>직급</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder={myData.position}
+                  disabled={disable}
+                  onChange={editPosition}
+                  // value={position}
+                />
+              </div>
+            </div>
+            <div>
+              <button className="infoEditButton" onClick={editHandler}>
+                수정
+              </button>
+              <button
+                className="editFinishButton"
+                disabled={disable}
+                onClick={confirmHandler}
+              >
+                완료
+              </button>
+              <button>탈퇴</button>
+            </div>
           </div>
         </div>
       </div>
