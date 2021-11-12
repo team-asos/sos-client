@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import '../assets/styles/u4_myInfoLogin.css';
 //마이페이지->나의 정보 수정 다시 로그인
 
-const MyInfoLoginForm = () => {
+const MyInfoLoginForm = props => {
   const [pw, setPw] = useState('');
   const inputPw = e => {
     setPw(e.target.value);
@@ -16,14 +16,14 @@ const MyInfoLoginForm = () => {
         },
         method: 'POST',
         body: JSON.stringify({
-          email: 'jw@sos.com', //나중에 받아와야됨
+          email: props.user.email,
           password: pw,
         }),
       },
     );
 
     if (response.status === 200) {
-      window.location.href = 'user-mypage-myinfo';
+      window.location.href = `user-mypage-myinfo/${props.user.id}`;
     } else {
       alert(response.status);
     }
