@@ -17,7 +17,6 @@ const SelectedRoomTable = props => {
       await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/rooms/${roomID}`, {
         headers: {
           Authorization: `Bearer ${cookie.access_token}`,
-          //'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6Iuq5gOyngOybkCIsInJvbGUiOjAsImlhdCI6MTYzNjYzMjAyNywiZXhwIjoxNjM5MjI0MDI3fQ.z7hJl0nLbgWs2HCrzzhfLMhcxDG-a6eM30a3CiPS1tQ',
         },
         method: 'GET',
       })
