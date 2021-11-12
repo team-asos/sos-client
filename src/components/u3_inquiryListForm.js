@@ -63,13 +63,7 @@ const InquiryListForm = props => {
   return (
     /*전체 문의 리스트 */
 
-    <Accordion
-      flush
-      className="inquiryListTotal"
-      style={{
-        overflow: 'auto',
-      }}
-    >
+    <Accordion flush className="inquiryListTotal">
       <div>{question.length === 0 ? '질문내역이없습니다' : ''}</div>
       {/*하나의 문의 제목, 내용/답변*/}
       {question &&
