@@ -14,6 +14,9 @@
   align-items: center;
   margin-top: 6vh;
 }
+.setPadding {
+  padding-left: 4vw;
+}
 .infoEditButton {
   width: 7vw;
   height: 5vh; /*30px*/
@@ -47,4 +50,13 @@
   transition: ease 0.2s;
   transform: scale(1.02);
   background: #747272;
+}
+.dropUser {
+  font-size: 1.2em;
+  cursor: pointer;
+  align-self: center;
+}
+.dropUser:hover {
+  transition: ease 0.1s;
+  transform: scale(1.01);
 }

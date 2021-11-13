@@ -43,6 +43,10 @@
   width: 5vw;
   height: 5vh;
 }
+.facilityicon:hover {
+  transition: ease-in 0.1s;
+  transform: scale(1.03);
+}
 .facility-icon-box {
   height: 6vh; /*54px*/
   position: relative;
