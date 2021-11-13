@@ -73,6 +73,7 @@ const AddParticipant = ({ START, END, MAXUSER, ROOMID }) => {
     );
     if (response.status === 201) {
       alert('예약이 완료되었습니다.');
+      window.location.href = '/room-check';
     } else {
       alert(response.status);
     }
