@@ -66,7 +66,23 @@ const MyInfoForm = props => {
     );
     alert(response.status);
   };
-
+  /*탈퇴 */
+  const dropHandler = async () => {
+    const response = await fetch(
+      `${process.env.REACT_APP_SERVER_BASE_URL}/users/${props.match.params.idx}`,
+      {
+        headers: {
+          'Content-type': 'application/json',
+          Authorization: `Bearer ${cookie.access_token}`,
+        },
+        method: 'DELETE',
+      },
+    );
+    if (response.status === 200) {
+      alert('탈퇴가 완료되었습니다.');
+      //removeCookie('access_token');
+    }
+  };
   const editHandler = () => {
     setDisable(!disable);
   };
@@ -156,7 +172,7 @@ const MyInfoForm = props => {
                   value={myData.name}
                 />
               </div>
-              <div>
+              <div className="setPadding">
                 <label>이메일</label>
                 <input
                   type="text"
@@ -164,7 +180,7 @@ const MyInfoForm = props => {
                   placeholder={myData.email}
                   disabled={disable}
                   onChange={editEmail}
-                  // value={email}
+                  value={myData.email}
                 />
               </div>
             </div>
@@ -179,10 +195,10 @@ const MyInfoForm = props => {
                   disabled={disable}
 
                   //onChange={inputPw}
-                  // value={password}
+                  //value={password}
                 />
               </div>
-              <div>
+              <div className="setPadding">
                 <label>비밀번호 확인</label>
                 <input
                   type="password"
@@ -192,7 +208,7 @@ const MyInfoForm = props => {
 
                   // onBlur={confirmHandler}
                   //onChange={inputConfirmPw}
-                  // value={confirmPw}
+                  //value={confirmPw}
                 />
               </div>
             </div>
@@ -206,10 +222,10 @@ const MyInfoForm = props => {
                   placeholder={myData.employeeId}
                   disabled={disable}
                   onChange={editEmployeeId}
-                  //value={employeeId}
+                  value={myData.employeeId}
                 />
               </div>
-              <div>
+              <div className="setPadding">
                 <label>전화번호</label>
                 <input
                   type="text"
@@ -217,7 +233,7 @@ const MyInfoForm = props => {
                   placeholder={myData.tel}
                   disabled={disable}
                   onChange={editTel}
-                  //value={tel}
+                  value={myData.tel}
                 />
               </div>
             </div>
@@ -231,10 +247,10 @@ const MyInfoForm = props => {
                   placeholder={myData.department}
                   disabled={disable}
                   onChange={editDepartment}
-                  //value={department}
+                  value={myData.department}
                 />
               </div>
-              <div>
+              <div className="setPadding">
                 <label>직급</label>
                 <input
                   type="text"
@@ -242,11 +258,11 @@ const MyInfoForm = props => {
                   placeholder={myData.position}
                   disabled={disable}
                   onChange={editPosition}
-                  // value={position}
+                  value={myData.position}
                 />
               </div>
             </div>
-            <div>
+            <div style={{ position: 'inherit' }}>
               <button className="infoEditButton" onClick={editHandler}>
                 수정
               </button>
@@ -257,8 +273,10 @@ const MyInfoForm = props => {
               >
                 완료
               </button>
-              <button>탈퇴</button>
             </div>
+            <p className="dropUser" onClick={dropHandler}>
+              탈퇴
+            </p>
           </div>
         </div>
       </div>
