@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
+import { useCookies } from 'react-cookie';
 import { Modal, Button, Table } from 'react-bootstrap';
 import '../assets/styles/u4_myReservationListForm.css';
 //마이페이지->나의 예약 내역 조회/취소
 
 const MyReservationListForm = props => {
+  const [cookie] = useCookies(['access_token']);
   const [show, setShow] = useState(false);
   const [reservation, setReservation] = useState([]);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  /*내 id */
   const res = async () => {
     await fetch(
       `${process.env.REACT_APP_SERVER_BASE_URL}/reservations/search?userId=${props.user.id}`,
@@ -24,25 +25,24 @@ const MyReservationListForm = props => {
   useEffect(() => {
     if (props.user.id !== 'undefined') res();
   }, [props.user.id]);
+  console.log(reservation);
 
   /*예약 취소*/
-  const deleteReservation = reservationId => {
-    const res = async () => {
+  const deleteClick = reservationId => {
+    handleClose();
+    const response = async () => {
       await fetch(
         `${process.env.REACT_APP_SERVER_BASE_URL}/reservations/${reservationId}`,
         {
           method: 'DELETE',
         },
       );
-      // .then(response => response.json())
-      // .then(json => {
-      //   setReservation(json);
-      // });
-      console.log(res);
-      if (res.status === 200) {
-        alert('예약이 취소되었습니다.');
-      }
+      //status가 undefined라고 뜸. 그리고 close됐을 때 새로고침 하고 싶음
+      // if (response.status === 200) {
+      //   alert('예약이 취소되었습니다.');
+      // }
     };
+    response();
   };
   return (
     <div className="myReservationListForm">
@@ -100,7 +100,7 @@ const MyReservationListForm = props => {
                             </Button>
                             <Button
                               variant="danger"
-                              onClick={deleteReservation(item.id)}
+                              onClick={deleteClick(item.id)}
                             >
                               확인
                             </Button>
@@ -190,7 +190,7 @@ const MyReservationListForm = props => {
                             </Button>
                             <Button
                               variant="danger"
-                              onClick={deleteReservation(item.id)}
+                              onClick={() => deleteClick(item.id)}
                             >
                               확인
                             </Button>
