@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Accordion } from 'react-bootstrap';
+import * as FcIcon from 'react-icons/fc';
 import '../assets/styles/u3_inquiryListForm.css';
 //문의 리스트 폼 /get할 때 권한 안써도 되는지?
 const InquiryListForm = props => {
@@ -37,15 +38,26 @@ const InquiryListForm = props => {
       res2();
     }
   }, [props.user.id]);
-
+  const deleteClick = questionId => {
+    const response = async () => {
+      await fetch(
+        `${process.env.REACT_APP_SERVER_BASE_URL}/questions/${questionId}`,
+        {
+          method: 'DELETE',
+        },
+      );
+    };
+    response();
+  };
   const getAnswerMessage = questionID => {
+    console.log(question);
+    console.log(answer?.id);
     for (let i = 0; i < answer.length; i++) {
       if (questionID === answer[i].question.id && answer[i].message) {
         return answer[i].message;
       }
     }
   };
-
   const getAnswerCreatedAt = questionID => {
     for (let i = 0; i < answer.length; i++) {
       if (questionID === answer[i].question.id && answer[i].message) {
@@ -64,7 +76,16 @@ const InquiryListForm = props => {
     /*전체 문의 리스트 */
 
     <Accordion flush className="inquiryListTotal">
-      <div>{question.length === 0 ? '질문내역이없습니다' : ''}</div>
+      <div>
+        {question.length === 0 ? (
+          <>
+            <FcIcon.FcQuestions size={200} className="alertStyle" />
+            <p className="alertTextStyle">문의 내역이 없습니다.</p>
+          </>
+        ) : (
+          ''
+        )}
+      </div>
       {/*하나의 문의 제목, 내용/답변*/}
       {question &&
         question
@@ -100,7 +121,13 @@ const InquiryListForm = props => {
                 </div>
               </Accordion.Header>
               <Accordion.Body className="inquiryContent">
-                {item.message}
+                <div className="inquiryMsg">{item.message}</div>
+                <p
+                  className="deleteInquiry"
+                  onClick={() => deleteClick(item.id)}
+                >
+                  삭제
+                </p>
               </Accordion.Body>
               {/*답변*/}
               <Accordion.Body className="inquiryAnswer">
