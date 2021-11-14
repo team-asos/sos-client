@@ -28,6 +28,7 @@ jobs:
         run: npm run build
         env:
           CI: ''
+          REACT_APP_SERVER_BASE_URL: ${{ secrets.REACT_APP_SERVER_BASE_URL }}
 
       - name: Deploy
         env:
