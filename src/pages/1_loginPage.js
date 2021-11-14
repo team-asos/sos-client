@@ -30,7 +30,7 @@ const Login = () => {
     const data = await response.json();
 
     if (data.role === 0) history.push('/seat-reservation');
-    else if (data.role === 1) history.push('/user-management');
+    else if (data.role === 0) history.push('/user-management');
   };
 
   useEffect(() => {

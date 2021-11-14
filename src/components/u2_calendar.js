@@ -1,15 +1,9 @@
 import React, { useState, forwardRef } from 'react';
 import DatePicker from 'react-datepicker';
 import { ko } from 'date-fns/esm/locale';
-import {
-  getMonth,
-  getDate,
-  getHours,
-  getMinutes,
-  getYear,
-  formatISO,
-} from 'date-fns';
-
+import * as FaIcon from 'react-icons/fa';
+import 'react-datepicker/dist/react-datepicker.css';
+import { formatISO } from 'date-fns';
 import { addDays } from 'date-fns';
 import AddParticipant from './u2_addParticipant';
 import '../assets/styles/u2_calendar.css';
@@ -17,15 +11,15 @@ import '../assets/styles/u2_calendar.css';
 //회의실 예약 페이지-> 이용시간 선택
 const Calendar = props => {
   const [startDate, setStartDate] = useState(new Date()); //DatePicker
-  const [endDate, setEndDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(startDate);
   const roomMAXUSER = props.roomMAXUSER;
-
+  const roomID = props.roomID;
   const MyCustom = forwardRef(({ value, onClick }, ref) => (
     <button className="customPicker" onClick={onClick} ref={ref}>
       {value}
+      <FaIcon.FaRegCalendarAlt size={30} style={{ marginLeft: '0.5vw' }} />
     </button>
   ));
-
   return (
     <>
       <div className="pickersTextStyle">이용 시간</div>
@@ -57,21 +51,10 @@ const Calendar = props => {
         />
       </div>
       <AddParticipant
-        // START={
-        //   getYear(startDate) +
-        //   '-' +
-        //   (getMonth(startDate) + 1) +
-        //   '-' +
-        //   getDate(startDate) +
-        //   ' ' +
-        //   getHours(startDate) +
-        //   ':' +
-        //   getMinutes(startDate)
-        // }
-
         START={formatISO(startDate)}
         END={formatISO(endDate)}
         MAXUSER={roomMAXUSER}
+        ROOMID={roomID}
       />
     </>
   );

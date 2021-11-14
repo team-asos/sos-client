@@ -1,37 +1,77 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../assets/styles/a4_userTable.css';
 
-import { Link } from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
+import moment from 'moment';
+import UserDetailModalContent from './a4_userDetailModal';
+import tableHeadertoKR from './a4_tableHeadertoKR';
 import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
 
-export default function userTable({ match, data }) {
+export default function UserTable({ data }) {
   const columns = data[0] && Object.keys(data[0]);
+  const [modalInfo, setModalInfo] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const toggleTrueFalse = () => {
+    setShowModal(handleShow);
+  };
+
+  useEffect(() => {
+    console.log(modalInfo);
+  }, [modalInfo]);
 
   return (
-    <MDBTable hover className="userTable" cellPadding={0} cellSpacing={0}>
-      <MDBTableHead>
-        <tr>{data[0] && columns.map(heading => <th>{heading}</th>)}</tr>
-      </MDBTableHead>
-      <MDBTableBody>
-        {data.map(row => (
+    <div>
+      <MDBTable hover className="userTable" cellPadding={0} cellSpacing={0}>
+        {/* 헤더 */}
+        <MDBTableHead>
           <tr>
-            {columns.map(column => (
-              <td>{row[column]}</td>
-            ))}
-
-            <td key={row['id']}>
-              <Link to={`/user-management/${row['id']}`}>
-                <button
-                  className="userInfoBtn"
-                  onClick={() => console.log(row)}
+            {data[0] &&
+              columns.map(heading =>
+                heading === 'role' ? '' : <th>{tableHeadertoKR(heading)}</th>,
+              )}
+          </tr>
+        </MDBTableHead>
+        {/* 바디 */}
+        <MDBTableBody>
+          {data.map(row => (
+            <tr>
+              {columns.map(column =>
+                column === 'role' ? '' : <td>{row[column]}</td>,
+              )}
+              <td>
+                <Button
+                  variant="outline-danger"
+                  size="sm"
+                  animation="false"
+                  onClick={e => {
+                    //console.log(row); 확인 완료
+                    setModalInfo(row);
+                    toggleTrueFalse();
+                  }}
                 >
                   조회하기
-                </button>
-              </Link>
-            </td>
-          </tr>
-        ))}
-      </MDBTableBody>
-    </MDBTable>
+                </Button>
+                {show ? (
+                  <UserDetailModalContent
+                    show={show}
+                    handleClose={handleClose}
+                    modalInfo={modalInfo}
+                    data={data}
+                    columns={columns}
+                  />
+                ) : (
+                  ''
+                )}
+              </td>
+            </tr>
+          ))}
+        </MDBTableBody>
+      </MDBTable>
+    </div>
   );
 }

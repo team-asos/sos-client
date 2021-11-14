@@ -38,3 +38,13 @@
   cursor: pointer;
   margin-left: 2%;
 }
+.myRLMenuTextStyle:hover,
+.myInfoMenuTextStyle:hover {
+  color: white;
+  transition: ease-in 0.1s;
+  transform: scale(1.04);
+}
+/*마이페이지에서 헤더 빼고 나머지 부분*/
+.myPageContents {
+  height: 90vh;
+}

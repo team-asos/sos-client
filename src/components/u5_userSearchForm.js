@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import Select from 'react-select';
+import { useCookies } from 'react-cookie';
 import { Table } from 'react-bootstrap';
-import * as MdIcon from 'react-icons/md';
 import '../assets/styles/u5_userSearchForm.css';
 //좌석 예약 페이지->직원 검색
 const UserSearchForm = () => {
   const [data, setData] = useState([]);
   const [ID, setID] = useState();
+  const [cookie] = useCookies(['access_token']);
 
   const handleChange = value => {
     setID(value);
@@ -17,8 +18,8 @@ const UserSearchForm = () => {
       //await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/users/${}`, {
       await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/users/search`, {
         headers: {
-          Authorization:
-            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsIm5hbWUiOiLquYDsubTtgqQiLCJyb2xlIjowLCJpYXQiOjE2MzYzODQ5OTcsImV4cCI6MTYzNjQ3MTM5N30.U9xQrCi51sBaempL6yQa3boHV8ZiO0si0OHD-vkqDK4',
+          Authorization: `Bearer ${cookie.access_token}`,
+          //'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6Iuq5gOyngOybkCIsInJvbGUiOjAsImlhdCI6MTYzNjYzMjAyNywiZXhwIjoxNjM5MjI0MDI3fQ.z7hJl0nLbgWs2HCrzzhfLMhcxDG-a6eM30a3CiPS1tQ',
         },
         method: 'GET',
       })
@@ -33,8 +34,7 @@ const UserSearchForm = () => {
   return (
     <div className="u_userSearchForm">
       <div className="searchUserTextStyle">
-        직원 검색
-        <MdIcon.MdPersonSearch size={35} />
+        <hr></hr>직원 검색
       </div>
       <div>
         <Select
@@ -52,7 +52,7 @@ const UserSearchForm = () => {
       </div>
       <div className="userLocation">
         {data.map(item =>
-          item.id == ID ? (
+          item.id === ID ? (
             <>
               <Table striped hover className="userLocationInfo">
                 <thead>

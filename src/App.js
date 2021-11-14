@@ -16,11 +16,10 @@ import RoomCheckPage from './pages/u1_roomCheckPage';
 import InquirePage from './pages/u3_inquirePage';
 import UserMyPage from './pages/u4_myPage';
 import SeatReservationPage from './pages/u5_seatPage';
-import MyInfo from './components/u4_myInfoForm';
+import MyInfo from './pages/u4_myInfoForm';
 
 //관리자 페이지
 import NotificationPage from './pages/a3_notificationPage';
-import UserDetailPage from './pages/a4_userDetailPage';
 import UserManagePage from './pages/a4_userManagePage';
 import SeatManagePage from './pages/a5_seatManagePage';
 
@@ -44,11 +43,10 @@ function App() {
           <Route path="/room-check" component={RoomCheckPage} />
           <Route path="/inquire" component={InquirePage} />
           <Route path="/user-mypage" component={UserMyPage} />
-          <Route path="/user-mypage/myinfo" component={MyInfo} />
+          <Route path="/user-mypage-myinfo/:idx" component={MyInfo} />
           <Route path="/seat-reservation" component={SeatReservationPage} />
 
           <Route exact path="/user-management" component={UserManagePage} />
-          <Route path="/user-management/:id" component={UserDetailPage} />
           <Route path="/notification" component={NotificationPage} />
           <Route path="/seat-management" component={SeatManagePage} />
         </Switch>

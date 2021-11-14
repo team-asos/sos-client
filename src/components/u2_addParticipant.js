@@ -1,15 +1,33 @@
 import React, { useState, useEffect } from 'react';
 import Select from 'react-select';
+import { useCookies } from 'react-cookie';
 import { Table } from 'react-bootstrap';
 import * as AiIcon from 'react-icons/ai';
 import '../assets/styles/u2_addParticipant.css';
 //회의실 인원 검색해서 추가
 
-const AddParticipant = ({ START, END, MAXUSER }) => {
-  const maxMember = 5; //db연결해야함
+const AddParticipant = ({ START, END, MAXUSER, ROOMID }) => {
+  const [cookie] = useCookies(['access_token']);
   const [data, setData] = useState([]);
   const [selectedMembers, setSelectedMembers] = useState([]);
   const [membersId, setMembersId] = useState([]);
+  const [myId, setMyId] = useState();
+  /*내 정보 */
+  useEffect(() => {
+    const res = async () => {
+      await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/auth`, {
+        headers: {
+          Authorization: `Bearer ${cookie.access_token}`,
+        },
+        method: 'GET',
+      })
+        .then(response => response.json())
+        .then(json => {
+          setMyId(json.id);
+        });
+    };
+    res();
+  }, []);
   /*참석자 선택 */
   const handleChange = e => {
     setSelectedMembers(e);
@@ -19,8 +37,7 @@ const AddParticipant = ({ START, END, MAXUSER }) => {
     const res = async () => {
       await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/users/search`, {
         headers: {
-          Authorization:
-            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsIm5hbWUiOiLquYDsubTtgqQiLCJyb2xlIjowLCJpYXQiOjE2MzYzODQ5OTcsImV4cCI6MTYzNjQ3MTM5N30.U9xQrCi51sBaempL6yQa3boHV8ZiO0si0OHD-vkqDK4',
+          Authorization: `Bearer ${cookie.access_token}`,
         },
         method: 'GET',
       })
@@ -31,7 +48,6 @@ const AddParticipant = ({ START, END, MAXUSER }) => {
     };
     res();
   }, []);
-
   /*예약하기 */
   const reservationClickHandler = async () => {
     for (let i = 0; i < selectedMembers.length; i++) {
@@ -48,14 +64,19 @@ const AddParticipant = ({ START, END, MAXUSER }) => {
         body: JSON.stringify({
           startTime: START,
           endTime: END,
-          status: 0,
-          seatId: 0,
-          roomId: 7,
-          userId: 2,
+          status: 0, //물어보기
+          roomId: Number(ROOMID),
+          userId: Number(myId),
           participantIds: membersId,
         }),
       },
     );
+    if (response.status === 201) {
+      alert('예약이 완료되었습니다.');
+      window.location.href = '/room-check';
+    } else {
+      alert(response.status);
+    }
   };
   /*마이너스 누르면 참석자 삭제 */
   const deleteParticipant = id => {
@@ -66,7 +87,7 @@ const AddParticipant = ({ START, END, MAXUSER }) => {
   /* id 접근 안돼서 만든 함수 */
   const participantInfo = id => {
     for (let i = 0; i < data.length; i++) {
-      if (data[i].id == id) {
+      if (data[i].id === id) {
         return i;
       }
     }
@@ -93,7 +114,7 @@ const AddParticipant = ({ START, END, MAXUSER }) => {
             noOptionsMessage={() => '검색 결과가 없습니다.'}
             className="searchParticipant"
             value={selectedMembers}
-            // isDisabled={selectedMembers.length < MAXUSER ? 0 : 1}
+            isDisabled={selectedMembers.length < MAXUSER ? 0 : 1}
           />
         </div>
         <div className="participantForm">

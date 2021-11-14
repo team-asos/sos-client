@@ -9,7 +9,7 @@ class RoomReservationTable extends React.Component {
   render() {
     return (
       <div>
-        <Table className="reservationTable">
+        <Table striped hover className="reservationTable">
           <thead className="rHeader">
             <tr>
               <th>이름</th>
