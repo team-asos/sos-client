@@ -1,7 +1,10 @@
 /*전체 리스트 폼*/
 .inquiryListTotal {
-  width: inherit;
-  height: 80vh;
+  /* width: inherit;
+  height: 80vh; */
+  width: 80%;
+  height: 100%;
+  overflow: auto;
 }
 
 /*제목 폼(제목, 날짜, 상태, 화살표)*/
@@ -33,7 +36,27 @@
 /*제목 폼에서 아랫부분*/
 .inquiryTitleBottom {
 }
+/*문의 내용*/
+.inquiryContent {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  justify-content: space-between;
+}
+/*삭제*/
+.deleteInquiry {
+  align-content: flex-end;
+  cursor: pointer;
+  color: #d80303;
+}
 /*답변 여부*/
 .isReply {
   color: rgb(40, 40, 40);
+}
+.alertStyle {
+}
+.alertTextStyle {
+  font-weight: bold;
+  font-size: 1.4em;
+  margin-left: 1vw;
 }

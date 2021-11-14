@@ -30,7 +30,7 @@
 }*/
 
 .inquiryForm {
-  background-color: rgba(133, 133, 133, 0.92);
+  /* background-color: rgba(133, 133, 133, 0.92); */
   display: flex;
   flex-direction: column;
   /*width: 75vw;*/

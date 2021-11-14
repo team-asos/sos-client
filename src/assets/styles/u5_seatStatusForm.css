@@ -10,16 +10,25 @@
 .u_seatFormUpper {
   display: flex;
   flex-direction: row;
-  height: 13vh;
+  height: 9vh;
   justify-content: flex-end;
   align-items: flex-end;
   justify-content: space-between;
 }
+.selectedFloorName {
+  display: flex;
+  align-items: center;
+  margin-left: 2vw;
+  height: inherit;
+}
 .selectedFloorNameTextStyle {
   font-weight: bold;
-  font-size: 2.5em;
+  font-size: 2.8em;
+}
+.dropdownFloor {
   margin-left: 2vw;
 }
+
 .showFacility {
 }
 .showFacilityButton {
