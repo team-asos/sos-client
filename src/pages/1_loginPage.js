@@ -21,6 +21,7 @@ const Login = () => {
       {
         headers: {
           'Content-type': 'application/json',
+          Accept: 'application/json',
           Authorization: `Bearer ${cookie.access_token}`,
         },
         method: 'GET',
