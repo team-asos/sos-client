@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import NavBarUser from '../components/u_navBar';
 import { Link } from 'react-router-dom';
 import MyInfoLogin from '../components/u4_myInfoLogin';
+import DeleteAccount from '../components/u4_deleteAccount';
 import { useCookies } from 'react-cookie';
 import MyReservationList from '../components/u4_myReservationListForm';
 import '../assets/styles/u4_myPage.css';
@@ -29,6 +30,7 @@ const UserMyPage = props => {
   const tabBar = {
     0: <MyReservationList user={user} />,
     1: <MyInfoLogin user={user} />, //나중에 email 받아서 인증해야해서
+    2: <DeleteAccount user={user} />,
   };
   const [state, setState] = useState(0);
   // const [loginShow, setLoginShow]=useState(1);
@@ -41,6 +43,8 @@ const UserMyPage = props => {
       return tabBar[0];
     } else if (state === 1) {
       return tabBar[1];
+    } else if (state === 2) {
+      return tabBar[2];
     }
   };
   return (
@@ -68,6 +72,9 @@ const UserMyPage = props => {
           </div>
           <div onClick={() => clickHandler(1)} className="myInfoMenuTextStyle">
             나의 정보 수정
+          </div>
+          <div onClick={() => clickHandler(2)} className="myInfoMenuTextStyle">
+            회원 탈퇴
           </div>
         </div>
 

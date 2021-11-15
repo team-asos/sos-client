@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Accordion } from 'react-bootstrap';
-import * as FcIcon from 'react-icons/fc';
+import * as AiIcon from 'react-icons/ai';
 import '../assets/styles/u3_inquiryListForm.css';
 //문의 리스트 폼 /get할 때 권한 안써도 되는지?
 const InquiryListForm = props => {
@@ -46,6 +46,12 @@ const InquiryListForm = props => {
           method: 'DELETE',
         },
       );
+      window.location.href = '/inquire'; //성공이면 바꾸기
+      if (response.status === 200) {
+        alert('문의가 삭제되었습니다.');
+      } else {
+        alert(response.status);
+      }
     };
     response();
   };
@@ -79,8 +85,21 @@ const InquiryListForm = props => {
       <div>
         {question.length === 0 ? (
           <>
-            <FcIcon.FcQuestions size={200} className="alertStyle" />
-            <p className="alertTextStyle">문의 내역이 없습니다.</p>
+            <AiIcon.AiOutlineQuestionCircle
+              size={200}
+              className="alertStyle"
+              style={{
+                marginTop: '27vh',
+                marginLeft: '37vw',
+                color: '#820101',
+              }}
+            />
+            <p
+              style={{ marginTop: '3vh', marginLeft: '36.5vw' }}
+              className="alertTextStyle"
+            >
+              문의 내역이 없습니다.
+            </p>
           </>
         ) : (
           ''

@@ -17,6 +17,10 @@
 .setPadding {
   padding-left: 4vw;
 }
+.infoBottom {
+  display: flex;
+  align-content: space-between;
+}
 .infoEditButton {
   width: 7vw;
   height: 5vh; /*30px*/
@@ -54,7 +58,7 @@
 .dropUser {
   font-size: 1.2em;
   cursor: pointer;
-  align-self: center;
+  align-self: flex-end;
 }
 .dropUser:hover {
   transition: ease 0.1s;
