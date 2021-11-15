@@ -8,6 +8,15 @@ const MyReservationListForm = props => {
   const [cookie] = useCookies(['access_token']);
   const [show, setShow] = useState(false);
   const [reservation, setReservation] = useState([]);
+  const [seatIdx, setSeatIdx] = useState(0);
+  const [roomIdx, setRoomIdx] = useState(0);
+  const seatCnt = () => {
+    console.log(seatIdx);
+  };
+  const roomCnt = () => {
+    setRoomIdx(roomIdx + 1);
+    return roomIdx;
+  };
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const res = async () => {
@@ -171,7 +180,7 @@ const MyReservationListForm = props => {
               .map((item, idx) =>
                 item.seat == null ? (
                   <tbody>
-                    <tr key={reservation.length - idx}>
+                    <tr key={idx}>
                       <td>{idx + 1}</td>
                       <td>{item.startTime.slice(0, 10)}</td>
                       <td>

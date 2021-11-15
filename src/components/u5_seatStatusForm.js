@@ -83,7 +83,9 @@ const SeatStatusForm = () => {
       </div>
 
       <div className="u_seatFormBottom">
-        <div className="seatLayout">{isToggleOn ? '' : <FacilityForm />}</div>
+        <div className="seatLayout">
+          {isToggleOn ? '좌석도면' : <FacilityForm />}
+        </div>
       </div>
     </div>
   );
