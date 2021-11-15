@@ -23,6 +23,7 @@ const SignUp = () => {
       {
         headers: {
           'Content-type': 'application/json',
+          Accept: 'application/json',
         },
         method: 'POST',
         body: JSON.stringify({
