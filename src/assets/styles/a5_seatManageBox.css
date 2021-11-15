@@ -38,6 +38,9 @@
   width: 30px;
   height: 30px;
 
+  margin-left: 1.5%;
+  margin-top: 1%;
+
   color: #860008;
 
   font-size: 0.7em;
@@ -61,20 +64,4 @@
   width: 99%;
   height: 87%;
   background: #c4c4c4;
-}
-
-.floorInputForm::placeholder {
-  font-style: italic;
-  font-size: smaller;
-}
-.floorModal {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-.createFloorModal {
-  width: 50%;
-}
-.deleteFloorModal {
-  width: 50%;
 }

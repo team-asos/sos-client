@@ -24,7 +24,7 @@ const AnswerCompleteList = () => {
   }, []);
   //답변완료 목록 가져오기
   const isReplied = item => {
-    if (item.status === 1) return 1;
+    if (item.status === 0) return 1;
   };
 
   //질문 받아오기

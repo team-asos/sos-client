@@ -16,7 +16,7 @@ const UserSearchBar = () => {
       await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/users/search`, {
         headers: {
           Authorization:
-            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IuyKpO2OgOyngOuwpSIsInJvbGUiOjAsImlhdCI6MTYzNjUyMjQ0NCwiZXhwIjoxNjM2NjA4ODQ0fQ.VHVQXsQjzuAuvAehWiiqbcwJ82VfppLfRsQDeH2-iJE',
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywibmFtZSI6IuyDjOuUlCIsInJvbGUiOjAsImlhdCI6MTYzNjcxMjc5MywiZXhwIjoxNjM5MzA0NzkzfQ.9u655XibwyyWiDxRgwdz18LYh54TT0ZfhaR_ETeZln8',
         },
         method: 'GET',
       })

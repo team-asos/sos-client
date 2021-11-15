@@ -52,5 +52,7 @@
   cursor: pointer;
 }
 .logOutTextStyle:hover {
-  color: white;
+  transition: 0.1s ease-in;
+  transform: scale(1.05);
+  color: #820101;
 }
