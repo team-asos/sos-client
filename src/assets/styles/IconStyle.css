@@ -11,11 +11,12 @@
 .text {
   font-size: 0.55em;
   font-weight: bold;
-  color: black;
+  color: #820101;
 
   visibility: hidden;
 
   text-decoration: overline;
+  text-decoration-color: black;
 }
 .icon-box:hover {
   color: #820101;

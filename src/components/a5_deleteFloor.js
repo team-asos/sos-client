@@ -1,4 +1,3 @@
-import { Alert, AlertTitle } from '@mui/material';
 import React, { useState, useEffect } from 'react';
 import { Modal } from 'react-bootstrap';
 
@@ -37,17 +36,19 @@ const DeleteFloor = () => {
     if (result.status === 200) {
       alert('층 삭제에 성공하였습니다.');
       window.location.href = '/seat-management';
-    } else {
-      //예외처리 할 것
+    } else if (result.status === 404) {
+      alert('존재하지 않는 층입니다.');
+      window.location.href = '/seat-management';
     }
   };
 
   const findFloorId = delete_floor_name => {
-    floor.map((item, idx) => {
+    floor.map(item => {
       if (delete_floor_name === item.name) {
         setDeletedFloorId(item.id);
       }
     });
+    console.log(deleteFloor);
   };
 
   return (

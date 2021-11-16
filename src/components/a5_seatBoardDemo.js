@@ -1,24 +1,40 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import Cell from './a5_Cell';
-import '../assets/styles/a5_seatBoard.css';
 import CreateTab from './a5_createTab';
 
+import '../assets/styles/a5_seatBoard.css';
+
 const SeatBoardDemo = ({ floorInfo }) => {
-  const [status, setStatus] = useState(0);
-  const [rows, setRows] = useState(20);
-  const [columns, setColumns] = useState(35);
   const [clickedRow, setClickedRow] = useState(-1);
   const [clickedColumn, setClickedColumn] = useState(-1);
+  const [seat, setSeat] = useState([]);
 
-  console.log(floorInfo); //출력 완료
+  useEffect(() => {
+    const asd = async () => {
+      await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/seats`, {
+        method: 'GET',
+      })
+        .then(response => response.json())
+        .then(json => {
+          setSeat(json);
+        });
+    };
+    asd();
+  }, []);
+
+  seat.map(item => {
+    if (item.floor.id === floorInfo.id) {
+      console.log(item);
+    }
+  });
 
   //보드 만들기
   const createBoard = () => {
     let board = [];
-    for (let i = 0; i < rows; i++) {
+    for (let i = 0; i < floorInfo.height; i++) {
       board.push([]);
-      for (let j = 0; j < columns; j++) {
+      for (let j = 0; j < floorInfo.width; j++) {
         board[i].push({
           x: j,
           y: i,
@@ -31,15 +47,14 @@ const SeatBoardDemo = ({ floorInfo }) => {
 
   const createRow = row => {
     let cells = row.map((data, index) => {
-      return <Cell key={index} data={data} clickCell={clickCell} />;
+      return <Cell data={data} clickCell={clickCell} />;
     });
     return <div className="row">{cells}</div>;
   };
 
   //cell(좌석, 회의실, 시설)을 클릭할 때
   const clickCell = (cell, e) => {
-    console.log(cell.y, cell.x, cell.status);
-
+    //console.log(cell.y, cell.x, cell.status);
     e.target.style.backgroundColor = 'rgb(76, 148, 76)';
 
     if (cell.status === 0) {
@@ -63,7 +78,21 @@ const SeatBoardDemo = ({ floorInfo }) => {
   return (
     <div className="seatBoard">
       <div className="seatBoardLeft">
-        <div className="board">{newRows}</div>
+        <div className="board">
+          {floorInfo.length === 0 ? (
+            <p
+              style={{
+                color: '#c4c4c4',
+                fontSize: 'smaller',
+                fontStyle: 'italic',
+              }}
+            >
+              층을 선택하면 이곳에 도면이 나타납니다.
+            </p>
+          ) : (
+            <div>{newRows}</div>
+          )}
+        </div>
       </div>
 
       <div className="seatBoardRight">

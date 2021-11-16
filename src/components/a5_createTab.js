@@ -12,7 +12,6 @@ import CreateFacility from './a5_createFacility';
 import '../assets/styles/a5_seatBoard.css';
 
 const CreateTab = ({ clickedColumn, clickedRow, floorInfo }) => {
-  console.log(floorInfo);
   const [value, setValue] = useState('seat');
 
   const handleChange = (e, newValue) => {
@@ -43,15 +42,24 @@ const CreateTab = ({ clickedColumn, clickedRow, floorInfo }) => {
             </ThemeProvider>
           </Box>
           <TabPanel value="seat">
-            <CreateSeat clickedColumn={clickedColumn} clickedRow={clickedRow} />
+            <CreateSeat
+              clickedColumn={clickedColumn}
+              clickedRow={clickedRow}
+              floorInfo={floorInfo}
+            />
           </TabPanel>
           <TabPanel value="room">
-            <CreateRoom clickedColumn={clickedColumn} clickedRow={clickedRow} />
+            <CreateRoom
+              clickedColumn={clickedColumn}
+              clickedRow={clickedRow}
+              floorInfo={floorInfo}
+            />
           </TabPanel>
           <TabPanel value="facility">
             <CreateFacility
               clickedColumn={clickedColumn}
               clickedRow={clickedRow}
+              floorInfo={floorInfo}
             />
           </TabPanel>
         </TabContext>

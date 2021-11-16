@@ -4,7 +4,6 @@ import 'react-dropdown/style.css';
 import { OverlayTrigger, Tooltip, Dropdown } from 'react-bootstrap';
 
 import '../assets/styles/a5_seatManageBox.css';
-import SeatBoard from './a5_seatBoard';
 import FloorModal from './a5_floorModal';
 import {
   Select,

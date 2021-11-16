@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useCookies } from 'react-cookie';
 import Modal from 'react-bootstrap/Modal';
 import tableHeadertoKR from './a4_tableHeadertoKR';
 import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
@@ -12,6 +13,7 @@ export default function UserDetailModalContent({
   columns,
 }) {
   const [reservation, setReservation] = useState([]);
+  const [cookie] = useCookies('access_token');
 
   //예약 내역 테이블 헤더
   const reservationTitle = [
@@ -54,9 +56,7 @@ export default function UserDetailModalContent({
     const res = async id => {
       await fetch(
         `${process.env.REACT_APP_SERVER_BASE_URL}/questions/search?userId=${id}`,
-        {
-          method: 'GET',
-        },
+        { Authorization: `Bearer ${cookie.access_token}`, method: 'GET' },
       )
         .then(response => response.json())
         .then(json => {
