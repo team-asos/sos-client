@@ -4,13 +4,16 @@
 
   display: flex;
   flex-direction: column;
+
+  font-size: 16px;
 }
 
 /*"좌석 관리" 텍스트 설정*/
 .seatManageUpperBox {
-  font-weight: bold;
+  margin-top: 1%;
+  height: 7vh;
 
-  height: 10vh;
+  font-weight: bold;
 
   display: flex;
   flex-direction: row;
@@ -18,13 +21,13 @@
 }
 
 .seatManageUpperFirstChild {
-  font-size: 2.2em;
+  font-size: 2em;
 }
 
 .seatManageUpperSecondChild {
   margin-left: 2%;
-  font-size: 1em;
 }
+
 .seatManageUpperLastChild {
   margin-left: 0.5%;
 
@@ -34,13 +37,17 @@
   justify-content: center;
   align-items: center;
 }
+
 .seatManageUpperLastChild button {
   width: 30px;
   height: 30px;
 
+  margin-left: 1.5%;
+  margin-top: 1%;
+
   color: #860008;
 
-  font-size: 0.7em;
+  font-size: 1.2em;
   font-weight: bold;
 
   border: 0.8px solid #636363;
@@ -48,33 +55,17 @@
 
   background: transparent;
 }
+
 .seatManageUpperLastChild button:hover {
   border: none;
   background-color: #860000;
   color: white;
 }
-.selectFloor {
-  width: 14vw;
-  font-weight: 600;
-}
+
 .seatManageBottomBox {
   width: 99%;
   height: 87%;
-  background: #c4c4c4;
-}
 
-.floorInputForm::placeholder {
-  font-style: italic;
-  font-size: smaller;
-}
-.floorModal {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-.createFloorModal {
-  width: 50%;
-}
-.deleteFloorModal {
-  width: 50%;
+  margin-top: 0.5%;
+  background: #c4c4c4;
 }

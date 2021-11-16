@@ -4,8 +4,14 @@ import 'react-dropdown/style.css';
 import { OverlayTrigger, Tooltip, Dropdown } from 'react-bootstrap';
 
 import '../assets/styles/a5_seatManageBox.css';
-import SeatBoard from './a5_seatBoard';
 import FloorModal from './a5_floorModal';
+import {
+  Select,
+  FormControl,
+  MenuItem,
+  FormHelperText,
+} from '@material-ui/core';
+import SeatBoardDemo from './a5_seatBoardDemo';
 
 const SeatManageBox = () => {
   //층 불러오기
@@ -23,6 +29,12 @@ const SeatManageBox = () => {
     asd();
   }, []);
 
+  //층 선택
+  const [selectFloor, setSelectFloor] = useState([]);
+  const handleChange = event => {
+    setSelectFloor(event.target.value);
+  };
+
   //층 생성 모달창 관련 변수 정의
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -36,17 +48,22 @@ const SeatManageBox = () => {
 
         {/* 층 선택 */}
         <div className="seatManageUpperSecondChild">
-          <Dropdown>
-            <Dropdown.Toggle variant="secondary" id="dropdown-basic">
-              층을 선택하세요.
-            </Dropdown.Toggle>
-
-            <Dropdown.Menu>
+          <FormControl sx={{ m: 4, minWidth: 150 }}>
+            <FormHelperText>층을 선택하세요.</FormHelperText>
+            <Select
+              value={selectFloor}
+              onChange={handleChange}
+              displayEmpty
+              inputProps={{ 'aria-label': 'Without label' }}
+            >
+              <MenuItem value="">
+                <em>선택</em>
+              </MenuItem>
               {floor.map(item => (
-                <Dropdown.Item>{item.name}</Dropdown.Item>
+                <MenuItem value={item}>{item.name}</MenuItem>
               ))}
-            </Dropdown.Menu>
-          </Dropdown>
+            </Select>
+          </FormControl>
         </div>
 
         {/* 층 추가 */}
@@ -73,7 +90,8 @@ const SeatManageBox = () => {
 
       {/* 아래 도면 부분 */}
       <div className="seatManageBottomBox">
-        <SeatBoard />
+        {/* <SeatBoard /> */}
+        <SeatBoardDemo floorInfo={selectFloor} />
       </div>
 
       {/* 층 생성 모달창 : 추후에 분리할 예정 */}

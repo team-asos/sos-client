@@ -18,3 +18,19 @@
   flex-direction: column;
   justify-content: center;
 }
+.deleteUserButton {
+  color: #c00000;
+  background-color: transparent;
+  border: 1px solid #c4c4c4;
+  border-radius: 2px;
+}
+.deleteUserButton:hover {
+  color: white;
+  background-color: #c00000;
+
+  transition: 0.1s ease-in;
+  transform: scale(1.03);
+
+  border: 1px solid transparent;
+  border-radius: 2px;
+}

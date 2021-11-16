@@ -2,13 +2,15 @@ import React, { useState, useEffect } from 'react';
 import '../assets/styles/a4_userTable.css';
 
 import Button from 'react-bootstrap/Button';
-import moment from 'moment';
 import UserDetailModalContent from './a4_userDetailModal';
 import tableHeadertoKR from './a4_tableHeadertoKR';
 import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
 
+import UsePagination from './a4_usePagination';
+
 export default function UserTable({ data }) {
   const columns = data[0] && Object.keys(data[0]);
+
   const [modalInfo, setModalInfo] = useState([]);
   const [showModal, setShowModal] = useState(false);
 
@@ -24,6 +26,17 @@ export default function UserTable({ data }) {
     console.log(modalInfo);
   }, [modalInfo]);
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const [userPerPage] = useState(10);
+
+  const indexOfLastUser = currentPage * userPerPage;
+  const indexOfFirstUser = indexOfLastUser - userPerPage;
+  const currentUsers = data.slice(indexOfFirstUser, indexOfLastUser);
+
+  const paginate = pageNumber => {
+    setCurrentPage(pageNumber);
+  };
+
   return (
     <div>
       <MDBTable hover className="userTable" cellPadding={0} cellSpacing={0}>
@@ -38,7 +51,7 @@ export default function UserTable({ data }) {
         </MDBTableHead>
         {/* 바디 */}
         <MDBTableBody>
-          {data.map(row => (
+          {currentUsers.map(row => (
             <tr>
               {columns.map(column =>
                 column === 'role' ? '' : <td>{row[column]}</td>,
@@ -49,7 +62,6 @@ export default function UserTable({ data }) {
                   size="sm"
                   animation="false"
                   onClick={e => {
-                    //console.log(row); 확인 완료
                     setModalInfo(row);
                     toggleTrueFalse();
                   }}
@@ -72,6 +84,11 @@ export default function UserTable({ data }) {
           ))}
         </MDBTableBody>
       </MDBTable>
+      <UsePagination
+        totalUsers={data.length}
+        usersPerPage={userPerPage}
+        paginate={paginate}
+      />
     </div>
   );
 }
