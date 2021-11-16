@@ -38,19 +38,22 @@ const MyReservationListForm = props => {
   /*예약 취소*/
   const deleteClick = reservationId => {
     handleClose();
-    const response = async () => {
-      await fetch(
+    const deleteHandler = async () => {
+      const res = await fetch(
         `${process.env.REACT_APP_SERVER_BASE_URL}/reservations/${reservationId}`,
         {
           method: 'DELETE',
         },
       );
       //status가 undefined라고 뜸. 그리고 close됐을 때 새로고침 하고 싶음
-      // if (response.status === 200) {
-      //   alert('예약이 취소되었습니다.');
-      // }
+      if (res.status === 200) {
+        alert('예약이 취소되었습니다.');
+      } else {
+        const json = await res.json();
+        alert(json.message);
+      }
     };
-    response();
+    deleteHandler();
   };
   /*날짜 정렬 */
   const sortedReservation = reservation.sort((a, b) =>
@@ -65,7 +68,7 @@ const MyReservationListForm = props => {
           <Table striped hover className="myReservationListTable">
             <thead>
               <tr>
-                <th></th>
+                {/* <th></th> */}
                 <th>이용 날짜</th>
                 <th>이용 시간</th>
                 <th>예약 정보</th>
@@ -80,7 +83,7 @@ const MyReservationListForm = props => {
                 item.room == null ? (
                   <tbody>
                     <tr key={idx}>
-                      <td>{idx + 1}</td>
+                      {/* <td>{idx + 1}</td> */}
                       <td>{item.startTime.slice(0, 10)}</td>
                       <td>
                         {item.startTime.slice(11, 16)}-
@@ -166,7 +169,7 @@ const MyReservationListForm = props => {
           <Table striped hover className="myReservationListTable">
             <thead>
               <tr>
-                <th></th>
+                {/* <th></th> */}
                 <th>이용 날짜</th>
                 <th>이용 시간</th>
                 <th>예약 정보</th>
@@ -181,7 +184,7 @@ const MyReservationListForm = props => {
                 item.seat == null ? (
                   <tbody>
                     <tr key={idx}>
-                      <td>{idx + 1}</td>
+                      {/* <td>{idx + 1}</td> */}
                       <td>{item.startTime.slice(0, 10)}</td>
                       <td>
                         {item.startTime.slice(11, 16)}-

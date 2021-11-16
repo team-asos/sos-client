@@ -37,7 +37,6 @@ const DateTimeForm = props => {
     );
     if (response.status === 201) {
       alert('예약이 완료되었습니다.');
-      window.location.href = '/';
     } else {
       alert(response.status);
     }

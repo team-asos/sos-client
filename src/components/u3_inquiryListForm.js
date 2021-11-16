@@ -39,8 +39,8 @@ const InquiryListForm = props => {
     }
   }, [props.user.id]);
   const deleteClick = questionId => {
-    const response = async () => {
-      await fetch(
+    const deleteHandler = async () => {
+      const response = await fetch(
         `${process.env.REACT_APP_SERVER_BASE_URL}/questions/${questionId}`,
         {
           method: 'DELETE',
@@ -50,10 +50,11 @@ const InquiryListForm = props => {
       if (response.status === 200) {
         alert('문의가 삭제되었습니다.');
       } else {
-        alert(response.status);
+        const json = await response.json();
+        alert(json.message);
       }
     };
-    response();
+    deleteHandler();
   };
   const getAnswerMessage = questionID => {
     console.log(question);
