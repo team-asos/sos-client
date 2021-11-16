@@ -1,8 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useCookies } from 'react-cookie';
+import { useHistory } from 'react-router-dom';
 import '../assets/styles/u4_myInfoLogin.css';
-//마이페이지->나의 정보 수정 다시 로그인
+//마이페이지->탈퇴
 
-const MyInfoLoginForm = props => {
+const DeleteAccount = props => {
+  const history = useHistory();
+
+  const [cookie, removeCookie] = useCookies(['access_token']);
   const [pw, setPw] = useState('');
   const inputPw = e => {
     setPw(e.target.value);
@@ -23,19 +28,34 @@ const MyInfoLoginForm = props => {
     );
 
     if (response.status === 200) {
-      window.location.href = `user-mypage-myinfo/${props.user.id}`;
-    } else if (response.status === 401) {
-      alert('비밀번호가 잘못되었습니다.');
+      const response = await fetch(
+        `${process.env.REACT_APP_SERVER_BASE_URL}/users/${props.user.id}`,
+        {
+          headers: {
+            'Content-type': 'application/json',
+            Authorization: `Bearer ${cookie.access_token}`,
+          },
+          method: 'DELETE',
+        },
+      );
+      if (response.status === 200) {
+        removeCookie('access_token');
+        alert('탈퇴가 완료되었습니다.');
+      }
     } else {
       alert(response.status);
     }
   };
-
+  useEffect(() => {
+    if (cookie.access_token === 'undefined') {
+      history.push('/');
+    }
+  }, [cookie]);
   return (
     <div className="myInfoLoginForm">
-      <p className="myInfoLoginTitleTextStyle">나의 정보 수정</p>
+      <p className="myInfoLoginTitleTextStyle">회원 탈퇴</p>
       <p className="myInfoLoginDetailTextStyle">
-        본인 확인을 위해 비밀번호를 입력해주세요.
+        탈퇴하시려면 비밀번호를 입력해주세요.
       </p>
 
       <div className="u4_loginForm">
@@ -53,4 +73,4 @@ const MyInfoLoginForm = props => {
     </div>
   );
 };
-export default MyInfoLoginForm;
+export default DeleteAccount;

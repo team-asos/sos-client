@@ -1,24 +1,16 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { Dropdown } from 'react-bootstrap';
 import FacilityForm from '../components/u5_facilityForm';
 import * as BsIcon from 'react-icons/bs';
 import '../assets/styles/u5_seatStatusForm.css';
 
 //좌석 예약 페이지->좌석 도면, 사용현황, 층
-const FloorData = {
-  floorList: [
-    { id: 0, name: '1층' },
-    { id: 1, name: '2층' },
-    { id: 2, name: '3층' },
-    { id: 3, name: '6층' },
-    { id: 4, name: '7층' },
-  ],
-};
 
 const SeatStatusForm = () => {
-  const [data, setData] = useState([]);
   //const button = React.createRef();
   const [isToggleOn, setIsToggleOn] = useState(1);
-  const [myfloorList, setmyFloorList] = useState([]); //db 데이터
+  const [floor, setFloor] = useState([]);
+  const [floorName, setFloorName] = useState('1층');
   //특정 층의 좌석 도면을 가져오도록 수정해야함
   useEffect(() => {
     const res = async () => {
@@ -27,7 +19,7 @@ const SeatStatusForm = () => {
       })
         .then(response => response.json())
         .then(json => {
-          setmyFloorList(json);
+          setFloor(json);
         });
     };
     res();
@@ -38,22 +30,30 @@ const SeatStatusForm = () => {
       ? (e.target.style.color = '#820101')
       : (e.target.style.color = 'black');
   };
-  const [floorName, setFloorName] = useState(FloorData.floorList[0].name);
-  //useState(myfloorList[0].name)안됨
-  // const changeFloorText = name => {
-  //   setFloorName(name);
-  //   button.current.focus();
-  // };
-  const changeFloorText = e => {
-    setFloorName(e.name);
-    //button.current.focus();
+  const changeFloorText = floorName => {
+    setFloorName(floorName);
   };
+  console.log(floor);
   return (
     <div className="seatForm">
       <div className="u_seatFormUpper">
         {/*층 이름, 시설 아이콘, 좌석 현황 */}
         <div className="selectedFloorName">
-          <p className="selectedFloorNameTextStyle">{floorName}</p>
+          <div className="selectedFloorNameTextStyle">{floorName}</div>
+
+          <Dropdown className="dropdownFloor">
+            <Dropdown.Toggle variant="secondary" id="dropdown-basic">
+              층을 선택하세요.
+            </Dropdown.Toggle>
+
+            <Dropdown.Menu defaultValue="3층">
+              {floor.map(item => (
+                <Dropdown.Item onClick={() => changeFloorText(item.name)}>
+                  {item.name}
+                </Dropdown.Item>
+              ))}
+            </Dropdown.Menu>
+          </Dropdown>
         </div>
 
         <div className="statusForm">
@@ -83,33 +83,8 @@ const SeatStatusForm = () => {
       </div>
 
       <div className="u_seatFormBottom">
-        <div className="seatLayout">{isToggleOn ? '' : <FacilityForm />}</div>
-        <div className="floorList">
-          {/*
-                    첫 번째 버튼은 눌려져 있게 구현해야함
-                    버튼에 맞게 해당 층의 좌석 컴포넌트를 불러와야함
-                     */}
-          {myfloorList.map((item, idx) => (
-            <button
-              key={idx}
-              //ref={button}
-              className="u_floorNameButton"
-              onClick={() => changeFloorText(item)}
-              style={
-                idx === 0
-                  ? {
-                      //backgroundColor: '#820101',
-
-                      backgroundColor: '#737272',
-                    }
-                  : {
-                      backgroundColor: '#737272',
-                    }
-              }
-            >
-              {item.name}
-            </button>
-          ))}
+        <div className="seatLayout">
+          {isToggleOn ? '좌석도면' : <FacilityForm />}
         </div>
       </div>
     </div>
