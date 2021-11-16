@@ -70,9 +70,7 @@ export default function UserDetailModalContent({
   const deleteUserHandler = async id => {
     const result = await fetch(
       `${process.env.REACT_APP_SERVER_BASE_URL}/users/${id}`,
-      {
-        method: 'DELETE',
-      },
+      { Authorization: `Bearer ${cookie.access_token}`, method: 'DELETE' },
     );
     if (result.status === 200) {
       alert('유저 삭제를 성공하였습니다.');

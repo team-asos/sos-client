@@ -1,17 +1,37 @@
 import React, { useState } from 'react';
-import {
-  FormControl,
-  RadioGroup,
-  FormControlLabel,
-  Radio,
-} from '@mui/material';
+import { FormControl, Select, MenuItem } from '@mui/material';
 import { red } from '@mui/material/colors';
 
 const CreateFacility = ({ clickedColumn, clickedRow, floorInfo }) => {
-  const [name, setName] = useState('');
   const [type, setType] = useState('');
+  const facility_Type = [
+    {
+      name: '에어컨',
+      engName: 'air',
+    },
+    {
+      name: '선풍기',
+      engName: 'pan',
+    },
+    {
+      name: '화장실',
+      engName: 'toilet',
+    },
+    {
+      name: '문',
+      engName: 'door',
+    },
+    {
+      name: '엘레베이터',
+      engName: 'elevator',
+    },
+    {
+      name: '비상계단',
+      engName: 'stair',
+    },
+  ];
 
-  const handleChange = event => {
+  const inputType = event => {
     setType(event.target.value);
   };
 
@@ -24,8 +44,7 @@ const CreateFacility = ({ clickedColumn, clickedRow, floorInfo }) => {
         },
         method: 'POST',
         body: JSON.stringify({
-          //name, x, y, width, height, floorId, maxUser
-          name,
+          //type, x, y, width, height, floorId
           type,
           width: Number(2),
           height: Number(2),
@@ -36,81 +55,30 @@ const CreateFacility = ({ clickedColumn, clickedRow, floorInfo }) => {
       },
     );
     if (result.status === 201) {
-      alert('회의실이 생성되었습니다.');
+      alert('시설이 생성되었습니다.');
     }
   };
-
-  const controlProps = item => ({
-    checked: type === item,
-    onChange: handleChange,
-    value: item,
-    name: 'color-radio-button-demo',
-    inputProps: { 'aria-label': item },
-  });
 
   return (
     <div className="tabContent">
       <p>
         시설 위치 : ( {clickedRow + 1},{clickedColumn + 1} )
       </p>
-      <FormControl
-        component="fieldset"
-        sx={{ display: 'flex', flexDirection: 'row' }}
-      >
-        <p>시설 타입</p>
-
-        <RadioGroup
-          value={type}
-          onChange={handleChange}
-          sx={{ ml: 2, mt: -1, display: 'flex', flexDirection: 'column' }}
-        >
-          <FormControlLabel
-            value="air_conditioner"
-            control={
-              <Radio
-                size="small"
-                {...controlProps('air_conditioner')}
-                sx={{
-                  '&.Mui-checked': {
-                    color: red[900],
-                  },
-                }}
-              />
-            }
-            label="에어컨"
-          />
-          <FormControlLabel
-            value="elevator"
-            control={
-              <Radio
-                size="small"
-                {...controlProps('elevator')}
-                sx={{
-                  '&.Mui-checked': {
-                    color: red[900],
-                  },
-                }}
-              />
-            }
-            label="엘레베이터"
-          />
-          <FormControlLabel
-            value="restroom"
-            control={
-              <Radio
-                size="small"
-                {...controlProps('restroom')}
-                sx={{
-                  '&.Mui-checked': {
-                    color: red[900],
-                  },
-                }}
-              />
-            }
-            label="화장실"
-          />
-        </RadioGroup>
-      </FormControl>
+      <p>
+        시설 타입 :
+        <span>
+          <FormControl
+            variant="standard"
+            sx={{ ml: 1, mt: -0.5, width: '6vw' }}
+          >
+            <Select value={type} onChange={inputType}>
+              {facility_Type.map(item => (
+                <MenuItem value={item.engName}>{item.name}</MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </span>
+      </p>
       <button className="addBtn" onClick={createClickHandler}>
         추가하기
       </button>

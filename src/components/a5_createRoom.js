@@ -12,6 +12,7 @@ const CreateRoom = ({ clickedColumn, clickedRow, floorInfo }) => {
   const inputMaxUser = e => {
     setMaxUser(e.target.value);
   };
+
   const createClickHandler = async () => {
     console.log(maxUser);
     const result = await fetch(
@@ -24,8 +25,8 @@ const CreateRoom = ({ clickedColumn, clickedRow, floorInfo }) => {
         body: JSON.stringify({
           //name, x, y, width, height, floorId, maxUser
           name,
-          width,
-          height,
+          width: Number(width),
+          height: Number(height),
           x: Number(clickedRow),
           y: Number(clickedColumn),
           floorId: Number(floorInfo.id),
