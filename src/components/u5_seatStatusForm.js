@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Dropdown } from 'react-bootstrap';
 import FacilityForm from '../components/u5_facilityForm';
+import SeatForm from '../components/u5_seatForm';
 import * as BsIcon from 'react-icons/bs';
 import '../assets/styles/u5_seatStatusForm.css';
 
@@ -10,8 +11,12 @@ const SeatStatusForm = () => {
   //const button = React.createRef();
   const [isToggleOn, setIsToggleOn] = useState(1);
   const [floor, setFloor] = useState([]);
+  const [seat, setSeat] = useState([]);
+  const [room, setRoom] = useState([]);
+  const [facility, setFacility] = useState([]);
   const [floorName, setFloorName] = useState('1층');
   //특정 층의 좌석 도면을 가져오도록 수정해야함
+  //층 조회
   useEffect(() => {
     const res = async () => {
       await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/floors`, {
@@ -24,6 +29,35 @@ const SeatStatusForm = () => {
     };
     res();
   }, []);
+  //좌석 조회
+  useEffect(() => {
+    const res = async () => {
+      await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/seats`, {
+        method: 'GET',
+      })
+        .then(response => response.json())
+        .then(json => {
+          setSeat(json);
+        });
+    };
+    res();
+  }, []);
+  //회의실 조회
+  useEffect(() => {
+    const res = async () => {
+      await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/rooms`, {
+        method: 'GET',
+      })
+        .then(response => response.json())
+        .then(json => {
+          setSeat(json);
+        });
+    };
+    res();
+  }, []);
+  console.log(seat);
+  console.log(room);
+
   const handleClick = e => {
     setIsToggleOn(!isToggleOn);
     isToggleOn
@@ -33,7 +67,6 @@ const SeatStatusForm = () => {
   const changeFloorText = floorName => {
     setFloorName(floorName);
   };
-  console.log(floor);
   return (
     <div className="seatForm">
       <div className="u_seatFormUpper">
@@ -83,9 +116,7 @@ const SeatStatusForm = () => {
       </div>
 
       <div className="u_seatFormBottom">
-        <div className="seatLayout">
-          {isToggleOn ? '좌석도면' : <FacilityForm />}
-        </div>
+        {isToggleOn ? <SeatForm /> : <FacilityForm />}
       </div>
     </div>
   );

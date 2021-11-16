@@ -42,7 +42,7 @@ const Login = () => {
     if (cookie.access_token !== 'undefined') getAuth();
   }, [cookie]);
 
-  if (loading) return <Loading name={name} />;
+  //if (loading) return <Loading name={name} />;
   const loginClickHandler = async () => {
     const response = await fetch(
       `${process.env.REACT_APP_SERVER_BASE_URL}/auth`,
