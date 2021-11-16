@@ -4,6 +4,8 @@
 
   display: flex;
   flex-direction: column;
+
+  font-size: 16px;
 }
 
 /*"사용자 관리" 텍스트 설정*/
@@ -15,6 +17,56 @@
   font-weight: bold;
 
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
+}
+
+.userManageUpperBoxChild {
+  margin-left: 2%;
+
+  display: flex;
+  flex-direction: row;
+
+  align-items: center;
+}
+
+.userSearchInput {
+  width: 35vw;
+  height: 6vh;
+
+  margin-right: 1%;
+
+  border: none;
+  border-radius: 2px;
+
+  font-size: 0.5em;
+  background: rgba(211, 211, 211, 0.384);
+}
+
+.userSearchInput:focus {
+  background: rgba(211, 211, 211, 0.116);
+  outline: 1px solid rgba(211, 211, 211, 0.815);
+
+  font-size: 0.5em;
+}
+.userSearchInput::placeholder {
+  color: rgba(0, 0, 0, 0.76);
+
+  font-style: italic;
+}
+.userSearchInput:focus::placeholder {
+  color: transparent;
+}
+
+/*검색아이콘 스타일*/
+.searchIcon {
+  cursor: pointer;
+}
+.searchIcon:hover {
+  transition: ease-in-out 0.1s;
+  transform: scale(1.05);
+}
+
+/*리스트 설정*/
+.userManageBottomBox {
+  margin-top: 1.5%;
 }

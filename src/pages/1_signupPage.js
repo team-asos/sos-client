@@ -50,7 +50,6 @@ const SignUp = () => {
   const inputEmail = e => {
     setEmail(e.target.value);
   };
-
   const inputPw = e => {
     setPassword(e.target.value);
   };
@@ -63,11 +62,9 @@ const SignUp = () => {
   const inputIdNo = e => {
     setIdNo(e.target.value);
   };
-
   const inputPhone = e => {
     setPhone(e.target.value);
   };
-
   const inputDep = e => {
     setDep(e.target.value);
   };

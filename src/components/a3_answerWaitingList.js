@@ -51,7 +51,7 @@ const AnswerWaitingList = () => {
 
   //답변대기 불러오기
   const isReplied = item => {
-    if (item.status === 0) {
+    if (item.status === 1) {
       return 1;
     }
   };
