@@ -8,13 +8,12 @@ const CreateRoom = ({ clickedColumn, clickedRow, floorInfo }) => {
   const [height, setHeight] = useState('');
 
   const maxUserList = [4, 5, 6, 8, 10, 12];
+
   const inputMaxUser = e => {
     setMaxUser(e.target.value);
-    setWidth(2);
-    setHeight(Math.ceil(e.target.value / 2));
-    console.log(maxUser, width, height);
   };
   const createClickHandler = async () => {
+    console.log(maxUser);
     const result = await fetch(
       `${process.env.REACT_APP_SERVER_BASE_URL}/rooms`,
       {
@@ -50,6 +49,21 @@ const CreateRoom = ({ clickedColumn, clickedRow, floorInfo }) => {
           type="text"
           placeholder="숫자로 입력하세요."
           onChange={e => setName(e.target.value)}
+        />
+      </p>
+      <p>
+        회의실 크기 :{' '}
+        <input
+          type="text"
+          placeholder="가로"
+          style={{ width: '6vw' }}
+          onChange={e => setWidth(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="세로"
+          style={{ width: '6vw', marginLeft: '1.5%' }}
+          onChange={e => setHeight(e.target.value)}
         />
       </p>
       <p>
