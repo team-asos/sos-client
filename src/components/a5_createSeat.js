@@ -16,8 +16,8 @@ const CreateSeat = props => {
           name,
           width: Number(1),
           height: Number(1),
-          x: Number(props.clickedRow),
-          y: Number(props.clickedColumn),
+          x: Number(props.clickedColumn),
+          y: Number(props.clickedRow),
           floorId: Number(props.floorInfo.id),
         }),
       },
@@ -31,22 +31,20 @@ const CreateSeat = props => {
 
   return (
     <div className="tabContent">
-      <div>
-        <p>
-          좌석 위치 : ( {props.clickedRow + 1},{props.clickedColumn + 1} )
-        </p>
-        <p>
-          좌석 번호 :{' '}
-          <input
-            type="text"
-            placeholder="숫자로 입력하세요."
-            onChange={e => setName(e.target.value)}
-          />
-        </p>
-        <button className="addBtn" onClick={createClickHandler}>
-          추가하기
-        </button>
-      </div>
+      <p>
+        좌석 위치 : ( {props.clickedColumn + 1},{props.clickedRow + 1} )
+      </p>
+      <p>
+        좌석 번호 :{' '}
+        <input
+          type="text"
+          placeholder="숫자로 입력하세요."
+          onChange={e => setName(e.target.value)}
+        />
+      </p>
+      <button className="addBtn" onClick={createClickHandler}>
+        추가하기
+      </button>
     </div>
   );
 };

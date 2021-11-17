@@ -4,6 +4,7 @@ import Cell from './a5_Cell';
 import CreateTab from './a5_createTab';
 
 import '../assets/styles/a5_seatBoard.css';
+import ShowTab from './a5_showTab';
 
 const SeatBoardDemo = props => {
   const [clickedRow, setClickedRow] = useState(-1);
@@ -124,17 +125,22 @@ const SeatBoardDemo = props => {
       </div>
 
       <div className="seatBoardRight">
-        <div style={{ height: '50%', backgroundColor: 'red' }}>
+        <div style={{ height: '50%' }}>
           <CreateTab
             clickedColumn={clickedColumn}
             clickedRow={clickedRow}
             floorInfo={props.floorInfo}
-            showColumn={showColumn}
-            showRow={showRow}
-            clickedSeat={clickedSeat}
           />
         </div>
-        <div style={{ height: '50%', backgroundColor: 'violet' }}></div>
+        <div
+          style={{
+            width: '95%',
+            height: '50%',
+            borderTop: '1px solid #c00000',
+          }}
+        >
+          <ShowTab clickedSeat={clickedSeat} />
+        </div>
       </div>
     </div>
   );
