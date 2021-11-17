@@ -5,36 +5,39 @@ import CreateTab from './a5_createTab';
 
 import '../assets/styles/a5_seatBoard.css';
 
-const SeatBoardDemo = ({ floorInfo }) => {
+const SeatBoardDemo = props => {
   const [clickedRow, setClickedRow] = useState(-1);
   const [clickedColumn, setClickedColumn] = useState(-1);
+
+  const [showRow, setShowRow] = useState(-1);
+  const [showColumn, setshowColumn] = useState(-1);
+  const [clickedSeat, setClickedSeat] = useState([]);
+
   const [seat, setSeat] = useState([]);
+  const [room, setRoom] = useState([]);
 
   useEffect(() => {
-    const asd = async () => {
-      await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/seats`, {
-        method: 'GET',
-      })
+    const asd = async id => {
+      await fetch(
+        `${process.env.REACT_APP_SERVER_BASE_URL}/seats/search?floorId=${id}`,
+        {
+          method: 'GET',
+        },
+      )
         .then(response => response.json())
         .then(json => {
           setSeat(json);
         });
     };
-    asd();
-  }, []);
-
-  seat.map(item => {
-    if (item.floor.id === floorInfo.id) {
-      console.log(item);
-    }
-  });
+    asd(props.floorInfo.id);
+  }, [props.floorInfo]);
 
   //보드 만들기
   const createBoard = () => {
     let board = [];
-    for (let i = 0; i < floorInfo.height; i++) {
+    for (let i = 0; i < props.floorInfo.height; i++) {
       board.push([]);
-      for (let j = 0; j < floorInfo.width; j++) {
+      for (let j = 0; j < props.floorInfo.width; j++) {
         board[i].push({
           x: j,
           y: i,
@@ -42,26 +45,37 @@ const SeatBoardDemo = ({ floorInfo }) => {
         });
       }
     }
+
+    seat.map(item => {
+      let occupied = board[item.x][item.y];
+      occupied.status = 1;
+    });
+
     return board;
   };
 
   const createRow = row => {
     let cells = row.map((data, index) => {
-      return <Cell data={data} clickCell={clickCell} />;
+      return (
+        <Cell
+          data={data}
+          clickCell={clickCell}
+          style={{
+            backgroundColor: data.status === 1 ? '#c00000' : 'white',
+          }}
+        />
+      );
     });
     return <div className="row">{cells}</div>;
   };
 
   //cell(좌석, 회의실, 시설)을 클릭할 때
   const clickCell = (cell, e) => {
-    //console.log(cell.y, cell.x, cell.status);
-    e.target.style.backgroundColor = 'rgb(76, 148, 76)';
-
     if (cell.status === 0) {
-      cell.status = 1;
+      e.target.style.backgroundColor = 'rgb(76, 148, 76)';
 
-      setClickedColumn(cell.x);
-      setClickedRow(cell.y);
+      setClickedRow(cell.x);
+      setClickedColumn(cell.y);
 
       console.log(
         'It can be clicked, ',
@@ -70,16 +84,30 @@ const SeatBoardDemo = ({ floorInfo }) => {
         clickedColumn,
       );
     } else {
+      e.target.style.backgroundColor = 'gray';
+
+      seat.map(item => {
+        if (cell.x === item.y && cell.y === item.x) {
+          setClickedSeat(item);
+        }
+      });
+
+      console.log(clickedSeat);
+
+      setShowRow(cell.x);
+      setshowColumn(cell.y);
+
       console.log('It already clicked');
     }
   };
 
   const newRows = createBoard().map(row => createRow(row));
+
   return (
     <div className="seatBoard">
       <div className="seatBoardLeft">
         <div className="board">
-          {floorInfo.length === 0 ? (
+          {props.floorInfo.length === 0 ? (
             <p
               style={{
                 color: '#c4c4c4',
@@ -96,13 +124,17 @@ const SeatBoardDemo = ({ floorInfo }) => {
       </div>
 
       <div className="seatBoardRight">
-        <div>
+        <div style={{ height: '50%', backgroundColor: 'red' }}>
           <CreateTab
             clickedColumn={clickedColumn}
             clickedRow={clickedRow}
-            floorInfo={floorInfo}
+            floorInfo={props.floorInfo}
+            showColumn={showColumn}
+            showRow={showRow}
+            clickedSeat={clickedSeat}
           />
         </div>
+        <div style={{ height: '50%', backgroundColor: 'violet' }}></div>
       </div>
     </div>
   );

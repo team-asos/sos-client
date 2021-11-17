@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import * as BiIcons from 'react-icons/bi';
+import { useCookies } from 'react-cookie';
 
 import UserTable from './a4_userTable';
 
@@ -8,14 +9,12 @@ import '../assets/styles/a4_userManageBox.css';
 const UserManageBox = () => {
   const [data, setData] = useState([]);
   const [q, setQ] = useState('');
+  const [cookie] = useCookies('access_token');
 
   useEffect(() => {
     const asd = async () => {
       await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/users/search`, {
-        headers: {
-          Authorization:
-            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywibmFtZSI6IuyDjOuUlCIsInJvbGUiOjAsImlhdCI6MTYzNjcxMjc5MywiZXhwIjoxNjM5MzA0NzkzfQ.9u655XibwyyWiDxRgwdz18LYh54TT0ZfhaR_ETeZln8',
-        },
+        headers: { Authorization: `Bearer ${cookie.access_token}` },
         method: 'GET',
       })
         .then(response => response.json())

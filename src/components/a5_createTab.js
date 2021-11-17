@@ -11,9 +11,17 @@ import CreateFacility from './a5_createFacility';
 
 import '../assets/styles/a5_seatBoard.css';
 
-const CreateTab = ({ clickedColumn, clickedRow, floorInfo }) => {
+const CreateTab = ({
+  clickedColumn,
+  clickedRow,
+  floorInfo,
+  showColumn,
+  showRow,
+  clickedSeat,
+}) => {
   const [value, setValue] = useState('seat');
 
+  console.log('createTab,', clickedSeat);
   const handleChange = (e, newValue) => {
     setValue(newValue);
   };

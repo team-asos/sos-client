@@ -5,7 +5,7 @@ const Cell = props => {
     <div
       className="cell"
       onClick={e => props.clickCell(props.data, e)}
-      style={{ pointer: 'cursor' }}
+      style={{ cursor: 'pointer', ...props.style }}
     ></div>
   );
 };

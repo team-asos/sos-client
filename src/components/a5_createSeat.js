@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-const CreateSeat = ({ clickedColumn, clickedRow, floorInfo }) => {
+const CreateSeat = props => {
   const [name, setName] = useState('');
 
   const createClickHandler = async () => {
@@ -16,9 +16,9 @@ const CreateSeat = ({ clickedColumn, clickedRow, floorInfo }) => {
           name,
           width: Number(1),
           height: Number(1),
-          x: Number(clickedRow),
-          y: Number(clickedColumn),
-          floorId: Number(floorInfo.id),
+          x: Number(props.clickedRow),
+          y: Number(props.clickedColumn),
+          floorId: Number(props.floorInfo.id),
         }),
       },
     );
@@ -26,22 +26,27 @@ const CreateSeat = ({ clickedColumn, clickedRow, floorInfo }) => {
       alert('좌석이 생성되었습니다.');
     }
   };
+
+  console.log('createSeat', props.clickedSeat);
+
   return (
     <div className="tabContent">
-      <p>
-        좌석 위치 : ( {clickedRow + 1},{clickedColumn + 1} )
-      </p>
-      <p>
-        좌석 번호 :{' '}
-        <input
-          type="text"
-          placeholder="숫자로 입력하세요."
-          onChange={e => setName(e.target.value)}
-        />
-      </p>
-      <button className="addBtn" onClick={createClickHandler}>
-        추가하기
-      </button>
+      <div>
+        <p>
+          좌석 위치 : ( {props.clickedRow + 1},{props.clickedColumn + 1} )
+        </p>
+        <p>
+          좌석 번호 :{' '}
+          <input
+            type="text"
+            placeholder="숫자로 입력하세요."
+            onChange={e => setName(e.target.value)}
+          />
+        </p>
+        <button className="addBtn" onClick={createClickHandler}>
+          추가하기
+        </button>
+      </div>
     </div>
   );
 };
