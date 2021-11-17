@@ -42,6 +42,8 @@ export default function UserDetailModalContent({
     res(modalInfo.id);
   }, []);
 
+  console.log(reservation);
+
   const [inquiry, setInquiry] = useState('');
   //문의 내역 테이블 헤더
   const inquiryTitle = [
@@ -56,7 +58,10 @@ export default function UserDetailModalContent({
     const res = async id => {
       await fetch(
         `${process.env.REACT_APP_SERVER_BASE_URL}/questions/search?userId=${id}`,
-        { Authorization: `Bearer ${cookie.access_token}`, method: 'GET' },
+        {
+          headers: { Authorization: `Bearer ${cookie.access_token}` },
+          method: 'GET',
+        },
       )
         .then(response => response.json())
         .then(json => {
@@ -70,7 +75,10 @@ export default function UserDetailModalContent({
   const deleteUserHandler = async id => {
     const result = await fetch(
       `${process.env.REACT_APP_SERVER_BASE_URL}/users/${id}`,
-      { Authorization: `Bearer ${cookie.access_token}`, method: 'DELETE' },
+      {
+        headers: { Authorization: `Bearer ${cookie.access_token}` },
+        method: 'DELETE',
+      },
     );
     if (result.status === 200) {
       alert('유저 삭제를 성공하였습니다.');
@@ -142,8 +150,8 @@ export default function UserDetailModalContent({
               </tr>
             </MDBTableHead>
             <MDBTableBody>
-              {reservation.map((item, idx) =>
-                item.roomId !== null ? (
+              {reservation.map(item =>
+                item.room === null ? (
                   //좌석일 경우
                   <tr>
                     <td>좌석</td>
@@ -184,14 +192,14 @@ export default function UserDetailModalContent({
               </tr>
             </MDBTableHead>
             <MDBTableBody>
-              {inquiry.map((item, idx) => (
+              {inquiry.map(item => (
                 <tr>
                   {item.status === 0 ? <td>답변완료</td> : <td>답변대기</td>}
                   <td>{item.message}</td>
-                  <td>{item.answer.message}</td>
+                  <td>{item.answer?.message}</td>
                   <td>{item.createdAt.slice(0, 10)}</td>
                   {item.status === 0 ? (
-                    <td>{item.answer.createdAt.slice(0, 10)}</td>
+                    <td>{item.answer?.createdAt.slice(0, 10)}</td>
                   ) : (
                     <td>-</td>
                   )}
@@ -204,7 +212,9 @@ export default function UserDetailModalContent({
       <Modal.Footer>
         <button
           className="deleteUserButton"
-          onClick={deleteUserHandler(modalInfo.id)}
+          onClick={() => {
+            deleteUserHandler(modalInfo.id);
+          }}
         >
           삭제하기
         </button>
