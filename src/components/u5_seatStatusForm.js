@@ -1,17 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import { Dropdown } from 'react-bootstrap';
 import FacilityForm from '../components/u5_facilityForm';
+import SeatForm from '../components/u5_seatForm';
 import * as BsIcon from 'react-icons/bs';
 import '../assets/styles/u5_seatStatusForm.css';
 
 //좌석 예약 페이지->좌석 도면, 사용현황, 층
 
-const SeatStatusForm = () => {
+const SeatStatusForm = props => {
   //const button = React.createRef();
   const [isToggleOn, setIsToggleOn] = useState(1);
   const [floor, setFloor] = useState([]);
+  const [seat, setSeat] = useState([]);
+  const [room, setRoom] = useState([]);
+  const [facility, setFacility] = useState([]);
   const [floorName, setFloorName] = useState('1층');
+  const [floorInfo, setFloorInfo] = useState(1);
   //특정 층의 좌석 도면을 가져오도록 수정해야함
+  //층 조회
   useEffect(() => {
     const res = async () => {
       await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/floors`, {
@@ -24,16 +30,46 @@ const SeatStatusForm = () => {
     };
     res();
   }, []);
+  //좌석 조회
+  useEffect(() => {
+    const res = async () => {
+      await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/seats`, {
+        method: 'GET',
+      })
+        .then(response => response.json())
+        .then(json => {
+          setSeat(json);
+        });
+    };
+    res();
+  }, []);
+  //회의실 조회
+  useEffect(() => {
+    const res = async () => {
+      await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/rooms`, {
+        method: 'GET',
+      })
+        .then(response => response.json())
+        .then(json => {
+          setSeat(json);
+        });
+    };
+    res();
+  }, []);
+  console.log(seat);
+  console.log(room);
+
   const handleClick = e => {
     setIsToggleOn(!isToggleOn);
     isToggleOn
       ? (e.target.style.color = '#820101')
       : (e.target.style.color = 'black');
   };
-  const changeFloorText = floorName => {
-    setFloorName(floorName);
+  const changeFloorText = floor => {
+    setFloorName(floor.name);
+    setFloorInfo(floor);
+    console.log(floorInfo);
   };
-  console.log(floor);
   return (
     <div className="seatForm">
       <div className="u_seatFormUpper">
@@ -43,17 +79,18 @@ const SeatStatusForm = () => {
 
           <Dropdown className="dropdownFloor">
             <Dropdown.Toggle variant="secondary" id="dropdown-basic">
-              층을 선택하세요.
+              {floorName}
             </Dropdown.Toggle>
 
             <Dropdown.Menu defaultValue="3층">
               {floor.map(item => (
-                <Dropdown.Item onClick={() => changeFloorText(item.name)}>
+                <Dropdown.Item onClick={() => changeFloorText(item)}>
                   {item.name}
                 </Dropdown.Item>
               ))}
             </Dropdown.Menu>
           </Dropdown>
+          <p className="u5textStyle">층을 선택하세요.</p>
         </div>
 
         <div className="statusForm">
@@ -83,9 +120,7 @@ const SeatStatusForm = () => {
       </div>
 
       <div className="u_seatFormBottom">
-        <div className="seatLayout">
-          {isToggleOn ? '좌석도면' : <FacilityForm />}
-        </div>
+        {isToggleOn ? <SeatForm floorInfo={floorInfo} /> : <FacilityForm />}
       </div>
     </div>
   );

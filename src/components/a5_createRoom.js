@@ -7,12 +7,6 @@ const CreateRoom = props => {
   const [width, setWidth] = useState('');
   const [height, setHeight] = useState('');
 
-  const maxUserList = [4, 5, 6, 8, 10, 12];
-
-  const inputMaxUser = e => {
-    setMaxUser(e.target.value);
-  };
-
   const createClickHandler = async () => {
     console.log(maxUser);
     const result = await fetch(
@@ -27,10 +21,10 @@ const CreateRoom = props => {
           name,
           width: Number(width),
           height: Number(height),
-          x: Number(props.clickedColumn),
-          y: Number(props.clickedRow),
+          x: Number(props.clickedRow),
+          y: Number(props.clickedColumn),
           floorId: Number(props.floorInfo.id),
-          maxUser,
+          maxUser: Number(maxUser),
         }),
       },
     );
@@ -70,18 +64,12 @@ const CreateRoom = props => {
       </p>
       <p>
         회의실 인원 수 :
-        <span>
-          <FormControl
-            variant="standard"
-            sx={{ ml: 1, mt: -0.5, width: '4vw' }}
-          >
-            <Select value={maxUser} onChange={inputMaxUser}>
-              {maxUserList.map(item => (
-                <MenuItem value={item}>{item}</MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-        </span>
+        <input
+          type="text"
+          placeholder="최대 인원수"
+          style={{ width: '6vw', marginLeft: '1.5%' }}
+          onChange={e => setMaxUser(e.target.value)}
+        />
       </p>
       <button className="addBtn" onClick={createClickHandler}>
         추가하기

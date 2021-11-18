@@ -37,7 +37,12 @@ const SignUp = () => {
         }),
       },
     );
-    window.location.href = '/'; //확인 작업이 필요한지
+    if (result.status === 201) {
+      alert('회원가입이 완료되었습니다.');
+      window.location.href = '/';
+    } else {
+      alert(result.message);
+    }
   };
   const confirmHandler = () => {
     if (password !== confirmPw) {
