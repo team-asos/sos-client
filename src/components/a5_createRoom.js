@@ -27,8 +27,8 @@ const CreateRoom = props => {
           name,
           width: Number(width),
           height: Number(height),
-          x: Number(props.clickedRow),
-          y: Number(props.clickedColumn),
+          x: Number(props.clickedColumn),
+          y: Number(props.clickedRow),
           floorId: Number(props.floorInfo.id),
           maxUser,
         }),
@@ -41,52 +41,51 @@ const CreateRoom = props => {
 
   return (
     <div className="tabContent">
-      <div>
-        <p>
-          회의실 위치 : ( {props.clickedRow + 1},{props.clickedColumn + 1} )
-        </p>
-        <p>
-          회의실 번호 :{' '}
-          <input
-            type="text"
-            placeholder="숫자로 입력하세요."
-            onChange={e => setName(e.target.value)}
-          />
-        </p>
-        <p>
-          회의실 크기 :{' '}
-          <input
-            type="text"
-            placeholder="가로"
-            style={{ width: '6vw' }}
-            onChange={e => setWidth(e.target.value)}
-          />
-          <input
-            type="text"
-            placeholder="세로"
-            style={{ width: '6vw', marginLeft: '1.5%' }}
-            onChange={e => setHeight(e.target.value)}
-          />
-        </p>
-        <p>
-          회의실 인원 수 :
-          <span>
-            <FormControl
-              variant="standard"
-              sx={{ ml: 1, mt: -0.5, width: '4vw' }}
-            >
-              <Select value={maxUser} onChange={inputMaxUser}>
-                {maxUserList.map(item => (
-                  <MenuItem value={item}>{item}</MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-          </span>
-        </p>
-        <button className="addBtn" onClick={createClickHandler}>
-          추가하기
-        </button>
-      </div>
+      <p>
+        회의실 위치 : ( {props.clickedColumn + 1},{props.clickedRow + 1} )
+      </p>
+      <p>
+        회의실 번호 :{' '}
+        <input
+          type="text"
+          placeholder="숫자로 입력하세요."
+          style={{ width: '11vw' }}
+          onChange={e => setName(e.target.value)}
+        />
+      </p>
+      <p>
+        회의실 크기 :{' '}
+        <input
+          type="text"
+          placeholder="가로"
+          style={{ width: '4vw' }}
+          onChange={e => setWidth(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="세로"
+          style={{ width: '4vw', marginLeft: '1.5%' }}
+          onChange={e => setHeight(e.target.value)}
+        />
+      </p>
+      <p>
+        회의실 인원 수 :
+        <span>
+          <FormControl
+            variant="standard"
+            sx={{ ml: 1, mt: -0.5, width: '4vw' }}
+          >
+            <Select value={maxUser} onChange={inputMaxUser}>
+              {maxUserList.map(item => (
+                <MenuItem value={item}>{item}</MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </span>
+      </p>
+      <button className="addBtn" onClick={createClickHandler}>
+        추가하기
+      </button>
     </div>
   );
 };

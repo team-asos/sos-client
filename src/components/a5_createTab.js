@@ -21,7 +21,6 @@ const CreateTab = ({
 }) => {
   const [value, setValue] = useState('seat');
 
-  console.log('createTab,', clickedSeat);
   const handleChange = (e, newValue) => {
     setValue(newValue);
   };

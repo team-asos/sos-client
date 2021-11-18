@@ -52,6 +52,7 @@ const DeleteFloor = () => {
     } else {
       alert('400 오류');
     }
+    window.location.href = '/seat-management';
   };
 
   return (

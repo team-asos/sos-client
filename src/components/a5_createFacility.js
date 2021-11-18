@@ -48,8 +48,8 @@ const CreateFacility = props => {
           type,
           width: Number(2),
           height: Number(2),
-          x: Number(props.clickedRow),
-          y: Number(props.clickedColumn),
+          x: Number(props.clickedColumn),
+          y: Number(props.clickedRow),
           floorId: Number(props.floorInfo.id),
         }),
       },
@@ -63,7 +63,7 @@ const CreateFacility = props => {
     <div className="tabContent">
       <div>
         <p>
-          시설 위치 : ( {props.clickedRow + 1},{props.clickedColumn + 1} )
+          시설 위치 : ( {props.clickedColumn + 1},{props.clickedRow + 1} )
         </p>
         <p>
           시설 타입 :
