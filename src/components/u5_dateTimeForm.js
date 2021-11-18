@@ -59,7 +59,6 @@ const DateTimeForm = props => {
               locale={ko}
               dateFormat="yyyy-MM-dd"
               minDate={new Date()} //오늘 이전 날짜 선택 안되게
-              maxDate={addDays(new Date(), 6)} //일주일 뒤는 예약 못함
               placeholderText="예약 날짜 선택"
               closeOnScroll={true} //스크롤 했을 때 닫힘
               customInput={<MyCustom />}
