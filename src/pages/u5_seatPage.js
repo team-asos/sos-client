@@ -11,6 +11,7 @@ import '../assets/styles/u5_seatPage.css';
 const SeatPage = () => {
   const [myId, setMyId] = useState();
   const [cookie] = useCookies(['access_token']);
+  const [seletedSeat, setSelectedSeat] = useState([]);
 
   /*내 정보 */
   useEffect(() => {
@@ -28,6 +29,9 @@ const SeatPage = () => {
     };
     res();
   }, []);
+  const getSeatName = seat => {
+    setSelectedSeat(seat);
+  };
   return (
     <div className="userSeatPage">
       <div>
@@ -59,12 +63,6 @@ const SeatPage = () => {
           <div className="u_rightForm">
             <DateTimeForm myId={myId} />
             <UserSearchForm />
-
-            {/*<button
-                className="u_seatReservationButton"
-              >
-                예약하기
-              </button>*/}
           </div>
         </div>
       </div>
