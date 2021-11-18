@@ -42,7 +42,7 @@ export default function UserTable({ data }) {
       <MDBTable hover className="userTable" cellPadding={0} cellSpacing={0}>
         {/* 헤더 */}
         <MDBTableHead>
-          <tr>
+          <tr style={{ fontSize: '0.7em' }}>
             {data[0] &&
               columns.map(heading =>
                 heading === 'role' ? '' : <th>{tableHeadertoKR(heading)}</th>,
@@ -52,11 +52,11 @@ export default function UserTable({ data }) {
         {/* 바디 */}
         <MDBTableBody>
           {currentUsers.map(row => (
-            <tr>
+            <tr style={{ fontSize: '0.7em' }}>
               {columns.map(column =>
                 column === 'role' ? '' : <td>{row[column]}</td>,
               )}
-              <td>
+              <td style={{ fontSize: '0.7em' }}>
                 <Button
                   variant="outline-danger"
                   size="sm"
