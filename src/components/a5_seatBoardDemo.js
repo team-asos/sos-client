@@ -16,6 +16,9 @@ const SeatBoardDemo = props => {
 
   const [seat, setSeat] = useState([]);
   const [room, setRoom] = useState([]);
+
+  const [board, setBoard] = useState([]);
+
   useEffect(() => {
     const asd = async () => {
       await fetch(
@@ -29,10 +32,8 @@ const SeatBoardDemo = props => {
           setSeat(json);
         });
     };
-    asd(props.floorInfo.id);
-  }, [props.floorInfo]);
-  useEffect(() => {
-    const asd = async () => {
+
+    const aaa = async () => {
       await fetch(
         `${process.env.REACT_APP_SERVER_BASE_URL}/rooms/search?floorId=${props.floorInfo.id}`,
         {
@@ -44,10 +45,23 @@ const SeatBoardDemo = props => {
           setRoom(json);
         });
     };
-    asd(props.floorInfo.id);
-  }, [props.floorInfo]);
+
+    asd();
+    aaa();
+
+    // if (seat.length !== 0 && room.length !== 0) {
+    //   setBoard(createBoard());
+    // }
+  }, [props.floorInfo.id]);
+
+  useEffect(() => {
+    console.log(seat);
+    console.log(room);
+    console.log('--------');
+  }, [seat, room]);
+
   //보드 만들기
-  console.log(seat);
+
   const createBoard = () => {
     let board = [];
     for (let i = 0; i < props.floorInfo.height; i++) {
@@ -60,20 +74,29 @@ const SeatBoardDemo = props => {
         });
       }
     }
-    seat.map(item => {
-      let occupiedSeat = board[item.y][item.x];
-      occupiedSeat.status = 1;
-    });
 
-    room.map(item => {
-      for (let i = item.x; i < item.width + item.x; i++) {
-        for (let j = item.y; j < item.height + item.y; j++) {
-          let occupiedRoom = board[i][j];
-          occupiedRoom.status = 2;
+    // console.log(props.floorInfo.width);
+    // console.log(props.floorInfo.height);
+    // console.log(seat);
+
+    if (seat.length !== 0) {
+      seat.map(item => {
+        let occupiedSeat = board[item.y][item.x];
+        occupiedSeat.status = 1;
+      });
+    }
+
+    if (room.length !== 0) {
+      room.map(item => {
+        for (let i = item.x; i < item.width + item.x; i++) {
+          for (let j = item.y; j < item.height + item.y; j++) {
+            let occupiedRoom = board[i][j];
+            occupiedRoom.status = 2;
+          }
         }
-      }
-      board[item.x][item.y].status = 3;
-    });
+        board[item.x][item.y].status = 3;
+      });
+    }
 
     return board;
   };
@@ -152,7 +175,7 @@ const SeatBoardDemo = props => {
     }
   };
 
-  const board = createBoard();
+  // const board = createBoard();
   const newRows = createBoard().map(row => createRow(board, row));
 
   return (
