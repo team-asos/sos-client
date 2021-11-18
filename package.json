@@ -31,12 +31,13 @@
     "react-select": "^5.1.0",
     "react-spinners": "^0.11.0",
     "react-spring": "^9.0.0-rc.3",
+    "sass": "^1.43.4",
     "spinners-react": "^1.0.6",
     "styled-components": "^5.3.3",
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start": "set PORT=5000&&react-scripts start",
+    "start": "set PORT=5000 && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

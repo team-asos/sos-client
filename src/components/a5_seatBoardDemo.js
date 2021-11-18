@@ -7,7 +7,7 @@ import '../assets/styles/a5_seatBoard.css';
 import ShowSeatInfo from './a5_showSeatInfo';
 import ShowRoomInfo from './a5_showRoomInfo';
 
-const SeatBoardDemo = props => {
+const SeatBoardDemo = ({ floor }) => {
   const [clickedRow, setClickedRow] = useState(-1);
   const [clickedColumn, setClickedColumn] = useState(-1);
 
@@ -22,7 +22,7 @@ const SeatBoardDemo = props => {
   useEffect(() => {
     const asd = async () => {
       await fetch(
-        `${process.env.REACT_APP_SERVER_BASE_URL}/seats/search?floorId=${props.floorInfo.id}`,
+        `${process.env.REACT_APP_SERVER_BASE_URL}/seats/search?floorId=${floor.id}`,
         {
           method: 'GET',
         },
@@ -35,7 +35,7 @@ const SeatBoardDemo = props => {
 
     const aaa = async () => {
       await fetch(
-        `${process.env.REACT_APP_SERVER_BASE_URL}/rooms/search?floorId=${props.floorInfo.id}`,
+        `${process.env.REACT_APP_SERVER_BASE_URL}/rooms/search?floorId=${floor.id}`,
         {
           method: 'GET',
         },
@@ -52,7 +52,7 @@ const SeatBoardDemo = props => {
     // if (seat.length !== 0 && room.length !== 0) {
     //   setBoard(createBoard());
     // }
-  }, [props.floorInfo.id]);
+  }, [floor.id]);
 
   useEffect(() => {
     console.log(seat);
@@ -64,9 +64,9 @@ const SeatBoardDemo = props => {
 
   const createBoard = () => {
     let board = [];
-    for (let i = 0; i < props.floorInfo.height; i++) {
+    for (let i = 0; i < floor.height; i++) {
       board.push([]);
-      for (let j = 0; j < props.floorInfo.width; j++) {
+      for (let j = 0; j < floor.width; j++) {
         board[i].push({
           x: i,
           y: j,
@@ -75,8 +75,8 @@ const SeatBoardDemo = props => {
       }
     }
 
-    // console.log(props.floorInfo.width);
-    // console.log(props.floorInfo.height);
+    // console.log(floor.width);
+    // console.log(floor.height);
     // console.log(seat);
 
     if (seat.length !== 0) {
@@ -182,7 +182,7 @@ const SeatBoardDemo = props => {
     <div className="seatBoard">
       <div className="seatBoardLeft">
         <div className="board">
-          {props.floorInfo.length === 0 ? (
+          {floor.length === 0 ? (
             <p className="selectFloorText">
               층을 선택하면 이곳에 도면이 나타납니다.
             </p>
@@ -197,7 +197,7 @@ const SeatBoardDemo = props => {
           <CreateTab
             clickedColumn={clickedColumn}
             clickedRow={clickedRow}
-            floorInfo={props.floorInfo}
+            floorInfo={floor}
           />
         </div>
 
