@@ -34,23 +34,23 @@ const ShowSeatInfo = props => {
           <button
             style={{
               marginRight: '2%',
-              border: '1px solid #c00000',
+              border: 'none',
               borderRadius: '2px',
-              color: '#c00000',
-              backgroundColor: 'white',
+              color: 'white',
+              backgroundColor: '#c00000',
             }}
           >
-            수정하기
+            수정
           </button>
           <button
             style={{
-              border: '1px solid #c00000',
+              border: 'none',
               borderRadius: '2px',
-              color: '#c00000',
-              backgroundColor: 'white',
+              color: 'white',
+              backgroundColor: '#c00000',
             }}
           >
-            삭제하기
+            삭제
           </button>
         </div>
       </div>
