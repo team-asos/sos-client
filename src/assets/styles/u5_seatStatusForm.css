@@ -40,7 +40,12 @@
 
   margin-left: 1vw;
   border-radius: 100%;
-  background-color: salmon;
+}
+.u5textStyle {
+  margin-left: 0.5vw;
+  margin-top: 1.5vh;
+  font-weight: bold;
+  color: #820101;
 }
 .statusForm {
   display: flex;

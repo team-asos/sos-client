@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
+import { useCookies } from 'react-cookie';
+
 import MessageDetailBox from './a3_messageDetailBox';
 import '../assets/styles/a3_answerWaitingList.css';
 
@@ -11,13 +13,12 @@ const AnswerWaitingList = () => {
   const [show, setShow] = useState(true);
   const handleShow = () => setShow(true);
 
+  const [cookie] = useCookies('access_token');
+
   useEffect(() => {
     const res = async () => {
       await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/questions`, {
-        headers: {
-          Authorization:
-            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IuyKpO2OgOyngOuwpSIsInJvbGUiOjAsImlhdCI6MTYzNjQzNDQzMSwiZXhwIjoxNjM2NTIwODMxfQ.IQU8OkiENv1gtf88GTngwk-Rya51_USgY-GWFL-zU2E',
-        },
+        headers: { Authorization: `Bearer ${cookie.access_token}` },
         method: 'GET',
       })
         .then(response => response.json())
@@ -31,10 +32,7 @@ const AnswerWaitingList = () => {
   useEffect(() => {
     const res2 = async () => {
       await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/answers`, {
-        headers: {
-          Authorization:
-            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IuyKpO2OgOyngOuwpSIsInJvbGUiOjAsImlhdCI6MTYzNjQzNDQzMSwiZXhwIjoxNjM2NTIwODMxfQ.IQU8OkiENv1gtf88GTngwk-Rya51_USgY-GWFL-zU2E',
-        },
+        headers: { Authorization: `Bearer ${cookie.access_token}` },
         method: 'GET',
       })
         .then(response => response.json())
@@ -51,7 +49,7 @@ const AnswerWaitingList = () => {
 
   //답변대기 불러오기
   const isReplied = item => {
-    if (item.status === 1) {
+    if (item.status === 0) {
       return 1;
     }
   };

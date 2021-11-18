@@ -34,7 +34,7 @@ const MyReservationListForm = props => {
   useEffect(() => {
     if (props.user.id !== 'undefined') res();
   }, [props.user.id]);
-
+  console.log(reservation);
   /*예약 취소*/
   const deleteClick = reservationId => {
     handleClose();
@@ -64,7 +64,7 @@ const MyReservationListForm = props => {
       <p className="myReservationListFormTitleTextStyle">나의 예약 조회/취소</p>
       <div style={{ display: 'flex', flexDirection: 'column' }}>
         <div className="seatReservationList">
-          <div className="u4seatTextStyle">좌석</div>
+          <div className="u4seatTextStyle">[ 좌석 ]</div>
           <Table striped hover className="myReservationListTable">
             <thead>
               <tr>
@@ -76,7 +76,7 @@ const MyReservationListForm = props => {
                 <th></th>
               </tr>
             </thead>
-            {reservation
+            {sortedReservation
               .slice(0)
               .reverse()
               .map((item, idx) =>
@@ -165,7 +165,7 @@ const MyReservationListForm = props => {
           </Table>
         </div>
         <div className="roomReservationList">
-          <div className="u4roomTextStyle">회의실</div>
+          <div className="u4roomTextStyle">[ 회의실 ]</div>
           <Table striped hover className="myReservationListTable">
             <thead>
               <tr>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FormControl, Select, MenuItem } from '@mui/material';
 
-const CreateRoom = ({ clickedColumn, clickedRow, floorInfo }) => {
+const CreateRoom = props => {
   const [maxUser, setMaxUser] = useState('');
   const [name, setName] = useState('');
   const [width, setWidth] = useState('');
@@ -27,9 +27,9 @@ const CreateRoom = ({ clickedColumn, clickedRow, floorInfo }) => {
           name,
           width: Number(width),
           height: Number(height),
-          x: Number(clickedRow),
-          y: Number(clickedColumn),
-          floorId: Number(floorInfo.id),
+          x: Number(props.clickedColumn),
+          y: Number(props.clickedRow),
+          floorId: Number(props.floorInfo.id),
           maxUser,
         }),
       },
@@ -42,13 +42,14 @@ const CreateRoom = ({ clickedColumn, clickedRow, floorInfo }) => {
   return (
     <div className="tabContent">
       <p>
-        회의실 위치 : ( {clickedRow + 1},{clickedColumn + 1} )
+        회의실 위치 : ( {props.clickedColumn + 1},{props.clickedRow + 1} )
       </p>
       <p>
         회의실 번호 :{' '}
         <input
           type="text"
           placeholder="숫자로 입력하세요."
+          style={{ width: '11vw' }}
           onChange={e => setName(e.target.value)}
         />
       </p>
@@ -57,13 +58,13 @@ const CreateRoom = ({ clickedColumn, clickedRow, floorInfo }) => {
         <input
           type="text"
           placeholder="가로"
-          style={{ width: '6vw' }}
+          style={{ width: '4vw' }}
           onChange={e => setWidth(e.target.value)}
         />
         <input
           type="text"
           placeholder="세로"
-          style={{ width: '6vw', marginLeft: '1.5%' }}
+          style={{ width: '4vw', marginLeft: '1.5%' }}
           onChange={e => setHeight(e.target.value)}
         />
       </p>

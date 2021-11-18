@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-const CreateSeat = ({ clickedColumn, clickedRow, floorInfo }) => {
+const CreateSeat = props => {
   const [name, setName] = useState('');
 
   const createClickHandler = async () => {
@@ -16,9 +16,9 @@ const CreateSeat = ({ clickedColumn, clickedRow, floorInfo }) => {
           name,
           width: Number(1),
           height: Number(1),
-          x: Number(clickedRow),
-          y: Number(clickedColumn),
-          floorId: Number(floorInfo.id),
+          x: Number(props.clickedColumn),
+          y: Number(props.clickedRow),
+          floorId: Number(props.floorInfo.id),
         }),
       },
     );
@@ -26,10 +26,11 @@ const CreateSeat = ({ clickedColumn, clickedRow, floorInfo }) => {
       alert('좌석이 생성되었습니다.');
     }
   };
+
   return (
     <div className="tabContent">
       <p>
-        좌석 위치 : ( {clickedRow + 1},{clickedColumn + 1} )
+        좌석 위치 : ( {props.clickedColumn + 1},{props.clickedRow + 1} )
       </p>
       <p>
         좌석 번호 :{' '}

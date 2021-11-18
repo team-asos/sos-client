@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FormControl, Select, MenuItem } from '@mui/material';
 import { red } from '@mui/material/colors';
 
-const CreateFacility = ({ clickedColumn, clickedRow, floorInfo }) => {
+const CreateFacility = props => {
   const [type, setType] = useState('');
   const facility_Type = [
     {
@@ -48,9 +48,9 @@ const CreateFacility = ({ clickedColumn, clickedRow, floorInfo }) => {
           type,
           width: Number(2),
           height: Number(2),
-          x: Number(clickedRow),
-          y: Number(clickedColumn),
-          floorId: Number(floorInfo.id),
+          x: Number(props.clickedColumn),
+          y: Number(props.clickedRow),
+          floorId: Number(props.floorInfo.id),
         }),
       },
     );
@@ -61,27 +61,29 @@ const CreateFacility = ({ clickedColumn, clickedRow, floorInfo }) => {
 
   return (
     <div className="tabContent">
-      <p>
-        시설 위치 : ( {clickedRow + 1},{clickedColumn + 1} )
-      </p>
-      <p>
-        시설 타입 :
-        <span>
-          <FormControl
-            variant="standard"
-            sx={{ ml: 1, mt: -0.5, width: '6vw' }}
-          >
-            <Select value={type} onChange={inputType}>
-              {facility_Type.map(item => (
-                <MenuItem value={item.engName}>{item.name}</MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-        </span>
-      </p>
-      <button className="addBtn" onClick={createClickHandler}>
-        추가하기
-      </button>
+      <div>
+        <p>
+          시설 위치 : ( {props.clickedColumn + 1},{props.clickedRow + 1} )
+        </p>
+        <p>
+          시설 타입 :
+          <span>
+            <FormControl
+              variant="standard"
+              sx={{ ml: 1, mt: -0.5, width: '6vw' }}
+            >
+              <Select value={type} onChange={inputType}>
+                {facility_Type.map(item => (
+                  <MenuItem value={item.engName}>{item.name}</MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </span>
+        </p>
+        <button className="addBtn" onClick={createClickHandler}>
+          추가하기
+        </button>
+      </div>
     </div>
   );
 };
