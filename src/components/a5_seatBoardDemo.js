@@ -16,11 +16,10 @@ const SeatBoardDemo = props => {
 
   const [seat, setSeat] = useState([]);
   const [room, setRoom] = useState([]);
-
   useEffect(() => {
-    const asd = async id => {
+    const asd = async () => {
       await fetch(
-        `${process.env.REACT_APP_SERVER_BASE_URL}/seats/search?floorId=${id}`,
+        `${process.env.REACT_APP_SERVER_BASE_URL}/seats/search?floorId=${props.floorInfo.id}`,
         {
           method: 'GET',
         },
@@ -32,11 +31,10 @@ const SeatBoardDemo = props => {
     };
     asd(props.floorInfo.id);
   }, [props.floorInfo]);
-
   useEffect(() => {
-    const asd = async id => {
+    const asd = async () => {
       await fetch(
-        `${process.env.REACT_APP_SERVER_BASE_URL}/rooms/search?floorId=${id}`,
+        `${process.env.REACT_APP_SERVER_BASE_URL}/rooms/search?floorId=${props.floorInfo.id}`,
         {
           method: 'GET',
         },
@@ -48,23 +46,22 @@ const SeatBoardDemo = props => {
     };
     asd(props.floorInfo.id);
   }, [props.floorInfo]);
-
   //보드 만들기
+  console.log(seat);
   const createBoard = () => {
     let board = [];
     for (let i = 0; i < props.floorInfo.height; i++) {
       board.push([]);
       for (let j = 0; j < props.floorInfo.width; j++) {
         board[i].push({
-          x: j,
-          y: i,
+          x: i,
+          y: j,
           status: 0,
         });
       }
     }
-
     seat.map(item => {
-      let occupiedSeat = board[item.x][item.y];
+      let occupiedSeat = board[item.y][item.x];
       occupiedSeat.status = 1;
     });
 
@@ -80,7 +77,27 @@ const SeatBoardDemo = props => {
 
     return board;
   };
+  const roomXY = (board, cell) => {
+    let j = cell.y;
+    let i = cell.x;
 
+    while (true) {
+      if (board[j][i].status === 3) break;
+      else if (board[j][i].status === 0) {
+        i += 1;
+        break;
+      } else i--;
+    }
+
+    while (board[j][i].status === 2) {
+      j--;
+    }
+    room.map(item => {
+      if (item.x === j && item.y === i) {
+        setClickedRoom(item);
+      }
+    });
+  };
   const createRow = (board, row) => {
     let cells = row.map((data, index) => {
       return (
@@ -105,26 +122,11 @@ const SeatBoardDemo = props => {
     return <div className="row">{cells}</div>;
   };
 
-  const roomXY = (board, cell) => {
-    let i = cell.x;
-    let j = cell.y;
-
-    while (board[j][i].status === 2) {
-      i--;
-    }
-    while (board[j][i].status === 2) {
-      j--;
-    }
-
-    room.map(item => {
-      if (item.x === j && item.y === i) {
-        setClickedRoom(item);
-      }
-    });
-  };
-
   //cell(좌석, 회의실, 시설)을 클릭할 때
   const clickCell = (board, cell, e) => {
+    setClickedRoom([]);
+    setClickedSeat([]);
+
     if (cell.status === 0) {
       //빈 공간일 경우
       e.target.style.backgroundColor = 'rgb(76, 148, 76)';
@@ -134,12 +136,11 @@ const SeatBoardDemo = props => {
       //좌석이 생성되어 있을 경우
       e.target.style.backgroundColor = 'gray';
       seat.map(item => {
-        if (cell.x === item.y && cell.y === item.x) {
+        if (cell.x === item.x && cell.y === item.y) {
           setClickedSeat(item);
         }
       });
-    } else if (cell.status === 2) {
-      //회의실이 생성되어 있을 경우
+    } else if (cell.status === 2 || cell.status === 3) {
       roomXY(board, cell);
     }
   };

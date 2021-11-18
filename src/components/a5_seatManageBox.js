@@ -28,7 +28,6 @@ const SeatManageBox = () => {
     };
     asd();
   }, []);
-
   //층 선택
   const [selectFloor, setSelectFloor] = useState([]);
   const handleChange = event => {
