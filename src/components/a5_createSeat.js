@@ -27,8 +27,6 @@ const CreateSeat = props => {
     }
   };
 
-  console.log('createSeat', props.clickedSeat);
-
   return (
     <div className="tabContent">
       <p>

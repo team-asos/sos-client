@@ -29,9 +29,6 @@
 .row {
   width: max-content;
 
-  border-right: 1px solid lightgray;
-  border-top: 1px solid lightgray;
-
   background-color: white;
 }
 
@@ -44,6 +41,7 @@
 }
 
 .row .cell:hover {
+  cursor: pointer;
   background-color: rgb(76, 148, 76);
 }
 
@@ -57,4 +55,24 @@
 
   border: none;
   border-radius: 2px;
+}
+
+.selectFloorText {
+  color: #c4c4c4;
+  font-size: smaller;
+  font-style: italic;
+}
+.seatBoardRightTop {
+  height: 50%;
+}
+.seatBoardRightBottom {
+  width: 95%;
+  height: 50%;
+  border-top: 1px solid #c00000;
+}
+.selectSeatText {
+  font-size: smaller;
+  font-style: italic;
+  text-align: center;
+  margin-top: 40%;
 }
