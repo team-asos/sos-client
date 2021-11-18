@@ -4,24 +4,45 @@
   flex-direction: row;
   align-items: center;
 }
+.m_login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /*위치와 크기 지정*/
+  width: 70%; /*55%*/
+  height: 70%; /*60%*/
+  margin-top: 30%;
+  margin-left: 15%;
 
+  /*배경과 그림자 지정*/
+  background: #c4c4c4;
+  box-shadow: 1px rgba(64, 64, 64, 0.4);
+  border-radius: 44px;
+}
 /*화면 중앙 기준 왼쪽*/
 .left {
   width: 50vw; /*80%*/
   text-align: center;
 }
+
 /*화면 중앙 기준 가운데*/
 .line {
   width: 0.2vw;
   height: 40vh;
   background-color: #c00000;
 }
+
 /*화면 중앙 기준 오른쪽*/
 .right {
   width: 50vw;
   text-align: center;
 }
-
+.m_right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 /*Input형식 크기,위치, 글자크기 지정*/
 .form-control-login {
   display: block;
@@ -37,7 +58,16 @@
 .form-control-login:focus {
   outline: none;
 }
-
+.m_form-control-login {
+  display: block;
+  margin: 7px auto;
+  width: 45vw;
+  height: 5vh; /*30px*/
+  font-size: 0.8em; /*12px*/
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+}
 /*Button 요소와 이벤트 지정*/
 .Button {
   width: 22vw; /*80%*/
@@ -69,6 +99,14 @@
   color: white;
   border: none;
   box-shadow: 0 0 40px 40px #8f0202 inset;
+}
+.m_Button {
+  width: 45vw; /*80%*/
+  height: 5vh; /*30px*/
+  border-radius: 5px;
+  font-size: 0.8em; /*12px*/
+  font-weight: bold;
+  margin-bottom: 12px;
 }
 
 /*계정이 없으신가요? 텍스트 스타일 지정*/
