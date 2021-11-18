@@ -87,7 +87,8 @@ const MyInfoForm = props => {
         }),
       },
     );
-    alert(response.status);
+    if (response.status === 200) alert('수정이 완료되었습니다.');
+    else alert(response.message);
   };
 
   const editHandler = () => {
