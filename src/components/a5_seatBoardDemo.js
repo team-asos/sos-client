@@ -78,8 +78,8 @@ const SeatBoardDemo = props => {
     return board;
   };
   const roomXY = (board, cell) => {
-    let j = cell.y;
-    let i = cell.x;
+    let i = cell.y;
+    let j = cell.x;
 
     while (true) {
       if (board[j][i].status === 3) break;
@@ -109,12 +109,17 @@ const SeatBoardDemo = props => {
             backgroundColor:
               data.status === 1
                 ? '#c00000'
-                : data.status === 2
+                : data.status === 2 || data.status === 3
                 ? 'black'
                 : 'white',
-            borderLeft: data.status === 2 ? '1px solid transparent ' : '',
-            borderBottom: data.status === 2 ? '1px solid black' : '',
-            borderTop: data.status === 2 ? '1px solid black' : '',
+            borderLeft:
+              data.status === 2 || data.status === 3
+                ? '1px solid transparent '
+                : '',
+            borderBottom:
+              data.status === 2 || data.status === 3 ? '1px solid black' : '',
+            borderTop:
+              data.status === 2 || data.status === 3 ? '1px solid black' : '',
           }}
         />
       );
@@ -128,15 +133,17 @@ const SeatBoardDemo = props => {
     setClickedSeat([]);
 
     if (cell.status === 0) {
-      //빈 공간일 경우
       e.target.style.backgroundColor = 'rgb(76, 148, 76)';
+
       setClickedRow(cell.x);
       setClickedColumn(cell.y);
     } else if (cell.status === 1) {
       //좌석이 생성되어 있을 경우
+
       e.target.style.backgroundColor = 'gray';
+
       seat.map(item => {
-        if (cell.x === item.x && cell.y === item.y) {
+        if (cell.x === item.y && cell.y === item.x) {
           setClickedSeat(item);
         }
       });

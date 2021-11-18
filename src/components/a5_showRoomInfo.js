@@ -14,7 +14,7 @@ const ShowSeatInfo = props => {
           <tr>
             <th>회의실 위치</th>
             <td>
-              ({props.clickedRoom.x + 1}, {props.clickedRoom.y + 1})
+              ({props.clickedRoom.y + 1}, {props.clickedRoom.x + 1})
             </td>
           </tr>
           <tr>
