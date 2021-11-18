@@ -59,13 +59,13 @@ const CreateRoom = props => {
           type="text"
           placeholder="가로"
           style={{ width: '4vw' }}
-          onChange={e => setWidth(e.target.value)}
+          onChange={e => setHeight(e.target.value)}
         />
         <input
           type="text"
           placeholder="세로"
           style={{ width: '4vw', marginLeft: '1.5%' }}
-          onChange={e => setHeight(e.target.value)}
+          onChange={e => setWidth(e.target.value)}
         />
       </p>
       <p>

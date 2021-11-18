@@ -92,12 +92,17 @@ const SeatBoardDemo = props => {
             backgroundColor:
               data.status === 1
                 ? '#c00000'
-                : data.status === 2
+                : data.status === 2 || data.status === 3
                 ? 'black'
                 : 'white',
-            borderLeft: data.status === 2 ? '1px solid transparent ' : '',
-            borderBottom: data.status === 2 ? '1px solid black' : '',
-            borderTop: data.status === 2 ? '1px solid black' : '',
+            borderLeft:
+              data.status === 2 || data.status === 3
+                ? '1px solid transparent '
+                : '',
+            borderBottom:
+              data.status === 2 || data.status === 3 ? '1px solid black' : '',
+            borderTop:
+              data.status === 2 || data.status === 3 ? '1px solid black' : '',
           }}
         />
       );
@@ -106,19 +111,32 @@ const SeatBoardDemo = props => {
   };
 
   const roomXY = (board, cell) => {
-    let i = cell.x;
+    setClickedRoom([]);
+
     let j = cell.y;
+    let i = cell.x;
+
+    console.log(i, j);
+
+    while (true) {
+      if (board[j][i].status === 3) break;
+      else if (board[j][i].status === 2) i--;
+      console.log('First: ', j, i, board[j][i].status);
+    }
+
+    console.log('Middle : ', j, i, board[j][i].status);
 
     while (board[j][i].status === 2) {
-      i--;
-    }
-    while (board[j][i].status === 2) {
+      console.log('Second: ', j, i, board[j][i].status);
       j--;
     }
+
+    console.log(j, i);
 
     room.map(item => {
       if (item.x === j && item.y === i) {
         setClickedRoom(item);
+        console.log(clickedRoom);
       }
     });
   };
@@ -138,9 +156,10 @@ const SeatBoardDemo = props => {
           setClickedSeat(item);
         }
       });
-    } else if (cell.status === 2) {
+    } else if (cell.status === 2 || cell.status === 3) {
       //회의실이 생성되어 있을 경우
       roomXY(board, cell);
+      console.log(clickedRoom);
     }
   };
 
