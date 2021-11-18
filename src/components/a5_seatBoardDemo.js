@@ -111,40 +111,35 @@ const SeatBoardDemo = props => {
   };
 
   const roomXY = (board, cell) => {
-    setClickedRoom([]);
-
     let j = cell.y;
     let i = cell.x;
 
-    console.log(i, j);
-
     while (true) {
       if (board[j][i].status === 3) break;
-      else if (board[j][i].status === 2) i--;
-      console.log('First: ', j, i, board[j][i].status);
+      else if (board[j][i].status === 0) {
+        i += 1;
+        break;
+      } else i--;
     }
-
-    console.log('Middle : ', j, i, board[j][i].status);
 
     while (board[j][i].status === 2) {
-      console.log('Second: ', j, i, board[j][i].status);
       j--;
     }
-
-    console.log(j, i);
-
     room.map(item => {
       if (item.x === j && item.y === i) {
         setClickedRoom(item);
-        console.log(clickedRoom);
       }
     });
   };
 
   //cell(좌석, 회의실, 시설)을 클릭할 때
   const clickCell = (board, cell, e) => {
+    //회의실, 좌석 초기화
+    setClickedSeat([]);
+    setClickedRoom([]);
+
+    //빈 공간일 경우
     if (cell.status === 0) {
-      //빈 공간일 경우
       e.target.style.backgroundColor = 'rgb(76, 148, 76)';
       setClickedRow(cell.x);
       setClickedColumn(cell.y);
@@ -159,7 +154,6 @@ const SeatBoardDemo = props => {
     } else if (cell.status === 2 || cell.status === 3) {
       //회의실이 생성되어 있을 경우
       roomXY(board, cell);
-      console.log(clickedRoom);
     }
   };
 
