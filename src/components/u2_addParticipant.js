@@ -3,10 +3,15 @@ import Select from 'react-select';
 import { useCookies } from 'react-cookie';
 import { Table } from 'react-bootstrap';
 import * as AiIcon from 'react-icons/ai';
+import { useMediaQuery } from 'react-responsive';
 import '../assets/styles/u2_addParticipant.css';
 //회의실 인원 검색해서 추가
 
 const AddParticipant = ({ START, END, MAXUSER, ROOMID }) => {
+  const isPc = useMediaQuery({
+    query: '(min-width:768px)',
+  });
+  const isMobile = useMediaQuery({ query: '(max-width:767px)' });
   const [cookie] = useCookies(['access_token']);
   const [data, setData] = useState([]);
   const [selectedMembers, setSelectedMembers] = useState([]);
@@ -30,6 +35,7 @@ const AddParticipant = ({ START, END, MAXUSER, ROOMID }) => {
   }, []);
   /*참석자 선택 */
   const handleChange = e => {
+    // setSelectedMembers([...selectedMembers, e]); 멀티 아닐 때 근데 옵션에서 사라져야함
     setSelectedMembers(e);
   };
   /*회원 검색 */
@@ -91,15 +97,15 @@ const AddParticipant = ({ START, END, MAXUSER, ROOMID }) => {
       }
     }
   };
-
+  console.log(selectedMembers);
   return (
-    <div style={{ display: 'flex', flexDirection: 'row' }}>
-      <div className="addParticipantForm">
-        <p className="rrp_centerTextStyle">
-          회의 참석자를 입력하세요. (사용 가능 인원 : {MAXUSER}명)
+    <div className={isPc ? 'addAndButtonForm' : 'mAddAndButtonForm'}>
+      <div className={isPc ? 'addParticipantForm' : 'mParticipantForm'}>
+        <p className={isPc ? 'rrp_centerTextStyle' : 'mrrp_centerTextStyle'}>
+          회의 참석자를 입력하세요. [ 사용 가능 인원 : {MAXUSER}명 ]
         </p>
 
-        <div className="searchForm">
+        <div className={isPc ? 'searchForm' : 'mSearchForm'}>
           <Select
             menuPosition={'center'}
             isMulti
@@ -111,13 +117,16 @@ const AddParticipant = ({ START, END, MAXUSER, ROOMID }) => {
             onChange={e => handleChange(e)}
             // onInputChange={e => console.log(e)}
             noOptionsMessage={() => '검색 결과가 없습니다.'}
-            className="searchParticipant"
             value={selectedMembers}
-            isDisabled={selectedMembers.length < MAXUSER ? 0 : 1}
+            isDisabled={selectedMembers.length < MAXUSER ? 0 : 0}
           />
         </div>
         <div className="participantForm">
-          <Table striped hover className="selectedMembersList">
+          <Table
+            striped
+            hover
+            className={isPc ? 'selectedMembersList' : 'mSelectedMembersList'}
+          >
             <thead>
               <tr>
                 <th></th>
@@ -147,9 +156,9 @@ const AddParticipant = ({ START, END, MAXUSER, ROOMID }) => {
           </Table>
         </div>
       </div>
-      <div style={{ marginTop: '7vh', marginLeft: '10vw' }}>
+      <div className={isMobile ? 'divButton' : ''}>
         <button
-          className="roomReservationBtn"
+          className={isPc ? 'roomReservationBtn' : 'mRoomReservationBtn'}
           onClick={reservationClickHandler}
         >
           예약하기
