@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 
 import './index.scss';
 
@@ -62,7 +62,9 @@ export const Board = ({ area, setArea, board, setBoard, originBoard }) => {
                 backgroundColor: 'red',
               }
         }
-      ></td>
+      >
+        <div></div>
+      </td>
     ));
   };
 
@@ -76,11 +78,20 @@ export const Board = ({ area, setArea, board, setBoard, originBoard }) => {
 
   const Board = () => {
     return (
-      <table className="board-table">
-        <tbody>
-          <Rows board={board} />
-        </tbody>
-      </table>
+      <div
+        style={{
+          width: '960px',
+          height: '640px',
+          overflow: 'auto',
+          border: '1px solid red',
+        }}
+      >
+        <table className="board-table">
+          <tbody>
+            <Rows board={board} />
+          </tbody>
+        </table>
+      </div>
     );
   };
 

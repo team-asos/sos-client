@@ -1,0 +1,42 @@
+.modal-content {
+  .floor-modal-select {
+    width: fit-content;
+    display: flex;
+    flex-direction: row;
+
+    div {
+      margin-left: 1vw;
+    }
+  }
+
+  .floor-modal-pane {
+    padding-left: 14%;
+  }
+
+  .floor-modal-pane label {
+    width: 8vw;
+  }
+
+  .floorRadio {
+    margin-left: 0.5vw;
+    font-size: 0.6em;
+  }
+
+  .floor-modal-input {
+    width: 15vw;
+    margin-top: 2%;
+  }
+
+  .floor-modal-input::placeholder {
+    font-style: italic;
+    font-size: smaller;
+  }
+
+  .floor-modal-button {
+    margin-left: 20vw;
+    background: #c00000;
+    color: white;
+    border: none;
+    border-radius: 2px;
+  }
+}
