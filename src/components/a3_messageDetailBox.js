@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { ListGroup } from 'react-bootstrap';
 import moment from 'moment';
+import { useCookies } from 'react-cookie';
 import '../assets/styles/a3_answerWaitingList.css';
 
 const MessageDetailBox = ({ messageInfo, show }) => {
   const [message, setMessage] = useState('');
-
-  const inputMessage = e => {
-    setMessage(e.target.value);
-  };
+  const [cookie] = useCookies('access_token');
 
   const submitHandler = async () => {
     const result = await fetch(
@@ -16,6 +14,7 @@ const MessageDetailBox = ({ messageInfo, show }) => {
       {
         headers: {
           'Content-type': 'application/json',
+          Authorization: `Bearer ${cookie.access_token}`,
         },
         method: 'POST',
         body: JSON.stringify({
@@ -29,12 +28,8 @@ const MessageDetailBox = ({ messageInfo, show }) => {
 
     if (result.status === 201) {
       alert('답변을 보냈습니다.');
-      console.log('Submit the answer');
     }
   };
-
-  console.log(messageInfo);
-  console.log('2: ', messageInfo.status);
 
   return (
     <div className="messageDetailBox" show={show}>
@@ -50,7 +45,9 @@ const MessageDetailBox = ({ messageInfo, show }) => {
         </ListGroup.Item>
         <ListGroup.Item>
           <span style={{ fontWeight: '650' }}>수신 시간 : </span>
-          {moment(messageInfo.createdAt).format('YYYY-MM-DD / hh:mm:ss')}
+          {messageInfo.length !== 0
+            ? moment(messageInfo.createdAt).format('YYYY-MM-DD / hh:mm:ss')
+            : ''}
         </ListGroup.Item>
         <ListGroup.Item>
           <span style={{ fontWeight: '650' }}>문의 내용 </span>
@@ -62,7 +59,7 @@ const MessageDetailBox = ({ messageInfo, show }) => {
             className="answerInput"
             placeholder="답변 
             내용을 입력해주세요."
-            onChange={inputMessage}
+            onChange={e => setMessage(e.target.value)}
           />
           <button className="sendBtn" onClick={submitHandler}>
             보내기

@@ -13,7 +13,7 @@
 .inquireHeader {
   position: relative;
   height: 10%;
-  background: #c4c4c4;
+  background: #c4c4c45b;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -24,4 +24,8 @@
   font-size: 2em;
   margin-left: 2%;
   margin-right: 4%;
+}
+
+.myRLMenuTextStyle:hover {
+  color: #c00000;
 }

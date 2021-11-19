@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
+
 import AppBar from './u_appBar';
 import TimeBar from './2_timeBar';
 import '../assets/styles/a2_navBox.css';
@@ -9,6 +10,7 @@ const NavBar = props => {
   const history = useHistory();
   const [cookie, removeCookie] = useCookies(['access_token']);
   const [user, setUser] = useState({});
+
   useEffect(() => {
     const res = async () => {
       await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/auth`, {
@@ -24,6 +26,7 @@ const NavBar = props => {
     };
     res();
   }, []);
+
   useEffect(() => {
     if (cookie.access_token === 'undefined') {
       history.push('/');
@@ -33,6 +36,7 @@ const NavBar = props => {
   const logoutClickHandler = () => {
     removeCookie('access_token');
   };
+
   return (
     <div className="navBox">
       <Link to="seat-reservation">

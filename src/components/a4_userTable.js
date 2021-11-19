@@ -9,8 +9,10 @@ import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
 import UsePagination from './a4_usePagination';
 
 export default function UserTable({ data }) {
+  //헤더들
   const columns = data[0] && Object.keys(data[0]);
 
+  //모달 관련 함수
   const [modalInfo, setModalInfo] = useState([]);
   const [showModal, setShowModal] = useState(false);
 
@@ -26,6 +28,7 @@ export default function UserTable({ data }) {
     console.log(modalInfo);
   }, [modalInfo]);
 
+  //pagination
   const [currentPage, setCurrentPage] = useState(1);
   const [userPerPage] = useState(10);
 
@@ -42,7 +45,7 @@ export default function UserTable({ data }) {
       <MDBTable hover className="userTable" cellPadding={0} cellSpacing={0}>
         {/* 헤더 */}
         <MDBTableHead>
-          <tr style={{ fontSize: '0.7em' }}>
+          <tr style={{ fontSize: '0.8em' }}>
             {data[0] &&
               columns.map(heading =>
                 heading === 'role' ? '' : <th>{tableHeadertoKR(heading)}</th>,
@@ -51,10 +54,17 @@ export default function UserTable({ data }) {
         </MDBTableHead>
         {/* 바디 */}
         <MDBTableBody>
-          {currentUsers.map(row => (
-            <tr style={{ fontSize: '0.7em' }}>
+          {currentUsers.map((row, idx) => (
+            <tr style={{ fontSize: '0.8em' }}>
+              <td>{idx + 1}</td>
               {columns.map(column =>
-                column === 'role' ? '' : <td>{row[column]}</td>,
+                column === 'role' || column === 'id' ? (
+                  ''
+                ) : column === 'createdAt' || column === 'updatedAt' ? (
+                  <td>{row[column].slice(0, 10)}</td>
+                ) : (
+                  <td>{row[column]}</td>
+                ),
               )}
               <td style={{ fontSize: '0.7em' }}>
                 <Button

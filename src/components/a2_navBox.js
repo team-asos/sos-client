@@ -26,6 +26,7 @@ const NavBox = () => {
     };
     res();
   }, []);
+
   useEffect(() => {
     if (cookie.access_token === 'undefined') {
       history.push('/');
