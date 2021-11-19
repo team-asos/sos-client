@@ -4,12 +4,17 @@ import { Table } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import '../assets/styles/u1_roomInfoTable.css';
 import { getMonth, getDate, getYear } from 'date-fns';
+import { useMediaQuery } from 'react-responsive';
+
 //전체 회의실 리스트 조회
 const RoomInfoTable = () => {
   const [cookie] = useCookies(['access_token']);
   const [idx, setIdx] = useState();
   const [data, setData] = useState([]);
-
+  const isPc = useMediaQuery({
+    query: '(min-width:768px)',
+  });
+  const isMobile = useMediaQuery({ query: '(max-width:767px)' });
   const handleClick = e => {
     setIdx(e);
     const idx = e;
@@ -20,7 +25,6 @@ const RoomInfoTable = () => {
       await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/rooms`, {
         headers: {
           Authorization: `Bearer ${cookie.access_token}`,
-          //'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6Iuq5gOyngOybkCIsInJvbGUiOjAsImlhdCI6MTYzNjYzMjAyNywiZXhwIjoxNjM5MjI0MDI3fQ.z7hJl0nLbgWs2HCrzzhfLMhcxDG-a6eM30a3CiPS1tQ',
         },
         method: 'GET',
       })
@@ -33,7 +37,7 @@ const RoomInfoTable = () => {
   }, []);
   return (
     <div>
-      <Table striped hover className="infoTable">
+      <Table striped hover className={isPc ? 'infoTable' : 'mobileInfoTable'}>
         <thead className="rHeader">
           <tr>
             <th>회의실 명</th>
@@ -69,10 +73,12 @@ const RoomInfoTable = () => {
                   }}
                 >
                   <button
-                    className="roomReservationButton"
+                    className={
+                      isPc ? 'roomReservationButton' : 'm_roomReservationBtn'
+                    }
                     onClick={() => handleClick(item.id)}
                   >
-                    예약하기
+                    {isPc ? '예약하기' : '예약'}
                   </button>
                 </Link>
               </td>

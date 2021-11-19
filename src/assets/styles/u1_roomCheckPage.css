@@ -5,10 +5,18 @@
   display: flex;
   flex-direction: row;
 }
+/* .m_roomCheckPage {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+} */
 .roomCheckForm {
   width: 95vw;
   display: flex;
   flex-direction: column;
+}
+.m_roomCheckForm {
+  width: 100%;
 }
 .checkHeader {
   position: relative;

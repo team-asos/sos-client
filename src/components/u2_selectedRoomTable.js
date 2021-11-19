@@ -5,9 +5,15 @@ import React, { useState, useEffect } from 'react';
 import { useCookies } from 'react-cookie';
 import { Table } from 'react-bootstrap';
 import Calendar from './u2_calendar';
+import { useMediaQuery } from 'react-responsive';
+
 import '../assets/styles/u2_selectedRoomTable.css';
 //회의실 예약 페이지-> 선택된 회의실 설명 테이블(room-check에서 정보 받아오기)
 const SelectedRoomTable = props => {
+  const isPc = useMediaQuery({
+    query: '(min-width:768px)',
+  });
+  const isMobile = useMediaQuery({ query: '(max-width:767px)' });
   const [cookie] = useCookies(['access_token']);
   const today = new Date();
   const roomID = props.roomID; //선택한 회의실 id
@@ -31,7 +37,11 @@ const SelectedRoomTable = props => {
   console.log(data);
   return (
     <div>
-      <Table striped hover className="selectedTable">
+      <Table
+        striped
+        hover
+        className={isPc ? 'selectedTable' : 'mobileInfoTable'}
+      >
         <thead className="sHeader">
           <tr>
             <th>회의실명</th>

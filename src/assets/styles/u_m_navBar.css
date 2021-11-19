@@ -1,0 +1,46 @@
+.nav-menu {
+  background-color: gray;
+  width: 150px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: -100%;
+  transition: 0.8s all;
+  z-index: 1;
+}
+.nav-menu.active {
+  left: 0;
+  transition: all 0.5s ease;
+
+  display: flex;
+  flex-direction: column;
+  z-index: 1;
+}
+.nav-menu-items {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  margin-top: 30px;
+  justify-items: flex-end;
+}
+
+.closeBtn {
+  margin-top: 10px;
+  margin-left: 10px;
+}
+.iconText {
+  font-size: 1em;
+  font-weight: bold;
+  color: white;
+  display: initial;
+}
+.m_icon {
+  width: 50px;
+  height: 50px;
+}
+.oneMenu {
+  margin-bottom: 40px;
+}
