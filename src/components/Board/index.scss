@@ -1,13 +1,20 @@
 .board-container {
-  table {
-    tbody {
-      tr {
-        td {
-          width: 30px;
-          height: 30px;
-          border: 1px solid black;
-        }
-      }
+  display: flex;
+
+  .board-table {
+    flex: 2;
+    table-layout: fixed;
+
+    .board-content {
+      width: 30px;
+      height: 30px;
+      border: 1px solid #c2c2c2;
     }
+  }
+
+  .board-setting {
+    flex: 1;
+
+    flex-direction: column;
   }
 }
