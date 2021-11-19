@@ -11,7 +11,7 @@ import {
   MenuItem,
   FormHelperText,
 } from '@material-ui/core';
-import { Board } from './Board';
+import { BoardContainer } from './BoardContainer/index';
 
 const SeatManageBox = () => {
   //층 불러오기
@@ -94,7 +94,7 @@ const SeatManageBox = () => {
 
       {/* 도면 */}
       <div className="seatManageBottomBox">
-        <Board floor={selectFloor} />
+        <BoardContainer floor={selectFloor} />
       </div>
 
       {/* 층 생성 모달창 : 추후에 분리할 예정 */}
