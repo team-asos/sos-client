@@ -35,6 +35,7 @@ export const RoomTab = ({ selection, floor }) => {
 
       if (response.status === 201) {
         alert('성공');
+        window.location.replace('/seat-management');
       }
     };
 
@@ -56,6 +57,7 @@ export const RoomTab = ({ selection, floor }) => {
 
       if (response.status === 200) {
         alert('성공');
+        window.location.replace('/seat-management');
       }
     };
 
@@ -81,7 +83,9 @@ export const RoomTab = ({ selection, floor }) => {
             onChange={e => {
               inputName(e);
             }}
-            disabled={selection.width === 0 ? true : false}
+            disabled={
+              selection.width <= 1 && selection.height <= 1 ? true : false
+            }
           />
           <label>회의실 최대 인원 수</label>
           <input
@@ -89,7 +93,9 @@ export const RoomTab = ({ selection, floor }) => {
             onChange={e => {
               inputNumber(e);
             }}
-            disabled={selection.width === 0 ? true : false}
+            disabled={
+              selection.width <= 1 && selection.height <= 1 ? true : false
+            }
           />
           <button
             onClick={() => {
@@ -105,6 +111,8 @@ export const RoomTab = ({ selection, floor }) => {
         <>
           <label>회의실 이름</label>
           <input value={selection.name} disabled />
+          <label>회의실 최대 인원 수</label>
+          <input value={selection.maxUser} disabled />
           <button
             onClick={() => {
               handleDelete();

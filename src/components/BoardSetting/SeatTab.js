@@ -30,6 +30,7 @@ export const SeatTab = ({ selection, floor }) => {
 
       if (response.status === 201) {
         alert('성공');
+        window.location.replace('/seat-management');
       }
     };
 
@@ -51,6 +52,7 @@ export const SeatTab = ({ selection, floor }) => {
 
       if (response.status === 200) {
         alert('성공');
+        window.location.replace('/seat-management');
       }
     };
 

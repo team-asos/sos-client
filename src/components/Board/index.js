@@ -9,6 +9,8 @@ export const Board = ({
   setBoard,
   board,
   originBoard,
+  seats,
+  rooms,
 }) => {
   useEffect(() => {
     if (selection.stage === 0) {
@@ -39,60 +41,68 @@ export const Board = ({
   const handleSelection = (x, y) => {
     if (board[y][x].type !== 0) {
       // 기존 좌석 선택
+      if (selection.stage === 0) {
+        if (board[y][x].type === 1 && tab === 0) {
+          const selectedSeat = seats.find(seat => seat.id === board[y][x].id);
 
-      if (board[y][x].type === 1) {
-        setSelection({
-          ...selection,
-          x,
-          y,
-          stage: 3,
-          id: board[y][x].id,
-          name: board[y][x].name,
-        });
+          setSelection({
+            ...selectedSeat,
+            stage: 3,
+          });
+        } else if (board[y][x].type === 2 && tab === 1) {
+          const selectedRoom = rooms.find(room => room.id === board[y][x].id);
+
+          setSelection({
+            ...selectedRoom,
+            stage: 3,
+          });
+        }
       }
     } else {
       // 신규 선택
-
       if (selection.stage === 0) {
         if (tab === 1) {
           setSelection({
+            id: -1,
+            name: '',
             x,
             y,
             width: 1,
             height: 1,
+            maxUser: 0,
             stage: 1,
-            id: -1,
-            name: '',
           });
         } else {
           setSelection({
+            id: -1,
+            name: '',
             x,
             y,
             width: 1,
             height: 1,
+            maxUser: 0,
             stage: 2,
-            id: -1,
-            name: '',
           });
         }
       } else if (selection.stage === 1) {
         setSelection({
           ...selection,
+          id: -1,
+          name: '',
           width: Math.abs(x - selection.x + 1),
           height: Math.abs(y - selection.y + 1),
           stage: 2,
-          id: -1,
-          name: '',
         });
       } else if (selection.stage === 2 || selection.stage === 3) {
         setSelection({
+          id: -1,
+          name: '',
           x: -1,
           y: -1,
           width: 0,
           height: 0,
+          maxUser: 0,
           stage: 0,
-          id: -1,
-          name: '',
         });
       }
     }

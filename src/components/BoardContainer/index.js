@@ -13,13 +13,14 @@ export const BoardContainer = ({ floor }) => {
   const [rooms, setRooms] = useState([]);
 
   const [selection, setSelection] = useState({
+    id: -1,
+    name: '',
     x: -1,
     y: -1,
     width: 0,
     height: 0,
+    maxUser: 0,
     stage: 0,
-    id: -1,
-    name: '',
   });
 
   const [tab, setTab] = useState(0);
@@ -111,6 +112,8 @@ export const BoardContainer = ({ floor }) => {
         board={board}
         setBoard={setBoard}
         originBoard={originBoard}
+        seats={seats}
+        rooms={rooms}
       />
       <BoardSetting
         selection={selection}
