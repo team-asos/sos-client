@@ -17,7 +17,9 @@ export const BoardContainer = ({ floor }) => {
     y: -1,
     width: 0,
     height: 0,
-    type: 0,
+    stage: 0,
+    id: -1,
+    name: '',
   });
 
   const [tab, setTab] = useState(0);
@@ -25,7 +27,9 @@ export const BoardContainer = ({ floor }) => {
   useEffect(() => {
     setBoard(
       Array.from({ length: floor.height }, () =>
-        Array.from({ length: floor.width }, () => 0),
+        Array.from({ length: floor.width }, () => {
+          return { type: 0, id: -1, name: '' };
+        }),
       ),
     );
 
@@ -67,14 +71,15 @@ export const BoardContainer = ({ floor }) => {
     let newMap = board;
 
     for (let seat of seats) {
-      newMap[seat.y][seat.x] = 1;
+      newMap[seat.y][seat.x] = { type: 1, id: seat.id, name: seat.name };
     }
 
     for (let room of rooms) {
       newMap = newMap.map((row, rowIndex) =>
         row.map((col, colIndex) => {
           if (colIndex >= room.x && colIndex < room.x + room.width)
-            if (rowIndex >= room.y && rowIndex < room.y + room.height) return 2;
+            if (rowIndex >= room.y && rowIndex < room.y + room.height)
+              return { type: 2, id: room.id, name: room.name };
 
           return col;
         }),
@@ -83,10 +88,18 @@ export const BoardContainer = ({ floor }) => {
 
     setBoard(newMap);
     setOriginBoard(newMap);
-  }, [rooms]);
+  }, [seats, rooms]);
 
   useEffect(() => {
-    setSelection({ x: -1, y: -1, width: 0, height: 0, type: 0 });
+    setSelection({
+      x: -1,
+      y: -1,
+      width: 0,
+      height: 0,
+      stage: 0,
+      id: -1,
+      name: '',
+    });
   }, [tab]);
 
   return (

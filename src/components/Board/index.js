@@ -11,7 +11,7 @@ export const Board = ({
   originBoard,
 }) => {
   useEffect(() => {
-    if (selection.type === 0) {
+    if (selection.stage === 0) {
       setBoard(originBoard);
     } else {
       let newMap = board;
@@ -26,7 +26,7 @@ export const Board = ({
               rowIndex >= selection.y &&
               rowIndex <= selection.y + selection.height
             )
-              return 3;
+              return { type: 3, name: '' };
 
           return col;
         }),
@@ -37,27 +37,48 @@ export const Board = ({
   }, [selection]);
 
   const handleSelection = (x, y) => {
-    if (selection.type === 0) {
-      if (tab === 1) {
-        setSelection({ ...selection, x, y, type: 1 });
-      } else {
-        setSelection({ ...selection, x, y, type: 2 });
+    if (board[y][x].type !== 0) {
+      // 기존 좌석 선택
+
+      if (board[y][x].type === 1) {
+        setSelection({
+          ...selection,
+          x,
+          y,
+          stage: 3,
+          id: board[y][x].id,
+          name: board[y][x].name,
+        });
       }
-    } else if (selection.type === 1) {
-      setSelection({
-        ...selection,
-        width: Math.abs(x - selection.x),
-        height: Math.abs(y - selection.y),
-        type: 2,
-      });
-    } else if (selection.type === 2) {
-      setSelection({
-        x: -1,
-        y: -1,
-        width: 0,
-        height: 0,
-        type: 0,
-      });
+    } else {
+      // 신규 선택
+
+      if (selection.stage === 0) {
+        if (tab === 1) {
+          setSelection({ ...selection, x, y, stage: 1, id: -1, name: '' });
+        } else {
+          setSelection({ ...selection, x, y, stage: 2, id: -1, name: '' });
+        }
+      } else if (selection.stage === 1) {
+        setSelection({
+          ...selection,
+          width: Math.abs(x - selection.x),
+          height: Math.abs(y - selection.y),
+          stage: 2,
+          id: -1,
+          name: '',
+        });
+      } else if (selection.stage === 2 || selection.stage === 3) {
+        setSelection({
+          x: -1,
+          y: -1,
+          width: 0,
+          height: 0,
+          stage: 0,
+          id: -1,
+          name: '',
+        });
+      }
     }
   };
 
@@ -70,15 +91,15 @@ export const Board = ({
         }}
         key={index}
         style={
-          item === 0
+          item.type === 0
             ? {
                 backgroundColor: 'white',
               }
-            : item === 1
+            : item.type === 1
             ? {
                 backgroundColor: 'green',
               }
-            : item === 2
+            : item.type === 2
             ? {
                 backgroundColor: 'blue',
               }
@@ -87,7 +108,15 @@ export const Board = ({
               }
         }
       >
-        <div></div>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          {item.name}
+        </div>
       </td>
     ));
   };
