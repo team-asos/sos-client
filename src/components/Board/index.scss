@@ -1,14 +1,15 @@
 .board-container {
-  .board-table {
-    .board-content {
-      border: 1px solid #c2c2c2;
+  .board-cover {
+    flex: 1;
+    height: 840px;
+    overflow: auto;
+    border: 1px solid red;
 
-      > div {
-        width: 50px;
-        height: 50px;
-        overflow: hidden;
-        word-wrap: break-word;
-      }
+    .board-item {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid #c2c2c2;
     }
   }
 }

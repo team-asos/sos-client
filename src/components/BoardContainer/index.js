@@ -80,7 +80,11 @@ export const BoardContainer = ({ floor }) => {
         row.map((col, colIndex) => {
           if (colIndex >= room.x && colIndex < room.x + room.width)
             if (rowIndex >= room.y && rowIndex < room.y + room.height)
-              return { type: 2, id: room.id, name: room.name };
+              return {
+                type: 2,
+                id: room.id,
+                name: room.name,
+              };
 
           return col;
         }),

@@ -108,51 +108,24 @@ export const Board = ({
     }
   };
 
-  const Row = ({ row, y }) => {
-    return row.map((item, index) => (
-      <td
-        className="board-content"
-        onClick={() => {
-          handleSelection(index, y);
-        }}
-        key={index}
-        style={
-          item.type === 0
-            ? {
-                backgroundColor: 'white',
-              }
-            : item.type === 1
-            ? {
-                backgroundColor: 'green',
-              }
-            : item.type === 2
-            ? {
-                backgroundColor: 'blue',
-              }
-            : {
-                backgroundColor: 'red',
-              }
-        }
-      >
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
-          {item.name}
-        </div>
-      </td>
-    ));
+  const itemStyle = type => {
+    if (type === 0) return { backgroundColor: 'white' };
+    else if (type === 1) return { backgroundColor: 'green' };
+    else if (type === 2) return { backgroundColor: 'blue' };
+    else if (type === 3) return { backgroundColor: 'red' };
   };
 
   const Item = ({ board }) => {
     return board.map((row, y) =>
       row.map((col, x) => (
-        <div key={x + y}>
-          {`${x}, ${y}`}
-          <br />
+        <div
+          className="board-item"
+          key={x + y}
+          onClick={() => {
+            handleSelection(x, y);
+          }}
+          style={itemStyle(col.type)}
+        >
           {col.name}
         </div>
       )),
@@ -161,33 +134,19 @@ export const Board = ({
 
   const Board = () => {
     return (
-      <div
-        style={{
-          flex: 1,
-          overflow: 'auto',
-        }}
-      >
+      <div className="board-cover">
         <div
           style={{
-            width: 'inherit',
-            height: ' 640px',
-            overflow: 'auto',
-            border: '1px solid red',
+            display: 'grid',
+            gridTemplateColumns: `repeat(${
+              board.length > 0 ? board[0].length : '1'
+            }, 50px)`,
+            gridTemplateRows: `repeat(${
+              board.length > 0 ? board.length : '1'
+            }, 50px)`,
           }}
         >
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: `repeat(${
-                board.length > 0 ? board[0].length : '1'
-              }, 50px)`,
-              gridTemplateRows: `repeat(${
-                board.length > 0 ? board.length : '1'
-              }, 50px)`,
-            }}
-          >
-            <Item board={board} />
-          </div>
+          <Item board={board} />
         </div>
       </div>
     );
