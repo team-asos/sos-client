@@ -24,6 +24,8 @@ const MyInfoLoginForm = props => {
 
     if (response.status === 200) {
       window.location.href = `user-mypage-myinfo/${props.user.id}`;
+    } else if (response.status === 401) {
+      alert('비밀번호가 잘못되었습니다.');
     } else {
       alert(response.status);
     }
@@ -33,7 +35,7 @@ const MyInfoLoginForm = props => {
     <div className="myInfoLoginForm">
       <p className="myInfoLoginTitleTextStyle">나의 정보 수정</p>
       <p className="myInfoLoginDetailTextStyle">
-        정보 수정을 위해 비밀번호를 입력해주세요.
+        본인 확인을 위해 비밀번호를 입력해주세요.
       </p>
 
       <div className="u4_loginForm">

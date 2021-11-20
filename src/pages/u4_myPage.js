@@ -4,6 +4,9 @@ import { Link } from 'react-router-dom';
 import MyInfoLogin from '../components/u4_myInfoLogin';
 import { useCookies } from 'react-cookie';
 import MyReservationList from '../components/u4_myReservationListForm';
+import MobileNavBar from '../components/u_m_navBar';
+import { FiMenu } from 'react-icons/fi';
+import { useMediaQuery } from 'react-responsive';
 import '../assets/styles/u4_myPage.css';
 
 //유저 마이페이지
@@ -25,14 +28,19 @@ const UserMyPage = props => {
     };
     res();
   }, []);
-
+  const [open, setOpen] = useState(false);
+  const isPc = useMediaQuery({
+    query: '(min-width:768px)',
+  });
+  const isMobile = useMediaQuery({ query: '(max-width:767px)' });
+  const navClick = () => {
+    setOpen(!open);
+  };
   const tabBar = {
     0: <MyReservationList user={user} />,
     1: <MyInfoLogin user={user} />, //나중에 email 받아서 인증해야해서
   };
   const [state, setState] = useState(0);
-  // const [loginShow, setLoginShow]=useState(1);
-  // const [editShow, setEditShow]=useState(0);
   const clickHandler = id => {
     setState(id);
   };
@@ -45,13 +53,26 @@ const UserMyPage = props => {
   };
   return (
     <div className="userMyPage">
-      <div>
-        <NavBarUser />
-      </div>
+      <div>{isPc ? <NavBarUser /> : null}</div>
 
-      <div className="u_myPageForm">
+      <div className={isPc ? 'u_myPageForm' : 'm_u_myPageForm'}>
         <div className="u_myPageHeader">
-          <div className="u_myPageHeaderTextStyle">
+          <div>
+            {isMobile ? (
+              <FiMenu
+                size={40}
+                onClick={navClick}
+                style={{ color: '#820101' }}
+              />
+            ) : (
+              ''
+            )}
+          </div>
+          <div
+            className={
+              isPc ? 'u_myPageHeaderTextStyle' : 'm_u_myPageHeaderTextStyle'
+            }
+          >
             <Link
               to="/user-mypage"
               style={{
@@ -63,13 +84,20 @@ const UserMyPage = props => {
             </Link>
           </div>
 
-          <div onClick={() => clickHandler(0)} className="myRLMenuTextStyle">
-            나의 예약 내역
+          <div
+            onClick={() => clickHandler(0)}
+            className={isPc ? 'myRLMenuTextStyle' : 'm_myPageMenuText'}
+          >
+            {isPc ? '나의 예약 내역' : '예약 내역'}
           </div>
-          <div onClick={() => clickHandler(1)} className="myInfoMenuTextStyle">
-            나의 정보 수정
+          <div
+            onClick={() => clickHandler(1)}
+            className={isPc ? 'myInfoMenuTextStyle' : 'm_myPageMenuText'}
+          >
+            {isPc ? '나의 정보 수정' : '정보 수정'}
           </div>
         </div>
+        {open ? <MobileNavBar open={open} /> : ''}
 
         <div className="myPageContents">{getPage()}</div>
       </div>

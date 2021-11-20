@@ -62,11 +62,16 @@
 /*문의하기 버튼*/
 .inquiryFormButton {
   height: 6vh;
-  width: 65vw;
+  width: 20vw;
   font-size: 1.5em;
   color: white;
   font-weight: bold;
   background-color: #820101;
   border-radius: 30px;
   margin-top: 2%;
+}
+.inquiryFormButton:hover {
+  transition: ease-in 0.1s;
+  transform: scale(1.01);
+  background-color: #b80000;
 }

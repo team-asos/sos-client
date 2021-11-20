@@ -4,8 +4,8 @@ const Cell = props => {
   return (
     <div
       className="cell"
-      onClick={e => props.clickCell(props.data, e)}
-      style={{ pointer: 'cursor' }}
+      onClick={e => props.clickCell(props.board, props.data, e)}
+      style={{ cursor: 'pointer', ...props.style }}
     ></div>
   );
 };

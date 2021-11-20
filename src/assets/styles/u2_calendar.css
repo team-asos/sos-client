@@ -4,6 +4,17 @@
   font-size: 1.2em;
   font-weight: bold;
   width: fit-content;
+  height: 5vh;
+  border-radius: 10px;
+  padding-left: 1vw;
+  padding-right: 1vw;
+}
+.m_customPicker {
+  background-color: #e7e7e7;
+  border: 0;
+  font-size: 1em;
+  font-weight: bold;
+  width: fit-content;
   height: 4vh;
   border-radius: 10px;
   padding-left: 1vw;
@@ -27,4 +38,19 @@
 .pickers {
   display: flex;
   margin-left: 2vw;
+}
+.mPickers {
+  margin-top: 2vh;
+  display: flex;
+  flex-direction: column;
+}
+.mPicker {
+  display: flex;
+}
+.pickerText {
+  margin-left: 10px;
+  margin-right: 20px;
+  font-size: 1.1em;
+  font-weight: bold;
+  color: #820101;
 }

@@ -11,7 +11,6 @@ import * as FaIcon from 'react-icons/fa';
 //좌석 예약 페이지->이용 시간 선택
 const DateTimeForm = props => {
   const [startDate, setStartDate] = useState(new Date()); //DatePicker
-  const [endDate, setEndDate] = useState(new Date());
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -28,7 +27,6 @@ const DateTimeForm = props => {
         method: 'POST',
         body: JSON.stringify({
           startTime: formatISO(startDate),
-          endTime: formatISO(endDate),
           status: 0, //물어보기
           seatId: 1,
           userId: Number(props.myId),
@@ -37,7 +35,6 @@ const DateTimeForm = props => {
     );
     if (response.status === 201) {
       alert('예약이 완료되었습니다.');
-      window.location.href = '/';
     } else {
       alert(response.status);
     }
@@ -52,35 +49,17 @@ const DateTimeForm = props => {
   return (
     <div className="dateTimeAndBtnForm">
       <div className="dateTimeForm">
-        <div className="seatNameTextStyle">[ 좌석 18 ]</div>
+        <div className="seatNameTextStyle">[좌석 18]</div>
         <div className="reservationDatePicker">
           <div className="reservationDatePicker_start">
-            <p className="startTimeTextStyle">사용 일시(시작)</p>
+            <p className="startTimeTextStyle">사용 일시</p>
             <DatePicker
               selected={startDate}
               onChange={date => setStartDate(date)}
               locale={ko}
-              dateFormat="yyyy-MM-dd hh:mm"
+              dateFormat="yyyy-MM-dd"
               minDate={new Date()} //오늘 이전 날짜 선택 안되게
-              maxDate={addDays(new Date(), 6)} //일주일 뒤는 예약 못함
               placeholderText="예약 날짜 선택"
-              showTimeInput
-              closeOnScroll={true} //스크롤 했을 때 닫힘
-              customInput={<MyCustom />}
-            />
-          </div>
-
-          <div className="reservationDatePicker_end">
-            <p className="startTimeTextStyle">사용 일시(종료)</p>
-            <DatePicker
-              selected={endDate}
-              onChange={date => setEndDate(date)}
-              locale={ko}
-              dateFormat="yyyy-MM-dd hh:mm"
-              minDate={startDate} //오늘 이전 날짜 선택 안되게
-              maxDate={startDate} //앞에 선택된 날짜 고정
-              placeholderText="예약 날짜 선택"
-              showTimeInput
               closeOnScroll={true} //스크롤 했을 때 닫힘
               customInput={<MyCustom />}
             />

@@ -43,7 +43,12 @@ const NavBar = props => {
         <AppBar />
       </div>
       <div className="logOutBar">
-        <p className="logOutTextStyle" onClick={() => logoutClickHandler()}>
+        <p>
+          {' '}
+          <span style={{ fontWeight: 'bolder' }}>{user.name}</span>님
+        </p>
+
+        <p className="logOutTextStyle" onClick={logoutClickHandler}>
           로그아웃
         </p>
       </div>
@@ -56,9 +61,7 @@ const NavBar = props => {
             fontWeight: 'bold',
             color: 'white',
           }}
-        >
-          {user.name}님
-        </div>
+        ></div>
       </div>
     </div>
   );

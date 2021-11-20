@@ -6,6 +6,7 @@ import MessageCompleteBox from './a3_messageCompleteBox';
 const AnswerCompleteList = () => {
   //문의 받아오기
   const [question, setQestion] = useState([]);
+
   useEffect(() => {
     const res = async () => {
       await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/questions`, {
@@ -22,6 +23,7 @@ const AnswerCompleteList = () => {
     };
     res();
   }, []);
+
   //답변완료 목록 가져오기
   const isReplied = item => {
     if (item.status === 1) return 1;

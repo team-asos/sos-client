@@ -17,7 +17,12 @@
 .setPadding {
   padding-left: 4vw;
 }
-.infoEditButton {
+.infoBottom {
+  display: flex;
+  flex-direction: column;
+}
+
+.editFinishButton {
   width: 7vw;
   height: 5vh; /*30px*/
   margin-left: 2vw;
@@ -29,34 +34,40 @@
   border: none;
   margin-top: 5vh;
 }
-.infoEditButton:hover {
+.editFinishButton:hover {
   transition: ease 0.2s;
   transform: scale(1.02);
   background: #8f0202;
 }
-.editFinishButton {
-  width: 7vw;
-  height: 5vh; /*30px*/
+.m_editFinishButton {
+  width: 20vw;
+  height: 6vh; /*30px*/
   margin-left: 2vw;
   border-radius: 5px;
   font-size: 0.8em; /*12px*/
   font-weight: bold;
-  background: #3f3f3f;
+  background: #c00000;
   color: white;
   border: none;
   margin-top: 5vh;
 }
-.editFinishButton:hover {
-  transition: ease 0.2s;
-  transform: scale(1.02);
-  background: #747272;
-}
 .dropUser {
-  font-size: 1.2em;
+  font-size: 1em;
   cursor: pointer;
-  align-self: center;
+  margin-left: 3.4vw;
+  margin-top: 6vh;
+  font-weight: bold;
+  text-decoration: underline;
 }
 .dropUser:hover {
   transition: ease 0.1s;
   transform: scale(1.01);
+}
+.m_editInput {
+  width: 40vw;
+  height: 5vh; /*30px*/
+  font-size: 0.9em; /*14px*/
+  margin-bottom: 1vh;
+  font-weight: bolder;
+  border-radius: 5px;
 }
