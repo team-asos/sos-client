@@ -1,5 +1,19 @@
 import React, { useEffect } from 'react';
 
+import {
+  EMPTY,
+  SEAT,
+  ROOM,
+  FACILITY,
+  SELECTION,
+} from '../../const/object-type.const';
+
+import {
+  PREV_SELECTION,
+  FIRST_SELECTION,
+  SECOND_SELECTION,
+} from '../../const/selection-type.const';
+
 import './index.scss';
 
 export const Board = ({
@@ -11,9 +25,10 @@ export const Board = ({
   originBoard,
   seats,
   rooms,
+  facilities,
 }) => {
   useEffect(() => {
-    if (selection.stage === 0) {
+    if (selection.stage === PREV_SELECTION) {
       setBoard(originBoard);
     } else {
       let newMap = board;
@@ -28,7 +43,7 @@ export const Board = ({
               rowIndex >= selection.y &&
               rowIndex < selection.y + selection.height
             )
-              return { type: 3, name: '' };
+              return { type: SELECTION, name: '' };
 
           return col;
         }),
@@ -39,28 +54,38 @@ export const Board = ({
   }, [selection]);
 
   const handleSelection = (x, y) => {
-    if (board[y][x].type !== 0) {
+    if (board[y][x].type !== EMPTY) {
       // 기존 좌석 선택
-      if (selection.stage === 0) {
-        if (board[y][x].type === 1 && tab === 0) {
+      if (selection.stage === PREV_SELECTION) {
+        if (board[y][x].type === SEAT && tab === 0) {
           const selectedSeat = seats.find(seat => seat.id === board[y][x].id);
 
           setSelection({
             ...selectedSeat,
-            stage: 3,
+            stage: SECOND_SELECTION,
           });
-        } else if (board[y][x].type === 2 && tab === 1) {
+        } else if (board[y][x].type === ROOM && tab === 1) {
           const selectedRoom = rooms.find(room => room.id === board[y][x].id);
 
           setSelection({
             ...selectedRoom,
-            stage: 3,
+            stage: SECOND_SELECTION,
+          });
+        } else if (board[y][x].type === FACILITY && tab === 2) {
+          const selectedFacility = facilities.find(
+            facility => facility.id === board[y][x].id,
+          );
+
+          setSelection({
+            ...selectedFacility,
+            name: selectedFacility.type,
+            stage: SECOND_SELECTION,
           });
         }
       }
     } else {
       // 신규 선택
-      if (selection.stage === 0) {
+      if (selection.stage === PREV_SELECTION) {
         if (tab === 1) {
           setSelection({
             id: -1,
@@ -70,7 +95,7 @@ export const Board = ({
             width: 1,
             height: 1,
             maxUser: 0,
-            stage: 1,
+            stage: FIRST_SELECTION,
           });
         } else {
           setSelection({
@@ -81,19 +106,19 @@ export const Board = ({
             width: 1,
             height: 1,
             maxUser: 0,
-            stage: 2,
+            stage: SECOND_SELECTION,
           });
         }
-      } else if (selection.stage === 1) {
+      } else if (selection.stage === FIRST_SELECTION) {
         setSelection({
           ...selection,
           id: -1,
           name: '',
           width: Math.abs(x - selection.x + 1),
           height: Math.abs(y - selection.y + 1),
-          stage: 2,
+          stage: SECOND_SELECTION,
         });
-      } else if (selection.stage === 2 || selection.stage === 3) {
+      } else if (selection.stage === SECOND_SELECTION) {
         setSelection({
           id: -1,
           name: '',
@@ -102,17 +127,18 @@ export const Board = ({
           width: 0,
           height: 0,
           maxUser: 0,
-          stage: 0,
+          stage: PREV_SELECTION,
         });
       }
     }
   };
 
   const itemStyle = type => {
-    if (type === 0) return { backgroundColor: 'white' };
-    else if (type === 1) return { backgroundColor: 'green' };
-    else if (type === 2) return { backgroundColor: 'blue' };
-    else if (type === 3) return { backgroundColor: 'red' };
+    if (type === EMPTY) return { backgroundColor: 'white' };
+    else if (type === SEAT) return { backgroundColor: 'green' };
+    else if (type === ROOM) return { backgroundColor: 'blue' };
+    else if (type === FACILITY) return { backgroundColor: 'yellow' };
+    else if (type === SELECTION) return { backgroundColor: 'red' };
   };
 
   const Item = ({ board }) => {

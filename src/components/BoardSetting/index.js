@@ -2,6 +2,7 @@ import React from 'react';
 
 import { SeatTab } from './SeatTab';
 import { RoomTab } from './RoomTab';
+import { FacilityTab } from './FacilityTab';
 
 import './index.scss';
 
@@ -14,6 +15,8 @@ export const BoardSetting = ({
   setSeats,
   rooms,
   setRooms,
+  facilities,
+  setFacilities,
 }) => {
   const Tab = () => {
     if (tab === 0)
@@ -34,7 +37,15 @@ export const BoardSetting = ({
           setRooms={setRooms}
         />
       );
-    else if (tab === 2) return <div>시설</div>;
+    else if (tab === 2)
+      return (
+        <FacilityTab
+          selection={selection}
+          floor={floor}
+          facilities={facilities}
+          setFacilities={setFacilities}
+        />
+      );
   };
 
   const Setting = () => {

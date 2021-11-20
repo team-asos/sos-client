@@ -3,6 +3,14 @@ import React, { useState, useEffect } from 'react';
 import { Board } from '../Board/index';
 import { BoardSetting } from '../BoardSetting';
 
+import {
+  EMPTY,
+  SEAT,
+  ROOM,
+  FACILITY,
+  SELECTION,
+} from '../../const/object-type.const';
+
 import './index.scss';
 
 export const BoardContainer = ({ floor }) => {
@@ -11,6 +19,7 @@ export const BoardContainer = ({ floor }) => {
 
   const [seats, setSeats] = useState([]);
   const [rooms, setRooms] = useState([]);
+  const [facilities, setFacilities] = useState([]);
 
   const [selection, setSelection] = useState({
     id: -1,
@@ -29,7 +38,7 @@ export const BoardContainer = ({ floor }) => {
     setBoard(
       Array.from({ length: floor.height }, () =>
         Array.from({ length: floor.width }, () => {
-          return { type: 0, id: -1, name: '' };
+          return { type: EMPTY, id: -1, name: '' };
         }),
       ),
     );
@@ -64,8 +73,24 @@ export const BoardContainer = ({ floor }) => {
       setRooms(await result.json());
     };
 
+    const fetchFacilities = async () => {
+      const result = await fetch(
+        `${process.env.REACT_APP_SERVER_BASE_URL}/facilities/search?floorId=${floor.id}`,
+        {
+          method: 'GET',
+          headers: {
+            'Content-type': 'application/json',
+            Accept: 'application/json',
+          },
+        },
+      );
+
+      setFacilities(await result.json());
+    };
+
     fetchSeats();
     fetchRooms();
+    fetchFacilities();
   }, [floor.id]);
 
   useEffect(() => {
@@ -73,13 +98,13 @@ export const BoardContainer = ({ floor }) => {
 
     newMap = newMap.map(row =>
       row.map(col => {
-        if (col.type === 3) return { type: 0, id: -1, name: '' };
+        if (col.type === SELECTION) return { type: EMPTY, id: -1, name: '' };
         return col;
       }),
     );
 
     for (let seat of seats) {
-      newMap[seat.y][seat.x] = { type: 1, id: seat.id, name: seat.name };
+      newMap[seat.y][seat.x] = { type: SEAT, id: seat.id, name: seat.name };
     }
 
     for (let room of rooms) {
@@ -88,7 +113,7 @@ export const BoardContainer = ({ floor }) => {
           if (colIndex >= room.x && colIndex < room.x + room.width)
             if (rowIndex >= room.y && rowIndex < room.y + room.height)
               return {
-                type: 2,
+                type: ROOM,
                 id: room.id,
                 name: room.name,
               };
@@ -98,9 +123,17 @@ export const BoardContainer = ({ floor }) => {
       );
     }
 
+    for (let facility of facilities) {
+      newMap[facility.y][facility.x] = {
+        type: FACILITY,
+        id: facility.id,
+        name: facility.type,
+      };
+    }
+
     setBoard(newMap);
     setOriginBoard(newMap);
-  }, [seats, rooms]);
+  }, [seats, rooms, facilities]);
 
   useEffect(() => {
     setSelection({
@@ -125,6 +158,7 @@ export const BoardContainer = ({ floor }) => {
         originBoard={originBoard}
         seats={seats}
         rooms={rooms}
+        facilities={facilities}
       />
       <BoardSetting
         selection={selection}
@@ -135,6 +169,8 @@ export const BoardContainer = ({ floor }) => {
         setSeats={setSeats}
         rooms={rooms}
         setRooms={setRooms}
+        facilities={facilities}
+        setFacilities={setFacilities}
       />
     </div>
   );
