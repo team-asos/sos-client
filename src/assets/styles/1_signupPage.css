@@ -12,10 +12,10 @@
 .m_register {
   /*위치와 크기 지정*/
   width: 90%; /*55%*/
-  height: 70%; /*60%*/
-  margin-top: 30%;
-  margin-left: 3%;
-
+  height: 94%; /*60%*/
+  margin-left: 5%;
+  margin-top: 5%;
+  position: absolute;
   /*배경과 그림자 지정*/
   background: #c4c4c4;
   box-shadow: 1px rgba(64, 64, 64, 0.4);
@@ -23,12 +23,10 @@
 
   display: flex;
   flex-direction: column;
-  align-content: flex-start;
-
   /*밑 이미지 설정(로고)*/
   background-image: url('../images/logo_transparent.png');
   background-repeat: no-repeat;
-  background-size: 25vw; /*300px*/
+  background-size: 95vw; /*300px*/
   background-position: center;
 }
 /*회원가입 텍스트 영역*/
@@ -85,16 +83,16 @@
   font-size: 0.8em; /*12px*/
   font-weight: bolder;
 }
+.m_bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 /*각 줄 스타일 넣기*/
 .column {
   display: flex;
   flex-direction: row;
   margin-bottom: 2%;
-}
-.m_column {
-  display: flex;
-  flex-direction: row;
-  margin-bottom: 7%;
 }
 
 .column div {
@@ -111,11 +109,11 @@
   font-size: 0.9em; /*14px*/
 }
 .m_form-control {
-  width: 41vw; /*250px*/
+  width: 60vw; /*250px*/
   height: 5vh; /*30px*/
   font-size: 0.9em; /*14px*/
   position: relative;
-
+  margin-bottom: 1vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -135,6 +133,7 @@
   border-radius: 5px;
   font-size: 0.9em; /*14px*/
   font-weight: bolder;
+  margin-top: 4vh;
 }
 .registerButton:hover {
   transition: ease 0.2s;
@@ -152,5 +151,5 @@
   border-radius: 5px;
   font-size: 0.9em; /*14px*/
   font-weight: bolder;
-  margin-top: 2vh;
+  margin-top: 2.5vh;
 }

@@ -145,7 +145,7 @@ const Login = () => {
             </button>
             <p className="or">계정이 없으신가요?</p>
             <Link to="/sign-up">
-              <button className="m_Button Register">회원가입</button>
+              <button className="m_registerBtn">회원가입</button>
             </Link>
           </div>
         </div>

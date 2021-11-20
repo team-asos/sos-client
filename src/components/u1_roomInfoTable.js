@@ -10,7 +10,8 @@ import { useMediaQuery } from 'react-responsive';
 const RoomInfoTable = () => {
   const [cookie] = useCookies(['access_token']);
   const [idx, setIdx] = useState();
-  const [data, setData] = useState([]);
+  const [floorName, setFloorName] = useState([]);
+  const [rooms, setRooms] = useState([]);
   const isPc = useMediaQuery({
     query: '(min-width:768px)',
   });
@@ -30,28 +31,33 @@ const RoomInfoTable = () => {
       })
         .then(response => response.json())
         .then(json => {
-          setData(json);
+          setRooms(json);
         });
     };
     res();
   }, []);
+  /*회의실 숫자로 정렬 */
+  const sortedRooms = rooms.sort((a, b) => {
+    if (parseInt(a.floor.name.split('층')) < parseInt(b.floor.name.split('층')))
+      return -1;
+  });
   return (
     <div>
       <Table striped hover className={isPc ? 'infoTable' : 'mobileInfoTable'}>
         <thead className="rHeader">
           <tr>
-            <th>회의실 명</th>
             <th>층</th>
+            <th>회의실 명</th>
             <th>예약 가능 일</th>
             <th>사용 가능 인원</th>
             <th></th>
           </tr>
         </thead>
-        {data.map((item, idx) => (
+        {rooms.map((item, idx) => (
           <tbody>
             <tr key={idx}>
-              <td>{item.name}</td>
               <td>{item.floor.name}</td>
+              <td>{item.name}</td>
               <td>
                 {getYear(new Date()) +
                   '-' +

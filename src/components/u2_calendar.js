@@ -20,9 +20,16 @@ const Calendar = props => {
   const roomMAXUSER = props.roomMAXUSER;
   const roomID = props.roomID;
   const MyCustom = forwardRef(({ value, onClick }, ref) => (
-    <button className="customPicker" onClick={onClick} ref={ref}>
+    <button
+      className={isPc ? 'customPicker' : 'm_customPicker'}
+      onClick={onClick}
+      ref={ref}
+    >
       {value}
-      <FaIcon.FaRegCalendarAlt size={30} style={{ marginLeft: '0.5vw' }} />
+      <FaIcon.FaRegCalendarAlt
+        size={isPc ? 30 : 15}
+        style={{ marginLeft: '0.5vw' }}
+      />
     </button>
   ));
   return (

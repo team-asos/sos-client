@@ -22,7 +22,17 @@ const RoomCheckPage = () => {
 
       <div className={isPc ? 'roomCheckForm' : 'm_roomCheckForm'}>
         <div className="checkHeader">
-          <div>{isMobile ? <FiMenu size={40} onClick={navClick} /> : ''}</div>
+          <div>
+            {isMobile ? (
+              <FiMenu
+                size={40}
+                onClick={navClick}
+                style={{ color: '#820101' }}
+              />
+            ) : (
+              ''
+            )}
+          </div>
 
           <div className="roomCheck_titleTextStyle">
             <Link

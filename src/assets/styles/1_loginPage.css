@@ -12,9 +12,9 @@
   /*위치와 크기 지정*/
   width: 70%; /*55%*/
   height: 70%; /*60%*/
-  margin-top: 30%;
+  margin-top: 25%;
   margin-left: 15%;
-
+  position: absolute;
   /*배경과 그림자 지정*/
   background: #c4c4c4;
   box-shadow: 1px rgba(64, 64, 64, 0.4);
@@ -108,7 +108,18 @@
   font-weight: bold;
   margin-bottom: 12px;
 }
-
+.m_registerBtn {
+  width: 20vw; /*80%*/
+  height: 5vh; /*30px*/
+  border-radius: 5px;
+  font-size: 0.8em; /*12px*/
+  font-weight: bold;
+  margin-bottom: 10px;
+  background: transparent;
+  color: #c00000;
+  border: 2px solid #c00000;
+  margin-top: 10px;
+}
 /*계정이 없으신가요? 텍스트 스타일 지정*/
 .or {
   text-align: center;

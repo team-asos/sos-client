@@ -27,7 +27,17 @@ const RoomReservationPage = props => {
 
       <div className={isPc ? 'reservationForm' : 'm_reservationForm'}>
         <div className="reservationHeader">
-          <div>{isMobile ? <FiMenu size={40} onClick={navClick} /> : ''}</div>
+          <div>
+            {isMobile ? (
+              <FiMenu
+                size={40}
+                onClick={navClick}
+                style={{ color: '#820101' }}
+              />
+            ) : (
+              ''
+            )}
+          </div>
           <div className="rrp_titleTextStyle">
             <Link
               to="/room-reservation/roomId"
