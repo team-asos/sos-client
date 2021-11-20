@@ -34,9 +34,8 @@ const Login = () => {
     setName(data.name);
     setTimeout(() => {
       if (data.role === 0) history.push('/seat-reservation');
-      else if (data.role === 0) history.push('/user-management');
+      else if (data.role === 1) history.push('/user-management');
     }, 2000);
-    //setLoading(0);
   };
   useEffect(() => {
     if (cookie.access_token !== 'undefined') getAuth();

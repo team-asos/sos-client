@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useCookies } from 'react-cookie';
 import * as ai from 'react-icons/ai';
+import * as cg from 'react-icons/cg';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 import MessageDetailBox from './a3_messageDetailBox';
@@ -12,7 +13,7 @@ const AnswerWaitingList = props => {
 
   //문의 받아오기
   const [question, setQestion] = useState([]); //전체 문의
-  const [selectQuestion, setSelectQuestion] = useState([]); //선택된 문의
+  const [selectQuestion, setSelectQuestion] = useState({}); //선택된 문의
 
   useEffect(() => {
     const res = async () => {
@@ -41,6 +42,14 @@ const AnswerWaitingList = props => {
   const isReplied = item => {
     if (item.status === 0) {
       return 1;
+    }
+  };
+
+  const isEmpty = question => {
+    for (let i = 0; i < question.length; i++) {
+      if (isReplied(question[i])) {
+        return 1; //문의들이 있는 경우
+      }
     }
   };
 
@@ -83,9 +92,7 @@ const AnswerWaitingList = props => {
           method: 'DELETE',
         },
       );
-      if (result.status === 200) {
-        alert('문의를 삭제하였습니다.');
-      }
+
       window.location.href = '/notification';
     });
   };
@@ -109,6 +116,7 @@ const AnswerWaitingList = props => {
       <div className="answerWaitingListLeft">
         <div className="answerWaitingListLeftTop">
           <li>
+            {/* 전체 체크박스  */}
             <input
               type="checkbox"
               onChange={e => onCheckedAll(e.target.checked)}
@@ -120,6 +128,7 @@ const AnswerWaitingList = props => {
                   : false
               }
             />
+            {/* 삭제 아이콘 tooltip*/}
             <span>
               <OverlayTrigger
                 placement="right"
@@ -145,6 +154,8 @@ const AnswerWaitingList = props => {
                   />
                 </span>
               </OverlayTrigger>
+
+              {/* 검색창 */}
               <input
                 className="searchQuestionForm"
                 type="text"
@@ -156,47 +167,75 @@ const AnswerWaitingList = props => {
             </span>
           </li>
         </div>
+
+        {/* 문의 리스트 부분 */}
         <div className="answerWaitingListLeftBottom">
-          {search(question).map((item, idx) => (
-            <ul style={{ marginTop: '1%' }}>
-              {isReplied(item) ? (
-                <li
-                  className={selectQuestion === item ? 'clickedLi' : 'normalLi'}
-                  key={idx}
-                  onClick={e => {
-                    setSelectQuestion(item);
-                    toggleTrueFalse();
-                  }}
-                >
-                  <div className="waitinglistStyle">
-                    <div style={{ width: '3%' }}>
-                      <input
-                        type="checkbox"
-                        onChange={e =>
-                          onCheckedElement(e.target.checked, item.id)
-                        }
-                        checked={checkedList.includes(item.id) ? true : false}
-                      />
-                    </div>
-                    <div style={{ width: '10%', paddingLeft: '4%' }}>
-                      {idx + 1}
-                    </div>
-                    <div style={{ width: '70%' }}>{item.title}</div>
-                    <div style={{ width: '17%' }}>
-                      {item.createdAt.slice(0, 10)}
-                    </div>
-                  </div>
-                </li>
-              ) : (
-                ''
+          {isEmpty(question) ? (
+            <div>
+              {search(question).map((item, idx) =>
+                isReplied(item) ? (
+                  <ul style={{ marginTop: '1%' }}>
+                    <li
+                      className={
+                        selectQuestion === item ? 'clickedLi' : 'normalLi'
+                      }
+                      key={idx}
+                      onClick={e => {
+                        setSelectQuestion(item);
+                        toggleTrueFalse();
+                      }}
+                    >
+                      <div className="waitinglistStyle">
+                        <div style={{ width: '3%' }}>
+                          <input
+                            type="checkbox"
+                            onChange={e =>
+                              onCheckedElement(e.target.checked, item.id)
+                            }
+                            checked={
+                              checkedList.includes(item.id) ? true : false
+                            }
+                          />
+                        </div>
+                        <div style={{ width: '5%', paddingLeft: '4%' }}></div>
+                        <div style={{ width: '70%' }}>{item.title}</div>
+                        <div style={{ width: '17%' }}>
+                          {item.createdAt.slice(0, 10)}
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                ) : (
+                  ''
+                ),
               )}
-            </ul>
-          ))}
+            </div>
+          ) : (
+            <div className="noMessageBox">
+              <cg.CgCloseO
+                size={20}
+                style={{ color: '#820101', marginTop: '5%' }}
+              />
+              <p
+                style={{
+                  fontSize: 'smaller',
+                  fontStyle: 'italic',
+                  marginTop: '1.5%',
+                }}
+              >
+                답변을 대기 중인 문의가 없습니다.
+              </p>
+            </div>
+          )}
         </div>
       </div>
       <div className="answerWaitingListRight">
         {show ? (
-          <MessageDetailBox show={show} messageInfo={selectQuestion} />
+          <MessageDetailBox
+            show={show}
+            messageInfo={selectQuestion}
+            isEmpty={isEmpty(question) ? 1 : 0}
+          />
         ) : (
           ''
         )}

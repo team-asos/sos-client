@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useCookies } from 'react-cookie';
 import * as ai from 'react-icons/ai';
+import * as cg from 'react-icons/cg';
+
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 import '../assets/styles/a3_answerWaitingList.css';
@@ -27,7 +29,7 @@ const AnswerCompleteList = () => {
     res();
   }, []);
 
-  //질문 받아오기
+  //답변 받아오기
   const [answer, setAnswer] = useState([]);
   useEffect(() => {
     const res2 = async () => {
@@ -47,12 +49,18 @@ const AnswerCompleteList = () => {
   const [selectQuestion, setSelectQuestion] = useState([]);
   const [selectAnswer, setSelectAnswer] = useState([]);
 
-  const findAnswer = id => {
-    answer.map((item, idx) => {
-      if (item.id === id) {
-        return setSelectAnswer(item);
-      }
-    });
+  const findAnswer = async id => {
+    await fetch(
+      `${process.env.REACT_APP_SERVER_BASE_URL}/answers/search?questionId=${id}`,
+      {
+        headers: { Authorization: `Bearer ${cookie.access_token}` },
+        method: 'GET',
+      },
+    )
+      .then(response => response.json())
+      .then(json => {
+        setSelectAnswer(json);
+      });
   };
 
   //Datail 창 띄우기
@@ -67,6 +75,14 @@ const AnswerCompleteList = () => {
   //답변완료 불러오기
   const isReplied = item => {
     if (item.status === 1) return 1;
+  };
+
+  const isEmpty = question => {
+    for (let i = 0; i < question.length; i++) {
+      if (isReplied(question[i])) {
+        return 1; //문의들이 있는 경우
+      }
+    }
   };
 
   //체크박스 설정
@@ -108,9 +124,6 @@ const AnswerCompleteList = () => {
           method: 'DELETE',
         },
       );
-      if (result.status === 200) {
-        alert('문의를 삭제하였습니다.');
-      }
       window.location.href = '/notification';
     });
   };
@@ -128,12 +141,12 @@ const AnswerCompleteList = () => {
       ),
     );
   }
-
   return (
     <div className="answerWaitingList">
       <div className="answerWaitingListLeft">
         <div className="answerWaitingListLeftTop">
           <li>
+            {/* 전체 체크박스  */}
             <input
               type="checkbox"
               onChange={e => onCheckedAll(e.target.checked)}
@@ -145,6 +158,7 @@ const AnswerCompleteList = () => {
                   : false
               }
             />
+            {/* 삭제 아이콘 tooltip*/}
             <span>
               <OverlayTrigger
                 placement="right"
@@ -170,6 +184,8 @@ const AnswerCompleteList = () => {
                   />
                 </span>
               </OverlayTrigger>
+
+              {/* 검색창 */}
               <input
                 className="searchQuestionForm"
                 type="text"
@@ -181,53 +197,76 @@ const AnswerCompleteList = () => {
             </span>
           </li>
         </div>
+
+        {/* 문의 리스트 부분 */}
         <div className="answerWaitingListLeftBottom">
-          {search(question).map((item, idx) => (
-            <ul style={{ marginTop: '1%' }}>
-              {isReplied(item) ? (
-                <li
-                  className={selectQuestion === item ? 'clickedLi' : 'normalLi'}
-                  key={idx}
-                  onClick={e => {
-                    setSelectQuestion(item);
-                    toggleTrueFalse();
-                    findAnswer(item.id);
-                  }}
-                >
-                  <div className="waitinglistStyle">
-                    <div style={{ width: '3%' }}>
-                      <input
-                        type="checkbox"
-                        onChange={e =>
-                          onCheckedElement(e.target.checked, item.id)
-                        }
-                        checked={checkedList.includes(item.id) ? true : false}
-                      />
-                    </div>
-                    <div style={{ width: '10%', paddingLeft: '4%' }}>
-                      {idx + 1}
-                    </div>
-                    <div style={{ width: '10%' }}>{item.id}</div>
-                    <div style={{ width: '70%' }}>{item.title}</div>
-                    <div style={{ width: '17%' }}>
-                      {item.createdAt.slice(0, 10)}
-                    </div>
-                  </div>
-                </li>
-              ) : (
-                ''
+          {isEmpty(question) ? (
+            <div>
+              {search(question).map((item, idx) =>
+                isReplied(item) ? (
+                  <ul style={{ marginTop: '1%' }}>
+                    <li
+                      className={
+                        selectQuestion === item ? 'clickedLi' : 'normalLi'
+                      }
+                      key={idx}
+                      onClick={e => {
+                        setSelectQuestion(item);
+                        toggleTrueFalse();
+                        findAnswer(item.id);
+                      }}
+                    >
+                      <div className="waitinglistStyle">
+                        <div style={{ width: '3%' }}>
+                          <input
+                            type="checkbox"
+                            onChange={e =>
+                              onCheckedElement(e.target.checked, item.id)
+                            }
+                            checked={
+                              checkedList.includes(item.id) ? true : false
+                            }
+                          />
+                        </div>
+                        <div style={{ width: '5%', paddingLeft: '2%' }}></div>
+                        <div style={{ width: '70%' }}>{item.title}</div>
+                        <div style={{ width: '17%' }}>
+                          {item.createdAt.slice(0, 10)}
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                ) : (
+                  ''
+                ),
               )}
-            </ul>
-          ))}
+            </div>
+          ) : (
+            <div className="noMessageBox">
+              <cg.CgCloseO
+                size={20}
+                style={{ color: '#820101', marginTop: '5%' }}
+              />
+              <p
+                style={{
+                  fontSize: 'smaller',
+                  fontStyle: 'italic',
+                  marginTop: '1.5%',
+                }}
+              >
+                답변이 완료된 문의가 없습니다.
+              </p>
+            </div>
+          )}
         </div>
       </div>
-
       <div className="answerWaitingListRight">
         {show ? (
           <MessageCompleteBox
             show={show}
             messageInfo={selectQuestion}
             answerInfo={selectAnswer}
+            isEmpty={isEmpty(question) ? 1 : 0}
           />
         ) : (
           ''

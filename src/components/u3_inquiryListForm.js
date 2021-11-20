@@ -1,19 +1,24 @@
 import React, { useState, useEffect } from 'react';
+import { useCookies } from 'react-cookie';
+
 import { Accordion, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import * as AiIcon from 'react-icons/ai';
 
 import InquiryForm from './u3_inquiryForm';
 import '../assets/styles/u3_inquiryListForm.css';
 
-//문의 리스트 폼 /get할 때 권한 안써도 되는지?
 const InquiryListForm = props => {
+  const [cookie] = useCookies('access_token');
+
   //문의 가져오기
   const [question, setquestion] = useState([]);
 
   const res = async () => {
     await fetch(
       `${process.env.REACT_APP_SERVER_BASE_URL}/questions/search?userId=${props.user.id}`,
+
       {
+        headers: { Authorization: `Bearer ${cookie.access_token}` },
         method: 'GET',
       },
     )
@@ -23,26 +28,27 @@ const InquiryListForm = props => {
       });
   };
 
-  //답변 가져오기
-  const [answer, setAnswer] = useState([]);
+  console.log(question);
 
-  const res2 = async () => {
-    await fetch(
-      `${process.env.REACT_APP_SERVER_BASE_URL}/answers/search?userId=${props.user.id}`,
-      {
-        method: 'GET',
-      },
-    )
-      .then(response => response.json())
-      .then(json => {
-        setAnswer(json);
-      });
-  };
+  // const [answer, setAnswer] = useState([]);
+  // const res2 = async () => {
+  //   await fetch(
+  //     `${process.env.REACT_APP_SERVER_BASE_URL}/answers/search?userId=${props.user.id}`,
+  //     {
+  //       headers: { Authorization: `Bearer ${cookie.access_token}` },
+  //       method: 'GET',
+  //     },
+  //   )
+  //     .then(response => response.json())
+  //     .then(json => {
+  //       setAnswer(json);
+  //     });
+  // };
+  // console.log(answer);
 
   useEffect(() => {
     if (props.user.id !== 'undefined') {
       res();
-      res2();
     }
   }, [props.user.id]);
 
@@ -65,34 +71,7 @@ const InquiryListForm = props => {
     };
     deleteHandler();
   };
-
-  const getAnswerMessage = questionID => {
-    console.log(question);
-    console.log(answer?.id);
-    for (let i = 0; i < answer.length; i++) {
-      if (questionID === answer[i].question.id && answer[i].message) {
-        return answer[i].message;
-      }
-    }
-  };
-
-  const getAnswerCreatedAt = questionID => {
-    for (let i = 0; i < answer.length; i++) {
-      if (questionID === answer[i].question.id && answer[i].message) {
-        return answer[i].createdAt.slice(0, 10);
-      }
-    }
-  };
-  const isReplied = questionID => {
-    for (let i = 0; i < answer.length; i++) {
-      if (questionID === answer[i].question.id && answer[i].message) {
-        return 1;
-      }
-    }
-  };
-
   //모달 관련 합수
-  const [modalInfo, setModalInfo] = useState([]);
   const [showModal, setShowModal] = useState(false);
 
   const [show, setShow] = useState(false);
@@ -102,6 +81,7 @@ const InquiryListForm = props => {
   const toggleTrueFalse = () => {
     setShowModal(handleShow);
   };
+
   return (
     /*전체 문의 리스트 */
     <div>
@@ -149,7 +129,7 @@ const InquiryListForm = props => {
                 문의 내역이 존재하지 않습니다.
                 <br />
                 상단의 <AiIcon.AiOutlinePlusSquare size={20} />
-                버튼을 눌러 새로운 문의를 하세요.
+                버튼을 눌러 새로운 문의를 생성해 주세요.
               </p>
             </div>
           </div>
@@ -175,12 +155,12 @@ const InquiryListForm = props => {
                             <p
                               className="isReply"
                               style={
-                                isReplied(item.id)
-                                  ? { color: '#62AB72' }
-                                  : { color: 'gray' }
+                                item.status === 1
+                                  ? { color: 'green' }
+                                  : { color: '#c00000' }
                               }
                             >
-                              {isReplied(item.id) ? '답변완료' : '답변대기'}
+                              {item.status === 1 ? '답변완료' : '답변대기'}
                             </p>
                             {/* 문의 제목 */}
                             <p key={idx} className="inquiryTitleStyle">
@@ -194,7 +174,12 @@ const InquiryListForm = props => {
                         </div>
                       </Accordion.Header>
                       <Accordion.Body className="inquiryContent">
-                        <div className="inquiryMsg">{item.message}</div>
+                        <div className="inquiryMsg">
+                          <div style={{ width: '10%' }}>
+                            <p style={{ fontWeight: 'bold' }}>문의 내용</p>
+                          </div>
+                          <div style={{ width: '90%' }}>{item.message}</div>
+                        </div>
                         <p
                           className="deleteInquiry"
                           onClick={() => deleteClick(item.id)}
@@ -204,14 +189,20 @@ const InquiryListForm = props => {
                       </Accordion.Body>
                       {/* 답변 */}
                       <Accordion.Body className="inquiryAnswer">
-                        <div className="inquiryTitleUpper">
-                          <p>{getAnswerMessage(item.id)}</p>
+                        <div className="inquiryMsg">
+                          <div style={{ width: '10%' }}>
+                            <p style={{ fontWeight: 'bold' }}>답변 내용</p>
+                          </div>
+                          <div style={{ width: '70%' }}>
+                            {item.answer?.message}
+                          </div>
+
                           <p
                             style={{
-                              marginLeft: '3vw',
+                              marginLeft: '9vw',
                             }}
                           >
-                            {getAnswerCreatedAt(item.id)}
+                            {item.answer?.createdAt.slice(0, 10)}
                           </p>
                         </div>
                       </Accordion.Body>

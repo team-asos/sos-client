@@ -94,18 +94,29 @@
 
 .messageDetailBox {
   width: 95%;
-
   height: 100%;
-  overflow: auto;
 
   padding: 2%;
 
   border-radius: 3px;
   background: rgba(107, 107, 107, 0.308);
+
+  overflow: auto;
+}
+.noMessageBox {
+  width: 50%;
+
+  margin-top: 26vh;
+  margin-left: 12vw;
+  text-align: center;
+
+  border: 0.7px solid rgba(128, 128, 128, 0.267);
 }
 
 .detailList {
   border-radius: 3px;
+  height: 100%;
+  background-color: white;
 }
 
 .answerInput {

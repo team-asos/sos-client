@@ -209,17 +209,21 @@ export default function UserDetailModalContent({
               {inquiry.map(item => (
                 <tr style={{ fontSize: 'small' }}>
                   {item.status === 0 ? (
-                    <td style={{ color: 'green' }}>답변완료</td>
+                    <td style={{ color: 'red', width: '6%' }}>답변대기</td>
                   ) : (
-                    <td style={{ color: 'red' }}>답변대기</td>
+                    <td style={{ color: 'green', width: '6%' }}>답변완료</td>
                   )}
-                  <td>{item.message}</td>
-                  <td>{item.answer?.message}</td>
-                  <td>{item.createdAt.slice(0, 10)}</td>
-                  {item.status === 0 ? (
-                    <td>{item.answer?.createdAt.slice(0, 10)}</td>
+                  <td style={{ width: '32%' }}>{item.message}</td>
+                  <td style={{ width: '32%' }}>{item.answer?.message}</td>
+                  <td style={{ width: '8%' }}>{item.createdAt.slice(0, 10)}</td>
+                  {item.status === 1 ? (
+                    <td style={{ width: '8%' }}>
+                      {item.answer?.createdAt.slice(0, 10)}
+                    </td>
                   ) : (
-                    <td style={{ fontSize: 'small' }}>-</td>
+                    <td style={{ width: '8%' }} style={{ fontSize: 'small' }}>
+                      -
+                    </td>
                   )}
                 </tr>
               ))}

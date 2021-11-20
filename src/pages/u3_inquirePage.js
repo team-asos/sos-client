@@ -5,8 +5,7 @@ import { useCookies } from 'react-cookie';
 import NavBarUser from '../components/u_navBar';
 import '../assets/styles/u3_inquirePage.css';
 
-import First from '../components/u3_inquiryListForm';
-import Second from '../components/u3_inquiryForm';
+import InquiryListForm from '../components/u3_inquiryListForm';
 
 //문의하기 페이지
 const InquirePage = () => {
@@ -31,32 +30,6 @@ const InquirePage = () => {
     res();
   }, []);
 
-  //문의내역, 문의하기 탭
-  const tabBar = {
-    //First : 문의 내역 조회 -> u3_inquiryListForm
-    0: <First user={user} />,
-
-    //Second : 문의하기 > u3_inquiryForm
-    1: <Second user={user} />,
-  };
-
-  //탭 이동
-  const [state, setState] = useState(0);
-  const clickHandler = id => {
-    setState(id);
-  };
-
-  //탭 페이지 불러오기
-  const getPage = () => {
-    if (state === 0) {
-      //문의내역
-      return tabBar[0];
-    } else if (state === 1) {
-      //문의하기
-      return tabBar[1];
-    }
-  };
-
   return (
     <div className="inquirePage">
       {/* 화면 왼쪽 부분 : 네비 바*/}
@@ -80,7 +53,9 @@ const InquirePage = () => {
           </div>
         </div>
         {/* 내용이 담기는 content */}
-        <div className="myPageContents">{getPage()}</div>
+        <div className="myPageContents">
+          <InquiryListForm user={user} />
+        </div>
       </div>
     </div>
   );

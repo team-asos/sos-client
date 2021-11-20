@@ -58,13 +58,12 @@
 }
 .accordion {
   width: 90%;
-  height: 85%;
-
+  height: 73vh;
   margin-left: 5%;
 
   border-top: 1px solid gray;
   border-bottom: 1px solid gray;
-  border-radius: 2px;
+  border-radius: 3px;
 
   overflow: auto;
 }
@@ -75,10 +74,7 @@
   position: relative;
   flex: 1;
 }
-/*제목 폼에서 윗 부분(제목, 날짜)*/
-.inquiryTitleUpper {
-  display: flex;
-}
+
 /*인덱스*/
 .index {
   width: 3%;
@@ -102,10 +98,16 @@
 }
 .inquiryMsg {
   width: 95%;
+  display: flex;
+  flex-direction: row;
 }
 /*삭제*/
 .deleteInquiry {
   width: 3%;
   cursor: pointer;
   color: #d80303;
+}
+/*제목 폼에서 윗 부분(제목, 날짜)*/
+.inquiryTitleUpper {
+  display: flex;
 }

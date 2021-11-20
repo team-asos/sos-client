@@ -1,7 +1,9 @@
 .icon-box {
-  text-align: center;
-  height: 10vh; /*54px*/
+  height: 10vh;
+
   padding-top: 15%;
+  text-align: center;
+
   color: black;
 }
 .icon {
@@ -11,6 +13,7 @@
 .text {
   font-size: 0.55em;
   font-weight: bold;
+
   color: #820101;
 
   visibility: hidden;
