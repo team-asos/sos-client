@@ -56,8 +56,6 @@ const SeatStatusForm = props => {
     };
     res();
   }, []);
-  console.log(seat);
-  console.log(room);
 
   const handleClick = e => {
     setIsToggleOn(!isToggleOn);
@@ -68,7 +66,6 @@ const SeatStatusForm = props => {
   const changeFloorText = floor => {
     setFloorName(floor.name);
     setFloorInfo(floor);
-    console.log(floorInfo);
   };
   return (
     <div className="seatForm">
@@ -82,7 +79,7 @@ const SeatStatusForm = props => {
               {floorName}
             </Dropdown.Toggle>
 
-            <Dropdown.Menu defaultValue="3층">
+            <Dropdown.Menu>
               {floor.map(item => (
                 <Dropdown.Item onClick={() => changeFloorText(item)}>
                   {item.name}
@@ -120,7 +117,8 @@ const SeatStatusForm = props => {
       </div>
 
       <div className="u_seatFormBottom">
-        {isToggleOn ? <SeatForm floorInfo={floorInfo} /> : <FacilityForm />}
+        <SeatForm floorInfo={floorInfo} />
+        {isToggleOn ? null : <FacilityForm />}
       </div>
     </div>
   );

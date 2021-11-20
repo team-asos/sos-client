@@ -7,6 +7,8 @@ import { FiX } from 'react-icons/fi';
 /* 아이콘 컬러 전체 변경 기능 */
 import { IconContext } from 'react-icons';
 import * as MdIcon from 'react-icons/md';
+import TimeBar from './2_timeBar';
+
 const MobileNavBar = props => {
   const history = useHistory();
   const [cookie, removeCookie] = useCookies(['access_token']);
@@ -103,6 +105,7 @@ const MobileNavBar = props => {
               로그아웃
             </p>
           </div>
+          <TimeBar className="mobileTimeBar" />
         </div>
       </IconContext.Provider>
     </>

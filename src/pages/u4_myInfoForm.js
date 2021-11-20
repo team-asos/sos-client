@@ -1,18 +1,31 @@
 import React, { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
-import DeleteAccount from '../components/u4_deleteAccount';
 import MyReservationList from '../components/u4_myReservationListForm';
+import { useHistory } from 'react-router-dom';
 import NavBarUser from '../components/u_navBar';
 import { Link } from 'react-router-dom';
+import { Modal, Button } from 'react-bootstrap';
+import { FiMenu } from 'react-icons/fi';
+import { useMediaQuery } from 'react-responsive';
+import MobileNavBar from '../components/u_m_navBar';
+
 import '../assets/styles/u4_myInfoForm.css';
 //마이페이지->나의 정보
 const MyInfoForm = props => {
-  const [cookie] = useCookies(['access_token']);
+  const [open, setOpen] = useState(false);
+  const isPc = useMediaQuery({
+    query: '(min-width:768px)',
+  });
+  const isMobile = useMediaQuery({ query: '(max-width:767px)' });
+  const navClick = () => {
+    setOpen(!open);
+  };
+  const [cookie, removeCookie] = useCookies(['access_token']);
+  const history = useHistory();
   const [myData, setMyData] = useState([]);
+  const [show, setShow] = useState(false);
   const [state, setState] = useState(0);
-  const [disable, setDisable] = useState(1);
   const [user, setUser] = useState({});
-  console.log(props.match.params.idx);
   const [editData, setEditData] = useState({
     name: '',
     email: '',
@@ -23,6 +36,8 @@ const MyInfoForm = props => {
     password: '',
     confirmPw: '',
   });
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   useEffect(() => {
     const res = async () => {
       await fetch(
@@ -37,7 +52,6 @@ const MyInfoForm = props => {
         .then(response => response.json())
         .then(json => {
           setMyData(json);
-          console.log(json.email);
           setEditData({
             name: json.name,
             email: json.email,
@@ -91,10 +105,6 @@ const MyInfoForm = props => {
     else alert(response.message);
   };
 
-  const editHandler = () => {
-    setDisable(!disable);
-  };
-
   const editName = e => {
     setEditData({
       ...editData,
@@ -106,7 +116,6 @@ const MyInfoForm = props => {
       ...editData,
       email: e.target.value,
     });
-    console.log(editData);
   };
   const editEmployeeId = e => {
     setEditData({
@@ -146,23 +155,66 @@ const MyInfoForm = props => {
   };
   const confirmPwHandler = () => {
     if (editData.password !== editData.confirmPw) {
-      setDisable(1); //다름
       alert('비밀번호가 다릅니다.');
     } else {
-      setDisable(0);
     }
   };
   const clickHandler = id => {
     setState(id);
   };
+
+  const dropClick = () => {
+    handleClose();
+    const dropUser = async () => {
+      console.log(props.match.params.idx);
+      const response = await fetch(
+        `${process.env.REACT_APP_SERVER_BASE_URL}/users/${props.match.params.idx}`,
+        {
+          headers: {
+            'Content-type': 'application/json',
+            Authorization: `Bearer ${cookie.access_token}`,
+          },
+          method: 'DELETE',
+        },
+      );
+      if (response.status === 200) {
+        removeCookie('access_token');
+        alert('탈퇴가 완료되었습니다.');
+      } else {
+        const json = await response.json();
+        alert(json.message);
+      }
+    };
+    dropUser();
+  };
+
+  useEffect(() => {
+    if (cookie.access_token === 'undefined') {
+      history.push('/');
+    }
+  }, [cookie]);
   return (
     <div className="userMyPage">
-      <div>
-        <NavBarUser />
-      </div>
-      <div className="u_myPageForm">
+      {open ? <MobileNavBar open={open} /> : ''}
+      <div>{isPc ? <NavBarUser /> : null}</div>
+      <div className={isPc ? 'u_myPageForm' : 'm_u_myPageForm '}>
         <div className="u_myPageHeader">
-          <div className="u_myPageHeaderTextStyle">
+          <div>
+            {isMobile ? (
+              <FiMenu
+                size={40}
+                onClick={navClick}
+                style={{ color: '#820101' }}
+              />
+            ) : (
+              ''
+            )}
+          </div>
+          <div
+            className={
+              isPc ? 'u_myPageHeaderTextStyle' : 'm_u_myPageHeaderTextStyle'
+            }
+          >
             <Link
               to="/user-mypage"
               style={{
@@ -174,21 +226,22 @@ const MyInfoForm = props => {
             </Link>
           </div>
 
-          <div onClick={() => clickHandler(2)} className="myRLMenuTextStyle">
-            나의 예약 내역
+          <div
+            onClick={() => clickHandler(1)}
+            className={isPc ? 'myRLMenuTextStyle' : 'm_myPageMenuText'}
+          >
+            {isPc ? '나의 예약 내역' : '예약 내역'}
           </div>
-          <div onClick={() => clickHandler(0)} className="myInfoMenuTextStyle">
-            나의 정보 수정
-          </div>
-          <div onClick={() => clickHandler(1)} className="myInfoMenuTextStyle">
-            회원 탈퇴
+          <div
+            onClick={() => clickHandler(0)}
+            className={isPc ? 'myInfoMenuTextStyle' : 'm_myPageMenuText'}
+          >
+            {isPc ? '나의 정보 수정' : '정보 수정'}
           </div>
         </div>
         <div className="myInfoForm">
-          {state === 2 ? (
+          {state === 1 ? (
             <MyReservationList user={user} />
-          ) : state === 1 ? (
-            <DeleteAccount user={user} />
           ) : (
             <>
               <p className="myInfoFormTitleTextStyle">나의 정보 수정</p>
@@ -199,22 +252,18 @@ const MyInfoForm = props => {
                     <label>이름</label>
                     <input
                       type="text"
-                      className="form-control"
-                      placeholder={myData.name}
-                      disabled={disable}
+                      className={isPc ? 'form-control' : 'm_editInput'}
                       onChange={editName}
-                      value={myData.name}
+                      value={editData.name}
                     />
                   </div>
                   <div className="setPadding">
                     <label>이메일</label>
                     <input
                       type="text"
-                      className="form-control"
-                      placeholder={myData.email}
-                      disabled={disable}
+                      className={isPc ? 'form-control' : 'm_editInput'}
                       onChange={editEmail}
-                      value={myData.email}
+                      value={editData.email}
                     />
                   </div>
                 </div>
@@ -224,9 +273,8 @@ const MyInfoForm = props => {
                     <label>비밀번호</label>
                     <input
                       type="password"
-                      className="form-control"
+                      className={isPc ? 'form-control' : 'm_editInput'}
                       placeholder="대소문자와 숫자를 포함한 8~12자리"
-                      disabled={disable}
                       onChange={editPw}
                       //value={password}
                     />
@@ -235,9 +283,8 @@ const MyInfoForm = props => {
                     <label>비밀번호 확인</label>
                     <input
                       type="password"
-                      className="form-control"
+                      className={isPc ? 'form-control' : 'm_editInput'}
                       placeholder="비밀번호 확인"
-                      disabled={disable}
                       onBlur={confirmPwHandler}
                       onChange={editConfirmPw}
                       //value={confirmPw}
@@ -250,22 +297,18 @@ const MyInfoForm = props => {
                     <label>사원번호</label>
                     <input
                       type="text"
-                      className="form-control"
-                      placeholder={myData.employeeId}
-                      disabled={disable}
+                      className={isPc ? 'form-control' : 'm_editInput'}
                       onChange={editEmployeeId}
-                      value={myData.employeeId}
+                      value={editData.employeeId}
                     />
                   </div>
                   <div className="setPadding">
                     <label>전화번호</label>
                     <input
                       type="text"
-                      className="form-control"
-                      placeholder={myData.tel}
-                      disabled={disable}
+                      className={isPc ? 'form-control' : 'm_editInput'}
                       onChange={editTel}
-                      value={myData.tel}
+                      value={editData.tel}
                     />
                   </div>
                 </div>
@@ -275,40 +318,45 @@ const MyInfoForm = props => {
                     <label>부서</label>
                     <input
                       type="text"
-                      className="form-control"
-                      placeholder={myData.department}
-                      disabled={disable}
+                      className={isPc ? 'form-control' : 'm_editInput'}
                       onChange={editDepartment}
-                      value={myData.department}
+                      value={editData.department}
                     />
                   </div>
                   <div className="setPadding">
                     <label>직급</label>
                     <input
                       type="text"
-                      className="form-control"
-                      placeholder={myData.position}
-                      disabled={disable}
+                      className={isPc ? 'form-control' : 'm_editInput'}
                       onChange={editPosition}
-                      value={myData.position}
+                      value={editData.position}
                     />
                   </div>
                 </div>
                 <div className="infoBottom">
                   <button
-                    className="infoEditButton"
-                    onClick={editHandler}
-                    disabled={!disable}
-                  >
-                    수정
-                  </button>
-                  <button
-                    className="editFinishButton"
-                    disabled={disable}
+                    className={isPc ? 'editFinishButton' : 'm_editFinishButton'}
                     onClick={confirmHandler}
                   >
                     완료
                   </button>
+                  <p className="dropUser" onClick={handleShow}>
+                    회원 탈퇴
+                  </p>
+                  <Modal show={show} onHide={handleClose}>
+                    <Modal.Header closeButton>
+                      <Modal.Title>회원 탈퇴</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>탈퇴하시겠습니까?</Modal.Body>
+                    <Modal.Footer>
+                      <Button variant="secondary" onClick={handleClose}>
+                        취소
+                      </Button>
+                      <Button variant="danger" onClick={dropClick}>
+                        확인
+                      </Button>
+                    </Modal.Footer>
+                  </Modal>
                 </div>
               </div>
             </>

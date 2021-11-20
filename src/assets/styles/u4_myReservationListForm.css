@@ -7,6 +7,11 @@
   color: #820101;
   font-weight: bold;
 }
+.m_myReservationListFormTitleTextStyle {
+  font-size: 1.4em;
+  color: #820101;
+  font-weight: bold;
+}
 .seatReservationList,
 .roomReservationList {
 }

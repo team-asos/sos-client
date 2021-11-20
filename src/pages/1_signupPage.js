@@ -210,99 +210,90 @@ const SignUp = () => {
             <p>회원 가입</p>
           </div>
 
-          <div className="bottom">
-            <div className="m_column">
-              <div>
-                <label>이메일</label>
-                <input
-                  type="text"
-                  className="m_form-control"
-                  placeholder="회사 이메일을 입력해주세요"
-                  onChange={inputEmail}
-                  value={email}
-                />
-              </div>
-              <div>
-                <label>이름</label>
-                <input
-                  type="text"
-                  className="m_form-control"
-                  placeholder="이름"
-                  onChange={inputName}
-                  value={name}
-                />
-              </div>
+          <div className="m_bottom">
+            <div>
+              <label>이메일</label>
+              <input
+                type="text"
+                className="m_form-control"
+                placeholder="회사 이메일을 입력해주세요"
+                onChange={inputEmail}
+                value={email}
+              />
+            </div>
+            <div>
+              <label>이름</label>
+              <input
+                type="text"
+                className="m_form-control"
+                placeholder="이름"
+                onChange={inputName}
+                value={name}
+              />
             </div>
 
-            <div className="m_column">
-              <div>
-                <label>비밀번호</label>
-                <input
-                  type="password"
-                  className="m_form-control"
-                  placeholder="대소문자와 숫자를 포함한 8~12자리"
-                  onChange={inputPw}
-                  value={password}
-                />
-              </div>
-              <div>
-                <label>비밀번호 확인</label>
-                <input
-                  type="password"
-                  className="m_form-control"
-                  placeholder="비밀번호 확인"
-                  onBlur={confirmHandler}
-                  onChange={inputConfirmPw}
-                  value={confirmPw}
-                />
-              </div>
+            <div>
+              <label>비밀번호</label>
+              <input
+                type="password"
+                className="m_form-control"
+                placeholder="대소문자와 숫자를 포함한 8~12자리"
+                onChange={inputPw}
+                value={password}
+              />
+            </div>
+            <div>
+              <label>비밀번호 확인</label>
+              <input
+                type="password"
+                className="m_form-control"
+                placeholder="비밀번호 확인"
+                onBlur={confirmHandler}
+                onChange={inputConfirmPw}
+                value={confirmPw}
+              />
             </div>
 
-            <div className="m_column">
-              <div>
-                <label>사원번호</label>
-                <input
-                  type="text"
-                  className="m_form-control"
-                  placeholder="사원번호"
-                  onChange={inputIdNo}
-                  value={employeeId}
-                />
-              </div>
-              <div>
-                <label>전화번호</label>
-                <input
-                  type="text"
-                  className="m_form-control"
-                  placeholder="- 를 제외하고 입력하세요"
-                  onChange={inputPhone}
-                  value={tel}
-                />
-              </div>
+            <div>
+              <label>사원번호</label>
+              <input
+                type="text"
+                className="m_form-control"
+                placeholder="사원번호"
+                onChange={inputIdNo}
+                value={employeeId}
+              />
+            </div>
+            <div>
+              <label>전화번호</label>
+              <input
+                type="text"
+                className="m_form-control"
+                placeholder="- 를 제외하고 입력하세요"
+                onChange={inputPhone}
+                value={tel}
+              />
             </div>
 
-            <div className="m_column">
-              <div>
-                <label>부서</label>
-                <input
-                  type="text"
-                  className="m_form-control"
-                  placeholder="부서"
-                  onChange={inputDep}
-                  value={department}
-                />
-              </div>
-              <div>
-                <label>직급</label>
-                <input
-                  type="text"
-                  className="m_form-control"
-                  placeholder="직급"
-                  onChange={inputPosition}
-                  value={position}
-                />
-                {/* <Select className="position" options={positionList}/> */}
-              </div>
+            <div>
+              <label>부서</label>
+              <input
+                type="text"
+                className="m_form-control"
+                placeholder="부서"
+                onChange={inputDep}
+                value={department}
+              />
+            </div>
+            <div>
+              <label>직급</label>
+              <input
+                type="text"
+                className="m_form-control"
+                placeholder="직급"
+                onChange={inputPosition}
+                value={position}
+              />
             </div>
             <div>
               <button
