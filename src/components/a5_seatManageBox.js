@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import 'react-dropdown/style.css';
-import { OverlayTrigger, Tooltip, Dropdown } from 'react-bootstrap';
+import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 import '../assets/styles/a5_seatManageBox.css';
 import FloorModal from './a5_floorModal';
@@ -11,33 +11,34 @@ import {
   MenuItem,
   FormHelperText,
 } from '@material-ui/core';
-import SeatBoardDemo from './a5_seatBoardDemo';
+import { BoardContainer } from './BoardContainer/index';
 
 const SeatManageBox = () => {
   //층 불러오기
-  const [floor, setFloor] = useState([]);
-  useEffect(() => {
-    const asd = async () => {
-      await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/floors`, {
-        method: 'GET',
-      })
-        .then(response => response.json())
-        .then(json => {
-          setFloor(json);
-        });
-    };
-    asd();
-  }, []);
+  const [floors, setFloors] = useState([]);
+
   //층 선택
   const [selectFloor, setSelectFloor] = useState([]);
-  const handleChange = event => {
-    setSelectFloor(event.target.value);
-  };
 
   //층 생성 모달창 관련 변수 정의
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  useEffect(() => {
+    const fetchFloors = async () => {
+      const result = await fetch(
+        `${process.env.REACT_APP_SERVER_BASE_URL}/floors`,
+        {
+          method: 'GET',
+        },
+      );
+
+      setFloors(await result.json());
+    };
+
+    fetchFloors();
+  }, []);
 
   return (
     <div className="seatManageBox">
@@ -51,15 +52,19 @@ const SeatManageBox = () => {
             <FormHelperText>층을 선택하세요.</FormHelperText>
             <Select
               value={selectFloor}
-              onChange={handleChange}
+              onChange={e => {
+                setSelectFloor(e.target.value);
+              }}
               displayEmpty
               inputProps={{ 'aria-label': 'Without label' }}
             >
               <MenuItem value="">
                 <em>선택</em>
               </MenuItem>
-              {floor.map(item => (
-                <MenuItem value={item}>{item.name}</MenuItem>
+              {floors.map(item => (
+                <MenuItem value={item} key={item.id}>
+                  {item.name}
+                </MenuItem>
               ))}
             </Select>
           </FormControl>
@@ -87,10 +92,9 @@ const SeatManageBox = () => {
         </div>
       </div>
 
-      {/* 아래 도면 부분 */}
+      {/* 도면 */}
       <div className="seatManageBottomBox">
-        {/* <SeatBoard /> */}
-        <SeatBoardDemo floorInfo={selectFloor} />
+        <BoardContainer floor={selectFloor} />
       </div>
 
       {/* 층 생성 모달창 : 추후에 분리할 예정 */}

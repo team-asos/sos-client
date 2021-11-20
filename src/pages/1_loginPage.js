@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useCookies } from 'react-cookie';
 import { Link, useHistory } from 'react-router-dom';
-import Loading from './1_loadingPage';
 import Logo from '../assets/images/logo.png';
 import '../assets/styles/1_loginPage.css';
 import { useMediaQuery } from 'react-responsive';
@@ -36,17 +35,17 @@ const Login = () => {
 
     const data = await response.json();
     setName(data.name);
+
     setTimeout(() => {
       if (data.role === 0) history.push('/seat-reservation');
-      else if (data.role === 0) history.push('/user-management');
+      else if (data.role === 1) history.push('/user-management');
     }, 2000);
-    //setLoading(0);
   };
+
   useEffect(() => {
     if (cookie.access_token !== 'undefined') getAuth();
   }, [cookie]);
 
-  //if (loading) return <Loading name={name} />;
   const loginClickHandler = async () => {
     const response = await fetch(
       `${process.env.REACT_APP_SERVER_BASE_URL}/auth`,

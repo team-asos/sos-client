@@ -1,0 +1,12 @@
+.board-container {
+  .board-setting {
+    width: 300px;
+    margin-left: 4px;
+    flex-direction: column;
+
+    .seat-tab {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}
