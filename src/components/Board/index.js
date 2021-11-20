@@ -2,38 +2,62 @@ import React, { useEffect } from 'react';
 
 import './index.scss';
 
-export const Board = ({ area, setArea, board, setBoard, originBoard }) => {
+export const Board = ({
+  selection,
+  setSelection,
+  tab,
+  setBoard,
+  board,
+  originBoard,
+}) => {
   useEffect(() => {
-    if (area.type === 0) {
+    if (selection.type === 0) {
       setBoard(originBoard);
     } else {
       let newMap = board;
 
       newMap = newMap.map((row, rowIndex) =>
         row.map((col, colIndex) => {
-          if (colIndex >= area.x && colIndex <= area.x + area.width)
-            if (rowIndex >= area.y && rowIndex <= area.y + area.height)
+          if (
+            colIndex >= selection.x &&
+            colIndex <= selection.x + selection.width
+          )
+            if (
+              rowIndex >= selection.y &&
+              rowIndex <= selection.y + selection.height
+            )
               return 3;
 
           return col;
         }),
       );
+
       setBoard(newMap);
     }
-  }, [area]);
+  }, [selection]);
 
   const handleSelection = (x, y) => {
-    if (area.type === 0) {
-      setArea({ ...area, x, y, type: 1 });
-    } else if (area.type === 1) {
-      setArea({
-        ...area,
-        width: Math.abs(x - area.x),
-        height: Math.abs(y - area.y),
+    if (selection.type === 0) {
+      if (tab === 1) {
+        setSelection({ ...selection, x, y, type: 1 });
+      } else {
+        setSelection({ ...selection, x, y, type: 2 });
+      }
+    } else if (selection.type === 1) {
+      setSelection({
+        ...selection,
+        width: Math.abs(x - selection.x),
+        height: Math.abs(y - selection.y),
         type: 2,
       });
-    } else if (area.type === 2) {
-      setArea({ x: null, y: null, width: null, height: null, type: 0 });
+    } else if (selection.type === 2) {
+      setSelection({
+        x: -1,
+        y: -1,
+        width: 0,
+        height: 0,
+        type: 0,
+      });
     }
   };
 
@@ -80,17 +104,24 @@ export const Board = ({ area, setArea, board, setBoard, originBoard }) => {
     return (
       <div
         style={{
-          width: '960px',
-          height: '640px',
+          flex: 1,
           overflow: 'auto',
-          border: '1px solid red',
         }}
       >
-        <table className="board-table">
-          <tbody>
-            <Rows board={board} />
-          </tbody>
-        </table>
+        <div
+          style={{
+            width: 'inherit',
+            height: ' 640px',
+            overflow: 'auto',
+            border: '1px solid red',
+          }}
+        >
+          <table className="board-table">
+            <tbody>
+              <Rows board={board} />
+            </tbody>
+          </table>
+        </div>
       </div>
     );
   };

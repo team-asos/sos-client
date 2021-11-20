@@ -6,19 +6,21 @@ import { BoardSetting } from '../BoardSetting';
 import './index.scss';
 
 export const BoardContainer = ({ floor }) => {
+  const [board, setBoard] = useState([]);
+  const [originBoard, setOriginBoard] = useState([]);
+
   const [seats, setSeats] = useState([]);
   const [rooms, setRooms] = useState([]);
 
-  const [originBoard, setOriginBoard] = useState([]);
-  const [board, setBoard] = useState([]);
-
-  const [area, setArea] = useState({
-    x: null,
-    y: null,
-    width: null,
-    height: null,
+  const [selection, setSelection] = useState({
+    x: -1,
+    y: -1,
+    width: 0,
+    height: 0,
     type: 0,
   });
+
+  const [tab, setTab] = useState(0);
 
   useEffect(() => {
     setBoard(
@@ -65,7 +67,7 @@ export const BoardContainer = ({ floor }) => {
     let newMap = board;
 
     for (let seat of seats) {
-      newMap[seat.x][seat.y] = 1;
+      newMap[seat.y][seat.x] = 1;
     }
 
     for (let room of rooms) {
@@ -81,18 +83,23 @@ export const BoardContainer = ({ floor }) => {
 
     setBoard(newMap);
     setOriginBoard(newMap);
-  }, [seats, rooms]);
+  }, [rooms]);
+
+  useEffect(() => {
+    setSelection({ x: -1, y: -1, width: 0, height: 0, type: 0 });
+  }, [tab]);
 
   return (
     <div className="board-container">
       <Board
-        area={area}
-        setArea={setArea}
+        selection={selection}
+        setSelection={setSelection}
+        tab={tab}
         board={board}
         setBoard={setBoard}
         originBoard={originBoard}
       />
-      <BoardSetting area={area} />
+      <BoardSetting selection={selection} tab={tab} setTab={setTab} />
     </div>
   );
 };
