@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-export const SeatTab = ({ selection, floor }) => {
+export const SeatTab = ({ selection, floor, seats, setSeats }) => {
   const [name, setName] = useState('');
 
   const inputName = e => {
@@ -29,8 +29,9 @@ export const SeatTab = ({ selection, floor }) => {
       );
 
       if (response.status === 201) {
-        alert('성공');
-        window.location.replace('/seat-management');
+        alert('좌석이 생성되었습니다.');
+        const json = await response.json();
+        setSeats([...seats, json]);
       }
     };
 
@@ -51,8 +52,9 @@ export const SeatTab = ({ selection, floor }) => {
       );
 
       if (response.status === 200) {
-        alert('성공');
-        window.location.replace('/seat-management');
+        alert('좌석이 삭제되었습니다.');
+        const json = await response.json();
+        setSeats(seats.filter(seat => seat.id !== json.id));
       }
     };
 

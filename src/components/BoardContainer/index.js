@@ -71,6 +71,13 @@ export const BoardContainer = ({ floor }) => {
   useEffect(() => {
     let newMap = board;
 
+    newMap = newMap.map(row =>
+      row.map(col => {
+        if (col.type === 3) return { type: 0, id: -1, name: '' };
+        return col;
+      }),
+    );
+
     for (let seat of seats) {
       newMap[seat.y][seat.x] = { type: 1, id: seat.id, name: seat.name };
     }
@@ -124,6 +131,10 @@ export const BoardContainer = ({ floor }) => {
         tab={tab}
         setTab={setTab}
         floor={floor}
+        seats={seats}
+        setSeats={setSeats}
+        rooms={rooms}
+        setRooms={setRooms}
       />
     </div>
   );

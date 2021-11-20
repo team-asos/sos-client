@@ -5,10 +5,35 @@ import { RoomTab } from './RoomTab';
 
 import './index.scss';
 
-export const BoardSetting = ({ selection, tab, setTab, floor }) => {
+export const BoardSetting = ({
+  selection,
+  tab,
+  setTab,
+  floor,
+  seats,
+  setSeats,
+  rooms,
+  setRooms,
+}) => {
   const Tab = () => {
-    if (tab === 0) return <SeatTab selection={selection} floor={floor} />;
-    else if (tab === 1) return <RoomTab selection={selection} floor={floor} />;
+    if (tab === 0)
+      return (
+        <SeatTab
+          selection={selection}
+          floor={floor}
+          seats={seats}
+          setSeats={setSeats}
+        />
+      );
+    else if (tab === 1)
+      return (
+        <RoomTab
+          selection={selection}
+          floor={floor}
+          rooms={rooms}
+          setRooms={setRooms}
+        />
+      );
     else if (tab === 2) return <div>시설</div>;
   };
 

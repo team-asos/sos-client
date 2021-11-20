@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-export const RoomTab = ({ selection, floor }) => {
+export const RoomTab = ({ selection, floor, rooms, setRooms }) => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState(0);
 
@@ -34,8 +34,9 @@ export const RoomTab = ({ selection, floor }) => {
       );
 
       if (response.status === 201) {
-        alert('성공');
-        window.location.replace('/seat-management');
+        alert('회의실이 생성되었습니다.');
+        const json = await response.json();
+        setRooms([...rooms, json]);
       }
     };
 
@@ -56,8 +57,9 @@ export const RoomTab = ({ selection, floor }) => {
       );
 
       if (response.status === 200) {
-        alert('성공');
-        window.location.replace('/seat-management');
+        alert('회의실이 삭제되었습니다.');
+        const json = await response.json();
+        setRooms(rooms.filter(room => room.id !== json.id));
       }
     };
 
