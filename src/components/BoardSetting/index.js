@@ -1,13 +1,14 @@
 import React from 'react';
 
 import { SeatTab } from './SeatTab';
+import { RoomTab } from './RoomTab';
 
 import './index.scss';
 
-export const BoardSetting = ({ selection, tab, setTab }) => {
+export const BoardSetting = ({ selection, tab, setTab, floor }) => {
   const Tab = () => {
-    if (tab === 0) return <SeatTab selection={selection} />;
-    else if (tab === 1) return <div>회의실</div>;
+    if (tab === 0) return <SeatTab selection={selection} floor={floor} />;
+    else if (tab === 1) return <RoomTab selection={selection} floor={floor} />;
     else if (tab === 2) return <div>시설</div>;
   };
 

@@ -112,7 +112,12 @@ export const BoardContainer = ({ floor }) => {
         setBoard={setBoard}
         originBoard={originBoard}
       />
-      <BoardSetting selection={selection} tab={tab} setTab={setTab} />
+      <BoardSetting
+        selection={selection}
+        tab={tab}
+        setTab={setTab}
+        floor={floor}
+      />
     </div>
   );
 };

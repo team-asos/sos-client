@@ -1,16 +1,20 @@
 import React, { useState } from 'react';
 
-export const SeatTab = ({ selection, floor }) => {
+export const RoomTab = ({ selection, floor }) => {
   const [name, setName] = useState('');
+  const [number, setNumber] = useState(0);
 
   const inputName = e => {
     setName(e.target.value);
   };
+  const inputNumber = e => {
+    setNumber(Number(e.target.value));
+  };
 
   const handleSave = () => {
-    const createSeat = async () => {
+    const createRoom = async () => {
       const response = await fetch(
-        `${process.env.REACT_APP_SERVER_BASE_URL}/seats`,
+        `${process.env.REACT_APP_SERVER_BASE_URL}/rooms`,
         {
           method: 'POST',
           headers: {
@@ -24,6 +28,7 @@ export const SeatTab = ({ selection, floor }) => {
             width: selection.width,
             height: selection.height,
             floorId: floor.id,
+            maxUser: number,
           }),
         },
       );
@@ -33,13 +38,13 @@ export const SeatTab = ({ selection, floor }) => {
       }
     };
 
-    createSeat();
+    createRoom();
   };
 
   const handleDelete = () => {
-    const deleteSeat = async () => {
+    const deleteRoom = async () => {
       const response = await fetch(
-        `${process.env.REACT_APP_SERVER_BASE_URL}/seats/${selection.id}`,
+        `${process.env.REACT_APP_SERVER_BASE_URL}/rooms/${selection.id}`,
         {
           method: 'DELETE',
           headers: {
@@ -54,7 +59,7 @@ export const SeatTab = ({ selection, floor }) => {
       }
     };
 
-    deleteSeat();
+    deleteRoom();
   };
 
   return (
@@ -63,22 +68,34 @@ export const SeatTab = ({ selection, floor }) => {
       <input value={selection.x} disabled />
       <label>Y</label>
       <input value={selection.y} disabled />
-      <label>좌석 이름</label>
+      <label>WIDTH</label>
+      <input value={selection.width} disabled />
+      <label>HEIGHT</label>
+      <input value={selection.height} disabled />
 
       {selection.stage !== 3 && (
         <>
+          <label>회의실 이름</label>
           <input
             value={name}
             onChange={e => {
               inputName(e);
             }}
-            disabled={selection.x === -1 ? true : false}
+            disabled={selection.width === 0 ? true : false}
+          />
+          <label>회의실 최대 인원 수</label>
+          <input
+            value={number}
+            onChange={e => {
+              inputNumber(e);
+            }}
+            disabled={selection.width === 0 ? true : false}
           />
           <button
             onClick={() => {
               handleSave();
             }}
-            disabled={name === '' ? true : false}
+            disabled={name !== '' && number !== 0 ? false : true}
           >
             생성하기
           </button>
@@ -86,6 +103,7 @@ export const SeatTab = ({ selection, floor }) => {
       )}
       {selection.stage === 3 && (
         <>
+          <label>회의실 이름</label>
           <input value={selection.name} disabled />
           <button
             onClick={() => {

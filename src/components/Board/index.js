@@ -20,11 +20,11 @@ export const Board = ({
         row.map((col, colIndex) => {
           if (
             colIndex >= selection.x &&
-            colIndex <= selection.x + selection.width
+            colIndex < selection.x + selection.width
           )
             if (
               rowIndex >= selection.y &&
-              rowIndex <= selection.y + selection.height
+              rowIndex < selection.y + selection.height
             )
               return { type: 3, name: '' };
 
@@ -55,15 +55,31 @@ export const Board = ({
 
       if (selection.stage === 0) {
         if (tab === 1) {
-          setSelection({ ...selection, x, y, stage: 1, id: -1, name: '' });
+          setSelection({
+            x,
+            y,
+            width: 1,
+            height: 1,
+            stage: 1,
+            id: -1,
+            name: '',
+          });
         } else {
-          setSelection({ ...selection, x, y, stage: 2, id: -1, name: '' });
+          setSelection({
+            x,
+            y,
+            width: 1,
+            height: 1,
+            stage: 2,
+            id: -1,
+            name: '',
+          });
         }
       } else if (selection.stage === 1) {
         setSelection({
           ...selection,
-          width: Math.abs(x - selection.x),
-          height: Math.abs(y - selection.y),
+          width: Math.abs(x - selection.x + 1),
+          height: Math.abs(y - selection.y + 1),
           stage: 2,
           id: -1,
           name: '',
