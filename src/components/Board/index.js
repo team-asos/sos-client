@@ -147,12 +147,16 @@ export const Board = ({
     ));
   };
 
-  const Rows = ({ board }) => {
-    return board.map((row, index) => (
-      <tr key={index}>
-        <Row row={row} y={index} />
-      </tr>
-    ));
+  const Item = ({ board }) => {
+    return board.map((row, y) =>
+      row.map((col, x) => (
+        <div key={x + y}>
+          {`${x}, ${y}`}
+          <br />
+          {col.name}
+        </div>
+      )),
+    );
   };
 
   const Board = () => {
@@ -171,11 +175,19 @@ export const Board = ({
             border: '1px solid red',
           }}
         >
-          <table className="board-table">
-            <tbody>
-              <Rows board={board} />
-            </tbody>
-          </table>
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: `repeat(${
+                board.length > 0 ? board[0].length : '1'
+              }, 50px)`,
+              gridTemplateRows: `repeat(${
+                board.length > 0 ? board.length : '1'
+              }, 50px)`,
+            }}
+          >
+            <Item board={board} />
+          </div>
         </div>
       </div>
     );
