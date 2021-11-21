@@ -3,13 +3,11 @@
 }
 /*나의 예약 내역 조회*/
 .myReservationListFormTitleTextStyle {
-  font-size: 2em;
-  color: #820101;
+  font-size: 1.5em;
   font-weight: bold;
 }
 .m_myReservationListFormTitleTextStyle {
   font-size: 1.4em;
-  color: #820101;
   font-weight: bold;
 }
 .seatReservationList,
@@ -17,12 +15,13 @@
 }
 .u4seatTextStyle,
 .u4roomTextStyle {
-  font-size: 1.4em;
+  font-size: 1.2em;
   font-weight: bold;
+  color: #c00000;
 }
 .myReservationListTable {
   /* position: relative; */
-  font-size: 1.2em;
+  font-size: 1em;
 }
 .reservationCancelBtn,
 .checkOutBtn {
@@ -38,6 +37,6 @@
 .reservationCancelBtn:hover,
 .checkOutBtn:hover {
   background: #8f0202;
-  transition: ease 0.2s;
+  transition: ease 0.1s;
   transform: scale(1.01);
 }
