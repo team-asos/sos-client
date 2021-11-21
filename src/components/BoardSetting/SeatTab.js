@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import { EDIT_SELECTION } from '../../const/selection-type.const';
+
 export const SeatTab = ({ selection, floor, seats, setSeats }) => {
   const [name, setName] = useState('');
 
@@ -69,7 +71,7 @@ export const SeatTab = ({ selection, floor, seats, setSeats }) => {
       <input value={selection.y} disabled />
       <label>좌석 이름</label>
 
-      {selection.stage !== 3 && (
+      {selection.stage !== EDIT_SELECTION && (
         <>
           <input
             value={name}
@@ -88,7 +90,7 @@ export const SeatTab = ({ selection, floor, seats, setSeats }) => {
           </button>
         </>
       )}
-      {selection.stage === 3 && (
+      {selection.stage === EDIT_SELECTION && (
         <>
           <input value={selection.name} disabled />
           <button

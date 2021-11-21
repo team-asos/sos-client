@@ -4,6 +4,8 @@ import { SeatTab } from './SeatTab';
 import { RoomTab } from './RoomTab';
 import { FacilityTab } from './FacilityTab';
 
+import { EDIT_SELECTION } from '../../const/selection-type.const';
+
 import './index.scss';
 
 export const BoardSetting = ({
@@ -18,6 +20,12 @@ export const BoardSetting = ({
   facilities,
   setFacilities,
 }) => {
+  const handleTab = tab => {
+    if (selection.stage === EDIT_SELECTION) return;
+
+    setTab(tab);
+  };
+
   const Tab = () => {
     if (tab === 0)
       return (
@@ -52,9 +60,9 @@ export const BoardSetting = ({
     return (
       <div className="board-setting">
         <div className="setting-tab-group">
-          <button onClick={() => setTab(0)}>좌석</button>
-          <button onClick={() => setTab(1)}>회의실</button>
-          <button onClick={() => setTab(2)}>시설</button>
+          <button onClick={() => handleTab(0)}>좌석</button>
+          <button onClick={() => handleTab(1)}>회의실</button>
+          <button onClick={() => handleTab(2)}>시설</button>
         </div>
         <div className="setting-tab">
           <Tab />

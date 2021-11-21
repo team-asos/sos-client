@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import { EDIT_SELECTION } from '../../const/selection-type.const';
+
 export const RoomTab = ({ selection, floor, rooms, setRooms }) => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState(0);
@@ -77,7 +79,7 @@ export const RoomTab = ({ selection, floor, rooms, setRooms }) => {
       <label>HEIGHT</label>
       <input value={selection.height} disabled />
 
-      {selection.stage !== 3 && (
+      {selection.stage !== EDIT_SELECTION && (
         <>
           <label>회의실 이름</label>
           <input
@@ -109,7 +111,7 @@ export const RoomTab = ({ selection, floor, rooms, setRooms }) => {
           </button>
         </>
       )}
-      {selection.stage === 3 && (
+      {selection.stage === EDIT_SELECTION && (
         <>
           <label>회의실 이름</label>
           <input value={selection.name} disabled />

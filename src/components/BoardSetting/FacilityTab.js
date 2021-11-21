@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import { EDIT_SELECTION } from '../../const/selection-type.const';
+
 import { FormControl, Select, MenuItem } from '@mui/material';
 
 export const FacilityTab = ({
@@ -103,7 +105,7 @@ export const FacilityTab = ({
       <input value={selection.y} disabled />
       <label>시설 타입</label>
 
-      {selection.stage !== 3 && (
+      {selection.stage !== EDIT_SELECTION && (
         <>
           <FormControl variant="standard">
             <Select
@@ -128,7 +130,7 @@ export const FacilityTab = ({
           </button>
         </>
       )}
-      {selection.stage === 3 && (
+      {selection.stage === EDIT_SELECTION && (
         <>
           <FormControl variant="standard">
             <Select value={selection.name} disabled>

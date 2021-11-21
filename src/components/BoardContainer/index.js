@@ -135,24 +135,13 @@ export const BoardContainer = ({ floor }) => {
     setOriginBoard(newMap);
   }, [facilities]);
 
-  useEffect(() => {
-    setSelection({
-      x: -1,
-      y: -1,
-      width: 0,
-      height: 0,
-      stage: 0,
-      id: -1,
-      name: '',
-    });
-  }, [tab]);
-
   return (
     <div className="board-container">
       <Board
         selection={selection}
         setSelection={setSelection}
         tab={tab}
+        setTab={setTab}
         board={board}
         setBoard={setBoard}
         originBoard={originBoard}
