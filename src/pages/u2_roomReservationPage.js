@@ -38,7 +38,11 @@ const RoomReservationPage = props => {
               ''
             )}
           </div>
-          <div className="rrp_titleTextStyle">
+          <div
+            className={
+              isPc ? 'rrp_titleTextStyle' : 'm_roomCheck_titleTextStyle'
+            }
+          >
             <Link
               to="/room-reservation/roomId"
               style={{

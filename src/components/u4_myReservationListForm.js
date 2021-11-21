@@ -31,7 +31,6 @@ const MyReservationListForm = props => {
   useEffect(() => {
     if (props.user.id !== 'undefined') res();
   }, [props.user.id]);
-  console.log(reservation);
   /*예약 취소*/
   const deleteClick = reservationId => {
     handleClose();
@@ -42,7 +41,6 @@ const MyReservationListForm = props => {
           method: 'DELETE',
         },
       );
-      //status가 undefined라고 뜸. 그리고 close됐을 때 새로고침 하고 싶음
       if (res.status === 200) {
         alert('예약이 취소되었습니다.');
       } else {
@@ -69,8 +67,12 @@ const MyReservationListForm = props => {
       </p>
       <div style={{ display: 'flex', flexDirection: 'column' }}>
         <div className="seatReservationList">
-          <div className="u4seatTextStyle">[ 좌석 ]</div>
-          <Table striped hover className="myReservationListTable">
+          <div className="u4seatTextStyle"> 좌석 </div>
+          <Table
+            striped
+            hover
+            className={isPc ? 'myReservationListTable' : 'mobileInfoTable'}
+          >
             <thead>
               <tr>
                 {/* <th></th> */}
@@ -109,11 +111,11 @@ const MyReservationListForm = props => {
                             className="reservationCancelBtn"
                             onClick={handleShow}
                           >
-                            예약취소
+                            예약 취소
                           </button>
                           <Modal show={show} onHide={handleClose}>
                             <Modal.Header closeButton>
-                              <Modal.Title>좌석 {item.seat_id}번</Modal.Title>
+                              <Modal.Title>좌석 {item.seat.name}</Modal.Title>
                             </Modal.Header>
                             <Modal.Body>예약을 취소하시겠습니까?</Modal.Body>
                             <Modal.Footer>
@@ -136,13 +138,15 @@ const MyReservationListForm = props => {
                               className="checkOutBtn"
                               onClick={handleShow}
                             >
-                              퇴실하기
+                              사용 종료
                             </button>
                             <Modal show={show} onHide={handleClose}>
                               <Modal.Header closeButton>
-                                <Modal.Title>좌석 {item.seat_id}번</Modal.Title>
+                                <Modal.Title>좌석 {item.seat.name}</Modal.Title>
                               </Modal.Header>
-                              <Modal.Body>퇴실 하시겠습니까?</Modal.Body>
+                              <Modal.Body>
+                                좌석 사용을 종료하시겠습니까?
+                              </Modal.Body>
                               <Modal.Footer>
                                 <Button
                                   variant="secondary"
@@ -169,8 +173,12 @@ const MyReservationListForm = props => {
           </Table>
         </div>
         <div className="roomReservationList">
-          <div className="u4roomTextStyle">[ 회의실 ]</div>
-          <Table striped hover className="myReservationListTable">
+          <div className="u4roomTextStyle"> 회의실 </div>
+          <Table
+            striped
+            hover
+            className={isPc ? 'myReservationListTable' : 'mobileInfoTable'}
+          >
             <thead>
               <tr>
                 {/* <th></th> */}

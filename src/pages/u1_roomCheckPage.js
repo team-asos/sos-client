@@ -34,7 +34,11 @@ const RoomCheckPage = () => {
             )}
           </div>
 
-          <div className="roomCheck_titleTextStyle">
+          <div
+            className={
+              isPc ? 'roomCheck_titleTextStyle' : 'm_roomCheck_titleTextStyle'
+            }
+          >
             <Link
               to="/room-check"
               style={{

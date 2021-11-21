@@ -246,119 +246,227 @@ const MyInfoForm = props => {
             <>
               <p className="myInfoFormTitleTextStyle">나의 정보 수정</p>
 
-              <div className="myInfoDetailForm">
-                <div className="column">
+              {isPc ? (
+                <div className="myInfoDetailForm">
+                  <div className="column">
+                    <div>
+                      <label>이름</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        onChange={editName}
+                        value={editData.name}
+                      />
+                    </div>
+                    <div className="setPadding">
+                      <label>이메일</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        onChange={editEmail}
+                        value={editData.email}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="column">
+                    <div>
+                      <label>비밀번호</label>
+                      <input
+                        type="password"
+                        className="form-control"
+                        placeholder="대소문자와 숫자를 포함한 8~12자리"
+                        onChange={editPw}
+                        //value={password}
+                      />
+                    </div>
+                    <div className="setPadding">
+                      <label>비밀번호 확인</label>
+                      <input
+                        type="password"
+                        className="form-control"
+                        placeholder="비밀번호 확인"
+                        onBlur={confirmPwHandler}
+                        onChange={editConfirmPw}
+                        //value={confirmPw}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="column">
+                    <div>
+                      <label>사원번호</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        onChange={editEmployeeId}
+                        value={editData.employeeId}
+                      />
+                    </div>
+                    <div className="setPadding">
+                      <label>전화번호</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        onChange={editTel}
+                        value={editData.tel}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="column">
+                    <div>
+                      <label>부서</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        onChange={editDepartment}
+                        value={editData.department}
+                      />
+                    </div>
+                    <div className="setPadding">
+                      <label>직급</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        onChange={editPosition}
+                        value={editData.position}
+                      />
+                    </div>
+                  </div>
+                  <div className="infoBottom">
+                    <button
+                      className="editFinishButton"
+                      onClick={confirmHandler}
+                    >
+                      완료
+                    </button>
+                    <p className="dropUser" onClick={handleShow}>
+                      회원 탈퇴
+                    </p>
+                    <Modal show={show} onHide={handleClose}>
+                      <Modal.Header closeButton>
+                        <Modal.Title>회원 탈퇴</Modal.Title>
+                      </Modal.Header>
+                      <Modal.Body>탈퇴하시겠습니까?</Modal.Body>
+                      <Modal.Footer>
+                        <Button variant="secondary" onClick={handleClose}>
+                          취소
+                        </Button>
+                        <Button variant="danger" onClick={dropClick}>
+                          확인
+                        </Button>
+                      </Modal.Footer>
+                    </Modal>
+                  </div>
+                </div>
+              ) : (
+                <div className="m_myInfoDetailForm">
                   <div>
-                    <label>이름</label>
+                    <label style={{ display: 'block' }}>이름</label>
                     <input
                       type="text"
-                      className={isPc ? 'form-control' : 'm_editInput'}
+                      className="m_myInfoForm-control"
                       onChange={editName}
                       value={editData.name}
                     />
                   </div>
-                  <div className="setPadding">
-                    <label>이메일</label>
+                  <div>
+                    <label style={{ display: 'block' }}>이메일</label>
                     <input
                       type="text"
-                      className={isPc ? 'form-control' : 'm_editInput'}
+                      className="m_myInfoForm-control"
                       onChange={editEmail}
                       value={editData.email}
                     />
                   </div>
-                </div>
 
-                <div className="column">
                   <div>
-                    <label>비밀번호</label>
+                    <label style={{ display: 'block' }}>비밀번호</label>
                     <input
                       type="password"
-                      className={isPc ? 'form-control' : 'm_editInput'}
+                      className="m_myInfoForm-control"
                       placeholder="대소문자와 숫자를 포함한 8~12자리"
                       onChange={editPw}
                       //value={password}
                     />
                   </div>
-                  <div className="setPadding">
-                    <label>비밀번호 확인</label>
+                  <div>
+                    <label style={{ display: 'block' }}>비밀번호 확인</label>
                     <input
                       type="password"
-                      className={isPc ? 'form-control' : 'm_editInput'}
+                      className="m_myInfoForm-control"
                       placeholder="비밀번호 확인"
                       onBlur={confirmPwHandler}
                       onChange={editConfirmPw}
                       //value={confirmPw}
                     />
                   </div>
-                </div>
 
-                <div className="column">
                   <div>
-                    <label>사원번호</label>
+                    <label style={{ display: 'block' }}>사원번호</label>
                     <input
                       type="text"
-                      className={isPc ? 'form-control' : 'm_editInput'}
+                      className="m_myInfoForm-control"
                       onChange={editEmployeeId}
                       value={editData.employeeId}
                     />
                   </div>
-                  <div className="setPadding">
-                    <label>전화번호</label>
+                  <div>
+                    <label style={{ display: 'block' }}>전화번호</label>
                     <input
                       type="text"
-                      className={isPc ? 'form-control' : 'm_editInput'}
+                      className="m_myInfoForm-control"
                       onChange={editTel}
                       value={editData.tel}
                     />
                   </div>
-                </div>
 
-                <div className="column">
                   <div>
-                    <label>부서</label>
+                    <label style={{ display: 'block' }}>부서</label>
                     <input
                       type="text"
-                      className={isPc ? 'form-control' : 'm_editInput'}
+                      className="m_myInfoForm-control"
                       onChange={editDepartment}
                       value={editData.department}
                     />
                   </div>
-                  <div className="setPadding">
-                    <label>직급</label>
+                  <div>
+                    <label style={{ display: 'block' }}>직급</label>
                     <input
                       type="text"
-                      className={isPc ? 'form-control' : 'm_editInput'}
+                      className="m_myInfoForm-control"
                       onChange={editPosition}
                       value={editData.position}
                     />
                   </div>
+                  <div className="infoBottom">
+                    <button
+                      className="m_editFinishButton"
+                      onClick={confirmHandler}
+                    >
+                      완료
+                    </button>
+                    <p className="m_dropUser" onClick={handleShow}>
+                      회원 탈퇴
+                    </p>
+                    <Modal show={show} onHide={handleClose}>
+                      <Modal.Header closeButton>
+                        <Modal.Title>회원 탈퇴</Modal.Title>
+                      </Modal.Header>
+                      <Modal.Body>탈퇴하시겠습니까?</Modal.Body>
+                      <Modal.Footer>
+                        <Button variant="secondary" onClick={handleClose}>
+                          취소
+                        </Button>
+                        <Button variant="danger" onClick={dropClick}>
+                          확인
+                        </Button>
+                      </Modal.Footer>
+                    </Modal>
+                  </div>
                 </div>
-                <div className="infoBottom">
-                  <button
-                    className={isPc ? 'editFinishButton' : 'm_editFinishButton'}
-                    onClick={confirmHandler}
-                  >
-                    완료
-                  </button>
-                  <p className="dropUser" onClick={handleShow}>
-                    회원 탈퇴
-                  </p>
-                  <Modal show={show} onHide={handleClose}>
-                    <Modal.Header closeButton>
-                      <Modal.Title>회원 탈퇴</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>탈퇴하시겠습니까?</Modal.Body>
-                    <Modal.Footer>
-                      <Button variant="secondary" onClick={handleClose}>
-                        취소
-                      </Button>
-                      <Button variant="danger" onClick={dropClick}>
-                        확인
-                      </Button>
-                    </Modal.Footer>
-                  </Modal>
-                </div>
-              </div>
+              )}
             </>
           )}
         </div>
