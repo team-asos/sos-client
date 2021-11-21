@@ -38,7 +38,6 @@ const AddParticipant = ({ START, END, MAXUSER, ROOMID }) => {
   const handleChange = e => {
     setSelectedMembers([...selectedMembers, e]); //멀티 아닐 때 근데 옵션에서 사라져야함
     // setSelectedMembers(e);
-    users.filter(users => users.id == e.value);
   };
   /*회원 검색 */
   useEffect(() => {
@@ -72,7 +71,6 @@ const AddParticipant = ({ START, END, MAXUSER, ROOMID }) => {
         body: JSON.stringify({
           startTime: START,
           endTime: END,
-          status: 0, //물어보기
           roomId: Number(ROOMID),
           userId: Number(myId),
           participantIds: membersId,
