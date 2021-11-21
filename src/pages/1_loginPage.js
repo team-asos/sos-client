@@ -36,10 +36,8 @@ const Login = () => {
     const data = await response.json();
     setName(data.name);
 
-    setTimeout(() => {
-      if (data.role === 0) history.push('/seat-reservation');
-      else if (data.role === 1) history.push('/user-management');
-    }, 2000);
+    if (data.role === 0) history.push('/seat-reservation');
+    else if (data.role === 1) history.push('/user-management');
   };
 
   useEffect(() => {

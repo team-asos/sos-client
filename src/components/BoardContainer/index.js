@@ -133,7 +133,7 @@ export const BoardContainer = ({ floor }) => {
 
     setBoard(newMap);
     setOriginBoard(newMap);
-  }, [seats, rooms, facilities]);
+  }, [facilities]);
 
   useEffect(() => {
     setSelection({
