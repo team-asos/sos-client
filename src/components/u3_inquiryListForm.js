@@ -28,24 +28,6 @@ const InquiryListForm = props => {
       });
   };
 
-  console.log(question);
-
-  // const [answer, setAnswer] = useState([]);
-  // const res2 = async () => {
-  //   await fetch(
-  //     `${process.env.REACT_APP_SERVER_BASE_URL}/answers/search?userId=${props.user.id}`,
-  //     {
-  //       headers: { Authorization: `Bearer ${cookie.access_token}` },
-  //       method: 'GET',
-  //     },
-  //   )
-  //     .then(response => response.json())
-  //     .then(json => {
-  //       setAnswer(json);
-  //     });
-  // };
-  // console.log(answer);
-
   useEffect(() => {
     if (props.user.id !== 'undefined') {
       res();
@@ -157,7 +139,7 @@ const InquiryListForm = props => {
                               style={
                                 item.status === 1
                                   ? { color: 'green' }
-                                  : { color: '#c00000' }
+                                  : { color: 'gray' }
                               }
                             >
                               {item.status === 1 ? '답변완료' : '답변대기'}
@@ -188,24 +170,28 @@ const InquiryListForm = props => {
                         </p>
                       </Accordion.Body>
                       {/* 답변 */}
-                      <Accordion.Body className="inquiryAnswer">
-                        <div className="inquiryMsg">
-                          <div style={{ width: '10%' }}>
-                            <p style={{ fontWeight: 'bold' }}>답변 내용</p>
-                          </div>
-                          <div style={{ width: '70%' }}>
-                            {item.answer?.message}
-                          </div>
+                      {item.status === 1 ? (
+                        <Accordion.Body className="inquiryAnswer">
+                          <div className="inquiryMsg">
+                            <div style={{ width: '10%' }}>
+                              <p style={{ fontWeight: 'bold' }}>답변 내용</p>
+                            </div>
+                            <div style={{ width: '70%' }}>
+                              {item.answer?.message}
+                            </div>
 
-                          <p
-                            style={{
-                              marginLeft: '9vw',
-                            }}
-                          >
-                            {item.answer?.createdAt.slice(0, 10)}
-                          </p>
-                        </div>
-                      </Accordion.Body>
+                            <p
+                              style={{
+                                marginLeft: '9vw',
+                              }}
+                            >
+                              {item.answer?.createdAt.slice(0, 10)}
+                            </p>
+                          </div>
+                        </Accordion.Body>
+                      ) : (
+                        ''
+                      )}
                     </Accordion.Item>
                   ))}
             </Accordion>

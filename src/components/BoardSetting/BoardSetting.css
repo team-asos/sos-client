@@ -1,0 +1,94 @@
+/* index.js 부분 */
+
+/* 전체 pane */
+.board-setting {
+  width: 300px;
+  margin: 1%;
+  flex-direction: column;
+}
+
+/* 탭 버튼 그룹 pane */
+.setting-tab-group {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+/* 개별 버튼 그룹 pane */
+.createbtn {
+  border: none;
+  border-bottom: 1px solid black;
+  background-color: transparent;
+}
+.createbtn:hover {
+  color: #810000;
+  border-bottom: 1px solid #810000;
+
+  transition: 0.05s ease-in-out;
+  transform: scale(1.01);
+}
+/* 탭 콘텐츠 */
+.setting-tab {
+  padding: 5%;
+  border-radius: 3px;
+  background-color: rgba(255, 255, 255, 0.096);
+}
+
+/* SeatTab.js 부분 */
+.text-notification {
+  font-size: smaller;
+  font-style: italic;
+  text-align: center;
+}
+.seat-tab {
+  display: flex;
+  flex-direction: column;
+}
+.seat-input-location {
+  width: 2.8vw;
+  text-align: center;
+  border: none;
+  background-color: transparent;
+  border-bottom: 0.2px solid rgb(134, 134, 134);
+}
+.seat-input-name {
+  width: 10.5vw;
+  border: none;
+  background-color: transparent;
+  border-bottom: 0.2px solid rgb(134, 134, 134);
+}
+.seat-input-name-show {
+  width: 10.5vw;
+  border: none;
+  background-color: transparent;
+  border-bottom: 0.2px solid rgb(134, 134, 134);
+  text-align: center;
+}
+.seat-input-name::placeholder {
+  font-size: smaller;
+}
+.seat-btn-make {
+  width: 95%;
+  margin-left: 5%;
+  margin-top: 10%;
+  border: none;
+  border-radius: 3px;
+  box-shadow: 1px 1.2px #888888;
+}
+.seat-btn-make:hover {
+  background-color: #c00000;
+  color: white;
+}
+
+.room-input-maxuser {
+  width: 4vw;
+  border: none;
+  background-color: transparent;
+  border-bottom: 0.2px solid rgb(134, 134, 134);
+}
+.room-input-maxuser-show {
+  width: 4vw;
+  border: none;
+  background-color: transparent;
+  border-bottom: 0.2px solid rgb(134, 134, 134);
+  text-align: center;
+}

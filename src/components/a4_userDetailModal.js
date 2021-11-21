@@ -105,7 +105,7 @@ export default function UserDetailModalContent({
           <fa.FaUser
             style={{ color: 'gray', marginRight: '0.4%', marginTop: '-0.2%' }}
           />
-          회원 정보
+          | 회원 정보
         </h6>
         <MDBTable hover className="userTable" cellPadding={0} cellSpacing={0}>
           <MDBTableHead>
@@ -140,7 +140,7 @@ export default function UserDetailModalContent({
           <fa.FaRegistered
             style={{ color: 'gray', marginRight: '0.4%', marginTop: '-0.2%' }}
           />
-          예약 내역
+          | 예약 내역
         </h6>
         {/* 예약내역 존재여부 판별 */}
         {reservation.length === 0 ? (
@@ -189,7 +189,7 @@ export default function UserDetailModalContent({
           <fa.FaTelegramPlane
             style={{ color: 'gray', marginRight: '0.4%', marginTop: '-0.2%' }}
           />
-          문의 내역
+          | 문의 내역
         </h6>
         {/* 문의 내역 존재 여부 판별 */}
         {inquiry.length === 0 ? (

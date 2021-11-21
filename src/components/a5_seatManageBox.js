@@ -1,35 +1,39 @@
 import React, { useEffect, useState } from 'react';
 
 import 'react-dropdown/style.css';
-import { OverlayTrigger, Tooltip, Dropdown } from 'react-bootstrap';
+import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 import '../assets/styles/a5_seatManageBox.css';
 import FloorModal from './a5_floorModal';
+
 import {
   Select,
   FormControl,
   MenuItem,
   FormHelperText,
 } from '@material-ui/core';
-import SeatBoardDemo from './a5_seatBoardDemo';
+import { BoardContainer } from './a5_BoardContainer';
 
 const SeatManageBox = () => {
   //층 불러오기
   const [floor, setFloor] = useState([]);
+
   useEffect(() => {
-    const asd = async () => {
-      await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/floors`, {
-        method: 'GET',
-      })
-        .then(response => response.json())
-        .then(json => {
-          setFloor(json);
-        });
+    const fetchFloors = async () => {
+      const result = await fetch(
+        `${process.env.REACT_APP_SERVER_BASE_URL}/floors`,
+        {
+          method: 'GET',
+        },
+      );
+      setFloor(await result.json());
     };
-    asd();
+    fetchFloors();
   }, []);
+
   //층 선택
   const [selectFloor, setSelectFloor] = useState([]);
+
   const handleChange = event => {
     setSelectFloor(event.target.value);
   };
@@ -40,12 +44,14 @@ const SeatManageBox = () => {
   const handleShow = () => setShow(true);
 
   return (
+    //.arrangement-container
     <div className="seatManageBox">
+      {/* .header */}
       <div className="seatManageUpperBox">
-        {/* 위, 텍스트 부분 */}
-        <div className="seatManageUpperFirstChild">좌석 관리</div>
+        {/* .header-title // 위, 텍스트 부분 */}
+        <div className="seatManageUpperFirstChild">배치 관리</div>
 
-        {/* 층 선택 */}
+        {/* .header-floor // 층 선택 */}
         <div className="seatManageUpperSecondChild">
           <FormControl sx={{ m: 4, minWidth: 150 }}>
             <FormHelperText>층을 선택하세요.</FormHelperText>
@@ -65,7 +71,7 @@ const SeatManageBox = () => {
           </FormControl>
         </div>
 
-        {/* 층 추가 */}
+        {/* .header-tooltip // 층 추가 */}
         <div className="seatManageUpperLastChild">
           <OverlayTrigger
             key="right"
@@ -87,10 +93,10 @@ const SeatManageBox = () => {
         </div>
       </div>
 
-      {/* 아래 도면 부분 */}
+      {/* .content // 아래 도면 부분 */}
       <div className="seatManageBottomBox">
         {/* <SeatBoard /> */}
-        <SeatBoardDemo floorInfo={selectFloor} />
+        <BoardContainer floor={selectFloor} />
       </div>
 
       {/* 층 생성 모달창 : 추후에 분리할 예정 */}

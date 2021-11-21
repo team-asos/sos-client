@@ -95,6 +95,7 @@
   flex-direction: row;
   position: relative;
   justify-content: space-between;
+  background-color: #c4c4c415;
 }
 .inquiryMsg {
   width: 95%;
@@ -110,4 +111,8 @@
 /*제목 폼에서 윗 부분(제목, 날짜)*/
 .inquiryTitleUpper {
   display: flex;
+}
+.inquiryAnswer {
+  background: #c4c4c415;
+  border-top: 1px dashed rgba(128, 128, 128, 0.404);
 }
