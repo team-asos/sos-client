@@ -1,3 +1,10 @@
+.addAndButtonForm {
+  display: flex;
+}
+.mAddAndButtonForm {
+  display: flex;
+  flex-direction: column;
+}
 .addParticipantForm {
   display: flex;
   flex-direction: column;
@@ -5,20 +12,41 @@
   margin-top: 3vh;
   width: 60vw;
 }
+.mParticipantForm {
+  display: flex;
+  flex-direction: column;
+  margin-left: 2vw;
+  margin-top: 2vh;
+  width: 95vw;
+  height: 50vh;
+}
 /*회의 참석자를 입력하세요*/
 .rrp_centerTextStyle {
   position: relative;
   font-size: 1.3em;
   font-weight: bold;
 }
-
-.searchParticipant {
+.mrrp_centerTextStyle {
+  font-size: 1em;
+  font-weight: bold;
+}
+.mSearchForm {
 }
 .selectedMembersList {
+}
+.mSelectedMembersList {
+  font-size: 0.7em;
+  height: 50px;
+  overflow: scroll;
+}
+.divButton {
+  margin-left: 38%;
 }
 .roomReservationBtn {
   width: fit-content;
   height: 5vh;
+  margin-top: 7vh;
+  margin-left: 10vw;
   padding-left: 2vw;
   padding-right: 2vw;
   font-size: 1.2em;
@@ -32,6 +60,16 @@
   background: #8f0202;
   transition: ease 0.2s;
   transform: scale(1.02);
+}
+.mRoomReservationBtn {
+  width: fit-content;
+  height: 5vh;
+  font-size: 1.2em;
+  background-color: #820101;
+  color: white;
+  border-radius: 10px;
+  outline: 0;
+  border: 0;
 }
 /*참석자 리스트*/
 .participantForm {

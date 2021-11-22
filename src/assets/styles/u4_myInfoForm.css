@@ -3,8 +3,8 @@
 }
 
 .myInfoFormTitleTextStyle {
-  font-size: 2em;
-  color: #646464;
+  font-size: 1.5em;
+  color: #820101;
   font-weight: bold;
   text-align: center;
 }
@@ -14,14 +14,19 @@
   align-items: center;
   margin-top: 6vh;
 }
-.setPadding {
-  padding-left: 4vw;
+.m_myInfoDetailForm {
+  display: flex;
+  flex-direction: column;
+  margin-top: 2vh;
+  align-items: center;
 }
+
 .infoBottom {
   display: flex;
-  align-content: space-between;
+  flex-direction: column;
 }
-.infoEditButton {
+
+.editFinishButton {
   width: 7vw;
   height: 5vh; /*30px*/
   margin-left: 2vw;
@@ -33,34 +38,56 @@
   border: none;
   margin-top: 5vh;
 }
-.infoEditButton:hover {
+.editFinishButton:hover {
   transition: ease 0.2s;
   transform: scale(1.02);
   background: #8f0202;
 }
-.editFinishButton {
-  width: 7vw;
-  height: 5vh; /*30px*/
-  margin-left: 2vw;
+.m_editFinishButton {
+  width: 20vw;
+  height: 6vh; /*30px*/
   border-radius: 5px;
   font-size: 0.8em; /*12px*/
   font-weight: bold;
-  background: #3f3f3f;
+  background: #c00000;
   color: white;
   border: none;
   margin-top: 5vh;
 }
-.editFinishButton:hover {
-  transition: ease 0.2s;
-  transform: scale(1.02);
-  background: #747272;
-}
 .dropUser {
-  font-size: 1.2em;
+  font-size: 1em;
   cursor: pointer;
-  align-self: flex-end;
+  margin-left: 3.4vw;
+  margin-top: 6vh;
+  font-weight: bold;
+  text-decoration: underline;
 }
 .dropUser:hover {
   transition: ease 0.1s;
   transform: scale(1.01);
+}
+.m_dropUser {
+  font-size: 0.8em;
+  margin-left: 3.4vw;
+  margin-top: 6vh;
+  font-weight: bold;
+  text-decoration: underline;
+}
+.m_editInput {
+  width: 20vw; /*80%*/
+  height: 5vh; /*30px*/
+  border-radius: 5px;
+  font-size: 0.8em; /*12px*/
+  font-weight: bold;
+  margin-bottom: 10px;
+  border: 2px solid #c00000;
+  margin-top: 10px;
+}
+.m_myInfoForm-control {
+  margin: 5px auto;
+  width: 50vw; /*80%*/
+  height: 6vh; /*30px*/
+  font-size: 0.8em; /*12px*/
+  font-weight: bold;
+  border-radius: 5px;
 }

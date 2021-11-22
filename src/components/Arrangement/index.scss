@@ -1,0 +1,22 @@
+.arrangement-container {
+  height: 100%;
+
+  .header {
+    display: flex;
+    align-items: center;
+
+    .header-title {
+      font-size: 2em;
+      display: flex;
+      align-items: center;
+    }
+  }
+}
+
+.tooltip {
+  .tooltip-inner {
+    strong {
+      color: #ce0303;
+    }
+  }
+}

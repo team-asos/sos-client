@@ -1,3 +1,11 @@
+.infoTable {
+  position: relative;
+  text-align: center;
+  font-size: 1em;
+}
+.mobileInfoTable {
+  font-size: 0.8em;
+}
 .roomReservationButton {
   background-color: #820101;
   color: ivory;
@@ -8,11 +16,15 @@
 }
 .roomReservationButton:hover {
   background: #8f0202;
-  transition: ease 0.2s;
+  transition: ease 0.1s;
   transform: scale(1.01);
 }
-.infoTable {
-  position: relative;
-  text-align: center;
-  font-size: 1.2em;
+.m_roomReservationBtn {
+  background-color: #820101;
+  color: ivory;
+  border-radius: 10px;
+  border: 0;
+  outline: 0;
+  height: 30px;
+  width: 40px;
 }

@@ -1,18 +1,35 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import NavBarUser from '../components/u_navBar';
-import SeatStatusForm from '../components/u5_seatStatusForm';
-import UserSearchForm from '../components/u5_userSearchForm';
-import DateTimeForm from '../components/u5_dateTimeForm';
 import { useCookies } from 'react-cookie';
-
+import { Dropdown } from 'react-bootstrap';
+import { BoardContainer } from '../components/u5_boardContainer';
+import * as BsIcon from 'react-icons/bs';
+import { useMediaQuery } from 'react-responsive';
+import { FiMenu } from 'react-icons/fi';
+import MobileNavBar from '../components/u_m_navBar';
 import '../assets/styles/u5_seatPage.css';
 //좌석 예약 페이지
 const SeatPage = () => {
+  const [open, setOpen] = useState(false);
+  const isPc = useMediaQuery({
+    query: '(min-width:768px)',
+  });
+  const isMobile = useMediaQuery({ query: '(max-width:767px)' });
+  const navClick = () => {
+    setOpen(!open);
+  };
   const [myId, setMyId] = useState();
   const [cookie] = useCookies(['access_token']);
-  const [seletedSeat, setSelectedSeat] = useState([]);
-
+  const [isToggleOn, setIsToggleOn] = useState(1);
+  const [floors, setFloors] = useState([]);
+  const [selectedFloor, setSelectedFloor] = useState([]);
+  const handleClick = e => {
+    setIsToggleOn(!isToggleOn);
+    isToggleOn
+      ? (e.target.style.color = '#820101')
+      : (e.target.style.color = 'black');
+  };
   /*내 정보 */
   useEffect(() => {
     const res = async () => {
@@ -29,18 +46,45 @@ const SeatPage = () => {
     };
     res();
   }, []);
-  const getSeatName = seat => {
-    setSelectedSeat(seat);
-  };
+
+  //전체 층 조회
+  useEffect(() => {
+    const fetchFloors = async () => {
+      const result = await fetch(
+        `${process.env.REACT_APP_SERVER_BASE_URL}/floors`,
+        {
+          method: 'GET',
+        },
+      );
+
+      setFloors(await result.json());
+    };
+
+    fetchFloors();
+  }, []);
+
   return (
     <div className="userSeatPage">
-      <div>
-        <NavBarUser />
-      </div>
+      <div>{isPc ? <NavBarUser /> : ''}</div>
 
-      <div className="userSeatForm">
+      <div className={isPc ? 'userSeatForm' : 'm_roomCheckForm'}>
         <div className="u_seatHeader">
-          <div className="u_seatHeaderTextStyle">
+          <div>
+            {isMobile ? (
+              <FiMenu
+                size={40}
+                onClick={navClick}
+                style={{ color: '#820101' }}
+              />
+            ) : (
+              ''
+            )}
+          </div>
+          <div
+            className={
+              isPc ? 'u_seatHeaderTextStyle' : 'm_roomCheck_titleTextStyle'
+            }
+          >
             <Link
               to="/seat-reservation"
               style={{
@@ -52,18 +96,58 @@ const SeatPage = () => {
             </Link>
           </div>
         </div>
+        {open ? <MobileNavBar open={open} /> : ''}
 
-        <div className="userSeatReservationForm">
-          {/*좌석 도면, 시설, 좌석 현황*/}
-          <div className="u_leftForm">
-            <SeatStatusForm />
+        <div className="u_seatFormUpper">
+          {/*층 이름, 시설 아이콘, 좌석 현황 */}
+          <div className="u_selectFloor">
+            <Dropdown className="dropdownFloor">
+              <Dropdown.Toggle variant="secondary" id="dropdown-basic">
+                {selectedFloor.name}
+              </Dropdown.Toggle>
+
+              <Dropdown.Menu>
+                {floors.map(floor => (
+                  <Dropdown.Item
+                    onClick={e => {
+                      setSelectedFloor(floor);
+                    }}
+                  >
+                    {floor.name}
+                  </Dropdown.Item>
+                ))}
+              </Dropdown.Menu>
+            </Dropdown>
+            {isPc && <p className="selectFloorTextStyle">층을 선택하세요.</p>}
           </div>
 
-          {/*임직원 검색창, 예약시간, 예약하기 버튼*/}
-          <div className="u_rightForm">
-            <DateTimeForm myId={myId} />
-            <UserSearchForm />
+          <div className="statusForm">
+            <div className="showFacility">
+              {/*시설 아이콘*/}
+              <div className="facility-icon-box">
+                <div className="facility-icon-div">
+                  <BsIcon.BsFillInfoCircleFill
+                    className="facilityicon"
+                    size={35}
+                    onClick={handleClick}
+                    style={{ cursor: 'pointer' }}
+                  ></BsIcon.BsFillInfoCircleFill>
+                </div>
+              </div>
+            </div>
+            {/*좌석 현황*/}
+            <div className="reservedSeats">
+              <div className="reservedSeatShape"></div>
+              <div className="reservedSeatsTextStyle">사용 좌석 20석</div>
+            </div>
+            <div className="ableSeats">
+              <div className="ableSeatShape"></div>
+              <div className="ableSeatsTextStyle">예약 가능 13석</div>
+            </div>
           </div>
+        </div>
+        <div className="content">
+          <BoardContainer floor={selectedFloor} userId={myId} />
         </div>
       </div>
     </div>

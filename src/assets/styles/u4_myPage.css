@@ -10,6 +10,9 @@
   display: flex;
   flex-direction: column;
 }
+.m_u_myPageForm {
+  width: 100%;
+}
 .u_myPageHeader {
   position: relative;
   height: 10vh;
@@ -21,7 +24,14 @@
 .u_myPageHeaderTextStyle {
   position: relative;
   font-weight: bold;
-  font-size: 2em;
+  font-size: 1.8em;
+  margin-left: 2%;
+  margin-right: 4%;
+}
+.m_u_myPageHeaderTextStyle {
+  position: relative;
+  font-weight: bold;
+  font-size: 1.4em;
   margin-left: 2%;
   margin-right: 4%;
 }
@@ -37,6 +47,10 @@
   font-weight: bold;
   cursor: pointer;
   margin-left: 2%;
+}
+.m_myPageMenuText {
+  font-size: 0.9em;
+  padding-right: 3.5vw;
 }
 .myRLMenuTextStyle:hover,
 .myInfoMenuTextStyle:hover {
