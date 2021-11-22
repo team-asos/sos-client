@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { useCookies } from 'react-cookie';
-
+import { useMediaQuery } from 'react-responsive';
 import { Accordion, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import * as AiIcon from 'react-icons/ai';
-
 import InquiryForm from './u3_inquiryForm';
 import '../assets/styles/u3_inquiryListForm.css';
 
 const InquiryListForm = props => {
+  const isPc = useMediaQuery({
+    query: '(min-width:768px)',
+  });
+  const isMobile = useMediaQuery({ query: '(max-width:767px)' });
   const [cookie] = useCookies('access_token');
 
   //문의 가져오기
@@ -68,7 +71,7 @@ const InquiryListForm = props => {
     <div>
       <div className="inquiryListTotal">
         <div className="inquiryListUpper">
-          <p className="myListText">나의 문의 내역</p>
+          <p className={isPc ? 'myListText' : 'm_myListText'}>나의 문의 내역</p>
           <span>
             <OverlayTrigger
               placement="right"
@@ -98,7 +101,7 @@ const InquiryListForm = props => {
           </span>
         </div>
         {question.length === 0 ? (
-          <div className="noInquiryList">
+          <div className={isPc ? 'noInquiryList' : 'm_noInquiryList'}>
             <div>
               <AiIcon.AiOutlineQuestionCircle
                 size={50}
@@ -131,24 +134,48 @@ const InquiryListForm = props => {
                       <Accordion.Header className="inquiryTitle">
                         <div className="inquiryTitleMain">
                           <div className="inquiryTitleUpper">
-                            <p className="index">{idx + 1}</p>
                             {/* 문의 상태 */}
+                            {isPc ? (
+                              <p
+                                className="isReply"
+                                style={
+                                  item.status === 1
+                                    ? { color: 'green' }
+                                    : { color: 'gray' }
+                                }
+                              >
+                                {item.status === 1 ? '답변완료' : '답변대기'}
+                              </p>
+                            ) : (
+                              <p
+                                className="isReply"
+                                style={
+                                  item.status === 1
+                                    ? { color: 'green' }
+                                    : { color: 'gray' }
+                                }
+                              >
+                                ●
+                              </p>
+                            )}
+                            {/* {isPc ? <p className="index">{idx + 1}</p> : null} */}
+                            {/* 문의 제목 */}
                             <p
-                              className="isReply"
-                              style={
-                                item.status === 1
-                                  ? { color: 'green' }
-                                  : { color: 'gray' }
+                              key={idx}
+                              className={
+                                isPc
+                                  ? 'inquiryTitleStyle'
+                                  : 'm_inquiryTitleStyle'
                               }
                             >
-                              {item.status === 1 ? '답변완료' : '답변대기'}
-                            </p>
-                            {/* 문의 제목 */}
-                            <p key={idx} className="inquiryTitleStyle">
                               {item.title}
                             </p>
                             {/* 문의 날짜 */}
-                            <p className="inquiryDateStyle">
+                            <p
+                              className={
+                                isPc ? 'inquiryDateStyle' : 'm_inquiryDateStyle'
+                              }
+                            >
                               {item.createdAt.slice(0, 10)}
                             </p>
                           </div>
@@ -156,36 +183,67 @@ const InquiryListForm = props => {
                       </Accordion.Header>
                       <Accordion.Body className="inquiryContent">
                         <div className="inquiryMsg">
-                          <div style={{ width: '10%' }}>
-                            <p style={{ fontWeight: 'bold' }}>문의 내용</p>
+                          <div className="inquiryAndDeleteButton">
+                            <p
+                              className={
+                                isPc ? 'inquiryBodyTitle' : 'm_inquiryBodyTitle'
+                              }
+                            >
+                              {isPc ? '문의 내용' : '문의'}
+                            </p>
+                            <AiIcon.AiTwotoneDelete
+                              className="deleteInquriy"
+                              size={20}
+                              onClick={() => deleteClick(item.id)}
+                              style={{ color: 'gray' }}
+                            />
                           </div>
-                          <div style={{ width: '90%' }}>{item.message}</div>
+                          <div
+                            style={{ width: '90%' }}
+                            className={
+                              isPc
+                                ? 'inquiryBodyMessage'
+                                : 'm_inquiryBodyMessage'
+                            }
+                          >
+                            {item.message}
+                          </div>
                         </div>
-                        <p
-                          className="deleteInquiry"
-                          onClick={() => deleteClick(item.id)}
-                        >
-                          삭제
-                        </p>
                       </Accordion.Body>
                       {/* 답변 */}
                       {item.status === 1 ? (
                         <Accordion.Body className="inquiryAnswer">
                           <div className="inquiryMsg">
-                            <div style={{ width: '10%' }}>
-                              <p style={{ fontWeight: 'bold' }}>답변 내용</p>
+                            <div className="inquiryAndDeleteButton">
+                              <p
+                                className={
+                                  isPc
+                                    ? 'inquiryBodyTitle'
+                                    : 'm_inquiryBodyTitle'
+                                }
+                              >
+                                {isPc ? '답변 내용' : '답변'}
+                              </p>
+                              <p
+                                className={
+                                  isPc
+                                    ? 'answerDateTextStyle'
+                                    : 'm_answerDateTextStyle'
+                                }
+                              >
+                                {item.answer?.createdAt.slice(0, 10)}
+                              </p>
                             </div>
-                            <div style={{ width: '70%' }}>
+                            <div
+                              style={{ width: '70%' }}
+                              className={
+                                isPc
+                                  ? 'inquiryBodyMessage'
+                                  : 'm_inquiryBodyMessage'
+                              }
+                            >
                               {item.answer?.message}
                             </div>
-
-                            <p
-                              style={{
-                                marginLeft: '9vw',
-                              }}
-                            >
-                              {item.answer?.createdAt.slice(0, 10)}
-                            </p>
                           </div>
                         </Accordion.Body>
                       ) : (

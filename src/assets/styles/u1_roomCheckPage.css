@@ -21,7 +21,7 @@
 .checkHeader {
   position: relative;
   height: 10%;
-  background: #c4c4c4;
+  background: #c4c4c45b;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -34,7 +34,7 @@
   margin-right: 4%;
 }
 .m_roomCheck_titleTextStyle {
-  font-size: 1.4em;
+  font-size: 1.2em;
   margin-left: 2%;
   font-weight: bold;
 }

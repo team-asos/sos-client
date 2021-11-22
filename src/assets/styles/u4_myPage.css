@@ -16,7 +16,7 @@
 .u_myPageHeader {
   position: relative;
   height: 10vh;
-  background: #c4c4c4;
+  background: #c4c4c45b;
   display: flex;
   flex-direction: row;
   align-items: center;

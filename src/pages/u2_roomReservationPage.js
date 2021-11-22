@@ -43,15 +43,7 @@ const RoomReservationPage = props => {
               isPc ? 'rrp_titleTextStyle' : 'm_roomCheck_titleTextStyle'
             }
           >
-            <Link
-              to="/room-reservation/roomId"
-              style={{
-                color: 'inherit',
-                textDecoration: 'none',
-              }}
-            >
-              회의실 예약
-            </Link>
+            회의실 예약
           </div>
         </div>
         {open ? <MobileNavBar open={open} /> : ''}

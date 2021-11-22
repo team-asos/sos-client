@@ -16,7 +16,7 @@
 .u_seatHeader {
   position: relative;
   height: 10%;
-  background: #c4c4c4;
+  background: #c4c4c45b;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -64,7 +64,7 @@
   display: flex;
   align-items: center;
 }
-.dropdownFloor {
+.u_dropdownFloor {
   margin-left: 2vw;
 }
 

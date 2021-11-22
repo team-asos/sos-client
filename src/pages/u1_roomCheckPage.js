@@ -18,7 +18,7 @@ const RoomCheckPage = () => {
   };
   return (
     <div className="roomCheckPage">
-      <div>{isPc ? <NavBarUser /> : ''}</div>
+      <div>{isPc ? <NavBarUser /> : null}</div>
 
       <div className={isPc ? 'roomCheckForm' : 'm_roomCheckForm'}>
         <div className="checkHeader">
@@ -39,18 +39,10 @@ const RoomCheckPage = () => {
               isPc ? 'roomCheck_titleTextStyle' : 'm_roomCheck_titleTextStyle'
             }
           >
-            <Link
-              to="/room-check"
-              style={{
-                color: 'inherit',
-                textDecoration: 'none',
-              }}
-            >
-              회의실 조회
-            </Link>
+            회의실 조회
           </div>
         </div>
-        {open ? <MobileNavBar open={open} /> : ''}
+        {open ? <MobileNavBar open={open} /> : null}
         <div className="roomInfoTable">
           <RoomInfoTable />
         </div>

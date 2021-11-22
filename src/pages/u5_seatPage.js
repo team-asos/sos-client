@@ -85,15 +85,7 @@ const SeatPage = () => {
               isPc ? 'u_seatHeaderTextStyle' : 'm_roomCheck_titleTextStyle'
             }
           >
-            <Link
-              to="/seat-reservation"
-              style={{
-                color: 'inherit',
-                textDecoration: 'none',
-              }}
-            >
-              좌석 예약
-            </Link>
+            좌석 예약
           </div>
         </div>
         {open ? <MobileNavBar open={open} /> : ''}
@@ -101,7 +93,7 @@ const SeatPage = () => {
         <div className="u_seatFormUpper">
           {/*층 이름, 시설 아이콘, 좌석 현황 */}
           <div className="u_selectFloor">
-            <Dropdown className="dropdownFloor">
+            <Dropdown className="u_dropdownFloor">
               <Dropdown.Toggle variant="secondary" id="dropdown-basic">
                 {selectedFloor.name}
               </Dropdown.Toggle>
