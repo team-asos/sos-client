@@ -3,19 +3,19 @@ import React from 'react';
 import '../assets/styles/a5_seatManagePage.css';
 
 import NavBox from '../components/a2_navBox';
-import { Arrangement } from '../components/Arrangement';
+import SeatManageBox from '../components/a5_seatManageBox';
 
-const seatManagePage = () => {
-  return (
-    <div className="seatManagePage">
-      <div>
-        <NavBox />
+export default class seatManagePage extends React.Component {
+  render() {
+    return (
+      <div className="seatManagePage">
+        <div>
+          <NavBox />
+        </div>
+        <div className="seatManagePageRight">
+          <SeatManageBox />
+        </div>
       </div>
-      <div className="seatManagePageRight">
-        <Arrangement />
-      </div>
-    </div>
-  );
-};
-
-export default seatManagePage;
+    );
+  }
+}

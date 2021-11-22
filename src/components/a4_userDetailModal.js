@@ -5,6 +5,8 @@ import tableHeadertoKR from './a4_tableHeadertoKR';
 import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
 import '../assets/styles/a4_userDetailBox.css';
 
+import * as fa from 'react-icons/fa';
+
 export default function UserDetailModalContent({
   show,
   handleClose,
@@ -42,17 +44,9 @@ export default function UserDetailModalContent({
     res(modalInfo.id);
   }, []);
 
-  console.log(reservation);
-
   const [inquiry, setInquiry] = useState('');
   //문의 내역 테이블 헤더
-  const inquiryTitle = [
-    '문의상태',
-    '문의내용',
-    '답변내용',
-    '문의날짜',
-    '답변날짜',
-  ];
+  const inquiryTitle = ['상태', '문의내용', '답변내용', '문의날짜', '답변날짜'];
   //문의 내역 불러오기
   useEffect(() => {
     const res = async id => {
@@ -91,6 +85,7 @@ export default function UserDetailModalContent({
     <Modal
       show={show}
       onHide={handleClose}
+      scrollable={true}
       size="xl"
       aria-labelledby="contained-modal-title-vcenter"
       centereddialogClassName="modal-180w"
@@ -106,10 +101,15 @@ export default function UserDetailModalContent({
       </Modal.Header>
       {/* 회원 정보 조회 테이블*/}
       <Modal.Body>
-        <h5 style={{ fontWeight: 'bold', color: '#c00000' }}>회원 정보</h5>
+        <h6 style={{ fontWeight: 'bold', color: '#c00000' }}>
+          <fa.FaUser
+            style={{ color: 'gray', marginRight: '0.4%', marginTop: '-0.2%' }}
+          />
+          | 회원 정보
+        </h6>
         <MDBTable hover className="userTable" cellPadding={0} cellSpacing={0}>
           <MDBTableHead>
-            <tr>
+            <tr style={{ fontSize: 'smaller' }}>
               {data[0] &&
                 columns.map(heading =>
                   heading === 'role' || heading === 'id' ? (
@@ -121,7 +121,7 @@ export default function UserDetailModalContent({
             </tr>
           </MDBTableHead>
           <MDBTableBody>
-            <tr>
+            <tr style={{ fontSize: 'smaller' }}>
               {columns.map(column =>
                 column === 'role' || column === 'id' ? (
                   ''
@@ -136,10 +136,17 @@ export default function UserDetailModalContent({
         </MDBTable>
 
         {/* 예약 내역 조회 테이블 */}
-        <h5 style={{ fontWeight: 'bold', color: '#c00000' }}>예약 내역</h5>
+        <h6 style={{ fontWeight: 'bold', color: '#c00000' }}>
+          <fa.FaRegistered
+            style={{ color: 'gray', marginRight: '0.4%', marginTop: '-0.2%' }}
+          />
+          | 예약 내역
+        </h6>
         {/* 예약내역 존재여부 판별 */}
         {reservation.length === 0 ? (
-          <p>예약 내역이 존재하지 않습니다.</p>
+          <p style={{ fontStyle: 'italic', color: 'gray', fontSize: 'small' }}>
+            &nbsp; &nbsp;&nbsp; 예약 내역이 존재하지 않습니다.
+          </p>
         ) : (
           <MDBTable hover className="userTable" cellPadding={0} cellSpacing={0}>
             <MDBTableHead>
@@ -178,14 +185,21 @@ export default function UserDetailModalContent({
         )}
 
         {/* 문의 내역 조회 테이블 */}
-        <h5 style={{ fontWeight: 'bold', color: '#c00000' }}>문의 내역</h5>
+        <h6 style={{ fontWeight: 'bold', color: '#c00000' }}>
+          <fa.FaTelegramPlane
+            style={{ color: 'gray', marginRight: '0.4%', marginTop: '-0.2%' }}
+          />
+          | 문의 내역
+        </h6>
         {/* 문의 내역 존재 여부 판별 */}
         {inquiry.length === 0 ? (
-          <p>문의 내역이 존재하지 않습니다.</p>
+          <p style={{ fontStyle: 'italic', color: 'gray', fontSize: 'small' }}>
+            &nbsp; &nbsp;&nbsp;문의 내역이 존재하지 않습니다.
+          </p>
         ) : (
           <MDBTable hover className="userTable" cellPadding={0} cellSpacing={0}>
             <MDBTableHead>
-              <tr>
+              <tr style={{ fontSize: 'small' }}>
                 {inquiryTitle.map(heading => (
                   <th>{heading}</th>
                 ))}
@@ -193,15 +207,23 @@ export default function UserDetailModalContent({
             </MDBTableHead>
             <MDBTableBody>
               {inquiry.map(item => (
-                <tr>
-                  {item.status === 0 ? <td>답변완료</td> : <td>답변대기</td>}
-                  <td>{item.message}</td>
-                  <td>{item.answer?.message}</td>
-                  <td>{item.createdAt.slice(0, 10)}</td>
+                <tr style={{ fontSize: 'small' }}>
                   {item.status === 0 ? (
-                    <td>{item.answer?.createdAt.slice(0, 10)}</td>
+                    <td style={{ color: 'red', width: '6%' }}>답변대기</td>
                   ) : (
-                    <td>-</td>
+                    <td style={{ color: 'green', width: '6%' }}>답변완료</td>
+                  )}
+                  <td style={{ width: '32%' }}>{item.message}</td>
+                  <td style={{ width: '32%' }}>{item.answer?.message}</td>
+                  <td style={{ width: '8%' }}>{item.createdAt.slice(0, 10)}</td>
+                  {item.status === 1 ? (
+                    <td style={{ width: '8%' }}>
+                      {item.answer?.createdAt.slice(0, 10)}
+                    </td>
+                  ) : (
+                    <td style={{ width: '8%' }} style={{ fontSize: 'small' }}>
+                      -
+                    </td>
                   )}
                 </tr>
               ))}

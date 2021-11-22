@@ -23,6 +23,11 @@ const DeleteFloor = () => {
   //삭제 층 데이터베이스 불러오기
   const [deleteFloor, setDeleteFloor] = useState('');
 
+  const inputHandler = e => {
+    setDeleteFloor(e.target.value);
+    console.log(deleteFloor);
+  };
+
   const deleteClickHandler = async floorName => {
     const floorId = 0;
 
@@ -59,13 +64,23 @@ const DeleteFloor = () => {
     <div>
       <Modal.Body>
         <div className="createFloorModal">
-          <div>
-            <label>층 이름 : </label>
-            <input
+          <div style={{ width: '100%' }}>
+            <form style={{ width: '100%' }}>
+              <label style={{ width: '100%' }}>
+                층을 선택해주세요 : {'         '}
+                <select onChange={inputHandler}>
+                  {floor.map(item => (
+                    <option value={item}>{item.name}</option>
+                  ))}
+                </select>
+              </label>
+            </form>
+
+            {/* <input
               className="floorInputForm"
               placeholder=" (숫자+층)으로 입력해주세요. 예) 1층"
               onChange={e => setDeleteFloor(e.target.value)}
-            />
+            /> */}
           </div>
         </div>
       </Modal.Body>

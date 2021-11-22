@@ -5,8 +5,7 @@ import { RoomTab } from './RoomTab';
 import { FacilityTab } from './FacilityTab';
 
 import { EDIT_SELECTION } from '../../const/selection-type.const';
-
-import './index.scss';
+import './BoardSetting.css';
 
 export const BoardSetting = ({
   selection,
@@ -60,9 +59,24 @@ export const BoardSetting = ({
     return (
       <div className="board-setting">
         <div className="setting-tab-group">
-          <button onClick={() => handleTab(0)}>좌석</button>
-          <button onClick={() => handleTab(1)}>회의실</button>
-          <button onClick={() => handleTab(2)}>시설</button>
+          <button
+            className={tab === 0 ? 'createbtn-click' : 'createbtn'}
+            onClick={() => handleTab(0)}
+          >
+            좌석
+          </button>
+          <button
+            className={tab === 1 ? 'createbtn-click' : 'createbtn'}
+            onClick={() => handleTab(1)}
+          >
+            회의실
+          </button>
+          <button
+            className={tab === 2 ? 'createbtn-click' : 'createbtn'}
+            onClick={() => handleTab(2)}
+          >
+            시설
+          </button>
         </div>
         <div className="setting-tab">
           <Tab />

@@ -1,29 +1,16 @@
 import React, { useEffect, useState } from 'react';
 
 import 'react-dropdown/style.css';
-import { OverlayTrigger, Tooltip } from 'react-bootstrap';
+import { OverlayTrigger, Tooltip, Dropdown } from 'react-bootstrap';
 
 import '../assets/styles/a5_seatManageBox.css';
 import FloorModal from './a5_floorModal';
-import {
-  Select,
-  FormControl,
-  MenuItem,
-  FormHelperText,
-} from '@material-ui/core';
-import { BoardContainer } from './BoardContainer/index';
+
+import { BoardContainer } from './a5_BoardContainer';
 
 const SeatManageBox = () => {
   //층 불러오기
-  const [floors, setFloors] = useState([]);
-
-  //층 선택
-  const [selectFloor, setSelectFloor] = useState([]);
-
-  //층 생성 모달창 관련 변수 정의
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const [floor, setFloor] = useState([]);
 
   useEffect(() => {
     const fetchFloors = async () => {
@@ -33,44 +20,67 @@ const SeatManageBox = () => {
           method: 'GET',
         },
       );
-
-      setFloors(await result.json());
+      setFloor(await result.json());
     };
-
     fetchFloors();
   }, []);
 
-  return (
-    <div className="seatManageBox">
-      <div className="seatManageUpperBox">
-        {/* 위, 텍스트 부분 */}
-        <div className="seatManageUpperFirstChild">좌석 관리</div>
+  //층 선택
+  const [selectFloor, setSelectFloor] = useState([]);
 
-        {/* 층 선택 */}
+  const handleChange = event => {
+    console.log(event.target.value);
+    setSelectFloor(event.target.value);
+  };
+
+  //층 생성 모달창 관련 변수 정의
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  return (
+    //.arrangement-container
+    <div className="seatManageBox">
+      {/* .header */}
+      <div className="seatManageUpperBox">
+        {/* .header-title // 위, 텍스트 부분 */}
+        <div className="seatManageUpperFirstChild">배치 관리</div>
+
+        {/* .header-floor // 층 선택 */}
         <div className="seatManageUpperSecondChild">
-          <FormControl sx={{ m: 4, minWidth: 150 }}>
-            <FormHelperText>층을 선택하세요.</FormHelperText>
-            <Select
-              value={selectFloor}
-              onChange={e => {
-                setSelectFloor(e.target.value);
-              }}
-              displayEmpty
-              inputProps={{ 'aria-label': 'Without label' }}
-            >
-              <MenuItem value="">
-                <em>선택</em>
-              </MenuItem>
-              {floors.map(item => (
-                <MenuItem value={item} key={item.id}>
-                  {item.name}
-                </MenuItem>
+          {/* 여기에 select 다시 작성하기 */}
+          {/* <div>
+            <label>층을 선택해주세요:</label>
+            <select className="form-control" name="floor">
+
+              {floor.map(floor => (
+                <option onClick={e => setSelectFloor(floor), console.log}>
+                  {floor.name}
+                </option>
               ))}
-            </Select>
-          </FormControl>
+            </select>
+          </div> */}
+          <p style={{ fontSize: '0.75em' }}>층을 선택해주세요.</p>
+          <Dropdown className="dropdownFloor">
+            <Dropdown.Toggle id="dropdown-basic" variant="secondary">
+              {selectFloor.length === 0 ? '층 선택' : selectFloor.name}
+            </Dropdown.Toggle>
+            <Dropdown.Menu>
+              <Dropdown.Item>층 선택</Dropdown.Item>
+              {floor.map(floor => (
+                <Dropdown.Item
+                  onClick={e => {
+                    setSelectFloor(floor);
+                  }}
+                >
+                  {floor.name}
+                </Dropdown.Item>
+              ))}
+            </Dropdown.Menu>
+          </Dropdown>
         </div>
 
-        {/* 층 추가 */}
+        {/* .header-tooltip // 층 추가 */}
         <div className="seatManageUpperLastChild">
           <OverlayTrigger
             key="right"
@@ -92,8 +102,9 @@ const SeatManageBox = () => {
         </div>
       </div>
 
-      {/* 도면 */}
+      {/* .content // 아래 도면 부분 */}
       <div className="seatManageBottomBox">
+        {/* <SeatBoard /> */}
         <BoardContainer floor={selectFloor} />
       </div>
 

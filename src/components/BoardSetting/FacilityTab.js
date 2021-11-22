@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import * as bs from 'react-icons/bs';
+import * as io from 'react-icons/io';
 
 import { EDIT_SELECTION } from '../../const/selection-type.const';
 
@@ -97,30 +99,71 @@ export const FacilityTab = ({
     deleteFacility();
   };
 
+  const FindFacility = ({ name }) => {
+    console.log(name);
+    return facilitiesList.map(facility =>
+      name === facility.engName ? <>{facility.name}</> : '',
+    );
+  };
+
   return (
     <div className="seat-tab">
-      <label>X</label>
-      <input value={selection.x} disabled />
-      <label>Y</label>
-      <input value={selection.y} disabled />
-      <label>시설 타입</label>
-
+      {selection.stage !== EDIT_SELECTION && (
+        <p className="text-notification">
+          시설 생성 시, <bs.BsCheckAll style={{ color: '#c00000' }} />는{' '}
+          <span className="text-notification-strong">필수 선택칸</span>입니다.
+          <br />
+          도면의 흰색 부분 선택 시, 생성이 종료됩니다.
+        </p>
+      )}
+      {selection.stage === EDIT_SELECTION && (
+        <p className="text-notification">
+          <io.IoIosNotifications size={18} style={{ color: '#c00000' }} />{' '}
+          도면의 흰색 부분 선택 시, <br />
+          조회가 종료됩니다.
+        </p>
+      )}
+      <label>
+        <bs.BsCheckAll style={{ color: 'transparent' }} />
+        시설 위치
+      </label>
+      <div style={{ marginLeft: '15%' }}>
+        <label>
+          X :{'  '}
+          <input
+            value={selection.x}
+            className="seat-input-location"
+            disabled
+          />{' '}
+          ,
+        </label>
+        <label style={{ marginLeft: '5%' }}>
+          Y :{'  '}
+          <input value={selection.y} className="seat-input-location" disabled />
+        </label>
+      </div>
       {selection.stage !== EDIT_SELECTION && (
         <>
-          <FormControl variant="standard">
-            <Select
-              value={type}
-              onChange={inputType}
-              disabled={selection.x === -1 ? true : false}
-            >
-              {facilitiesList.map(facility => (
-                <MenuItem value={facility.engName} key={facility.name}>
-                  {facility.name}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
+          <label style={{ marginTop: '5%' }}>
+            <bs.BsCheckAll style={{ color: '#c00000' }} />
+            시설 타입 :{'  '}
+            <FormControl variant="standard">
+              <Select
+                style={{ width: '10.5vw' }}
+                value={type}
+                onChange={inputType}
+                disabled={selection.x === -1 ? true : false}
+              >
+                {facilitiesList.map(facility => (
+                  <MenuItem value={facility.engName} key={facility.name}>
+                    {facility.name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </label>
           <button
+            className="seat-btn-make"
             onClick={() => {
               handleSave();
             }}
@@ -132,16 +175,13 @@ export const FacilityTab = ({
       )}
       {selection.stage === EDIT_SELECTION && (
         <>
-          <FormControl variant="standard">
-            <Select value={selection.name} disabled>
-              {facilitiesList.map(facility => (
-                <MenuItem value={facility.engName} key={facility.name}>
-                  {facility.name}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
+          <label style={{ marginTop: '5%' }}>
+            <bs.BsCheckAll style={{ color: 'transparent' }} />
+            시설 타입 :{'  '}
+            <FindFacility name={selection.name} />
+          </label>
           <button
+            className="seat-btn-make"
             onClick={() => {
               handleDelete();
             }}

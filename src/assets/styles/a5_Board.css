@@ -1,0 +1,34 @@
+.board-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #c2c2c2;
+}
+
+.board-cover {
+  height: 100%;
+  flex: 1;
+
+  overflow: auto;
+
+  background-color: #821001;
+}
+.board-item-cover {
+  width: fit-content;
+  height: fit-content;
+
+  padding: 5%;
+
+  transition: 0.1s ease-in;
+  transform: scale(1);
+}
+
+.board-item-cover-scale {
+  width: fit-content;
+  height: fit-content;
+
+  transition: 0.1s ease-out;
+  transform: scale(0.5);
+
+  border: 2px solid black;
+}
