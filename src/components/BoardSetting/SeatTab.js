@@ -70,14 +70,17 @@ export const SeatTab = ({ selection, floor, seats, setSeats }) => {
     <div className="seat-tab">
       {selection.stage !== EDIT_SELECTION && (
         <p className="text-notification">
-          좌석 생성 시, <bs.BsCheckAll style={{ color: '#c00000' }} />는 필수
-          입력칸 입니다.
+          좌석 생성 시, <bs.BsCheckAll style={{ color: '#c00000' }} />는{' '}
+          <span className="text-notification-strong">필수 입력칸</span> 입니다.
+          <br />
+          도면의 흰색 부분 선택 시, 생성이 종료됩니다.
         </p>
       )}
       {selection.stage === EDIT_SELECTION && (
         <p className="text-notification">
           <io.IoIosNotifications size={18} style={{ color: '#c00000' }} />{' '}
-          도면의 흰색 부분 선택 시, 조회가 종료됩니다.
+          도면의 흰색 부분 선택 시, <br />
+          조회가 종료됩니다.
         </p>
       )}
 

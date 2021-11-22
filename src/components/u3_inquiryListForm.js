@@ -16,7 +16,6 @@ const InquiryListForm = props => {
   const res = async () => {
     await fetch(
       `${process.env.REACT_APP_SERVER_BASE_URL}/questions/search?userId=${props.user.id}`,
-
       {
         headers: { Authorization: `Bearer ${cookie.access_token}` },
         method: 'GET',

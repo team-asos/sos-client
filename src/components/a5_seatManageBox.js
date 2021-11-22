@@ -1,17 +1,11 @@
 import React, { useEffect, useState } from 'react';
 
 import 'react-dropdown/style.css';
-import { OverlayTrigger, Tooltip } from 'react-bootstrap';
+import { OverlayTrigger, Tooltip, Dropdown } from 'react-bootstrap';
 
 import '../assets/styles/a5_seatManageBox.css';
 import FloorModal from './a5_floorModal';
 
-import {
-  Select,
-  FormControl,
-  MenuItem,
-  FormHelperText,
-} from '@material-ui/core';
 import { BoardContainer } from './a5_BoardContainer';
 
 const SeatManageBox = () => {
@@ -35,6 +29,7 @@ const SeatManageBox = () => {
   const [selectFloor, setSelectFloor] = useState([]);
 
   const handleChange = event => {
+    console.log(event.target.value);
     setSelectFloor(event.target.value);
   };
 
@@ -53,22 +48,36 @@ const SeatManageBox = () => {
 
         {/* .header-floor // 층 선택 */}
         <div className="seatManageUpperSecondChild">
-          <FormControl sx={{ m: 4, minWidth: 150 }}>
-            <FormHelperText>층을 선택하세요.</FormHelperText>
-            <Select
-              value={selectFloor}
-              onChange={handleChange}
-              displayEmpty
-              inputProps={{ 'aria-label': 'Without label' }}
-            >
-              <MenuItem value="">
-                <em>선택</em>
-              </MenuItem>
-              {floor.map(item => (
-                <MenuItem value={item}>{item.name}</MenuItem>
+          {/* 여기에 select 다시 작성하기 */}
+          {/* <div>
+            <label>층을 선택해주세요:</label>
+            <select className="form-control" name="floor">
+
+              {floor.map(floor => (
+                <option onClick={e => setSelectFloor(floor), console.log}>
+                  {floor.name}
+                </option>
               ))}
-            </Select>
-          </FormControl>
+            </select>
+          </div> */}
+          <p style={{ fontSize: '0.75em' }}>층을 선택해주세요.</p>
+          <Dropdown className="dropdownFloor">
+            <Dropdown.Toggle id="dropdown-basic" variant="secondary">
+              {selectFloor.length === 0 ? '층 선택' : selectFloor.name}
+            </Dropdown.Toggle>
+            <Dropdown.Menu>
+              <Dropdown.Item>층 선택</Dropdown.Item>
+              {floor.map(floor => (
+                <Dropdown.Item
+                  onClick={e => {
+                    setSelectFloor(floor);
+                  }}
+                >
+                  {floor.name}
+                </Dropdown.Item>
+              ))}
+            </Dropdown.Menu>
+          </Dropdown>
         </div>
 
         {/* .header-tooltip // 층 추가 */}

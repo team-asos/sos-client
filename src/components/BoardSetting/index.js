@@ -59,13 +59,22 @@ export const BoardSetting = ({
     return (
       <div className="board-setting">
         <div className="setting-tab-group">
-          <button className="createbtn" onClick={() => handleTab(0)}>
+          <button
+            className={tab === 0 ? 'createbtn-click' : 'createbtn'}
+            onClick={() => handleTab(0)}
+          >
             좌석
           </button>
-          <button className="createbtn" onClick={() => handleTab(1)}>
+          <button
+            className={tab === 1 ? 'createbtn-click' : 'createbtn'}
+            onClick={() => handleTab(1)}
+          >
             회의실
           </button>
-          <button className="createbtn" onClick={() => handleTab(2)}>
+          <button
+            className={tab === 2 ? 'createbtn-click' : 'createbtn'}
+            onClick={() => handleTab(2)}
+          >
             시설
           </button>
         </div>
