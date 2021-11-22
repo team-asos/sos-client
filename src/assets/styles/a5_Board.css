@@ -1,33 +1,65 @@
 .board-item {
   display: flex;
+
   justify-content: center;
   align-items: center;
+
   border: 1px solid #c2c2c2;
+
+  cursor: pointer;
 }
-
 .board-cover {
+  width: 100%;
   height: 100%;
-  flex: 1;
 
+  display: flex;
+  flex: 1;
   overflow: auto;
 
   background-color: #821001;
+}
+
+.board-item-container {
+  width: fit-content;
+  height: fit-content;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: green;
+}
+.scale-icon {
+  position: absolute;
+  z-index: 1;
+
+  color: gray;
+
+  cursor: pointer;
+}
+.scale-icon:hover {
+  color: white;
+
+  transition: 0.01s ease-in;
+  transform: scale(1.01);
 }
 .board-item-cover {
   width: fit-content;
   height: fit-content;
 
-  padding: 5%;
+  padding: 2%;
 
-  transition: 0.1s ease-in;
-  transform: scale(1);
+  transition: 0.15s ease-in;
+  transform: scale(0.95);
 }
 
 .board-item-cover-scale {
   width: fit-content;
   height: fit-content;
 
-  transition: 0.1s ease-out;
+  padding: 2%;
+
+  transition: 0.15s ease-out;
   transform: scale(0.5);
 
   border: 2px solid black;

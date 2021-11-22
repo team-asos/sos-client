@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import '../../src/assets/styles/a5_Board.css';
+import { GiExpand } from 'react-icons/gi';
 
 import {
   EMPTY,
@@ -170,24 +171,38 @@ export const Board = ({
 
   const [scale, setScale] = useState(false);
 
+  const scaleHandler = () => {
+    if (scale === true) setScale(false);
+    else setScale(true);
+
+    console.log(scale);
+  };
+
   const Board = () => {
     return (
       <div className="board-cover">
-        {/* <button onClick={e => setScale(true)}>축소하기</button>
-        <button onClick={e => setScale(false)}>확대하기</button> */}
-        <div
-          className="board-item-cover"
-          style={{
-            display: 'grid',
-            gridTemplateColumns: `repeat(${
-              board.length > 0 ? board[0].length : '1'
-            }, 2.8vw)`,
-            gridTemplateRows: `repeat(${
-              board.length > 0 ? board.length : '1'
-            }, 2.8vw)`,
-          }}
-        >
-          <Item board={board} />
+        <GiExpand
+          className="scale-icon"
+          size={25}
+          onClick={e => scaleHandler()}
+        />
+        <div className="board-item-container">
+          <div
+            className={
+              scale === false ? 'board-item-cover ' : 'board-item-cover-scale'
+            }
+            style={{
+              display: 'grid',
+              gridTemplateColumns: `repeat(${
+                board.length > 0 ? board[0].length : '1'
+              }, 2.8vw)`,
+              gridTemplateRows: `repeat(${
+                board.length > 0 ? board.length : '1'
+              }, 2.8vw)`,
+            }}
+          >
+            <Item board={board} />
+          </div>
         </div>
       </div>
     );

@@ -26,12 +26,7 @@ const SeatManageBox = () => {
   }, []);
 
   //층 선택
-  const [selectFloor, setSelectFloor] = useState([]);
-
-  const handleChange = event => {
-    console.log(event.target.value);
-    setSelectFloor(event.target.value);
-  };
+  const [selectFloor, setSelectFloor] = useState('');
 
   //층 생성 모달창 관련 변수 정의
   const [show, setShow] = useState(false);
@@ -60,6 +55,18 @@ const SeatManageBox = () => {
               ))}
             </select>
           </div> */}
+          {/* <label>
+            층을 선택해주세요 : {'         '}
+            <select
+              onChange={e => setSelectFloor(e.target.value)}
+              value={selectFloor}
+              style={{ width: '10vw' }}
+            >
+              {floor.map(item => (
+                <option value={item.id}>{item.name}</option>
+              ))}
+            </select>
+          </label> */}
           <p style={{ fontSize: '0.75em' }}>층을 선택해주세요.</p>
           <Dropdown className="dropdownFloor">
             <Dropdown.Toggle id="dropdown-basic" variant="secondary">

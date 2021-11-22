@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import '../assets/styles/u1_roomCheckPage.css';
 import { useMediaQuery } from 'react-responsive';
 import { FiMenu } from 'react-icons/fi';
+
 //회의실 조회 페이지
 const RoomCheckPage = () => {
   const [open, setOpen] = useState(false);
