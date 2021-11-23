@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import '../assets/styles/u4_myInfoLogin.css';
-import { FiMenu } from 'react-icons/fi';
 import { useMediaQuery } from 'react-responsive';
-import MobileNavBar from '../components/u_m_navBar';
 
 //마이페이지->나의 정보 수정 다시 로그인
 

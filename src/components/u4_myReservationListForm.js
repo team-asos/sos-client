@@ -1,21 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import { useCookies } from 'react-cookie';
 import { Modal, Button, Table } from 'react-bootstrap';
-import '../assets/styles/u4_myReservationListForm.css';
 import { useMediaQuery } from 'react-responsive';
 
-//마이페이지->나의 예약 내역 조회/취소
+import '../assets/styles/u4_myReservationListForm.css';
 
+//마이페이지->나의 예약 내역 조회/취소
 const MyReservationListForm = props => {
+  //쿠키 생성
   const [cookie] = useCookies(['access_token']);
-  const [show, setShow] = useState(false);
-  const [reservation, setReservation] = useState([]);
+
+  //Mobile, PC
   const isPc = useMediaQuery({
     query: '(min-width:768px)',
   });
   const isMobile = useMediaQuery({ query: '(max-width:767px)' });
+
+  //Mobile - Nav 불러오기
+  const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  //예약내역 불러오기
+  const [reservation, setReservation] = useState([]);
   const res = async () => {
     await fetch(
       `${process.env.REACT_APP_SERVER_BASE_URL}/reservations/search?userId=${props.user.id}`,
@@ -28,11 +35,14 @@ const MyReservationListForm = props => {
         setReservation(json);
       });
   };
-  console.log(reservation);
+  //console.log(reservation);
+
+  //예외처리
   useEffect(() => {
     if (props.user.id !== 'undefined') res();
   }, [props.user.id]);
-  /*예약 취소*/
+
+  /* 회의실 예약 취소 */
   const deleteClick = reservationId => {
     handleClose();
     console.log(reservationId);
@@ -52,7 +62,8 @@ const MyReservationListForm = props => {
     };
     deleteHandler();
   };
-  /*좌석 사용 종료 */
+
+  /* 좌석 사용 종료 */
   const finishClick = reservationId => {
     handleClose();
     console.log(reservationId);
@@ -72,10 +83,12 @@ const MyReservationListForm = props => {
     };
     finishHandler();
   };
-  /*날짜 정렬 */
+
+  /* 예약 날짜 정렬 */
   const sortedReservation = reservation.sort((a, b) =>
     a.startTime.split('-').join().localeCompare(b.startTime.split('-').join()),
   );
+
   return (
     <div className="myReservationListForm">
       <p
@@ -97,7 +110,6 @@ const MyReservationListForm = props => {
           >
             <thead>
               <tr>
-                {/* <th></th> */}
                 <th>이용 날짜</th>
                 <th>예약 정보</th>
                 <th>상태</th>

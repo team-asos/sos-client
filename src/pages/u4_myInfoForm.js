@@ -1,31 +1,48 @@
 import React, { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
-import MyReservationList from '../components/u4_myReservationListForm';
 import { useHistory } from 'react-router-dom';
-import NavBarUser from '../components/u_navBar';
-import { Link } from 'react-router-dom';
 import { Modal, Button } from 'react-bootstrap';
 import { FiMenu } from 'react-icons/fi';
 import { useMediaQuery } from 'react-responsive';
+
+import MyReservationList from '../components/u4_myReservationListForm';
+
+import NavBarUser from '../components/u_navBar';
 import MobileNavBar from '../components/u_m_navBar';
 
 import '../assets/styles/u4_myInfoForm.css';
+
 //마이페이지->나의 정보
 const MyInfoForm = props => {
+  //Mobile - 네비바 열기
   const [open, setOpen] = useState(false);
+  const navClick = () => {
+    setOpen(!open);
+  };
+
+  //판별
   const isPc = useMediaQuery({
     query: '(min-width:768px)',
   });
   const isMobile = useMediaQuery({ query: '(max-width:767px)' });
-  const navClick = () => {
-    setOpen(!open);
-  };
+
+  //쿠키 생성
   const [cookie, removeCookie] = useCookies(['access_token']);
+
+  //탈퇴 관련
   const history = useHistory();
+
+  //사용자 정보를 모두 저장
   const [myData, setMyData] = useState([]);
-  const [show, setShow] = useState(false);
   const [state, setState] = useState(0);
-  const [user, setUser] = useState({});
+
+  //탈퇴 모달창
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  //유저 불러오기
+  //먼저 유저정보를 저장하고 수정하는 변수
   const [editData, setEditData] = useState({
     name: '',
     email: '',
@@ -36,8 +53,7 @@ const MyInfoForm = props => {
     password: '',
     confirmPw: '',
   });
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+
   useEffect(() => {
     const res = async () => {
       await fetch(
@@ -65,6 +81,10 @@ const MyInfoForm = props => {
 
     res();
   }, []);
+
+  //권한 가져오기
+  const [user, setUser] = useState({});
+
   useEffect(() => {
     const res = async () => {
       await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/auth`, {
@@ -80,6 +100,7 @@ const MyInfoForm = props => {
     };
     res();
   }, []);
+
   /*정보 수정 */
   const confirmHandler = async () => {
     const response = await fetch(
@@ -105,6 +126,7 @@ const MyInfoForm = props => {
     else alert(response.message);
   };
 
+  //수정 input, onChange
   const editName = e => {
     setEditData({
       ...editData,
@@ -159,10 +181,12 @@ const MyInfoForm = props => {
     } else {
     }
   };
+
   const clickHandler = id => {
     setState(id);
   };
 
+  //탈퇴 - 확인 눌렀을 때,
   const dropClick = () => {
     handleClose();
     const dropUser = async () => {
@@ -188,11 +212,13 @@ const MyInfoForm = props => {
     dropUser();
   };
 
+  //탈퇴 처리
   useEffect(() => {
     if (cookie.access_token === 'undefined') {
       history.push('/');
     }
   }, [cookie]);
+
   return (
     <div className="userMyPage">
       {open ? <MobileNavBar open={open} /> : ''}
@@ -232,10 +258,12 @@ const MyInfoForm = props => {
           </div>
         </div>
         <div className="myInfoForm">
+          {/* 탭메뉴 눌렀을 때 */}
           {state === 1 ? (
             <MyReservationList user={user} />
           ) : (
             <>
+              {/* 정보 수정 */}
               <p className="myInfoFormTitleTextStyle">나의 정보 수정</p>
 
               {isPc ? (
@@ -284,7 +312,6 @@ const MyInfoForm = props => {
                       />
                     </div>
                   </div>
-
                   <div className="column">
                     <div>
                       <label>사원번호</label>

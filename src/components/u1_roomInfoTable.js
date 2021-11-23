@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { useCookies } from 'react-cookie';
 import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
 import { Link } from 'react-router-dom';
-import '../assets/styles/u1_roomInfoTable.css';
 import { getMonth, getDate, getYear } from 'date-fns';
 import { useMediaQuery } from 'react-responsive';
+
+import '../assets/styles/u1_roomInfoTable.css';
 
 //전체 회의실 리스트 조회
 const RoomInfoTable = () => {

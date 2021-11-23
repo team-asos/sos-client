@@ -46,7 +46,6 @@ export const Board = ({
               rowIndex < selection.y + selection.height
             )
               return { type: SELECTION, name: '' };
-
           return col;
         }),
       );

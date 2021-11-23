@@ -1,0 +1,101 @@
+.myPageBox {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: row;
+
+  background-color: rgba(211, 211, 211, 0.116);
+}
+.myPageBox-left {
+  width: 45%;
+  height: 100%;
+
+  padding: 1%;
+}
+.myPageBox-left-myinfo {
+  width: 100%;
+  height: 100%;
+
+  border-radius: 2px;
+}
+.myPageBox-left-myinfo-content {
+  width: 100%;
+  height: 95%;
+
+  margin-top: 2%;
+  margin-left: 3%;
+  padding-top: 5%;
+  padding-left: 8%;
+
+  display: flex;
+  flex-direction: column;
+
+  border: 0.5px solid #c00000;
+  border-radius: 4px;
+
+  background-color: white;
+}
+.myPageBox-text-info {
+  width: 100%;
+  height: 10%;
+
+  display: flex;
+  flex-direction: row;
+}
+.myPage-edit-icon {
+  margin-left: 40%;
+  margin-top: 20%;
+
+  cursor: pointer;
+
+  color: gray;
+}
+.myPage-edit-icon:hover {
+  color: #c00000;
+}
+.detail-info-container {
+  width: 100%;
+  height: 85%;
+}
+.detail-info {
+  display: flex;
+  flex-direction: row;
+
+  margin-top: 3.5%;
+  margin-left: 13%;
+}
+.detail-info label {
+  width: 20%;
+  margin-right: 3%;
+
+  font-weight: bold;
+}
+.edit-form-control {
+  width: 55%;
+  border: none;
+  border-bottom: 0.5px solid #808080a4;
+}
+.myPageBox-right {
+  width: 55%;
+  height: 100%;
+
+  padding: 2%;
+
+  display: flex;
+  flex-direction: column;
+}
+.myPageBox-right-seat {
+  width: 100%;
+  height: 40%;
+
+  border: 1px solid white;
+}
+.myPageBox-right-room {
+  width: 100%;
+  height: 48%;
+
+  margin-top: 3.5%;
+
+  border: 1px solid white;
+}
