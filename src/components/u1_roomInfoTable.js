@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useCookies } from 'react-cookie';
-import { Table } from 'react-bootstrap';
+import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
 import { Link } from 'react-router-dom';
 import '../assets/styles/u1_roomInfoTable.css';
 import { getMonth, getDate, getYear } from 'date-fns';
@@ -15,12 +15,15 @@ const RoomInfoTable = () => {
   const isPc = useMediaQuery({
     query: '(min-width:768px)',
   });
+
   const isMobile = useMediaQuery({ query: '(max-width:767px)' });
+
   const handleClick = e => {
     setIdx(e);
     const idx = e;
     window.location.href = `/room-reservation/${idx}`;
   };
+
   useEffect(() => {
     const res = async () => {
       await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/rooms`, {
@@ -36,6 +39,7 @@ const RoomInfoTable = () => {
     };
     res();
   }, []);
+
   /*회의실 숫자로 정렬 */
   const sortedRooms = rooms.sort((a, b) => {
     if (parseInt(a.floor.name.split('층')) < parseInt(b.floor.name.split('층')))
@@ -43,8 +47,8 @@ const RoomInfoTable = () => {
   });
   return (
     <div>
-      <Table striped hover className={isPc ? 'infoTable' : 'mobileInfoTable'}>
-        <thead className="rHeader">
+      <MDBTable hover className={isPc ? 'infoTable' : 'mobileInfoTable'}>
+        <MDBTableHead className="rHeader">
           <tr>
             <th>층</th>
             <th>회의실 명</th>
@@ -52,9 +56,9 @@ const RoomInfoTable = () => {
             <th>사용 가능 인원</th>
             <th></th>
           </tr>
-        </thead>
-        {rooms.map((item, idx) => (
-          <tbody>
+        </MDBTableHead>
+        <MDBTableBody>
+          {rooms.map((item, idx) => (
             <tr key={idx}>
               <td>{item.floor.name}</td>
               <td>{item.name}</td>
@@ -89,9 +93,9 @@ const RoomInfoTable = () => {
                 </Link>
               </td>
             </tr>
-          </tbody>
-        ))}
-      </Table>
+          ))}
+        </MDBTableBody>
+      </MDBTable>
     </div>
   );
 };

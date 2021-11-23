@@ -28,13 +28,15 @@
 }
 .roomCheck_titleTextStyle {
   position: relative;
-  font-weight: bold;
-  font-size: 1.8em;
+
   margin-left: 2%;
   margin-right: 4%;
+
+  font-weight: bold;
+  font-size: 1.8em;
 }
 .m_roomCheck_titleTextStyle {
-  font-size: 1.4em;
+  font-size: 1.2em;
   margin-left: 2%;
   font-weight: bold;
 }

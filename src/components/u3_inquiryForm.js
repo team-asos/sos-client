@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useCookies } from 'react-cookie';
-
+import { useMediaQuery } from 'react-responsive';
 import '../assets/styles/u3_inquiryForm.css';
 import Modal from 'react-bootstrap/Modal';
 
 //문의 작성 폼
 const InquiryForm = props => {
+  const isPc = useMediaQuery({
+    query: '(min-width:768px)',
+  });
   //쿠키 생성
   const [cookie] = useCookies(['access_token']);
 
@@ -68,13 +71,17 @@ const InquiryForm = props => {
       <Modal.Body>
         <div className="inquiryForm">
           <input
-            className="inquiryFormTitleStyle"
+            className={
+              isPc ? 'inquiryFormTitleStyle' : 'm_inquiryFormTitleStyle'
+            }
             placeholder="  문의 제목을 입력해주세요."
             onChange={titleHandler}
           ></input>
           <br></br>
           <textarea
-            className="inquiryFormContentStyle"
+            className={
+              isPc ? 'inquiryFormContentStyle' : 'm_inquiryFormContentStyle'
+            }
             placeholder="  문의 내용을 입력해주세요."
             onChange={messageHandler}
           ></textarea>

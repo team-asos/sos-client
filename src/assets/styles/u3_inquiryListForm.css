@@ -1,27 +1,3 @@
-/*문의가 존재하지 않을 경우*/
-.noInquiryList {
-  width: 90%;
-  height: 85%;
-
-  margin-left: 5%;
-  padding-top: 12%;
-  text-align: center;
-
-  border-top: 1px solid gray;
-  border-bottom: 1px solid gray;
-  border-radius: 2px;
-}
-.alertStyle {
-  color: #c00000;
-  margin-bottom: 0.5%;
-}
-.alertTextStyle {
-  font-weight: bold;
-  font-size: 1em;
-
-  color: rgb(77, 77, 77);
-}
-
 /*문의가 존재할 경우*/
 .inquiryListTotal {
   width: 100%;
@@ -46,6 +22,13 @@
   font-size: 1.5em;
   font-weight: bold;
 }
+.m_myListText {
+  position: relative;
+  font-weight: bold;
+  font-size: 1.2em;
+  margin-left: 2%;
+  margin-right: 4%;
+}
 .newInquiryIcon {
   margin-left: 3%;
   cursor: pointer;
@@ -56,6 +39,38 @@
 
   color: #c00000;
 }
+/*문의가 존재하지 않을 경우*/
+.noInquiryList {
+  width: 90%;
+  height: 85%;
+
+  margin-left: 5%;
+  /* padding-top: 12%; */
+  padding-top: 20%;
+  text-align: center;
+
+  border-top: 1px solid gray;
+  border-bottom: 1px solid gray;
+  border-radius: 2px;
+}
+.m_noInquiryList {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 45%;
+}
+.alertStyle {
+  color: #c00000;
+  margin-bottom: 0.5%;
+}
+.alertTextStyle {
+  font-weight: bold;
+  font-size: 1em;
+
+  color: rgb(77, 77, 77);
+  text-align: center;
+}
+
 .accordion {
   width: 90%;
   height: 73vh;
@@ -77,7 +92,6 @@
 
 /*인덱스*/
 .index {
-  width: 3%;
 }
 /*답변 여부*/
 .isReply {
@@ -88,6 +102,12 @@
 .inquiryTitleStyle {
   width: 75%;
   font-size: 1em;
+}
+.m_inquiryTitleStyle {
+  width: 65%;
+}
+.m_inquiryDateStyle {
+  font-size: 0.8em;
 }
 /*문의 내용*/
 .inquiryContent {
@@ -100,8 +120,23 @@
 .inquiryMsg {
   width: 95%;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 }
+.inquiryAndDeleteButton {
+  display: flex;
+  justify-content: space-between;
+}
+.inquiryBodyTitle {
+  font-weight: bold;
+}
+.m_inquiryBodyTitle {
+  font-size: 0.9em;
+  font-weight: bold;
+}
+.m_inquiryBodyMessage {
+  font-size: 0.9em;
+}
+
 /*삭제*/
 .deleteInquiry {
   width: 3%;
@@ -115,4 +150,17 @@
 .inquiryAnswer {
   background: #c4c4c415;
   border-top: 1px dashed rgba(128, 128, 128, 0.404);
+}
+.answerDateTextStyle {
+  margin-left: 9vw;
+}
+.m_answerDateTextStyle {
+  font-size: 0.8em;
+}
+.deleteInquiry {
+  cursor: pointer;
+  color: gray;
+}
+.deleteInquiry:hover {
+  color: #c00000;
 }

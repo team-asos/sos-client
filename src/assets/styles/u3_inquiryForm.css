@@ -1,4 +1,5 @@
 .inquiryForm {
+  width: 100%;
   display: flex;
   flex-direction: column;
 
@@ -11,7 +12,7 @@
 .inquiryFormTitleStyle {
   position: relative;
 
-  width: 30vw;
+  width: 90%;
   height: 6vh;
 
   border: 1px solid #c4c4c4b0;
@@ -20,11 +21,19 @@
 .inquiryFormTitleStyle::placeholder {
   font-size: 0.9em;
 }
+.m_inquiryFormTitleStyle {
+  position: relative;
+  width: 85%;
+  height: 7vh;
+
+  border: 1px solid #c4c4c4b0;
+  border-radius: 2px;
+}
 /*문의 textarea*/
 .inquiryFormContentStyle {
   position: relative;
 
-  width: 30vw;
+  width: 90%;
   height: 45vh;
 
   border: 1px solid #c4c4c4b0;
@@ -34,6 +43,17 @@
 }
 .inquiryFormContentStyle::placeholder {
   font-size: 0.9em;
+}
+.m_inquiryFormContentStyle {
+  position: relative;
+
+  width: 85%;
+  height: 55vh;
+
+  border: 1px solid #c4c4c4b0;
+  border-radius: 2px;
+
+  background-color: #c4c4c43d;
 }
 /*문의하기 버튼*/
 .inquiryFormButton {

@@ -146,10 +146,20 @@ export const Board = ({
 
   const itemStyle = type => {
     if (type === EMPTY) return { backgroundColor: 'white' };
-    else if (type === SEAT) return { backgroundColor: 'green' };
-    else if (type === ROOM) return { backgroundColor: 'blue' };
-    else if (type === FACILITY) return { backgroundColor: 'yellow' };
-    else if (type === SELECTION) return { backgroundColor: 'red' };
+    else if (type === SEAT)
+      return {
+        backgroundColor: 'rgb(147,149,151)',
+        border: '1px solid rgb(147,149,151)',
+      };
+    else if (type === ROOM)
+      return {
+        backgroundColor: 'rgb(15,76,129)',
+        border: '1px solid rgb(15,76,129)',
+      };
+    else if (type === FACILITY)
+      return { backgroundColor: 'rgb(245,223,77)', border: 'rgb(245,223,77)' };
+    else if (type === SELECTION)
+      return { backgroundColor: '#D01C1F', border: '1px solid #D01C1F' };
   };
 
   const Item = ({ board }) => {
@@ -163,7 +173,7 @@ export const Board = ({
           }}
           style={itemStyle(col.type)}
         >
-          {col.name}
+          {col.type === ROOM ? '' : col.name}
         </div>
       )),
     );
@@ -186,23 +196,35 @@ export const Board = ({
           size={25}
           onClick={e => scaleHandler()}
         />
-        <div className="board-item-container">
-          <div
-            className={
-              scale === false ? 'board-item-cover ' : 'board-item-cover-scale'
-            }
-            style={{
-              display: 'grid',
-              gridTemplateColumns: `repeat(${
-                board.length > 0 ? board[0].length : '1'
-              }, 2.8vw)`,
-              gridTemplateRows: `repeat(${
-                board.length > 0 ? board.length : '1'
-              }, 2.8vw)`,
-            }}
-          >
-            <Item board={board} />
-          </div>
+        <div
+          className={
+            scale === false
+              ? 'board-item-container'
+              : 'board-item-container-scale'
+          }
+        >
+          {board.length > 0 ? (
+            <div
+              className={
+                scale === false ? 'board-item-cover ' : 'board-item-cover-scale'
+              }
+              style={{
+                display: 'grid',
+                gridTemplateColumns: `repeat(${
+                  board.length > 0 ? board[0].length : '1'
+                }, 2.8vw)`,
+                gridTemplateRows: `repeat(${
+                  board.length > 0 ? board.length : '1'
+                }, 2.8vw)`,
+              }}
+            >
+              <Item board={board} />
+            </div>
+          ) : (
+            <div className="board-no-item-text">
+              <p>상단의 층 선택을 통해 층을 선택해주세요.</p>
+            </div>
+          )}
         </div>
       </div>
     );

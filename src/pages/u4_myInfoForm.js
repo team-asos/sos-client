@@ -215,15 +215,7 @@ const MyInfoForm = props => {
               isPc ? 'u_myPageHeaderTextStyle' : 'm_u_myPageHeaderTextStyle'
             }
           >
-            <Link
-              to="/user-mypage"
-              style={{
-                color: 'inherit',
-                textDecoration: 'none',
-              }}
-            >
-              마이페이지
-            </Link>
+            마이페이지
           </div>
 
           <div

@@ -1,24 +1,37 @@
 .infoTable {
   position: relative;
+
+  width: 95%;
+  height: 100%;
+
+  margin-top: 1%;
+  margin-left: 2%;
+
   text-align: center;
-  font-size: 1em;
 }
 .mobileInfoTable {
   font-size: 0.8em;
 }
 .roomReservationButton {
-  background-color: #820101;
-  color: ivory;
-  border-radius: 10px;
+  width: 5.5vw;
+  height: 4vh;
+
+  border-radius: 3px;
   border: 0;
   outline: 0;
-  height: 4vh;
+
+  background-color: #c4c4c4;
+
+  color: black;
 }
 .roomReservationButton:hover {
   background: #8f0202;
-  transition: ease 0.1s;
+  color: white;
+
+  transition: ease 0.15s;
   transform: scale(1.01);
 }
+
 .m_roomReservationBtn {
   background-color: #820101;
   color: ivory;

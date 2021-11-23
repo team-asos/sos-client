@@ -28,12 +28,14 @@ const MyReservationListForm = props => {
         setReservation(json);
       });
   };
+  console.log(reservation);
   useEffect(() => {
     if (props.user.id !== 'undefined') res();
   }, [props.user.id]);
   /*예약 취소*/
   const deleteClick = reservationId => {
     handleClose();
+    console.log(reservationId);
     const deleteHandler = async () => {
       const res = await fetch(
         `${process.env.REACT_APP_SERVER_BASE_URL}/reservations/${reservationId}`,
@@ -49,6 +51,26 @@ const MyReservationListForm = props => {
       }
     };
     deleteHandler();
+  };
+  /*좌석 사용 종료 */
+  const finishClick = reservationId => {
+    handleClose();
+    console.log(reservationId);
+    const finishHandler = async () => {
+      const res = await fetch(
+        `${process.env.REACT_APP_SERVER_BASE_URL}/reservations/${reservationId}/seat`,
+        {
+          method: 'PATCH',
+        },
+      );
+      if (res.status === 200) {
+        alert('퇴실 완료');
+      } else {
+        const json = await res.json();
+        alert(json.message);
+      }
+    };
+    finishHandler();
   };
   /*날짜 정렬 */
   const sortedReservation = reservation.sort((a, b) =>
@@ -77,7 +99,6 @@ const MyReservationListForm = props => {
               <tr>
                 {/* <th></th> */}
                 <th>이용 날짜</th>
-                <th>이용 시간</th>
                 <th>예약 정보</th>
                 <th>상태</th>
                 <th></th>
@@ -91,10 +112,6 @@ const MyReservationListForm = props => {
                   <tbody>
                     <tr key={idx}>
                       <td>{item.startTime.slice(0, 10)}</td>
-                      <td>
-                        {item.startTime.slice(11, 16)}-
-                        {item.endTime.slice(11, 16)}
-                      </td>
                       <td>
                         {item.seat.floor.name} {item.seat.name}
                       </td>
@@ -154,7 +171,10 @@ const MyReservationListForm = props => {
                                 >
                                   취소
                                 </Button>
-                                <Button variant="danger" onClick={handleClose}>
+                                <Button
+                                  variant="danger"
+                                  onClick={() => finishClick(item.id)}
+                                >
                                   확인
                                 </Button>
                               </Modal.Footer>

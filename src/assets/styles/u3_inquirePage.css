@@ -10,6 +10,9 @@
   display: flex;
   flex-direction: column;
 }
+.m_inquireForm_main {
+  width: 100%;
+}
 .inquireHeader {
   position: relative;
   height: 10%;
@@ -21,7 +24,7 @@
 .inquire_titleTextStyle {
   position: relative;
   font-weight: bold;
-  font-size: 2em;
+  font-size: 1.8em;
   margin-left: 2%;
   margin-right: 4%;
 }
