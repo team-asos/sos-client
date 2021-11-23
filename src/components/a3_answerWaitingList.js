@@ -181,6 +181,7 @@ const AnswerWaitingList = props => {
                       }
                       key={idx}
                       onClick={e => {
+                        if (item.user === null) item.user = undefined;
                         setSelectQuestion(item);
                         toggleTrueFalse();
                       }}

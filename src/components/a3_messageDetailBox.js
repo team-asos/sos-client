@@ -9,10 +9,24 @@ const MessageDetailBox = ({ messageInfo, show, isEmpty }) => {
   const [message, setMessage] = useState('');
   const [cookie] = useCookies('access_token');
 
-  console.log(messageInfo);
-
   //내 계정 가져오기
   const [myInfo, setMyInfo] = useState({});
+  const [userId, setUserId] = useState(0);
+  const [userInfo, setUserInfo] = useState([]);
+
+  useEffect(() => {
+    const findUserInfo = () => {
+      if (messageInfo.user !== undefined) {
+        setUserId(messageInfo.user.id);
+      } else if (messageInfo.user === undefined) {
+        setUserInfo({
+          ...userInfo,
+          email: '탈퇴한 회원입니다.',
+        });
+      }
+    };
+    findUserInfo();
+  }, [messageInfo]);
 
   useEffect(() => {
     const res = async () => {
@@ -30,10 +44,23 @@ const MessageDetailBox = ({ messageInfo, show, isEmpty }) => {
     res();
   }, []);
 
-  console.log(myInfo);
-
+  /*발신자 정보 */
+  const res = async () => {
+    await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/users/${userId}`, {
+      headers: {
+        Authorization: `Bearer ${cookie.access_token}`,
+      },
+      method: 'GET',
+    })
+      .then(response => response.json())
+      .then(json => {
+        setUserInfo(json);
+      });
+  };
+  useEffect(() => {
+    if (userId !== undefined) res();
+  }, [userId]);
   const submitHandler = async () => {
-    console.log(message, Number(myInfo.id), Number(messageInfo.id));
     const result = await fetch(
       `${process.env.REACT_APP_SERVER_BASE_URL}/answers`,
       {
@@ -85,7 +112,7 @@ const MessageDetailBox = ({ messageInfo, show, isEmpty }) => {
               <ListGroup.Item>
                 {/* 데이터베이스에서 있는 userid -> 이름, 이메일 받기 */}
                 <span style={{ fontWeight: '650' }}>발신자 이메일 : </span>
-                {messageInfo.id}
+                {userInfo.email}
               </ListGroup.Item>
               <ListGroup.Item>
                 <span style={{ fontWeight: '650' }}>수신 시간 : </span>

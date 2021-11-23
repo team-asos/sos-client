@@ -3,6 +3,7 @@ import getDate from 'date-fns/getDate';
 import getMonth from 'date-fns/getMonth';
 import React, { useState, useEffect } from 'react';
 import { useCookies } from 'react-cookie';
+import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
 import { Table } from 'react-bootstrap';
 import Calendar from './u2_calendar';
 import { useMediaQuery } from 'react-responsive';
@@ -34,22 +35,17 @@ const SelectedRoomTable = props => {
     res();
   }, []);
 
-  console.log(data);
   return (
     <div>
-      <Table
-        striped
-        hover
-        className={isPc ? 'selectedTable' : 'mobileInfoTable'}
-      >
-        <thead className="sHeader">
+      <MDBTable hover className={isPc ? 'infoTable' : 'mobileInfoTable'}>
+        <MDBTableHead className="rHeader">
           <tr>
             <th>회의실명</th>
             <th>예약 가능 일</th>
             <th>사용 가능 인원</th>
           </tr>
-        </thead>
-        <tbody>
+        </MDBTableHead>
+        <MDBTableBody>
           <tr>
             <td>{data.name}</td>
             <td>
@@ -58,8 +54,8 @@ const SelectedRoomTable = props => {
             </td>
             <td>{data.maxUser}명</td>
           </tr>
-        </tbody>
-      </Table>
+        </MDBTableBody>
+      </MDBTable>
       <Calendar roomMAXUSER={data.maxUser} roomID={roomID} />
     </div>
   );

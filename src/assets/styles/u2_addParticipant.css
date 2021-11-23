@@ -1,5 +1,9 @@
 .addAndButtonForm {
   display: flex;
+  flex-direction: column;
+  width: 35%;
+  margin-left: 3%;
+  align-items: center;
 }
 .mAddAndButtonForm {
   display: flex;
@@ -9,8 +13,7 @@
   display: flex;
   flex-direction: column;
   margin-left: 2vw;
-  margin-top: 3vh;
-  width: 60vw;
+  width: 90%;
 }
 .mParticipantForm {
   display: flex;
@@ -23,11 +26,11 @@
 /*회의 참석자를 입력하세요*/
 .rrp_centerTextStyle {
   position: relative;
-  font-size: 1.3em;
+  font-size: 1.1em;
   font-weight: bold;
 }
 .mrrp_centerTextStyle {
-  font-size: 1em;
+  font-size: 0.9em;
   font-weight: bold;
 }
 .mSearchForm {
@@ -45,10 +48,11 @@
 .roomReservationBtn {
   width: fit-content;
   height: 5vh;
-  margin-top: 7vh;
+  margin-top: 2vh;
+  /*
   margin-left: 10vw;
   padding-left: 2vw;
-  padding-right: 2vw;
+  padding-right: 2vw; */
   font-size: 1.2em;
   background-color: #820101;
   color: white;
