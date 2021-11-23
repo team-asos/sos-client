@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import NavBarUser from '../components/u_navBar';
 import MobileNavBar from '../components/u_m_navBar';
 import RoomInfoTable from '../components/u1_roomInfoTable';
-import { Link } from 'react-router-dom';
 import '../assets/styles/u1_roomCheckPage.css';
 import { useMediaQuery } from 'react-responsive';
 import { FiMenu } from 'react-icons/fi';
+
 //회의실 조회 페이지
 const RoomCheckPage = () => {
   const [open, setOpen] = useState(false);

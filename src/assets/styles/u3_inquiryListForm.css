@@ -157,3 +157,10 @@
 .m_answerDateTextStyle {
   font-size: 0.8em;
 }
+.deleteInquiry {
+  cursor: pointer;
+  color: gray;
+}
+.deleteInquiry:hover {
+  color: #c00000;
+}

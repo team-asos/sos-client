@@ -1,34 +1,86 @@
 .board-item {
   display: flex;
+
   justify-content: center;
   align-items: center;
+
   border: 1px solid #c2c2c2;
+
+  cursor: pointer;
 }
-
 .board-cover {
+  width: 100%;
   height: 100%;
-  flex: 1;
 
-  overflow: auto;
+  display: flex;
+  flex: 1;
+  overflow: scroll;
+  overflow-anchor: auto;
 
   background-color: #821001;
+}
+
+.board-item-container {
+  width: fit-content;
+  height: fit-content;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.board-item-container-scale {
+  width: fit-content;
+  height: fit-content;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.board-item-cover-scale {
+  width: 100%;
+  height: 100%;
+
+  transition: 0.15s ease-out;
+
+  border: 2px solid black;
+  transform: scale(0.5);
+}
+.scale-icon {
+  position: absolute;
+  z-index: 1;
+
+  color: #821001;
+  background-color: white;
+  cursor: pointer;
+}
+.scale-icon:hover {
+  color: black;
+
+  transition: 0.05s ease-in;
+  transform: scale(1.02);
 }
 .board-item-cover {
   width: fit-content;
   height: fit-content;
 
-  padding: 5%;
+  padding: 2%;
+  margin-left: 4.1%;
 
-  transition: 0.1s ease-in;
+  transition: 0.15s ease-in;
   transform: scale(1);
+
+  touch-action: pinch-zoom;
 }
 
-.board-item-cover-scale {
-  width: fit-content;
-  height: fit-content;
+.board-no-item-text {
+  width: 66.4vw;
+  height: 86.9vh;
+  padding-top: 40vh;
 
-  transition: 0.1s ease-out;
-  transform: scale(0.5);
+  color: #e6e6e6;
 
-  border: 2px solid black;
+  font-style: italic;
+
+  text-align: center;
 }

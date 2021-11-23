@@ -1,4 +1,5 @@
 .inquiryForm {
+  width: 100%;
   display: flex;
   flex-direction: column;
 
@@ -11,7 +12,7 @@
 .inquiryFormTitleStyle {
   position: relative;
 
-  width: 30vw;
+  width: 90%;
   height: 6vh;
 
   border: 1px solid #c4c4c4b0;
@@ -32,7 +33,7 @@
 .inquiryFormContentStyle {
   position: relative;
 
-  width: 30vw;
+  width: 90%;
   height: 45vh;
 
   border: 1px solid #c4c4c4b0;
