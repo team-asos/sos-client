@@ -73,7 +73,7 @@ const Calendar = props => {
           isPc ? 'timeTableAndAddParticipant' : 'm_timeTableAndAddParticipant'
         }
       >
-        <RoomTimeTable selectedDate={formatISO(startDate)} />
+        <RoomTimeTable selectedDate={formatISO(startDate)} roomId={roomID} />
         <AddParticipant
           START={formatISO(startDate)}
           // END={formatISO(endDate)}

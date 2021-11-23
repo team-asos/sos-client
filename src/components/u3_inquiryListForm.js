@@ -192,7 +192,9 @@ const InquiryListForm = props => {
                               {isPc ? '문의 내용' : '문의'}
                             </p>
                             <AiIcon.AiTwotoneDelete
-                              className="deleteInquiry"
+                              className={
+                                isPc ? 'deleteInquiry' : 'm_deleteInquiry'
+                              }
                               size={20}
                               onClick={() => deleteClick(item.id)}
                             />

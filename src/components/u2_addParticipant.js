@@ -117,7 +117,7 @@ const AddParticipant = ({ START, END, MAXUSER, ROOMID }) => {
             onChange={e => handleChange(e)}
             // onInputChange={e => console.log(e)}
             noOptionsMessage={() => '검색 결과가 없습니다.'}
-            isDisabled={selectedMembers.length < MAXUSER ? 0 : 0}
+            isDisabled={selectedMembers.length < MAXUSER ? 0 : 1}
           />
         </div>
         <div className="participantForm">
