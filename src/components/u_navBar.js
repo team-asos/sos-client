@@ -39,7 +39,7 @@ const NavBar = props => {
 
   return (
     <div className="navBox">
-      <Link to="seat-reservation">
+      <Link to="/seat-reservation">
         <div className="logoBar"></div>
       </Link>
       <div className="appBar">

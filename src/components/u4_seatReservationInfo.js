@@ -11,6 +11,16 @@ const SeatReservationInfo = props => {
   const [cookie] = useCookies(['access_token']);
   //예약내역 불러오기
   const [reservation, setReservation] = useState([]);
+
+  //예약내역 모달창
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  //좌석 사용 종료
+  const [seatshow, setseatShow] = useState(false);
+  const seathandleClose = () => setseatShow(false);
+  const seathandleShow = () => setseatShow(true);
   const res = async () => {
     const id = Number(props.user.id);
     await fetch(
@@ -24,8 +34,9 @@ const SeatReservationInfo = props => {
         setReservation(json);
       });
   };
+  /*좌석 사용 종료 */
   const finishClick = reservationId => {
-    handleClose();
+    seathandleClose();
     console.log(reservationId);
     const finishHandler = async () => {
       const res = await fetch(
@@ -35,7 +46,7 @@ const SeatReservationInfo = props => {
         },
       );
       if (res.status === 200) {
-        alert('퇴실 완료');
+        alert('정상적으로 처리 되었습니다.');
       } else {
         const json = await res.json();
         alert(json.message);
@@ -48,16 +59,6 @@ const SeatReservationInfo = props => {
   useEffect(() => {
     if (props.user.id !== 'undefined') res();
   }, [props.user.id]);
-
-  //예약내역 모달창
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
-  //좌석 사용 종료
-  const [seatshow, setseatShow] = useState(false);
-  const seathandleClose = () => setseatShow(false);
-  const seathandleShow = () => setseatShow(true);
 
   return (
     <div className="reservationInfo">
@@ -173,8 +174,16 @@ const SeatReservationInfo = props => {
         <Modal.Header closeButton>
           <Modal.Title>좌석 사용 내역</Modal.Title>
         </Modal.Header>
-        <Modal.Body>불러오기</Modal.Body>
-        <Modal.Footer></Modal.Footer>
+        <Modal.Body>
+          <MDBTableHead>
+            <tr>
+              <th>이용 시작일</th>
+              <th>예약 정보</th>
+              <th></th>
+            </tr>
+          </MDBTableHead>
+          <MDBTableBody></MDBTableBody>
+        </Modal.Body>
       </Modal>
     </div>
   );

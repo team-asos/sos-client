@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useCookies } from 'react-cookie';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import NavBarUser from '../components/u_navBar';
 import MobileNavBar from '../components/u_m_navBar';
 import { useMediaQuery } from 'react-responsive';
@@ -20,6 +20,7 @@ const RoomReservationPage = props => {
   };
   const roomId = props.match.params.idx; //회의실 id 조회페이지에서 전달받음
   const [cookie] = useCookies(['access_token']);
+  const history = useHistory();
 
   return (
     <div className="roomReservationPage">
