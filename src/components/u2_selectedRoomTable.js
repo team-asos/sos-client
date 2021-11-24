@@ -1,10 +1,9 @@
-import { getYear } from 'date-fns';
-import getDate from 'date-fns/getDate';
-import getMonth from 'date-fns/getMonth';
+import { addDays } from 'date-fns';
 import React, { useState, useEffect } from 'react';
 import { useCookies } from 'react-cookie';
 import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
-import { Table } from 'react-bootstrap';
+import * as moment from 'moment';
+
 import Calendar from './u2_calendar';
 import { useMediaQuery } from 'react-responsive';
 
@@ -49,8 +48,8 @@ const SelectedRoomTable = props => {
           <tr>
             <td>{data.name}</td>
             <td>
-              {getYear(today)}.{getMonth(today) + 1}.{getDate(today)}-
-              {getYear(today)}.{getMonth(today) + 1}.{getDate(today) + 6}
+              {moment(new Date()).format('YYYY-MM-DD')}~
+              {moment(addDays(new Date(), 6)).format('YYYY-MM-DD')}
             </td>
             <td>{data.maxUser}명</td>
           </tr>
