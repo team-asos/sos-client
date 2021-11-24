@@ -170,19 +170,45 @@ const SeatReservationInfo = props => {
           </MDBTable>
         </div>
       </div>
-      <Modal show={show} onHide={handleClose}>
+      <Modal show={show} onHide={handleClose} size="xl">
         <Modal.Header closeButton>
           <Modal.Title>좌석 사용 내역</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <MDBTableHead>
-            <tr>
-              <th>이용 시작일</th>
-              <th>예약 정보</th>
-              <th></th>
-            </tr>
-          </MDBTableHead>
-          <MDBTableBody></MDBTableBody>
+          <MDBTable
+            hover
+            style={{
+              width: '90%',
+              marginLeft: '5%',
+              fontSize: '0.9em',
+            }}
+          >
+            <MDBTableHead>
+              <tr>
+                <th>이용 날짜</th>
+                <th>예약 정보</th>
+              </tr>
+            </MDBTableHead>
+            <MDBTableBody>
+              {console.log(reservation)}
+              {reservation.length !== 0 &&
+                reservation.map(item =>
+                  item.status === 2 &&
+                  item.seat !== null &&
+                  item.endTime !== null ? (
+                    <tr>
+                      <td>
+                        {item.startTime.slice(0, 10)}-
+                        {item.endTime.slice(0, 10)}
+                      </td>
+                      <td>
+                        {item.seat.floor.name} {item.seat.name}
+                      </td>
+                    </tr>
+                  ) : null,
+                )}
+            </MDBTableBody>
+          </MDBTable>
         </Modal.Body>
       </Modal>
     </div>
