@@ -3,6 +3,7 @@ import { useCookies } from 'react-cookie';
 import * as ai from 'react-icons/ai';
 import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
 import { OverlayTrigger, Tooltip, Modal, Button } from 'react-bootstrap';
+import * as moment from 'moment';
 
 import '../assets/styles/u4_reservationInfo.css';
 
@@ -122,7 +123,10 @@ const SeatReservationInfo = props => {
                   item.seat !== null &&
                   item.endTime === null ? (
                     <tr>
-                      <td>{item.startTime.slice(0, 10)}</td>
+                      {/* <td>{item.startTime.slice(0, 10)}</td> */}
+                      <td>
+                        {moment(item.startTime).format('YYYY-MM-DD HH:mm:ss')}
+                      </td>
                       <td>
                         {item.seat.floor.name} {item.seat.name}
                       </td>
