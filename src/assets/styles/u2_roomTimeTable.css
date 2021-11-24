@@ -1,5 +1,11 @@
-Table .time {
+Table .isReserved {
+  background-color: gray;
 }
-Table .clickTime {
-  background-color: hotpink;
+Table .isNotReserved {
+  cursor: pointer;
+}
+Table .isNotReserved:hover {
+  transition: ease 0.2s;
+  transform: scale(1.02);
+  background-color: crimson;
 }

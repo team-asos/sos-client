@@ -58,6 +58,7 @@
   display: flex;
   flex: 1;
   margin-left: 2%;
+  margin-right: 5%;
 }
 .m_timeTableAndAddParticipant {
   display: flex;
