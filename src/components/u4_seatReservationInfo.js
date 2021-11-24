@@ -61,6 +61,14 @@ const SeatReservationInfo = props => {
     if (props.user.id !== 'undefined') res();
   }, [props.user.id]);
 
+  // const sortedReservation =
+  //   reservation !== null &&
+  //   reservation.sort((a, b) =>
+  //     a.startTime
+  //       .split('-')
+  //       .join()
+  //       .localeCompare(b.startTime.split('-').join()),
+  //   );
   return (
     <div className="reservationInfo">
       <div>
@@ -194,7 +202,6 @@ const SeatReservationInfo = props => {
               </tr>
             </MDBTableHead>
             <MDBTableBody>
-              {console.log(reservation)}
               {reservation.length !== 0 &&
                 reservation.map(item =>
                   item.status === 2 &&
@@ -202,8 +209,8 @@ const SeatReservationInfo = props => {
                   item.endTime !== null ? (
                     <tr>
                       <td>
-                        {item.startTime.slice(0, 10)}-
-                        {item.endTime.slice(0, 10)}
+                        {moment(item.startTime).format('YYYY-MM-DD HH:mm:ss')}-
+                        {moment(item.endTime).format('YYYY-MM-DD HH:mm:ss')}
                       </td>
                       <td>
                         {item.seat.floor.name} {item.seat.name}

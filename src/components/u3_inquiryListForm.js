@@ -5,6 +5,7 @@ import { Accordion, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import * as AiIcon from 'react-icons/ai';
 import InquiryForm from './u3_inquiryForm';
 import '../assets/styles/u3_inquiryListForm.css';
+import * as moment from 'moment';
 
 const InquiryListForm = props => {
   const isPc = useMediaQuery({
@@ -176,7 +177,9 @@ const InquiryListForm = props => {
                                 isPc ? 'inquiryDateStyle' : 'm_inquiryDateStyle'
                               }
                             >
-                              {item.createdAt.slice(0, 10)}
+                              {moment(item.createdAt).format(
+                                'YYYY-MM-DD HH:mm:ss',
+                              )}
                             </p>
                           </div>
                         </div>
@@ -232,7 +235,9 @@ const InquiryListForm = props => {
                                     : 'm_answerDateTextStyle'
                                 }
                               >
-                                {item.answer?.createdAt.slice(0, 10)}
+                                {moment(item.answer?.createdAt).format(
+                                  'YYYY-MM-DD HH:mm:ss',
+                                )}
                               </p>
                             </div>
                             <div
@@ -247,16 +252,14 @@ const InquiryListForm = props => {
                             </div>
                           </div>
                         </Accordion.Body>
-                      ) : (
-                        ''
-                      )}
+                      ) : null}
                     </Accordion.Item>
                   ))}
             </Accordion>
           </div>
         )}
       </div>
-      {show ? <InquiryForm show={show} handleClose={handleClose} /> : ''}
+      {show ? <InquiryForm show={show} handleClose={handleClose} /> : null}
     </div>
   );
 };
