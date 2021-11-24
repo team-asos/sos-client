@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
+import { useHistory } from 'react-router-dom';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
+import { Modal, Button } from 'react-bootstrap';
 
 import SeatReservationInfo from '../components/u4_seatReservationInfo';
+import RoomReservationInfo from '../components/u4_roomReservationInfo';
 
 import * as fa from 'react-icons/fa';
+import * as ri from 'react-icons/ri';
+
 import '../assets/styles/u4_myPageBox.css';
 
 const MyPageBox = props => {
-  console.log(props.user.id);
   //쿠키 생성
   const [cookie, removeCookie] = useCookies(['access_token']);
 
@@ -63,18 +67,76 @@ const MyPageBox = props => {
         });
       });
   };
+  const [edit, setEdit] = useState(false);
+  const [showPwInput, setShowPwInput] = useState(false);
+
+  const [pw, setPw] = useState('');
+  const inputPw = e => {
+    setPw(e.target.value);
+  };
+
+  const loginAgainClickHandler = async () => {
+    const response = await fetch(
+      `${process.env.REACT_APP_SERVER_BASE_URL}/auth`,
+      {
+        headers: {
+          'Content-type': 'application/json',
+        },
+        method: 'POST',
+        body: JSON.stringify({
+          email: props.user.email,
+          password: pw,
+        }),
+      },
+    );
+
+    if (response.status === 200) {
+      setEdit(true);
+      setShowPwInput(false);
+    } else if (response.status === 401) {
+      alert('비밀번호가 잘못되었습니다.');
+    } else {
+      alert(response.status);
+    }
+  };
+
+  /*정보 수정 */
+  const confirmHandler = async () => {
+    const id = Number(props.user.id);
+    const response = await fetch(
+      `${process.env.REACT_APP_SERVER_BASE_URL}/users/${id}`,
+      {
+        headers: {
+          'Content-type': 'application/json',
+          Authorization: `Bearer ${cookie.access_token}`,
+        },
+        method: 'PATCH',
+        body: JSON.stringify({
+          name: editData.name,
+          email: editData.email,
+          employeeId: editData.employeeId,
+          tel: editData.tel,
+          department: editData.department,
+          position: editData.position,
+          password: editData.password,
+        }),
+      },
+    );
+    if (response.status === 200) alert('수정이 완료되었습니다.');
+    else alert(response.message);
+  };
 
   useEffect(() => {
     if (props.user.id !== 'undefined') res();
   }, [props.user.id]);
 
+  //Input Onchange : 정보 수정 함수
   const editName = e => {
     setEditData({
       ...editData,
       name: e.target.value,
     });
   };
-
   const editEmail = e => {
     setEditData({
       ...editData,
@@ -123,6 +185,47 @@ const MyPageBox = props => {
     } else {
     }
   };
+
+  //탈퇴 모달창
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const history = useHistory();
+
+  //탈퇴 - 확인 눌렀을 때,
+  const dropClick = () => {
+    handleClose();
+    const dropUser = async () => {
+      console.log(props.match.params.idx);
+      const response = await fetch(
+        `${process.env.REACT_APP_SERVER_BASE_URL}/users/${props.match.params.idx}`,
+        {
+          headers: {
+            'Content-type': 'application/json',
+            Authorization: `Bearer ${cookie.access_token}`,
+          },
+          method: 'DELETE',
+        },
+      );
+      if (response.status === 200) {
+        removeCookie('access_token');
+        alert('탈퇴가 완료되었습니다.');
+      } else {
+        const json = await response.json();
+        alert(json.message);
+      }
+    };
+    dropUser();
+  };
+
+  //탈퇴 처리
+  useEffect(() => {
+    if (cookie.access_token === 'undefined') {
+      history.push('/');
+    }
+  }, [cookie]);
+
   return (
     <div className="myPageBox">
       <div className="myPageBox-left">
@@ -147,87 +250,174 @@ const MyPageBox = props => {
                 }
               >
                 <p>
-                  <fa.FaUserEdit size={25} className="myPage-edit-icon" />
+                  <fa.FaUserEdit
+                    size={25}
+                    className="myPage-edit-icon"
+                    onClick={e => setShowPwInput(true)}
+                    style={
+                      edit === true
+                        ? { visibility: 'hidden' }
+                        : { visibility: 'visible' }
+                    }
+                  />
                 </p>
               </OverlayTrigger>
             </div>
-            <div className="detail-info-container">
-              <div className="detail-info">
-                <label>이름 </label>
-                <input
-                  type="text"
-                  className="edit-form-control"
-                  onChange={editName}
-                  value={editData.name}
-                />
+            {showPwInput === false ? (
+              <div className="detail-info-container">
+                <div className="detail-info">
+                  <label>이름</label>
+                  <input
+                    type="text"
+                    className="edit-form-control"
+                    onChange={editName}
+                    value={editData.name}
+                    disabled={edit === false ? true : false}
+                  />
+                </div>
+                <div className="detail-info">
+                  <label>이메일</label>
+                  <input
+                    type="text"
+                    className="edit-form-control"
+                    onChange={editEmail}
+                    value={editData.email}
+                    disabled={edit === false ? true : false}
+                  />
+                </div>
+                <div className="detail-info">
+                  <label>비밀번호 </label>
+                  <input
+                    type="password"
+                    className="edit-form-control"
+                    placeholder="수정 시에 보여집니다."
+                    onChange={editPw}
+                    //value={password}
+                    disabled={edit === false ? true : false}
+                  />
+                </div>
+                <div className="detail-info">
+                  <label>비밀번호 확인 </label>
+                  <input
+                    type="password"
+                    className="edit-form-control"
+                    placeholder="수정 시에 보여집니다."
+                    onBlur={confirmPwHandler}
+                    onChange={editConfirmPw}
+                    //value={confirmPw}
+                    disabled={edit === false ? true : false}
+                  />
+                </div>
+                <div className="detail-info">
+                  <label>사원번호</label>
+                  <input
+                    type="text"
+                    className="edit-form-control"
+                    onChange={editEmployeeId}
+                    value={editData.employeeId}
+                    disabled={edit === false ? true : false}
+                  />
+                </div>
+                <div className="detail-info">
+                  <label>전화번호</label>
+                  <input
+                    type="text"
+                    className="edit-form-control"
+                    onChange={editTel}
+                    value={editData.tel}
+                    disabled={edit === false ? true : false}
+                  />
+                </div>
+                <div className="detail-info">
+                  <label>부서</label>
+                  <input
+                    type="text"
+                    className="edit-form-control"
+                    onChange={editDepartment}
+                    value={editData.department}
+                    disabled={edit === false ? true : false}
+                  />
+                </div>
+                <div className="detail-info">
+                  <label>직급</label>
+                  <input
+                    type="text"
+                    className="edit-form-control"
+                    onChange={editPosition}
+                    value={editData.position}
+                    disabled={edit === false ? true : false}
+                  />
+                </div>
+                <div className="edit-button-group">
+                  <button
+                    onClick={confirmHandler}
+                    style={
+                      edit === false
+                        ? { visibility: 'hidden' }
+                        : { visibility: 'visible' }
+                    }
+                  >
+                    수정완료
+                  </button>
+                  <button
+                    onClick={handleShow}
+                    style={
+                      edit === false
+                        ? { visibility: 'hidden' }
+                        : { visibility: 'visible' }
+                    }
+                  >
+                    탈퇴
+                  </button>
+                </div>
               </div>
-              <div className="detail-info">
-                <label>이메일 </label>
-                <input
-                  type="text"
-                  className="edit-form-control"
-                  onChange={editEmail}
-                  value={editData.email}
+            ) : (
+              <div
+                className="input-password-form"
+                style={
+                  showPwInput === false
+                    ? { visibility: 'hidden' }
+                    : { visibility: 'visible' }
+                }
+              >
+                <ri.RiLockPasswordFill
+                  size={30}
+                  style={{ marginBottom: '2.5%', color: '#8f0000' }}
                 />
-              </div>
-              <div className="detail-info">
-                <label>비밀번호 </label>
+                <p style={{ fontWeight: 'bold' }}>
+                  본인확인을 위해 비밀번호를 입력해주세요.
+                </p>
                 <input
+                  className="confirmPWInput"
                   type="password"
-                  className="edit-form-control"
-                  placeholder="수정 시에 보여집니다."
-                  onChange={editPw}
-                  //value={password}
+                  placeholder="비밀번호"
+                  onChange={inputPw}
+                  value={pw}
                 />
+                <div
+                  style={{
+                    marginTop: '3%',
+                    display: 'flex',
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                  }}
+                >
+                  <button
+                    className="confirmPwBtn"
+                    onClick={e => setShowPwInput(false)}
+                  >
+                    취소
+                  </button>
+                  <button
+                    className="confirmPwBtn"
+                    onClick={loginAgainClickHandler}
+                    style={{ marginLeft: '4%' }}
+                  >
+                    확인
+                  </button>
+                </div>
               </div>
-              <div className="detail-info">
-                <label>비밀번호 확인 </label>
-                <input
-                  type="password"
-                  className="edit-form-control"
-                  placeholder="수정 시에 보여집니다."
-                  onBlur={confirmPwHandler}
-                  onChange={editConfirmPw}
-                  //value={confirmPw}
-                />
-              </div>
-              <div className="detail-info">
-                <label>사원번호</label>
-                <input
-                  type="text"
-                  className="edit-form-control"
-                  onChange={editEmployeeId}
-                  value={editData.employeeId}
-                />
-              </div>
-              <div className="detail-info">
-                <label>전화번호</label>
-                <input
-                  type="text"
-                  className="edit-form-control"
-                  onChange={editTel}
-                  value={editData.tel}
-                />
-              </div>
-              <div className="detail-info">
-                <label>부서</label>
-                <input
-                  type="text"
-                  className="edit-form-control"
-                  onChange={editDepartment}
-                  value={editData.department}
-                />
-              </div>
-              <div className="detail-info">
-                <label>직급</label>
-                <input
-                  type="text"
-                  className="edit-form-control"
-                  onChange={editPosition}
-                  value={editData.position}
-                />
-              </div>
-            </div>
+            )}
           </div>
         </div>
       </div>
@@ -235,8 +425,24 @@ const MyPageBox = props => {
         <div className="myPageBox-right-seat">
           <SeatReservationInfo user={props.user} />
         </div>
-        <div className="myPageBox-right-room"></div>
+        <div className="myPageBox-right-room">
+          <RoomReservationInfo user={props.user} />
+        </div>
       </div>
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>회원 탈퇴</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>탈퇴하시겠습니까?</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            취소
+          </Button>
+          <Button variant="danger" onClick={dropClick}>
+            확인
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };
