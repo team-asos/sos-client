@@ -103,7 +103,11 @@ export default function UserDetailModalContent({
       <Modal.Body>
         <h6 style={{ fontWeight: 'bold', color: '#c00000' }}>
           <fa.FaUser
-            style={{ color: 'gray', marginRight: '0.4%', marginTop: '-0.2%' }}
+            style={{
+              color: '#b7000d',
+              marginRight: '0.4%',
+              marginTop: '-0.2%',
+            }}
           />
           | 회원 정보
         </h6>
@@ -138,7 +142,11 @@ export default function UserDetailModalContent({
         {/* 예약 내역 조회 테이블 */}
         <h6 style={{ fontWeight: 'bold', color: '#c00000' }}>
           <fa.FaRegistered
-            style={{ color: 'gray', marginRight: '0.4%', marginTop: '-0.2%' }}
+            style={{
+              color: '#b7000d',
+              marginRight: '0.4%',
+              marginTop: '-0.2%',
+            }}
           />
           | 예약 내역
         </h6>
@@ -187,7 +195,11 @@ export default function UserDetailModalContent({
         {/* 문의 내역 조회 테이블 */}
         <h6 style={{ fontWeight: 'bold', color: '#c00000' }}>
           <fa.FaTelegramPlane
-            style={{ color: 'gray', marginRight: '0.4%', marginTop: '-0.2%' }}
+            style={{
+              color: '#b7000d',
+              marginRight: '0.4%',
+              marginTop: '-0.2%',
+            }}
           />
           | 문의 내역
         </h6>
@@ -209,9 +221,9 @@ export default function UserDetailModalContent({
               {inquiry.map(item => (
                 <tr style={{ fontSize: 'small' }}>
                   {item.status === 0 ? (
-                    <td style={{ color: 'red', width: '6%' }}>답변대기</td>
+                    <td style={{ color: 'gray', width: '6%' }}>답변대기</td>
                   ) : (
-                    <td style={{ color: 'green', width: '6%' }}>답변완료</td>
+                    <td style={{ color: '#D01C1F', width: '6%' }}>답변완료</td>
                   )}
                   <td style={{ width: '32%' }}>{item.message}</td>
                   <td style={{ width: '32%' }}>{item.answer?.message}</td>

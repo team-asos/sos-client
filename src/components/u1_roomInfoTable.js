@@ -46,6 +46,7 @@ const RoomInfoTable = () => {
     if (parseInt(a.floor.name.split('층')) < parseInt(b.floor.name.split('층')))
       return -1;
   });
+
   return (
     <div>
       <MDBTable hover className={isPc ? 'infoTable' : 'mobileInfoTable'}>
