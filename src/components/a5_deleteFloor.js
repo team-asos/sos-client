@@ -20,6 +20,10 @@ const DeleteFloor = () => {
     asd();
   }, []);
 
+  floor.sort(function (a, b) {
+    if (parseInt(a.name.split('층')) < parseInt(b.name.split('층'))) return -1;
+  });
+
   //삭제 층 데이터베이스 불러오기
   const [deleteFloor, setDeleteFloor] = useState('');
 
@@ -53,8 +57,9 @@ const DeleteFloor = () => {
                 <select
                   onChange={e => setDeleteFloor(e.target.value)}
                   value={deleteFloor}
-                  style={{ width: '10vw' }}
+                  style={{ width: '55%' }}
                 >
+                  <option value="">층 선택</option>
                   {floor.map(item => (
                     <option value={item.id}>{item.name}</option>
                   ))}

@@ -25,6 +25,10 @@ const SeatManageBox = () => {
     fetchFloors();
   }, []);
 
+  floor.sort(function (a, b) {
+    if (parseInt(a.name.split('층')) < parseInt(b.name.split('층'))) return -1;
+  });
+
   //층 선택
   const [selectFloor, setSelectFloor] = useState('');
 

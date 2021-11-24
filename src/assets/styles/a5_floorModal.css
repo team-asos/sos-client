@@ -13,7 +13,7 @@
   font-size: 0.6em;
 }
 .floorInputForm {
-  width: 15vw;
+  width: 55%;
   margin-top: 2%;
 }
 .floorInputForm::placeholder {
@@ -21,10 +21,10 @@
   font-size: smaller;
 }
 .createFloorModal {
-  padding-left: 14%;
+  padding-left: 15%;
 }
 .createFloorModal label {
-  width: 8vw;
+  width: 26%;
 }
 
 .floorControlButton {

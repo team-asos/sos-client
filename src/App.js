@@ -3,6 +3,8 @@ import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
+import './assets/fonts/font.css';
+
 //공통 페이지
 import Login from './pages/1_loginPage';
 import SignUp from './pages/1_signupPage';

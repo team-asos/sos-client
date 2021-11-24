@@ -1,4 +1,5 @@
 import React from 'react';
+import { BsInfoSquareFill } from 'react-icons/bs';
 
 import { SeatTab } from './SeatTab';
 import { RoomTab } from './RoomTab';
@@ -55,31 +56,65 @@ export const BoardSetting = ({
       );
   };
 
+  console.log(floor);
+
   const Setting = () => {
     return (
       <div className="board-setting">
-        <div className="setting-tab-group">
-          <button
-            className={tab === 0 ? 'createbtn-click' : 'createbtn'}
-            onClick={() => handleTab(0)}
-          >
-            좌석
-          </button>
-          <button
-            className={tab === 1 ? 'createbtn-click' : 'createbtn'}
-            onClick={() => handleTab(1)}
-          >
-            회의실
-          </button>
-          <button
-            className={tab === 2 ? 'createbtn-click' : 'createbtn'}
-            onClick={() => handleTab(2)}
-          >
-            시설
-          </button>
+        <div style={{ height: '70%' }}>
+          <div className="setting-tab-group">
+            <button
+              className={tab === 0 ? 'createbtn-click' : 'createbtn'}
+              onClick={() => handleTab(0)}
+            >
+              좌석
+            </button>
+            <button
+              className={tab === 1 ? 'createbtn-click' : 'createbtn'}
+              onClick={() => handleTab(1)}
+            >
+              회의실
+            </button>
+            <button
+              className={tab === 2 ? 'createbtn-click' : 'createbtn'}
+              onClick={() => handleTab(2)}
+            >
+              시설
+            </button>
+          </div>
+          <div className="setting-tab">
+            <Tab />
+          </div>
         </div>
-        <div className="setting-tab">
-          <Tab />
+        <div className="floor-info" style={{ height: '30%' }}>
+          {floor.length === 0 ? (
+            <p style={{ fontSize: '0.9em', fontStyle: 'italic' }}>
+              층을 선택하면 정보가 나타납니다.
+            </p>
+          ) : (
+            <div className="floor-info-detail">
+              <p style={{ fontSize: '1.1em' }}>
+                <BsInfoSquareFill
+                  style={{ marginRight: '3%', color: '#c00000' }}
+                />
+                층 정보
+              </p>
+              <div style={{ width: '100%' }}>
+                <label>층 이름 </label>: {floor.name}
+              </div>
+              <div>
+                <label>층 크기(가로, 세로) </label>: ({floor.width},
+                {floor.height})
+              </div>
+              <div>
+                <label>좌석 개수 </label>: {seats.length}
+              </div>
+              <div>
+                <label>회의실 개수 </label>: {'  '}
+                {rooms.length}
+              </div>
+            </div>
+          )}
         </div>
       </div>
     );

@@ -1,0 +1,18 @@
+@font-face {
+  font-family: 'NotoSansRegular';
+  src: url('./notosanskr-regular-webfont.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'NotoSansMedium';
+  src: url('./notosanskr-medium-webfont.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'NotoSansThin';
+  src: url('./notosanskr-thin-webfont.woff') format('woff');
+
+  font-weight: 400;
+}
