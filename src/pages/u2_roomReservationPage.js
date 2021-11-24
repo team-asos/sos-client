@@ -18,7 +18,7 @@ const RoomReservationPage = props => {
   const navClick = () => {
     setOpen(!open);
   };
-  const roomId = props.match.params.idx; //회의실 id 조회페이지에서 전달받음
+  const roomId = props.match.params.idx;
   const [cookie] = useCookies(['access_token']);
   const history = useHistory();
 

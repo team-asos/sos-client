@@ -67,9 +67,10 @@ const RoomTimeTable = ({ selectedDate, roomId }) => {
             <td key={1} className={isClicked ? 'clickTime' : 'time'}>
               8:00
             </td>
-            <td onClick={() => clickHandler(1)} style={{ cursor: 'pointer' }}>
-              Mark
-            </td>
+            <td
+              onClick={() => clickHandler(1)}
+              style={{ cursor: 'pointer' }}
+            ></td>
           </tr>
           <tr>
             <td
@@ -79,7 +80,7 @@ const RoomTimeTable = ({ selectedDate, roomId }) => {
             >
               8:30
             </td>
-            <td>Jacob</td>
+            <td></td>
           </tr>
           <tr>
             <td
@@ -88,7 +89,7 @@ const RoomTimeTable = ({ selectedDate, roomId }) => {
             >
               9:00
             </td>
-            <td>{name}</td>
+            <td></td>
           </tr>
           <tr>
             <td
@@ -133,7 +134,7 @@ const RoomTimeTable = ({ selectedDate, roomId }) => {
             >
               11:30
             </td>
-            <td>Larry</td>
+            <td></td>
           </tr>
           <tr>
             <td
@@ -142,7 +143,7 @@ const RoomTimeTable = ({ selectedDate, roomId }) => {
             >
               12:00
             </td>
-            <td>Larry</td>
+            <td></td>
           </tr>
           <tr>
             <td
@@ -151,7 +152,7 @@ const RoomTimeTable = ({ selectedDate, roomId }) => {
             >
               12:30
             </td>
-            <td>Larry</td>
+            <td></td>
           </tr>
           <tr>
             <td
@@ -160,7 +161,88 @@ const RoomTimeTable = ({ selectedDate, roomId }) => {
             >
               13:00
             </td>
-            <td>Larry</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td
+              className={isClicked ? 'clickTime' : 'time'}
+              onClick={() => clickHandler(11)}
+            >
+              13:30
+            </td>
+            <td></td>
+          </tr>
+          <tr>
+            <td
+              className={isClicked ? 'clickTime' : 'time'}
+              onClick={() => clickHandler(11)}
+            >
+              14:00
+            </td>
+            <td></td>
+          </tr>
+          <tr>
+            <td
+              className={isClicked ? 'clickTime' : 'time'}
+              onClick={() => clickHandler(11)}
+            >
+              14:30
+            </td>
+            <td></td>
+          </tr>
+          <tr>
+            <td
+              className={isClicked ? 'clickTime' : 'time'}
+              onClick={() => clickHandler(11)}
+            >
+              15:00
+            </td>
+            <td></td>
+          </tr>
+          <tr>
+            <td
+              className={isClicked ? 'clickTime' : 'time'}
+              onClick={() => clickHandler(11)}
+            >
+              15:30
+            </td>
+            <td></td>
+          </tr>
+          <tr>
+            <td
+              className={isClicked ? 'clickTime' : 'time'}
+              onClick={() => clickHandler(11)}
+            >
+              16:00
+            </td>
+            <td></td>
+          </tr>
+          <tr>
+            <td
+              className={isClicked ? 'clickTime' : 'time'}
+              onClick={() => clickHandler(11)}
+            >
+              16:30
+            </td>
+            <td></td>
+          </tr>
+          <tr>
+            <td
+              className={isClicked ? 'clickTime' : 'time'}
+              onClick={() => clickHandler(11)}
+            >
+              17:00
+            </td>
+            <td></td>
+          </tr>
+          <tr>
+            <td
+              className={isClicked ? 'clickTime' : 'time'}
+              onClick={() => clickHandler(11)}
+            >
+              17:30
+            </td>
+            <td></td>
           </tr>
         </tbody>
       </Table>
