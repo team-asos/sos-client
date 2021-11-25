@@ -1,17 +1,20 @@
 @font-face {
-  font-family: 'NotoSansRegular' !important;
-  src: url('./notosanskr-regular-webfont.woff') format('woff');
+  font-family: 'NotoSansRegular';
+
+  src: url('./notosanskr-regular-webfont.woff') format('woff'),
+    url('./notosansKR-Regular.eot') format('eot');
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'NotoSansMedium' !important;
-  src: url('./notosanskr-medium-webfont.woff') format('woff');
+  font-family: 'NotoSansMedium';
+  src: url('./notosanskr-medium-webfont.woff') format('woff'),
+    url('./notosansKR-Medium.eot') format('eot');
 }
 
 @font-face {
-  font-family: 'NotoSansThin' !important;
+  font-family: 'NotoSansThin';
   src: url('./notosanskr-thin-webfont.woff') format('woff');
 }
 @font-face {

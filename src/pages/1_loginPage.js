@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useCookies } from 'react-cookie';
 import { Link, useHistory } from 'react-router-dom';
-import Logo from '../assets/images/logo.png';
-import '../assets/styles/1_loginPage.css';
 import { useMediaQuery } from 'react-responsive';
+
+import '../assets/styles/1_loginPage.css';
+import '../assets/fonts/font.css';
+import Logo from '../assets/images/logo.png';
+
 const Login = () => {
   const isPc = useMediaQuery({
     query: '(min-width:768px)',

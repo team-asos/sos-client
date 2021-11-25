@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
-import '../assets/styles/1_signupPage.css';
-import '../assets/styles/1_containerStyle.css';
-import * as MdIcon from 'react-icons/md';
-import * as ai from 'react-icons/ai';
-import * as hi from 'react-icons/hi';
 import { Link } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
 import { InputGroup, FormControl, Form } from 'react-bootstrap';
+
+import * as MdIcon from 'react-icons/md';
+import * as ai from 'react-icons/ai';
+import * as hi from 'react-icons/hi';
+
+import '../assets/styles/1_signupPage.css';
+import '../assets/styles/1_containerStyle.css';
+import '../assets/fonts/font.css';
 
 const SignUp = () => {
   const isPc = useMediaQuery({
