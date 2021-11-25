@@ -1,9 +1,8 @@
 .nav-menu {
   position: fixed;
-
   z-index: 1;
 
-  width: 200px;
+  width: 190px;
   height: 100vh;
 
   top: 0;
@@ -26,35 +25,63 @@
 
   transition: all 0.5s ease;
 }
+.nav-close-btn {
+  height: 10%;
+  padding-top: 5%;
+  background-color: rgba(0, 0, 0, 0.822);
+}
 .nav-menu-items {
   width: 100%;
+  height: 60%;
 
-  margin-top: 30px;
-
-  padding-left: 15%;
+  padding-top: 20%;
+  padding-left: 19px;
 
   display: flex;
   flex-direction: column;
-  justify-items: flex-end;
+  align-items: flex-start;
 }
 
 .closeBtn {
   margin-top: 10px;
   margin-left: 10px;
+
+  color: #821000;
 }
-.iconText {
+.m_icon {
+  margin-right: 17px;
+}
+.m_iconText {
   display: initial;
 
-  margin-left: 2vw;
+  margin-left: 2px;
 
   font-size: 1em;
-  font-weight: bold;
+  font-weight: 600;
 
-  color: black;
+  color: rgb(34, 34, 34);
+}
+.m_iconText:hover {
+  color: #c00000;
+}
+.m_logOutBar {
+  height: 15%;
+  padding-top: 15%;
+
+  text-align: center;
+}
+.m_logOutTextStyle {
+  margin-top: -10px;
+
+  font-size: smaller;
+  text-decoration: underline black;
 }
 .oneMenu {
   margin-bottom: 40px;
 }
 .mobileTimeBar {
-  background-color: #820101;
+  height: 15%;
+  padding-top: 15%;
+
+  background-color: #821000;
 }

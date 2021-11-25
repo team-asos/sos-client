@@ -1,8 +1,17 @@
+.roomReservationFormRight {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  margin-left: 1%;
+  align-items: center;
+}
+.selectedTime {
+  margin-bottom: 2vh;
+}
 .addAndButtonForm {
   display: flex;
   flex-direction: column;
-  width: 35%;
-  margin-left: 3%;
+  width: 100%;
   align-items: center;
 }
 .mAddAndButtonForm {
@@ -12,8 +21,6 @@
 .addParticipantForm {
   display: flex;
   flex-direction: column;
-  margin-left: 2vw;
-  width: 90%;
 }
 .mParticipantForm {
   display: flex;

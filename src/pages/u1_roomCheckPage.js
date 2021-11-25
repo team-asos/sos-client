@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import NavBarUser from '../components/u_navBar';
 import MobileNavBar from '../components/u_m_navBar';
 import RoomInfoTable from '../components/u1_roomInfoTable';
@@ -16,6 +17,14 @@ const RoomCheckPage = () => {
   const navClick = () => {
     setOpen(!open);
   };
+  const history = useHistory();
+
+  useEffect(() => {
+    console.log(history);
+    //if (history.action === 'POP') {
+    // history.push('/room-check');
+    //}
+  }, []);
   return (
     <div className="roomCheckPage">
       <div>{isPc ? <NavBarUser /> : null}</div>

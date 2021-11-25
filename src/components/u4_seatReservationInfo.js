@@ -2,16 +2,26 @@ import React, { useState, useEffect } from 'react';
 import { useCookies } from 'react-cookie';
 import * as ai from 'react-icons/ai';
 import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
-import { OverlayTrigger, Tooltip, Modal } from 'react-bootstrap';
+import { OverlayTrigger, Tooltip, Modal, Button } from 'react-bootstrap';
+import * as moment from 'moment';
 
 import '../assets/styles/u4_reservationInfo.css';
 
 const SeatReservationInfo = props => {
   //쿠키 생성
   const [cookie] = useCookies(['access_token']);
-
   //예약내역 불러오기
   const [reservation, setReservation] = useState([]);
+
+  //예약내역 모달창
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  //좌석 사용 종료
+  const [seatshow, setseatShow] = useState(false);
+  const seathandleClose = () => setseatShow(false);
+  const seathandleShow = () => setseatShow(true);
   const res = async () => {
     const id = Number(props.user.id);
     await fetch(
@@ -25,17 +35,40 @@ const SeatReservationInfo = props => {
         setReservation(json);
       });
   };
+  /*좌석 사용 종료 */
+  const finishClick = reservationId => {
+    seathandleClose();
+    console.log(reservationId);
+    const finishHandler = async () => {
+      const res = await fetch(
+        `${process.env.REACT_APP_SERVER_BASE_URL}/reservations/${reservationId}/seat`,
+        {
+          method: 'PATCH',
+        },
+      );
+      if (res.status === 200) {
+        alert('정상적으로 처리 되었습니다.');
+      } else {
+        const json = await res.json();
+        alert(json.message);
+      }
+    };
+    finishHandler();
+  };
 
   //예외처리
   useEffect(() => {
     if (props.user.id !== 'undefined') res();
   }, [props.user.id]);
 
-  //예약내역 모달창
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
+  // const sortedReservation =
+  //   reservation !== null &&
+  //   reservation.sort((a, b) =>
+  //     a.startTime
+  //       .split('-')
+  //       .join()
+  //       .localeCompare(b.startTime.split('-').join()),
+  //   );
   return (
     <div className="reservationInfo">
       <div>
@@ -49,7 +82,7 @@ const SeatReservationInfo = props => {
               width: '20%',
             }}
           >
-            사용중인 좌석
+            사용 중인 좌석
           </p>
           <OverlayTrigger
             key="right"
@@ -87,41 +120,107 @@ const SeatReservationInfo = props => {
           >
             <MDBTableHead>
               <tr>
-                <th>이용시작일</th>
-                <th>예약정보</th>
+                <th>이용 시작일</th>
+                <th>예약 정보</th>
                 <th></th>
               </tr>
             </MDBTableHead>
             <MDBTableBody>
-              <tr>
-                <td>2021-11-24</td>
-                <td>3층 12번</td>
+              {reservation.length !== 0 &&
+                reservation.map(item =>
+                  item.status === 1 &&
+                  item.seat !== null &&
+                  item.endTime === null ? (
+                    <tr>
+                      {/* <td>{item.startTime.slice(0, 10)}</td> */}
+                      <td>
+                        {moment(item.startTime).format('YYYY-MM-DD HH:mm:ss')}
+                      </td>
+                      <td>
+                        {item.seat.floor.name} {item.seat.name}
+                      </td>
 
-                <td>
-                  <button
-                    style={{
-                      height: '4vh',
-                      width: '5vw',
-                      border: '1px solid #c00000',
-                      borderRadius: '3px',
-                      color: '#c00000',
-                      backgroundColor: 'transparent',
-                    }}
-                  >
-                    사용종료
-                  </button>
-                </td>
-              </tr>
+                      <td>
+                        <button
+                          style={{
+                            height: '4vh',
+                            width: '5vw',
+                            border: '1px solid #c00000',
+                            borderRadius: '3px',
+                            color: '#c00000',
+                            backgroundColor: 'transparent',
+                          }}
+                          onClick={seathandleShow}
+                        >
+                          사용종료
+                        </button>
+                        <Modal show={seatshow} onHide={seathandleClose}>
+                          <Modal.Header closeButton>
+                            <Modal.Title>좌석 {item.seat.name}</Modal.Title>
+                          </Modal.Header>
+                          <Modal.Body>사용을 종료하시겠습니까?</Modal.Body>
+                          <Modal.Footer>
+                            <Button
+                              variant="secondary"
+                              onClick={seathandleClose}
+                            >
+                              취소
+                            </Button>
+                            <Button
+                              variant="danger"
+                              onClick={() => finishClick(item.id)}
+                            >
+                              확인
+                            </Button>
+                          </Modal.Footer>
+                        </Modal>
+                      </td>
+                    </tr>
+                  ) : null,
+                )}
             </MDBTableBody>
           </MDBTable>
         </div>
       </div>
-      <Modal show={show} onHide={handleClose}>
+      <Modal show={show} onHide={handleClose} size="xl">
         <Modal.Header closeButton>
           <Modal.Title>좌석 사용 내역</Modal.Title>
         </Modal.Header>
-        <Modal.Body>불러오기</Modal.Body>
-        <Modal.Footer></Modal.Footer>
+        <Modal.Body>
+          <MDBTable
+            hover
+            style={{
+              width: '90%',
+              marginLeft: '5%',
+              fontSize: '0.9em',
+            }}
+          >
+            <MDBTableHead>
+              <tr>
+                <th>이용 날짜</th>
+                <th>예약 정보</th>
+              </tr>
+            </MDBTableHead>
+            <MDBTableBody>
+              {reservation.length !== 0 &&
+                reservation.map(item =>
+                  item.status === 2 &&
+                  item.seat !== null &&
+                  item.endTime !== null ? (
+                    <tr>
+                      <td>
+                        {moment(item.startTime).format('YYYY-MM-DD HH:mm:ss')}-
+                        {moment(item.endTime).format('YYYY-MM-DD HH:mm:ss')}
+                      </td>
+                      <td>
+                        {item.seat.floor.name} {item.seat.name}
+                      </td>
+                    </tr>
+                  ) : null,
+                )}
+            </MDBTableBody>
+          </MDBTable>
+        </Modal.Body>
       </Modal>
     </div>
   );

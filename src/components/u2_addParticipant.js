@@ -100,68 +100,74 @@ const AddParticipant = ({ START, END, MAXUSER, ROOMID }) => {
 
   console.log(selectedMembers);
   return (
-    <div className={isPc ? 'addAndButtonForm' : 'mAddAndButtonForm'}>
-      <div className={isPc ? 'addParticipantForm' : 'mParticipantForm'}>
-        <p className={isPc ? 'rrp_centerTextStyle' : 'mrrp_centerTextStyle'}>
-          회의 참석자를 입력하세요. [ 사용 가능 인원 : {MAXUSER}명 ]
-        </p>
-
-        <div className={isPc ? 'searchForm' : 'mSearchForm'}>
-          <Select
-            menuPosition={'center'}
-            options={users.map(item => ({
-              value: item.id,
-              label: [item.name, ' (', item.employeeId, ')'],
-            }))}
-            placeholder="회원 검색"
-            onChange={e => handleChange(e)}
-            // onInputChange={e => console.log(e)}
-            noOptionsMessage={() => '검색 결과가 없습니다.'}
-            isDisabled={selectedMembers.length < MAXUSER ? 0 : 0}
-          />
-        </div>
-        <div className="participantForm">
-          <Table
-            striped
-            hover
-            className={isPc ? 'selectedMembersList' : 'mSelectedMembersList'}
-          >
-            <thead>
-              <tr>
-                <th></th>
-                <th>이름</th>
-                <th>이메일</th>
-                <th>부서</th>
-              </tr>
-            </thead>
-            <tbody>
-              {selectedMembers.map((item, idx) => (
-                <tr key={idx}>
-                  <td>{idx + 1}</td>
-                  <td>{users[participantInfo(item.value)].name}</td>
-                  <td>{users[participantInfo(item.value)].email}</td>
-                  <td>{users[participantInfo(item.value)].department}</td>
-                  <td>
-                    <AiIcon.AiOutlineMinus
-                      style={{
-                        cursor: 'pointer',
-                      }}
-                      onClick={() => deleteParticipant(item.value)}
-                    ></AiIcon.AiOutlineMinus>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </Table>
-        </div>
+    <div className="roomReservationFormRight">
+      <div className="selectedTime">
+        <input value={START}></input>
+        <input value={END}></input>
       </div>
-      <div className={isMobile ? 'divButton' : ''}>
-        <button
-          className={isPc ? 'roomReservationBtn' : 'mRoomReservationBtn'}
-          onClick={reservationClickHandler}
-        >
-          예약하기
-        </button>
+      <div className={isPc ? 'addAndButtonForm' : 'mAddAndButtonForm'}>
+        <div className={isPc ? 'addParticipantForm' : 'mParticipantForm'}>
+          <p className={isPc ? 'rrp_centerTextStyle' : 'mrrp_centerTextStyle'}>
+            회의 참석자를 입력하세요. [ 사용 가능 인원 : {MAXUSER}명 ]
+          </p>
+
+          <div className={isPc ? 'searchForm' : 'mSearchForm'}>
+            <Select
+              menuPosition={'center'}
+              options={users.map(item => ({
+                value: item.id,
+                label: [item.name, ' (', item.employeeId, ')'],
+              }))}
+              placeholder="회원 검색"
+              onChange={e => handleChange(e)}
+              // onInputChange={e => console.log(e)}
+              noOptionsMessage={() => '검색 결과가 없습니다.'}
+              isDisabled={selectedMembers.length < MAXUSER ? 0 : 1}
+            />
+          </div>
+          <div className="participantForm">
+            <Table
+              striped
+              hover
+              className={isPc ? 'selectedMembersList' : 'mSelectedMembersList'}
+            >
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>이름</th>
+                  <th>이메일</th>
+                  <th>부서</th>
+                </tr>
+              </thead>
+              <tbody>
+                {selectedMembers.map((item, idx) => (
+                  <tr key={idx}>
+                    <td>{idx + 1}</td>
+                    <td>{users[participantInfo(item.value)].name}</td>
+                    <td>{users[participantInfo(item.value)].email}</td>
+                    <td>{users[participantInfo(item.value)].department}</td>
+                    <td>
+                      <AiIcon.AiOutlineMinus
+                        style={{
+                          cursor: 'pointer',
+                        }}
+                        onClick={() => deleteParticipant(item.value)}
+                      ></AiIcon.AiOutlineMinus>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
+          </div>
+        </div>
+        <div className={isMobile ? 'divButton' : ''}>
+          <button
+            className={isPc ? 'roomReservationBtn' : 'mRoomReservationBtn'}
+            onClick={reservationClickHandler}
+          >
+            예약하기
+          </button>
+        </div>
       </div>
     </div>
   );

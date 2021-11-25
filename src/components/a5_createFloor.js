@@ -7,7 +7,7 @@ const CreateFloor = () => {
   const [height, setHeight] = useState('');
 
   const inputName = e => {
-    setName(e.target.value);
+    setName(e.target.value.replace('-', '지하'));
   };
   const inputWidth = e => {
     setWidth(e.target.value);

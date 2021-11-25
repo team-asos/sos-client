@@ -4,25 +4,22 @@ import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
 import { Link } from 'react-router-dom';
 import { getMonth, getDate, getYear } from 'date-fns';
 import { useMediaQuery } from 'react-responsive';
+import { useHistory } from 'react-router-dom';
 
 import '../assets/styles/u1_roomInfoTable.css';
 
 //전체 회의실 리스트 조회
 const RoomInfoTable = () => {
   const [cookie] = useCookies(['access_token']);
-  const [idx, setIdx] = useState();
-  const [floorName, setFloorName] = useState([]);
   const [rooms, setRooms] = useState([]);
   const isPc = useMediaQuery({
     query: '(min-width:768px)',
   });
-
   const isMobile = useMediaQuery({ query: '(max-width:767px)' });
 
+  const history = useHistory();
   const handleClick = e => {
-    setIdx(e);
-    const idx = e;
-    window.location.href = `/room-reservation/${idx}`;
+    if (e) history.push(`/room-reservation/${e}`);
   };
 
   useEffect(() => {
@@ -79,20 +76,14 @@ const RoomInfoTable = () => {
               </td>
               <td>{item.maxUser}명</td>
               <td>
-                <Link
-                  to={{
-                    pathname: '/room-reservation',
-                  }}
+                <button
+                  className={
+                    isPc ? 'roomReservationButton' : 'm_roomReservationBtn'
+                  }
+                  onClick={() => handleClick(item.id)}
                 >
-                  <button
-                    className={
-                      isPc ? 'roomReservationButton' : 'm_roomReservationBtn'
-                    }
-                    onClick={() => handleClick(item.id)}
-                  >
-                    {isPc ? '예약하기' : '예약'}
-                  </button>
-                </Link>
+                  {isPc ? '예약하기' : '예약'}
+                </button>
               </td>
             </tr>
           ))}

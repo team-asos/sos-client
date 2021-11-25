@@ -137,11 +137,10 @@
   font-size: 0.9em;
 }
 
-/*삭제*/
-.deleteInquiry {
-  width: 3%;
-  cursor: pointer;
-  color: #d80303;
+.m_deleteInquiry {
+  width: 15px;
+  height: 15px;
+  color: gray;
 }
 /*제목 폼에서 윗 부분(제목, 날짜)*/
 .inquiryTitleUpper {

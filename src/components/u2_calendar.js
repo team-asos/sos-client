@@ -9,7 +9,6 @@ import AddParticipant from './u2_addParticipant';
 import RoomTimeTable from './u2_roomTimeTable';
 import { useMediaQuery } from 'react-responsive';
 import '../assets/styles/u2_calendar.css';
-
 //회의실 예약 페이지-> 이용시간 선택
 const Calendar = props => {
   const isPc = useMediaQuery({
@@ -33,7 +32,7 @@ const Calendar = props => {
     </button>
   ));
   return (
-    <>
+    <div style={{ width: '100%' }}>
       {isPc ? (
         <div className="roomDatePicker">
           <div className="pickersTextStyle">날짜 선택</div>
@@ -73,15 +72,13 @@ const Calendar = props => {
           isPc ? 'timeTableAndAddParticipant' : 'm_timeTableAndAddParticipant'
         }
       >
-        <RoomTimeTable selectedDate={formatISO(startDate)} />
-        <AddParticipant
-          START={formatISO(startDate)}
-          // END={formatISO(endDate)}
+        <RoomTimeTable
           MAXUSER={roomMAXUSER}
-          ROOMID={roomID}
+          selectedDate={formatISO(startDate)}
+          roomId={roomID}
         />
       </div>
-    </>
+    </div>
   );
 };
 
