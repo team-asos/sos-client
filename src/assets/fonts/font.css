@@ -13,6 +13,8 @@
 @font-face {
   font-family: 'NotoSansThin';
   src: url('./notosanskr-thin-webfont.woff') format('woff');
-
-  font-weight: 400;
+}
+@font-face {
+  font-family: 'NanumPenScript';
+  src: url('./NanumPenScript-Regular.woff') format('woff');
 }

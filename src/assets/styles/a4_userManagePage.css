@@ -1,4 +1,6 @@
 .userManagePage {
+  font-family: NotoSansRegular;
+
   display: flex;
   flex-direction: row;
 }

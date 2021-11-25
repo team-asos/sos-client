@@ -1,4 +1,5 @@
 .login {
+  font-family: NotoSansRegular;
   /*포함 컨텐츠들 정렬*/
   display: flex;
   flex-direction: row;

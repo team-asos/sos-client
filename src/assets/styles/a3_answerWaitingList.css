@@ -21,9 +21,10 @@
 .answerWaitingListLeftTop {
   list-style-type: none;
   width: 100%;
-  padding-left: 5.5%;
 
   vertical-align: middle;
+
+  margin-bottom: -2%;
 }
 .deleteIcon {
   margin-left: 1%;

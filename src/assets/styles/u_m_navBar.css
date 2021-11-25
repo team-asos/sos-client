@@ -1,28 +1,40 @@
 .nav-menu {
-  background-color: gray;
+  position: fixed;
+
+  z-index: 1;
+
   width: 200px;
   height: 100vh;
-  display: flex;
-  flex-direction: column;
-  position: fixed;
+
   top: 0;
   left: -100%;
-  transition: 0.8s all;
-  z-index: 1;
-}
-.nav-menu.active {
-  left: 0;
-  transition: all 0.5s ease;
+
   display: flex;
   flex-direction: column;
+
+  transition: 0.8s all;
+
+  background-color: rgb(173, 173, 173);
+}
+.nav-menu.active {
   z-index: 1;
+
+  left: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  transition: all 0.5s ease;
 }
 .nav-menu-items {
   width: 100%;
+
+  margin-top: 30px;
+
+  padding-left: 15%;
+
   display: flex;
   flex-direction: column;
-  /* align-items: center; */
-  margin-top: 30px;
   justify-items: flex-end;
 }
 
@@ -31,15 +43,14 @@
   margin-left: 10px;
 }
 .iconText {
+  display: initial;
+
+  margin-left: 2vw;
+
   font-size: 1em;
   font-weight: bold;
-  color: white;
-  display: initial;
-  margin-left: 2vw;
-}
-.m_icon {
-  width: 50px;
-  height: 50px;
+
+  color: black;
 }
 .oneMenu {
   margin-bottom: 40px;

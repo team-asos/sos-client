@@ -145,57 +145,64 @@ const AnswerCompleteList = () => {
     <div className="answerWaitingList">
       <div className="answerWaitingListLeft">
         <div className="answerWaitingListLeftTop">
-          <li>
-            {/* 전체 체크박스  */}
-            <input
-              type="checkbox"
-              onChange={e => onCheckedAll(e.target.checked)}
-              checked={
-                checkedList.length === 0
-                  ? false
-                  : checkedList.length === question.length
-                  ? true
-                  : false
-              }
-            />
-            {/* 삭제 아이콘 tooltip*/}
-            <span>
-              <OverlayTrigger
-                placement="right"
-                overlay={
-                  <Tooltip
-                    id="button-tooltip"
-                    style={{
-                      fontSize: 'x-small',
-                      height: 'fit-content',
-                      backgroundColor: 'transparent',
-                      border: 'none',
-                    }}
-                  >
-                    선택 삭제
-                  </Tooltip>
-                }
-              >
-                <span>
-                  <ai.AiTwotoneDelete
-                    className="deleteIcon"
-                    size={20}
-                    onClick={() => deleteClickHandler(checkedList)}
-                  />
-                </span>
-              </OverlayTrigger>
-
-              {/* 검색창 */}
+          <ul>
+            <li
+              style={{
+                width: '100%',
+                listStyleType: 'none',
+              }}
+            >
+              {/* 전체 체크박스  */}
               <input
-                className="searchQuestionForm"
-                type="text"
-                placeholder="검색할 문의를 입력하세요."
-                value={q}
-                onChange={e => setQ(e.target.value)}
+                type="checkbox"
+                onChange={e => onCheckedAll(e.target.checked)}
+                checked={
+                  checkedList.length === 0
+                    ? false
+                    : checkedList.length === question.length
+                    ? true
+                    : false
+                }
               />
-              <ai.AiOutlineSearch className="deleteIcon" size={20} />
-            </span>
-          </li>
+              {/* 삭제 아이콘 tooltip*/}
+              <span>
+                <OverlayTrigger
+                  placement="right"
+                  overlay={
+                    <Tooltip
+                      id="button-tooltip"
+                      style={{
+                        fontSize: 'x-small',
+                        height: 'fit-content',
+                        backgroundColor: 'transparent',
+                        border: 'none',
+                      }}
+                    >
+                      선택 삭제
+                    </Tooltip>
+                  }
+                >
+                  <span>
+                    <ai.AiTwotoneDelete
+                      className="deleteIcon"
+                      size={20}
+                      onClick={() => deleteClickHandler(checkedList)}
+                    />
+                  </span>
+                </OverlayTrigger>
+
+                {/* 검색창 */}
+                <input
+                  className="searchQuestionForm"
+                  type="text"
+                  placeholder="검색할 문의를 입력하세요."
+                  value={q}
+                  onChange={e => setQ(e.target.value)}
+                />
+                <ai.AiOutlineSearch className="deleteIcon" size={20} />
+              </span>
+            </li>
+          </ul>
         </div>
 
         {/* 문의 리스트 부분 */}
