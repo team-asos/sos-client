@@ -4,11 +4,10 @@ import { useCookies } from 'react-cookie';
 import { Table } from 'react-bootstrap';
 import * as AiIcon from 'react-icons/ai';
 import { useMediaQuery } from 'react-responsive';
+import * as moment from 'moment';
 import '../assets/styles/u2_addParticipant.css';
-import { useParams } from 'react-router';
 //회의실 인원 검색해서 추가
-
-const AddParticipant = ({ START, END, MAXUSER, ROOMID }) => {
+const AddParticipant = ({ START, END, MAXUSER, ROOMID, selectedDate }) => {
   const isPc = useMediaQuery({
     query: '(min-width:768px)',
   });
@@ -18,6 +17,8 @@ const AddParticipant = ({ START, END, MAXUSER, ROOMID }) => {
   const [selectedMembers, setSelectedMembers] = useState([]);
   const [membersId, setMembersId] = useState([]);
   const [myId, setMyId] = useState();
+  const [startTime, setStartTime] = useState('');
+  const [endTime, setEndTime] = useState('');
   /*내 정보 */
   useEffect(() => {
     const res = async () => {
@@ -37,8 +38,19 @@ const AddParticipant = ({ START, END, MAXUSER, ROOMID }) => {
   /*참석자 선택 */
   const handleChange = e => {
     setSelectedMembers([...selectedMembers, e]); //멀티 아닐 때 근데 옵션에서 사라져야함
-    // setSelectedMembers(e);
+    // setSelectedMembers([
+    //   ...selectedMembers.filter(member => member.value !== e.value),
+    // ]);
+    // const newMember = selectedMembers.filter(item => item.value !== e.value);
+    // setSelectedMembers(newMember);
+    // console.log(selectedMembers);
+    // console.log(e);
   };
+
+  // const removeMember = p => {
+  //   const newMember = selectedMembers.filter(item => item.value !== p.value);
+  //   setSelectedMembers(newMember);
+  // };
   /*회원 검색 */
   useEffect(() => {
     const res = async () => {
@@ -55,6 +67,18 @@ const AddParticipant = ({ START, END, MAXUSER, ROOMID }) => {
     };
     res();
   }, []);
+  const STARTTIME = () => {
+    setStartTime(moment(selectedDate).format('YYYY-MM-DD ') + START);
+  };
+  const ENDTIME = () => {
+    setEndTime(moment(selectedDate).format('YYYY-MM-DD ') + END);
+  };
+  useEffect(() => {
+    if (START !== null) STARTTIME();
+  }, [START]);
+  useEffect(() => {
+    if (END !== null) ENDTIME();
+  }, [END]);
   /*예약하기 */
   const reservationClickHandler = async () => {
     for (let i = 0; i < selectedMembers.length; i++) {
@@ -69,10 +93,10 @@ const AddParticipant = ({ START, END, MAXUSER, ROOMID }) => {
         },
         method: 'POST',
         body: JSON.stringify({
-          startTime: START,
-          endTime: END,
-          roomId: Number(ROOMID),
+          startTime: startTime,
+          endTime: endTime,
           userId: Number(myId),
+          roomId: Number(ROOMID),
           participantIds: membersId,
         }),
       },
@@ -98,7 +122,6 @@ const AddParticipant = ({ START, END, MAXUSER, ROOMID }) => {
     }
   };
 
-  console.log(selectedMembers);
   return (
     <div className="roomReservationFormRight">
       <div className="selectedTime">

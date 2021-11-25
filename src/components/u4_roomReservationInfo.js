@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useCookies } from 'react-cookie';
 import * as ai from 'react-icons/ai';
 import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
-import { OverlayTrigger, Tooltip } from 'react-bootstrap';
+import { OverlayTrigger, Tooltip, Modal, Button } from 'react-bootstrap';
+import * as moment from 'moment';
 
 import '../assets/styles/u4_reservationInfo.css';
 
@@ -12,6 +13,12 @@ const RoomReservationInfo = props => {
 
   //예약내역 불러오기
   const [reservation, setReservation] = useState([]);
+
+  //예약내역 모달창
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   const res = async () => {
     const id = Number(props.user.id);
     await fetch(
@@ -30,7 +37,11 @@ const RoomReservationInfo = props => {
   useEffect(() => {
     if (props.user.id !== 'undefined') res();
   }, [props.user.id]);
-
+  console.log(reservation);
+  /* 예약 날짜 정렬 */
+  const sortedReservation = reservation.sort((a, b) =>
+    a.startTime.split('-').join().localeCompare(b.startTime.split('-').join()),
+  );
   return (
     <div className="reservationInfo">
       <div>
@@ -66,6 +77,7 @@ const RoomReservationInfo = props => {
               <ai.AiOutlineHistory
                 size={25}
                 className="reservation-history-icon"
+                onClick={handleShow}
               />
             </p>
           </OverlayTrigger>
@@ -74,14 +86,39 @@ const RoomReservationInfo = props => {
           <MDBTable hover style={{ width: '90%', marginLeft: '5%' }}>
             <MDBTableHead style={{ fontSize: '0.9em' }}>
               <tr>
-                <th style={{ width: '20%' }}>이용날짜</th>
-                <th style={{ width: '20%' }}>예약정보</th>
-                <th style={{ width: '20%' }}>시작시간</th>
-                <th style={{ width: '20%' }}>종료시간</th>
-                <th style={{ width: '20%' }}></th>
+                <th style={{ width: '20%' }}>이용 날짜</th>
+                <th style={{ width: '20%' }}>예약 정보</th>
+                <th style={{ width: '20%' }}>시작 시간</th>
+                <th style={{ width: '20%' }}>종료 시간</th>
+                <th style={{ width: '20%' }}>예약 상태</th>
               </tr>
             </MDBTableHead>
-            <MDBTableBody></MDBTableBody>
+            <MDBTableBody style={{ height: '90%', overFlow: 'auto' }}>
+              {reservation.length !== 0 &&
+                sortedReservation
+                  .slice(0)
+                  .reverse()
+                  .map(item =>
+                    item.room !== null ? (
+                      <tr>
+                        <td>{moment(item.startTime).format('YYYY-MM-DD')}</td>
+                        <td>
+                          {item.room.floor.name} {item.room.name}
+                        </td>
+                        <td>{moment(item.startTime).format('HH:mm:ss')}</td>
+
+                        <td>{moment(item.endTime).format('HH:mm:ss')}</td>
+                        <td>
+                          {item.status === 0
+                            ? '예약 완료'
+                            : item.status === 1
+                            ? '사용 중'
+                            : '사용 완료'}
+                        </td>
+                      </tr>
+                    ) : null,
+                  )}
+            </MDBTableBody>
           </MDBTable>
         </div>
       </div>
