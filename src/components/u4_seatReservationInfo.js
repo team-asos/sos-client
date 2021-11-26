@@ -61,14 +61,14 @@ const SeatReservationInfo = props => {
     if (props.user.id !== 'undefined') res();
   }, [props.user.id]);
 
-  // const sortedReservation =
-  //   reservation !== null &&
-  //   reservation.sort((a, b) =>
-  //     a.startTime
-  //       .split('-')
-  //       .join()
-  //       .localeCompare(b.startTime.split('-').join()),
-  //   );
+  const sortedReservation =
+    reservation !== null &&
+    reservation.sort((a, b) =>
+      a.startTime
+        .split('-')
+        .join()
+        .localeCompare(b.startTime.split('-').join()),
+    );
   return (
     <div className="reservationInfo">
       <div>
@@ -132,7 +132,6 @@ const SeatReservationInfo = props => {
                   item.seat !== null &&
                   item.endTime === null ? (
                     <tr>
-                      {/* <td>{item.startTime.slice(0, 10)}</td> */}
                       <td>
                         {moment(item.startTime).format('YYYY-MM-DD HH:mm:ss')}
                       </td>
@@ -203,21 +202,24 @@ const SeatReservationInfo = props => {
             </MDBTableHead>
             <MDBTableBody>
               {reservation.length !== 0 &&
-                reservation.map(item =>
-                  item.status === 2 &&
-                  item.seat !== null &&
-                  item.endTime !== null ? (
-                    <tr>
-                      <td>
-                        {moment(item.startTime).format('YYYY-MM-DD HH:mm:ss')}-
-                        {moment(item.endTime).format('YYYY-MM-DD HH:mm:ss')}
-                      </td>
-                      <td>
-                        {item.seat.floor.name} {item.seat.name}
-                      </td>
-                    </tr>
-                  ) : null,
-                )}
+                sortedReservation
+                  .slice(0)
+                  .reverse()
+                  .map(item =>
+                    item.status === 2 &&
+                    item.seat !== null &&
+                    item.endTime !== null ? (
+                      <tr>
+                        <td>
+                          {moment(item.startTime).format('YYYY-MM-DD HH:mm:ss')}
+                          -{moment(item.endTime).format('YYYY-MM-DD HH:mm:ss')}
+                        </td>
+                        <td>
+                          {item.seat.floor.name} {item.seat.name}
+                        </td>
+                      </tr>
+                    ) : null,
+                  )}
             </MDBTableBody>
           </MDBTable>
         </Modal.Body>
