@@ -1,5 +1,6 @@
 .roomReservationFormRight {
   width: 40%;
+  height: 80%;
   display: flex;
   flex-direction: column;
   margin-left: 1%;
@@ -7,6 +8,8 @@
 }
 .selectedTime {
   margin-bottom: 2vh;
+  display: flex;
+  align-self: flex-start;
 }
 .addAndButtonForm {
   display: flex;
@@ -84,6 +87,6 @@
 }
 /*참석자 리스트*/
 .participantForm {
-  height: 53vh;
+  height: 45vh;
   overflow: auto;
 }

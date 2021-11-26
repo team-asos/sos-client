@@ -83,7 +83,11 @@ const RoomReservationInfo = props => {
           </OverlayTrigger>
         </div>
         <div>
-          <MDBTable hover style={{ width: '90%', marginLeft: '5%' }}>
+          <MDBTable
+            hover
+            style={{ width: '90%', marginLeft: '5%', height: '100%' }}
+            scrollY="true"
+          >
             <MDBTableHead style={{ fontSize: '0.9em' }}>
               <tr>
                 <th style={{ width: '20%' }}>이용 날짜</th>
@@ -93,7 +97,7 @@ const RoomReservationInfo = props => {
                 <th style={{ width: '20%' }}>예약 상태</th>
               </tr>
             </MDBTableHead>
-            <MDBTableBody style={{ height: '90%', overFlow: 'auto' }}>
+            <MDBTableBody style={{ height: '100%' }}>
               {reservation.length !== 0 &&
                 sortedReservation
                   .slice(0)
