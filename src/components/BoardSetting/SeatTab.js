@@ -105,18 +105,33 @@ export const SeatTab = ({ selection, floor, seats, setSeats }) => {
       </div>
 
       {selection.stage !== EDIT_SELECTION && (
-        <label style={{ marginTop: '10%' }}>
-          <bs.BsCheckAll style={{ color: '#c00000' }} />
-          좌석 이름 :{'     '}
-          <input
-            className="seat-input-name"
-            value={name}
-            placeholder="입력해 주세요."
-            onChange={e => {
-              inputName(e);
-            }}
-            disabled={selection.x === -1 ? true : false}
-          />
+        <div>
+          <label style={{ marginTop: '10%' }}>
+            <bs.BsCheckAll style={{ color: '#c00000' }} />
+            좌석 이름 :
+            <input
+              className="seat-input-name"
+              value={name}
+              placeholder="입력해 주세요."
+              onChange={e => {
+                inputName(e);
+              }}
+              disabled={selection.x === -1 ? true : false}
+            />
+          </label>
+          <label style={{ marginTop: '8%' }}>
+            <bs.BsCheckAll style={{ color: '#c00000' }} />
+            ESL 아이디 :
+            <input
+              className="seat-input-name"
+              // value={}
+              placeholder="입력해 주세요."
+              // onChange={e => {
+              //   inputName(e);
+              // }}
+              disabled={selection.x === -1 ? true : false}
+            />
+          </label>
           <button
             className="seat-btn-make"
             onClick={() => {
@@ -126,7 +141,7 @@ export const SeatTab = ({ selection, floor, seats, setSeats }) => {
           >
             생성하기
           </button>
-        </label>
+        </div>
       )}
       {selection.stage === EDIT_SELECTION && (
         <label style={{ marginTop: '10%' }}>

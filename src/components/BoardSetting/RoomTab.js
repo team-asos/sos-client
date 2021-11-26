@@ -107,7 +107,7 @@ export const RoomTab = ({ selection, floor, rooms, setRooms }) => {
           <input value={selection.y} className="seat-input-location" disabled />
         </label>
       </div>
-      <label style={{ marginTop: '5%' }}>
+      <label style={{ marginTop: '3%' }}>
         <bs.BsCheckAll style={{ color: 'transparent' }} />
         회의실 크기
       </label>
@@ -133,7 +133,7 @@ export const RoomTab = ({ selection, floor, rooms, setRooms }) => {
 
       {selection.stage !== EDIT_SELECTION && (
         <>
-          <label style={{ marginTop: '5%' }}>
+          <label style={{ marginTop: '3%' }}>
             <bs.BsCheckAll style={{ color: '#c00000' }} />
             회의실 이름 :{'     '}
             <input
@@ -148,7 +148,7 @@ export const RoomTab = ({ selection, floor, rooms, setRooms }) => {
               }
             />
           </label>
-          <label style={{ marginTop: '5%' }}>
+          <label style={{ marginTop: '3%' }}>
             <bs.BsCheckAll style={{ color: '#c00000' }} />
             회의실 최대 인원 수 :{'     '}
             <input
@@ -162,8 +162,24 @@ export const RoomTab = ({ selection, floor, rooms, setRooms }) => {
               }
             />
           </label>
+          <label style={{ marginTop: '3%' }}>
+            <bs.BsCheckAll style={{ color: '#c00000' }} />
+            ESL 아이디 :{'     '}
+            <input
+              className="seat-input-name"
+              // value={name}
+              placeholder="입력해 주세요."
+              // onChange={e => {
+              //   inputName(e);
+              // }}
+              disabled={
+                selection.width <= 1 && selection.height <= 1 ? true : false
+              }
+            />
+          </label>
           <button
             className="seat-btn-make"
+            style={{ marginTop: '3.5%' }}
             onClick={() => {
               handleSave();
             }}
