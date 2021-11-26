@@ -30,6 +30,8 @@ const AddParticipant = ({
   const [endTime, setEndTime] = useState(''); //요청시 보낼 날짜 문자열
   const [start, setStart] = useState('시작'); //props로 받아온 START 저장할 변수
   const [end, setEnd] = useState('종료'); //props로 받아온 END 저장할 변수
+  const [topic, setTopic] = useState(''); //회의 주제
+  const [isSelected, setIsSelected] = useState([0]);
   /*내 정보 */
   useEffect(() => {
     const res = async () => {
@@ -56,8 +58,8 @@ const AddParticipant = ({
     // setSelectedMembers(newMember);
     // console.log(selectedMembers);
     // console.log(e);
+    //setUsers([...users.filter(user => user.id !== e.value)]);
   };
-
   // const removeMember = p => {
   //   const newMember = selectedMembers.filter(item => item.value !== p.value);
   //   setSelectedMembers(newMember);
@@ -161,6 +163,17 @@ const AddParticipant = ({
   useEffect(() => {
     if (deleteClick) deleteClicked();
   }, [deleteClick]);
+  const inputTopic = e => {
+    setTopic(e.target.value);
+  };
+  const getOptions = () => {
+    users.map(user => ({
+      value: user.id,
+      label: [user.name, ' (', user.employeeId, ')'],
+    }));
+  };
+  console.log(users);
+  console.log(selectedMembers);
   return (
     <div className="roomReservationFormRight">
       <div className="selectedTime">
@@ -197,6 +210,13 @@ const AddParticipant = ({
           </Dropdown.Menu>
         </Dropdown>
       </div>
+      <div className="meetingTopicForm">
+        <input
+          className="topicInput"
+          onChange={inputTopic}
+          placeholder="회의 주제를 입력해주세요."
+        ></input>
+      </div>
       <div className={isPc ? 'addAndButtonForm' : 'mAddAndButtonForm'}>
         <div className={isPc ? 'addParticipantForm' : 'mParticipantForm'}>
           <p className={isPc ? 'rrp_centerTextStyle' : 'mrrp_centerTextStyle'}>
@@ -210,6 +230,7 @@ const AddParticipant = ({
                 value: item.id,
                 label: [item.name, ' (', item.employeeId, ')'],
               }))}
+              //options={getOptions}
               placeholder="회원 검색"
               onChange={e => handleChange(e)}
               noOptionsMessage={() => '검색 결과가 없습니다.'}

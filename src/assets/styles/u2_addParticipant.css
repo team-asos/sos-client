@@ -4,7 +4,7 @@
   display: flex;
   flex-direction: column;
   margin-left: 1%;
-  align-items: center;
+  align-items: flex-start;
 }
 .selectedTime {
   margin-bottom: 2vh;
@@ -24,6 +24,7 @@
 .addParticipantForm {
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 .mParticipantForm {
   display: flex;
@@ -36,7 +37,7 @@
 /*회의 참석자를 입력하세요*/
 .rrp_centerTextStyle {
   position: relative;
-  font-size: 1.1em;
+  font-size: 1em;
   font-weight: bold;
 }
 .mrrp_centerTextStyle {
@@ -89,4 +90,15 @@
 .participantForm {
   height: 45vh;
   overflow: auto;
+}
+.meetingTopicForm {
+  width: 100%;
+  margin-bottom: 2vh;
+}
+.topicInput {
+  border: none;
+  background-color: rgb(236, 236, 236);
+  height: 4vh;
+  border-radius: 5px;
+  width: 100%;
 }
