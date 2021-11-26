@@ -31,7 +31,6 @@ const DateTimeForm = ({ selection, userId }) => {
         },
         method: 'POST',
         body: JSON.stringify({
-          startTime: formatISO(now),
           seatId: Number(selection.id),
           userId: Number(userId),
         }),
