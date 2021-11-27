@@ -2,17 +2,16 @@
   position: relative;
   width: max-content;
   height: 100vh;
+
   box-shadow: 1px 1px 1px 1px white;
   border-radius: 10px;
-
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-    'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji',
-    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 }
 
 .logoBar {
   position: relative;
+
   height: 10vh;
+
   border-radius: 2px;
 
   background: black;
@@ -24,35 +23,50 @@
 
 .appBar {
   position: relative;
+
   height: 60vh;
-  background-color: #858585;
+
+  background-color: #cfcfcf;
 }
 
 .dateBar {
   position: relative;
-  display: block;
-  padding-top: 5vh;
+
   height: 20vh;
+
+  padding-top: 5vh;
   bottom: 0;
-  background-color: #820101;
+
+  display: block;
+
   border-radius: 2px;
+  background-color: #a70000;
 }
+
 .logOutBar {
   position: relative;
-  background-color: #858585;
+
   height: 10vh;
+
   text-align: center;
+
   display: flex;
   flex-direction: column;
   justify-content: end;
+
+  background-color: #cfcfcf;
 }
+
 .logOutTextStyle {
   font-weight: bold;
   font-size: 0.8em;
+
+  color: #990000;
+  text-decoration: underline #990000;
+
   cursor: pointer;
 }
 .logOutTextStyle:hover {
-  color: #820101;
   transition: ease-in 0.1s;
   transform: scale(1.07);
 }

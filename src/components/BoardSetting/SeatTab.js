@@ -1,4 +1,9 @@
 import React, { useState } from 'react';
+import * as bs from 'react-icons/bs';
+import * as io from 'react-icons/io';
+
+import { EDIT_SELECTION } from '../../const/selection-type.const';
+import './BoardSetting.css';
 
 export const SeatTab = ({ selection, floor, seats, setSeats }) => {
   const [name, setName] = useState('');
@@ -63,22 +68,72 @@ export const SeatTab = ({ selection, floor, seats, setSeats }) => {
 
   return (
     <div className="seat-tab">
-      <label>X</label>
-      <input value={selection.x} disabled />
-      <label>Y</label>
-      <input value={selection.y} disabled />
-      <label>좌석 이름</label>
+      {selection.stage !== EDIT_SELECTION && (
+        <p className="text-notification">
+          좌석 생성 시, <bs.BsCheckAll style={{ color: '#c00000' }} />는{' '}
+          <span className="text-notification-strong">필수 입력칸</span> 입니다.
+          <br />
+          도면의 흰색 부분 선택 시, 생성이 종료됩니다.
+        </p>
+      )}
+      {selection.stage === EDIT_SELECTION && (
+        <p className="text-notification">
+          <io.IoIosNotifications size={18} style={{ color: '#c00000' }} />{' '}
+          도면의 흰색 부분 선택 시, <br />
+          조회가 종료됩니다.
+        </p>
+      )}
 
-      {selection.stage !== 3 && (
-        <>
+      <label>
+        <bs.BsCheckAll style={{ color: 'transparent' }} />
+        좌석 위치
+      </label>
+      <div style={{ marginLeft: '15%' }}>
+        <label>
+          X :{'  '}
           <input
-            value={name}
-            onChange={e => {
-              inputName(e);
-            }}
-            disabled={selection.x === -1 ? true : false}
-          />
+            value={selection.x}
+            className="seat-input-location"
+            disabled
+          />{' '}
+          ,
+        </label>
+        <label style={{ marginLeft: '5%' }}>
+          Y :{'  '}
+          <input value={selection.y} className="seat-input-location" disabled />
+        </label>
+      </div>
+
+      {selection.stage !== EDIT_SELECTION && (
+        <div>
+          <label style={{ marginTop: '10%' }}>
+            <bs.BsCheckAll style={{ color: '#c00000' }} />
+            좌석 이름 :
+            <input
+              className="seat-input-name"
+              value={name}
+              placeholder="입력해 주세요."
+              onChange={e => {
+                inputName(e);
+              }}
+              disabled={selection.x === -1 ? true : false}
+            />
+          </label>
+          <label style={{ marginTop: '8%' }}>
+            <bs.BsCheckAll style={{ color: '#c00000' }} />
+            ESL 아이디 :
+            <input
+              className="seat-input-name"
+              // value={}
+              placeholder="입력해 주세요."
+              // onChange={e => {
+              //   inputName(e);
+              // }}
+              disabled={selection.x === -1 ? true : false}
+            />
+          </label>
           <button
+            className="seat-btn-make"
             onClick={() => {
               handleSave();
             }}
@@ -86,19 +141,26 @@ export const SeatTab = ({ selection, floor, seats, setSeats }) => {
           >
             생성하기
           </button>
-        </>
+        </div>
       )}
-      {selection.stage === 3 && (
-        <>
-          <input value={selection.name} disabled />
+      {selection.stage === EDIT_SELECTION && (
+        <label style={{ marginTop: '10%' }}>
+          <bs.BsCheckAll style={{ color: 'transparent' }} />
+          좌석 이름 :{'     '}
+          <input
+            className="seat-input-name-show"
+            value={selection.name}
+            disabled
+          />
           <button
+            className="seat-btn-make"
             onClick={() => {
               handleDelete();
             }}
           >
             삭제하기
           </button>
-        </>
+        </label>
       )}
     </div>
   );

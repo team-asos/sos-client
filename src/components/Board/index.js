@@ -12,6 +12,7 @@ import {
   PREV_SELECTION,
   FIRST_SELECTION,
   SECOND_SELECTION,
+  EDIT_SELECTION,
 } from '../../const/selection-type.const';
 
 import './index.scss';
@@ -20,6 +21,7 @@ export const Board = ({
   selection,
   setSelection,
   tab,
+  setTab,
   setBoard,
   board,
   originBoard,
@@ -57,21 +59,27 @@ export const Board = ({
     if (board[y][x].type !== EMPTY) {
       // 기존 좌석 선택
       if (selection.stage === PREV_SELECTION) {
-        if (board[y][x].type === SEAT && tab === 0) {
+        if (board[y][x].type === SEAT) {
+          setTab(0);
+
           const selectedSeat = seats.find(seat => seat.id === board[y][x].id);
 
           setSelection({
             ...selectedSeat,
-            stage: SECOND_SELECTION,
+            stage: EDIT_SELECTION,
           });
-        } else if (board[y][x].type === ROOM && tab === 1) {
+        } else if (board[y][x].type === ROOM) {
+          setTab(1);
+
           const selectedRoom = rooms.find(room => room.id === board[y][x].id);
 
           setSelection({
             ...selectedRoom,
-            stage: SECOND_SELECTION,
+            stage: EDIT_SELECTION,
           });
-        } else if (board[y][x].type === FACILITY && tab === 2) {
+        } else if (board[y][x].type === FACILITY) {
+          setTab(2);
+
           const selectedFacility = facilities.find(
             facility => facility.id === board[y][x].id,
           );
@@ -79,7 +87,7 @@ export const Board = ({
           setSelection({
             ...selectedFacility,
             name: selectedFacility.type,
-            stage: SECOND_SELECTION,
+            stage: EDIT_SELECTION,
           });
         }
       }
@@ -118,7 +126,10 @@ export const Board = ({
           height: Math.abs(y - selection.y + 1),
           stage: SECOND_SELECTION,
         });
-      } else if (selection.stage === SECOND_SELECTION) {
+      } else if (
+        selection.stage === SECOND_SELECTION ||
+        selection.stage === EDIT_SELECTION
+      ) {
         setSelection({
           id: -1,
           name: '',

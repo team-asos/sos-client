@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useCookies } from 'react-cookie';
 import { Link, useHistory } from 'react-router-dom';
-import Logo from '../assets/images/logo.png';
-import '../assets/styles/1_loginPage.css';
 import { useMediaQuery } from 'react-responsive';
+
+import '../assets/styles/1_loginPage.css';
+import '../assets/fonts/font.css';
+import Logo from '../assets/images/logo.png';
+
 const Login = () => {
   const isPc = useMediaQuery({
     query: '(min-width:768px)',
@@ -36,10 +39,8 @@ const Login = () => {
     const data = await response.json();
     setName(data.name);
 
-    setTimeout(() => {
-      if (data.role === 0) history.push('/seat-reservation');
-      else if (data.role === 1) history.push('/user-management');
-    }, 2000);
+    if (data.role === 0) history.push('/seat-reservation');
+    else if (data.role === 1) history.push('/user-management');
   };
 
   useEffect(() => {
@@ -122,7 +123,7 @@ const Login = () => {
           </div>
           <div className="m_line"> </div>
           <div className="m_right">
-            <div className="m_login-form" style={{ marginBottom: '17px' }}>
+            <div className="m_login-form" style={{ marginBottom: '15px' }}>
               <input
                 type="text"
                 className="m_form-control-login"
@@ -143,8 +144,19 @@ const Login = () => {
               로그인
             </button>
             <p className="or">계정이 없으신가요?</p>
-            <Link to="/sign-up">
-              <button className="m_registerBtn">회원가입</button>
+            <Link to="/sign-up" style={{ textDecoration: 'none' }}>
+              {' '}
+              <p
+                style={{
+                  textDecoration: 'underline #c00000',
+                  color: '#c00000',
+                  cursor: 'pointer',
+                  fontSize: '0.9em',
+                  marginTop: '4%',
+                }}
+              >
+                회원가입
+              </p>
             </Link>
           </div>
         </div>

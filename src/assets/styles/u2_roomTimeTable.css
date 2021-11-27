@@ -1,0 +1,11 @@
+Table .isReserved {
+  background-color: gray;
+}
+Table .isNotReserved {
+  cursor: pointer;
+}
+Table .isNotReserved:hover {
+  transition: ease 0.2s;
+  transform: scale(1.02);
+  background-color: crimson;
+}

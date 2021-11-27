@@ -1,8 +1,9 @@
 .u_userSearchForm {
-  width: 27vw;
+  width: 20vw;
   height: 10vh;
   display: flex;
   flex-direction: column;
+  margin-left: 1vw;
 }
 .userLocation {
   width: inherit;

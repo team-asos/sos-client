@@ -1,77 +1,73 @@
-/*.inquiryForm {
-  background-color: rgba(133, 133, 133, 0.92);
-  display: flex;
-  flex-direction: column;
-  width: 80vw;
-}
-.inquiryFormTitleStyle {
-  width: 60vw;
-  margin-left: 10%;
-  margin-top: 3%;
-  border-radius: 5px;
-}
-.inquiryFormContentStyle {
-  width: 60vw;
-  height: 40vh;
-  margin-left: 10%;
-  margin-bottom: 2%;
-  border-radius: 10px;
-}
-.inquiryFormButton {
-  height: 6vh;
-  width: 60vw;
-  margin-left: 10%;
-  margin-bottom: 5%;
-  font-size: 1.5em;
-  color: white;
-  font-weight: bold;
-  background-color: #820101;
-  border-radius: 30px;
-}*/
-
 .inquiryForm {
-  /* background-color: rgba(133, 133, 133, 0.92); */
+  width: 100%;
   display: flex;
   flex-direction: column;
-  /*width: 75vw;*/
-  width: inherit;
-  height: 80vh;
+
   flex: 1;
   justify-content: center;
   align-items: center;
-  justify-content: space-evenly;
-  padding-top: 5vh;
-  padding-bottom: 5vh;
 }
+
 /*제목 input*/
 .inquiryFormTitleStyle {
-  width: 65vw;
-  height: 6vh;
-  font-size: 1.2em;
-  border-radius: 5px;
   position: relative;
+
+  width: 90%;
+  height: 6vh;
+
+  border: 1px solid #c4c4c4b0;
+  border-radius: 2px;
+}
+.inquiryFormTitleStyle::placeholder {
+  font-size: 0.9em;
+}
+.m_inquiryFormTitleStyle {
+  position: relative;
+  width: 85%;
+  height: 7vh;
+
+  border: 1px solid #c4c4c4b0;
+  border-radius: 2px;
 }
 /*문의 textarea*/
 .inquiryFormContentStyle {
-  width: 65vw;
-  height: 50vh;
-  border-radius: 10px;
-  font-size: 1.1em;
   position: relative;
+
+  width: 90%;
+  height: 45vh;
+
+  border: 1px solid #c4c4c4b0;
+  border-radius: 2px;
+
+  background-color: #c4c4c43d;
+}
+.inquiryFormContentStyle::placeholder {
+  font-size: 0.9em;
+}
+.m_inquiryFormContentStyle {
+  position: relative;
+
+  width: 85%;
+  height: 55vh;
+
+  border: 1px solid #c4c4c4b0;
+  border-radius: 2px;
+
+  background-color: #c4c4c43d;
 }
 /*문의하기 버튼*/
 .inquiryFormButton {
-  height: 6vh;
-  width: 20vw;
-  font-size: 1.5em;
+  height: 4vh;
+
+  border: none;
+  border-radius: 2px;
+
   color: white;
-  font-weight: bold;
-  background-color: #820101;
-  border-radius: 30px;
-  margin-top: 2%;
+  background-color: #b80000;
 }
 .inquiryFormButton:hover {
   transition: ease-in 0.1s;
-  transform: scale(1.01);
-  background-color: #b80000;
+  transform: scale(1.02);
+
+  background-color: #820101;
 }

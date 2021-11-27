@@ -1,14 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
+import MobileNavBar from '../components/u_m_navBar';
 import NavBarUser from '../components/u_navBar';
 import '../assets/styles/u3_inquirePage.css';
-import { useCookies } from 'react-cookie';
-import First from '../components/u3_inquiryListForm';
-import Second from '../components/u3_inquiryForm';
+import { useMediaQuery } from 'react-responsive';
+import { FiMenu } from 'react-icons/fi';
+
+import InquiryListForm from '../components/u3_inquiryListForm';
 
 //문의하기 페이지
 const InquirePage = () => {
+  const [open, setOpen] = useState(false);
+  const isPc = useMediaQuery({
+    query: '(min-width:768px)',
+  });
+  const isMobile = useMediaQuery({ query: '(max-width:767px)' });
+  const navClick = () => {
+    setOpen(!open);
+  };
+  //쿠키 생성
   const [cookie] = useCookies(['access_token']);
+
+  //내 계정 가져오기
   const [user, setUser] = useState({});
   useEffect(() => {
     const res = async () => {
@@ -25,48 +39,40 @@ const InquirePage = () => {
     };
     res();
   }, []);
-  const tabBar = {
-    0: <First user={user} />,
-    1: <Second user={user} />,
-  };
-  const [state, setState] = useState(0);
-  const clickHandler = id => {
-    setState(id);
-  };
-  const getPage = () => {
-    if (state === 0) {
-      return tabBar[0];
-    } else if (state === 1) {
-      return tabBar[1];
-    }
-  };
+
   return (
     <div className="inquirePage">
-      <div>
-        <NavBarUser />
-      </div>
+      {/* 화면 왼쪽 부분 : 네비 바*/}
+      <div>{isPc ? <NavBarUser /> : null}</div>
 
-      <div className="inquireForm_main">
+      <div className={isPc ? 'inquireForm_main' : 'm_inquireForm_main'}>
+        {/* 문의하기, 문의내역 이동 탭 */}
         <div className="inquireHeader">
-          <div className="inquire_titleTextStyle">
-            <Link
-              to="/inquire"
-              style={{
-                color: 'inherit',
-                textDecoration: 'none',
-              }}
-            >
-              문의하기
-            </Link>
+          <div>
+            {isMobile ? (
+              <FiMenu
+                size={40}
+                onClick={navClick}
+                style={{ color: '#820101' }}
+              />
+            ) : (
+              ''
+            )}
           </div>
-          <div onClick={() => clickHandler(0)} className="myRLMenuTextStyle">
-            나의 문의 내역
-          </div>
-          <div onClick={() => clickHandler(1)} className="myInfoMenuTextStyle">
-            문의하기
+          <div
+            className={
+              isPc ? 'inquire_titleTextStyle' : 'm_roomCheck_titleTextStyle'
+            }
+          >
+            문의
           </div>
         </div>
-        <div className="myPageContents">{getPage()}</div>
+        {open ? <MobileNavBar open={open} /> : null}
+
+        {/* 내용이 담기는 content */}
+        <div className="myPageContents">
+          <InquiryListForm user={user} />
+        </div>
       </div>
     </div>
   );

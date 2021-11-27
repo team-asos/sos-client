@@ -1,0 +1,150 @@
+/* index.js 부분 */
+/* 전체 pane */
+.board-setting {
+  width: 300px;
+  margin: 1%;
+  flex-direction: column;
+}
+
+/* 탭 버튼 그룹 pane */
+.setting-tab-group {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+/* 개별 버튼 그룹 pane */
+.createbtn {
+  border: none;
+
+  border-bottom: 1px solid black;
+
+  background-color: transparent;
+}
+.createbtn:hover {
+  color: #810000;
+  border-bottom: 2px solid #810000;
+
+  transition: 0.05s ease-in-out;
+  transform: scale(1.01);
+}
+.createbtn-click {
+  color: #810000;
+  background-color: transparent;
+  border: none;
+  border-bottom: 2px solid #810000;
+  transform: scale(1.15);
+}
+/* 탭 콘텐츠 */
+.setting-tab {
+  padding: 5%;
+  border-radius: 3px;
+  background-color: rgba(255, 255, 255, 0.096);
+}
+
+/* 한번에 적용하는 css 부분 */
+/* 경고 text */
+.text-notification {
+  color: rgb(78, 78, 78);
+  font-size: smaller;
+  font-style: italic;
+  text-align: center;
+  margin-top: 2%;
+  border: 0.6px dashed rgba(124, 0, 0, 0.301);
+  padding: 3%;
+}
+.text-notification-strong {
+  color: #c00000;
+}
+
+/* 탭 사이즈 */
+.seat-tab {
+  display: flex;
+  flex-direction: column;
+}
+
+/* 생성 위치 */
+.seat-input-location {
+  width: 2.8vw;
+  text-align: center;
+  border: none;
+  background-color: transparent;
+  border-bottom: 0.2px solid rgb(134, 134, 134);
+}
+
+/* 생성 이름 */
+.seat-input-name {
+  width: 10.5vw;
+  border: none;
+  background-color: transparent;
+  border-bottom: 0.2px solid rgb(134, 134, 134);
+}
+.seat-input-name::placeholder {
+  font-size: smaller;
+}
+
+/* 조회 이름 */
+.seat-input-name-show {
+  width: 10.5vw;
+  border: none;
+  background-color: transparent;
+  border-bottom: 0.2px solid rgb(134, 134, 134);
+  text-align: center;
+}
+
+/* 생성, 삭제 버튼 */
+.seat-btn-make {
+  width: 95%;
+  margin-left: 5%;
+  margin-top: 10%;
+  border: none;
+  border-radius: 3px;
+  box-shadow: 1px 1.2px #888888;
+}
+.seat-btn-make:hover {
+  transition: 0.1s ease-in;
+  background-color: #c00000;
+  color: white;
+}
+
+/* 회의실 최대인원수 생성 */
+.room-input-maxuser {
+  width: 4vw;
+  border: none;
+  background-color: transparent;
+  border-bottom: 0.2px solid rgb(134, 134, 134);
+}
+/* 회의실 최대인원수 조회 */
+.room-input-maxuser-show {
+  width: 4vw;
+
+  text-align: center;
+
+  border: none;
+  border-bottom: 0.2px solid rgb(134, 134, 134);
+
+  background-color: transparent;
+}
+.floor-info {
+  width: 100%;
+  height: 30%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 2px;
+
+  background-color: rgba(255, 255, 255, 0.699);
+}
+.floor-info-detail {
+  width: 100%;
+
+  padding-left: 5%;
+}
+.floor-info-detail label {
+  width: 10vw;
+
+  margin-left: 10%;
+  margin-right: 1%;
+  margin-bottom: 0.5%;
+}

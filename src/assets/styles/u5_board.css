@@ -1,0 +1,27 @@
+.u_boardContainer {
+  display: flex;
+}
+.mobileBoardContainer {
+  display: flex;
+  flex-direction: column;
+}
+.u_boardCover {
+  width: 70vw;
+  height: 80vh;
+  overflow: auto;
+  background-color: gainsboro;
+}
+.mobileBoardCover {
+  width: 95%;
+  height: 500px;
+  margin-left: 2.5%;
+  overflow: auto;
+  background-color: gainsboro;
+}
+.u_boardItem {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* border: 1px solid #c2c2c2; */
+  border: none;
+}

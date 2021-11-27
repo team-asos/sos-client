@@ -15,8 +15,8 @@
 /*헤더*/
 .u_seatHeader {
   position: relative;
-  height: 10vh;
-  background: #c4c4c4;
+  height: 10%;
+  background: #c4c4c45b;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -25,26 +25,138 @@
 .u_seatHeaderTextStyle {
   position: relative;
   font-weight: bold;
-  font-size: 2em;
+  font-size: 1.8em;
   margin-left: 2%;
   margin-right: 4%;
 }
 
 .userSeatReservationForm {
   display: flex;
-  flex-direction: row;
-}
-.u_rightForm,
-.u_leftForm {
-  display: flex;
   flex-direction: column;
 }
+
 .u_seatReservationButton {
   background: #155924;
-  font-size: 2em;
+  font-size: 1.7em;
   font-weight: bold;
   color: white;
   width: fit-content;
   height: 13%;
   align-self: center;
+}
+/*leftForm*/
+.seatForm {
+  /* background-color: lightcoral;*/
+  width: 65vw;
+  height: 88vh;
+  display: flex;
+  flex-direction: column;
+}
+/*시설, 예약가능, 사용중*/
+.u_seatFormUpper {
+  display: flex;
+  flex-direction: row;
+  height: 9vh;
+  /* justify-content: flex-end;
+  align-items: flex-end; */
+}
+.u_selectFloor {
+  display: flex;
+  align-items: center;
+}
+.u_dropdownFloor {
+  margin-left: 2vw;
+}
+
+.showFacilityButton {
+  font-size: 1.4em;
+  font-weight: bold;
+  border: none;
+  width: 6vw;
+  height: max-content;
+
+  margin-left: 1vw;
+  border-radius: 100%;
+}
+.selectFloorTextStyle {
+  margin-left: 0.5vw;
+  margin-top: 1.5vh;
+  font-weight: bold;
+  color: #820101;
+}
+.statusForm {
+  display: flex;
+  align-items: center;
+  margin-left: 15vw;
+}
+/*아이콘*/
+.facilityicon {
+  width: 5vw;
+  height: 5vh;
+}
+.facilityicon:hover {
+  transition: ease-in 0.1s;
+  transform: scale(1.03);
+}
+.facility-icon-box {
+  height: 6vh; /*54px*/
+  position: relative;
+}
+/*.facility-icon-box:hover,
+:visited {
+  color: #820101;
+  transition: ease-in 0.1s;
+  transform: scale(1.05);
+  cursor: pointer;
+}*/
+
+.facility-icon-box:hover .text {
+  visibility: visible;
+}
+.facility-text {
+  font-size: 1.2em;
+  font-weight: 1000;
+  color: rgb(143, 143, 143);
+  text-align: center;
+  cursor: pointer;
+  /*visibility: hidden;*/
+}
+.facility-text-div {
+  position: absolute;
+  width: inherit;
+  left: 1vw;
+  top: 1vh;
+}
+.facility-icon-div {
+  position: relative;
+}
+
+.reservedSeats,
+.ableSeats {
+  display: flex;
+  margin-right: 2vw;
+  align-items: center;
+}
+.reservedSeatShape {
+  width: 2vw;
+  height: 2vw;
+  background-color: #646464;
+}
+.ableSeatShape {
+  width: 2vw;
+  height: 2vw;
+  background-color: #00a023;
+}
+.reservedSeatsTextStyle,
+.ableSeatsTextStyle {
+  font-size: 1.4em;
+  font-weight: bold;
+  margin-left: 7px;
+}
+
+.u_seatFormBottom {
+  width: 63vw;
+  height: 100vh;
+  background-color: #820101;
+  margin-left: 1vw;
 }

@@ -1,7 +1,5 @@
 import React from 'react';
-
 import * as TiIcon from 'react-icons/ti';
-
 import '../../assets/styles/IconStyle.css';
 
 class SeatIcon extends React.Component {

@@ -1,9 +1,9 @@
-import { getYear } from 'date-fns';
-import getDate from 'date-fns/getDate';
-import getMonth from 'date-fns/getMonth';
+import { addDays } from 'date-fns';
 import React, { useState, useEffect } from 'react';
 import { useCookies } from 'react-cookie';
-import { Table } from 'react-bootstrap';
+import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
+import * as moment from 'moment';
+
 import Calendar from './u2_calendar';
 import { useMediaQuery } from 'react-responsive';
 
@@ -34,32 +34,27 @@ const SelectedRoomTable = props => {
     res();
   }, []);
 
-  console.log(data);
   return (
     <div>
-      <Table
-        striped
-        hover
-        className={isPc ? 'selectedTable' : 'mobileInfoTable'}
-      >
-        <thead className="sHeader">
+      <MDBTable hover className={isPc ? 'infoTable' : 'mobileInfoTable'}>
+        <MDBTableHead className="rHeader">
           <tr>
             <th>회의실명</th>
             <th>예약 가능 일</th>
             <th>사용 가능 인원</th>
           </tr>
-        </thead>
-        <tbody>
+        </MDBTableHead>
+        <MDBTableBody>
           <tr>
             <td>{data.name}</td>
             <td>
-              {getYear(today)}.{getMonth(today) + 1}.{getDate(today)}-
-              {getYear(today)}.{getMonth(today) + 1}.{getDate(today) + 6}
+              {moment(new Date()).format('YYYY-MM-DD')}~
+              {moment(addDays(new Date(), 6)).format('YYYY-MM-DD')}
             </td>
             <td>{data.maxUser}명</td>
           </tr>
-        </tbody>
-      </Table>
+        </MDBTableBody>
+      </MDBTable>
       <Calendar roomMAXUSER={data.maxUser} roomID={roomID} />
     </div>
   );

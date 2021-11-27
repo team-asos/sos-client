@@ -1,5 +1,21 @@
+.roomReservationFormRight {
+  width: 40%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  margin-left: 1%;
+  align-items: flex-start;
+}
+.selectedTime {
+  margin-bottom: 2vh;
+  display: flex;
+  align-self: flex-start;
+}
 .addAndButtonForm {
   display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
 }
 .mAddAndButtonForm {
   display: flex;
@@ -8,9 +24,7 @@
 .addParticipantForm {
   display: flex;
   flex-direction: column;
-  margin-left: 2vw;
-  margin-top: 3vh;
-  width: 60vw;
+  width: 100%;
 }
 .mParticipantForm {
   display: flex;
@@ -23,11 +37,11 @@
 /*회의 참석자를 입력하세요*/
 .rrp_centerTextStyle {
   position: relative;
-  font-size: 1.3em;
+  font-size: 1em;
   font-weight: bold;
 }
 .mrrp_centerTextStyle {
-  font-size: 1em;
+  font-size: 0.9em;
   font-weight: bold;
 }
 .mSearchForm {
@@ -45,10 +59,11 @@
 .roomReservationBtn {
   width: fit-content;
   height: 5vh;
-  margin-top: 7vh;
+  margin-top: 2vh;
+  /*
   margin-left: 10vw;
   padding-left: 2vw;
-  padding-right: 2vw;
+  padding-right: 2vw; */
   font-size: 1.2em;
   background-color: #820101;
   color: white;
@@ -73,6 +88,17 @@
 }
 /*참석자 리스트*/
 .participantForm {
-  height: 53vh;
+  height: 45vh;
   overflow: auto;
+}
+.meetingTopicForm {
+  width: 100%;
+  margin-bottom: 2vh;
+}
+.topicInput {
+  border: none;
+  background-color: rgb(236, 236, 236);
+  height: 4vh;
+  border-radius: 5px;
+  width: 100%;
 }

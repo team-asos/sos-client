@@ -1,7 +1,5 @@
 import React from 'react';
-
 import * as AiIcon from 'react-icons/ai';
-
 import '../../assets/styles/IconStyle.css';
 
 class NotificationIcon extends React.Component {

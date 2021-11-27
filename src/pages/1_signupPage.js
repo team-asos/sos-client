@@ -1,9 +1,15 @@
 import React, { useState } from 'react';
-import '../assets/styles/1_signupPage.css';
-import '../assets/styles/1_containerStyle.css';
-import * as MdIcon from 'react-icons/md';
 import { Link } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
+import { InputGroup, FormControl, Form } from 'react-bootstrap';
+
+import * as MdIcon from 'react-icons/md';
+import * as ai from 'react-icons/ai';
+import * as hi from 'react-icons/hi';
+
+import '../assets/styles/1_signupPage.css';
+import '../assets/styles/1_containerStyle.css';
+import '../assets/fonts/font.css';
 
 const SignUp = () => {
   const isPc = useMediaQuery({
@@ -207,43 +213,108 @@ const SignUp = () => {
             <Link to="/">
               <MdIcon.MdArrowBackIos className="goBackIcon" size={20} />
             </Link>
-            <p>회원 가입</p>
+            <p style={{ color: '#c00000', fontSize: '1.2em' }}>회원 가입</p>
           </div>
-
+          <p
+            style={{
+              fontSize: '0.9em',
+              marginLeft: '15%',
+              marginTop: '-3%',
+              fontStyle: 'italic',
+            }}
+          >
+            회원 가입을 위해 아래의 정보를 입력해주세요.
+          </p>
           <div className="m_bottom">
             <div>
-              <label>이메일</label>
-              <input
+              <InputGroup className="mb-2">
+                <InputGroup.Text>
+                  <ai.AiTwotoneMail style={{ color: 'black' }} />
+                </InputGroup.Text>
+                <FormControl
+                  id="inlineFormInputGroup"
+                  placeholder="회사 이메일"
+                  onChange={inputEmail}
+                  value={email}
+                  style={{ width: '55vw' }}
+                />
+              </InputGroup>
+
+              {/* <input
                 type="text"
                 className="m_form-control"
                 placeholder="회사 이메일을 입력해주세요"
                 onChange={inputEmail}
                 value={email}
-              />
+              /> */}
             </div>
             <div>
-              <label>이름</label>
+              <InputGroup className="mb-2">
+                <InputGroup.Text>
+                  <ai.AiOutlineUser style={{ color: 'gray' }} />
+                </InputGroup.Text>
+                <FormControl
+                  id="inlineFormInputGroup"
+                  placeholder="이름"
+                  onChange={inputName}
+                  value={name}
+                  style={{ width: '55vw' }}
+                />
+              </InputGroup>
+
+              {/* <label>이름</label>
               <input
                 type="text"
                 className="m_form-control"
                 placeholder="이름"
                 onChange={inputName}
                 value={name}
-              />
+              /> */}
             </div>
 
             <div>
-              <label>비밀번호</label>
+              <Form.Text style={{ marginTop: '-1%' }}>
+                알파벳을 포함한 5~12자리
+              </Form.Text>
+              <InputGroup className="mb-2">
+                <InputGroup.Text>
+                  <ai.AiFillLock style={{ color: 'black' }} />
+                </InputGroup.Text>
+                <FormControl
+                  type="password"
+                  id="inlineFormInputGroup"
+                  placeholder="비밀번호"
+                  onChange={inputPw}
+                  value={password}
+                  style={{ width: '55vw' }}
+                />
+              </InputGroup>
+
+              {/* <label>비밀번호</label>
               <input
                 type="password"
                 className="m_form-control"
                 placeholder="대소문자와 숫자를 포함한 8~12자리"
                 onChange={inputPw}
                 value={password}
-              />
+              /> */}
             </div>
             <div>
-              <label>비밀번호 확인</label>
+              <InputGroup className="mb-2">
+                <InputGroup.Text>
+                  <ai.AiFillUnlock style={{ color: 'gray' }} />
+                </InputGroup.Text>
+                <FormControl
+                  type="password"
+                  id="inlineFormInputGroup"
+                  placeholder="비밀번호 확인"
+                  onBlur={confirmHandler}
+                  onChange={inputConfirmPw}
+                  value={confirmPw}
+                  style={{ width: '55vw' }}
+                />
+              </InputGroup>
+              {/* <label>비밀번호 확인</label>
               <input
                 type="password"
                 className="m_form-control"
@@ -251,49 +322,98 @@ const SignUp = () => {
                 onBlur={confirmHandler}
                 onChange={inputConfirmPw}
                 value={confirmPw}
-              />
+              /> */}
             </div>
 
             <div>
-              <label>사원번호</label>
+              <InputGroup className="mb-2">
+                <InputGroup.Text>
+                  <hi.HiIdentification style={{ color: 'black' }} />
+                </InputGroup.Text>
+                <FormControl
+                  id="inlineFormInputGroup"
+                  placeholder="사원번호"
+                  onChange={inputIdNo}
+                  value={employeeId}
+                  style={{ width: '55vw' }}
+                />
+              </InputGroup>
+              {/* <label>사원번호</label>
               <input
                 type="text"
                 className="m_form-control"
                 placeholder="사원번호"
                 onChange={inputIdNo}
                 value={employeeId}
-              />
+              /> */}
             </div>
+
             <div>
-              <label>전화번호</label>
+              <InputGroup className="mb-2">
+                <InputGroup.Text>
+                  <ai.AiFillPhone style={{ color: 'gray' }} />
+                </InputGroup.Text>
+                <FormControl
+                  id="inlineFormInputGroup"
+                  placeholder="전화번호를 입력하세요."
+                  onChange={inputPhone}
+                  value={tel}
+                  style={{ width: '55vw' }}
+                />
+              </InputGroup>
+              {/* <label>전화번호</label>
               <input
                 type="text"
                 className="m_form-control"
                 placeholder="- 를 제외하고 입력하세요"
                 onChange={inputPhone}
                 value={tel}
-              />
+              /> */}
             </div>
 
             <div>
-              <label>부서</label>
+              <InputGroup className="mb-2">
+                <InputGroup.Text>
+                  <ai.AiFillShopping style={{ color: 'black' }} />
+                </InputGroup.Text>
+                <FormControl
+                  id="inlineFormInputGroup"
+                  placeholder="부서"
+                  onChange={inputDep}
+                  value={department}
+                  style={{ width: '55vw' }}
+                />
+              </InputGroup>
+              {/* <label>부서</label>
               <input
                 type="text"
                 className="m_form-control"
                 placeholder="부서"
                 onChange={inputDep}
                 value={department}
-              />
+              /> */}
             </div>
             <div>
-              <label>직급</label>
+              <InputGroup className="mb-2">
+                <InputGroup.Text>
+                  <hi.HiPaperAirplane style={{ color: 'gray' }} />
+                </InputGroup.Text>
+                <FormControl
+                  id="inlineFormInputGroup"
+                  placeholder="직급"
+                  onChange={inputPosition}
+                  value={position}
+                  style={{ width: '55vw' }}
+                />
+              </InputGroup>
+              {/* <label>직급</label>
               <input
                 type="text"
                 className="m_form-control"
                 placeholder="직급"
                 onChange={inputPosition}
                 value={position}
-              />
+              /> */}
             </div>
             <div>
               <button

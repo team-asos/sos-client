@@ -1,4 +1,6 @@
 .roomReservationPage {
+  font-family: NotoSansRegular;
+
   width: 100vw;
   height: 100vh;
 
@@ -17,7 +19,7 @@
 .reservationHeader {
   position: relative;
   height: 10%;
-  background: #c4c4c4;
+  background: #c4c4c45b;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -26,7 +28,7 @@
 .rrp_titleTextStyle {
   position: relative;
   font-weight: bold;
-  font-size: 2em;
+  font-size: 1.8em;
   margin-left: 2%;
   margin-right: 4%;
 }

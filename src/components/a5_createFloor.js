@@ -7,7 +7,7 @@ const CreateFloor = () => {
   const [height, setHeight] = useState('');
 
   const inputName = e => {
-    setName(e.target.value);
+    setName(e.target.value.replace('-', '지하'));
   };
   const inputWidth = e => {
     setWidth(e.target.value);
@@ -40,29 +40,52 @@ const CreateFloor = () => {
     <div>
       <Modal.Body>
         <div className="createFloorModal">
-          <div>
-            <label>층 이름 : </label>
-            <input
-              className="floorInputForm"
-              placeholder=" (숫자+층)으로 입력해주세요. 예) 1층"
-              onChange={inputName}
-            />
-          </div>
-          <div>
-            <label>층의 가로 길이 : </label>
-            <input
-              className="floorInputForm"
-              placeholder=" 숫자로 입력해주세요. 예) 30"
-              onChange={inputWidth}
-            />
-          </div>
-          <div>
-            <label>층의 세로 길이 : </label>
-            <input
-              className="floorInputForm"
-              placeholder=" 숫자로 입력해주세요. 예) 30"
-              onChange={inputHeight}
-            />
+          <div style={{ width: '100%' }}>
+            <div
+              style={{
+                width: '85%',
+                height: 'min-content',
+                marginBottom: '3%',
+                textAlign: 'center',
+                borderBottom: '1px dashed #c00000',
+              }}
+            >
+              <p
+                style={{
+                  fontSize: 'small',
+                  fontStyle: 'italic',
+                  color: 'gray',
+                }}
+              >
+                지하 층을 생성하고 싶으면 -(숫자+층)으로 입력해주세요. <br />
+                예) 지하 1층 -&#62; -1층
+              </p>
+            </div>
+
+            <div style={{ width: '100%' }}>
+              <label>층 이름 :</label>
+              <input
+                className="floorInputForm"
+                placeholder=" (숫자+층)으로 입력해주세요. 예) 1층"
+                onChange={inputName}
+              />
+            </div>
+            <div>
+              <label>층의 가로 길이 : </label>
+              <input
+                className="floorInputForm"
+                placeholder=" 숫자로 입력해주세요. 예) 30"
+                onChange={inputWidth}
+              />
+            </div>
+            <div>
+              <label>층의 세로 길이 : </label>
+              <input
+                className="floorInputForm"
+                placeholder=" 숫자로 입력해주세요. 예) 30"
+                onChange={inputHeight}
+              />
+            </div>
           </div>
         </div>
       </Modal.Body>

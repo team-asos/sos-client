@@ -1,21 +1,26 @@
 import React, { useState, forwardRef } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import DatePicker from 'react-datepicker';
+import { useMediaQuery } from 'react-responsive';
 import { ko } from 'date-fns/esm/locale';
-import { addDays, formatISO } from 'date-fns';
+import { addDays, formatISO, formatISO9075 } from 'date-fns';
 import '../assets/styles/u5_dateTimeForm.css';
 import 'react-datepicker/dist/react-datepicker.css';
 import '../assets/styles/u2_calendar.css';
 import * as FaIcon from 'react-icons/fa';
+import UserSearchForm from './u5_userSearchForm';
+import formatISODuration from 'date-fns/formatISODuration';
 
 //좌석 예약 페이지->이용 시간 선택
-const DateTimeForm = props => {
-  const [startDate, setStartDate] = useState(new Date()); //DatePicker
+const DateTimeForm = ({ selection, userId }) => {
+  const isPc = useMediaQuery({
+    query: '(min-width:768px)',
+  });
+  const now = new Date();
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
-  /*예약하기 */
+  /*좌석 사용 시작 */
   const reservationClickHandler = async () => {
     handleClose();
     const response = await fetch(
@@ -26,65 +31,49 @@ const DateTimeForm = props => {
         },
         method: 'POST',
         body: JSON.stringify({
-          startTime: formatISO(startDate),
-          status: 0, //물어보기
-          seatId: 1,
-          userId: Number(props.myId),
+          seatId: Number(selection.id),
+          userId: Number(userId),
         }),
       },
     );
     if (response.status === 201) {
-      alert('예약이 완료되었습니다.');
+      alert('정상적으로 처리되었습니다.');
     } else {
       alert(response.status);
     }
   };
 
-  const MyCustom = forwardRef(({ value, onClick }, ref) => (
-    <button className="customPicker2" onClick={onClick} ref={ref}>
-      {value}
-      <FaIcon.FaRegCalendarAlt size={30} style={{ marginLeft: '0.5vw' }} />
-    </button>
-  ));
   return (
-    <div className="dateTimeAndBtnForm">
-      <div className="dateTimeForm">
-        <div className="seatNameTextStyle">[좌석 18]</div>
-        <div className="reservationDatePicker">
-          <div className="reservationDatePicker_start">
-            <p className="startTimeTextStyle">사용 일시</p>
-            <DatePicker
-              selected={startDate}
-              onChange={date => setStartDate(date)}
-              locale={ko}
-              dateFormat="yyyy-MM-dd"
-              minDate={new Date()} //오늘 이전 날짜 선택 안되게
-              placeholderText="예약 날짜 선택"
-              closeOnScroll={true} //스크롤 했을 때 닫힘
-              customInput={<MyCustom />}
-            />
+    <div className={isPc ? 'reservationAndSearch' : 'm_reservationAndSearch'}>
+      <div className="dateTimeAndBtnForm">
+        <div className={isPc ? 'dateTimeForm' : 'm_dateTimeForm'}>
+          <div className="seatNameTextStyle">좌석 {selection.name}</div>
+
+          <div className="seatReservationButtonForm">
+            <button
+              className={isPc ? 'seatReservationBtn' : 'm_seatReservationBtn'}
+              onClick={handleShow}
+            >
+              사용 시작
+            </button>
           </div>
+          <Modal show={show} onHide={handleClose}>
+            <Modal.Header closeButton>
+              <Modal.Title>좌석 {selection.name}</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>사용 하시겠습니까?</Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={handleClose}>
+                취소
+              </Button>
+              <Button variant="success" onClick={reservationClickHandler}>
+                확인
+              </Button>
+            </Modal.Footer>
+          </Modal>
         </div>
       </div>
-      <div className="seatReservationButtonForm">
-        <button className="seatReservationBtn" onClick={handleShow}>
-          예약하기
-        </button>
-        <Modal show={show} onHide={handleClose}>
-          <Modal.Header closeButton>
-            <Modal.Title>좌석 18</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>예약 하시겠습니까?</Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose}>
-              취소
-            </Button>
-            <Button variant="success" onClick={reservationClickHandler}>
-              확인
-            </Button>
-          </Modal.Footer>
-        </Modal>
-      </div>
+      <UserSearchForm />
     </div>
   );
 };

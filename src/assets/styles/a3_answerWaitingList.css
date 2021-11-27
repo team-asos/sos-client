@@ -14,27 +14,69 @@
 .answerWaitingListLeft {
   width: 50%;
   height: 100%;
-}
 
-.answerWaitingListLeft ul {
+  display: flex;
+  flex-direction: column;
+}
+.answerWaitingListLeftTop {
+  list-style-type: none;
+  width: 100%;
+
+  vertical-align: middle;
+
+  margin-bottom: -2%;
+}
+.deleteIcon {
+  margin-left: 1%;
+  margin-top: -0.5%;
+
+  cursor: pointer;
+
+  color: gray;
+}
+.deleteIcon:hover {
+  color: #821001;
+}
+.searchQuestionForm {
+  width: 23vw;
+  height: 4.5vh;
+  margin-left: 30%;
+
+  font-size: 0.8em;
+
+  background-color: rgba(128, 128, 128, 0.096);
+  border: 0.5px solid gray;
+  border-radius: 2px;
+}
+.searchQuestionForm::placeholder {
+  font-style: italic;
+}
+.answerWaitingListLeftBottom {
+  margin-top: 1.5%;
+  overflow: auto;
+  height: 93%;
+}
+.answerWaitingListLeftBottom ul {
   display: flex;
 }
-
-.answerWaitingListLeft li {
+.answerWaitingListLeftBottom li {
   list-style-type: none;
   width: 100%;
   padding: 1.5%;
   margin: -6px;
-
-  border-top: 0.1px solid rgba(0, 0, 0, 0.308);
-  border-bottom: 0.1px solid rgba(0, 0, 0, 0.308);
-
-  background-color: rgba(209, 209, 209, 0.082);
 }
 
-/* rgba(209, 209, 209, 0.185) */
-
-.answerWaitingListLeft li:hover {
+.normalLi {
+  background-color: rgba(209, 209, 209, 0.082);
+  border-top: 0.1px solid rgba(0, 0, 0, 0.308);
+  border-bottom: 0.1px solid rgba(0, 0, 0, 0.308);
+}
+.clickedLi {
+  background-color: rgba(107, 107, 107, 0.308);
+  border-top: 0.1px solid transparent;
+  border-bottom: 0.1px solid transparent;
+}
+.answerWaitingListLeftBottom li:hover {
   border: 0.8px solid transparent;
   background: rgba(107, 107, 107, 0.308);
 
@@ -53,16 +95,29 @@
 
 .messageDetailBox {
   width: 95%;
-  height: fit-content;
+  height: 100%;
 
   padding: 2%;
 
   border-radius: 3px;
   background: rgba(107, 107, 107, 0.308);
+
+  overflow: auto;
+}
+.noMessageBox {
+  width: 50%;
+
+  margin-top: 26vh;
+  margin-left: 12vw;
+  text-align: center;
+
+  border: 0.7px solid rgba(128, 128, 128, 0.267);
 }
 
 .detailList {
   border-radius: 3px;
+  height: 100%;
+  background-color: white;
 }
 
 .answerInput {

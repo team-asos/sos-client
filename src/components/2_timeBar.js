@@ -43,7 +43,7 @@ class DateTimeBox extends React.Component {
           {this.getToday()}
         </p>
         <p style={{ fontWeight: 'bold', color: 'white' }}>
-          {this.state.date.toLocaleTimeString()}
+          {this.state.date.toLocaleTimeString('en-GB')}
         </p>
         {this.callTime()}
       </div>

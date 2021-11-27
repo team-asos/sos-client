@@ -26,6 +26,7 @@ const NavBox = () => {
     };
     res();
   }, []);
+
   useEffect(() => {
     if (cookie.access_token === 'undefined') {
       history.push('/');
@@ -39,32 +40,32 @@ const NavBox = () => {
   return (
     <div className="navBox">
       <Link to="/user-management">
-        <div className="logoBar"></div>
+        <header className="logoBar"></header>
       </Link>
-      <div className="appBar">
+      <body className="appBar">
         <AppBar />
-      </div>
-      <div className="logOutBar">
-        <p>
-          {' '}
-          <span style={{ fontWeight: 'bolder' }}>{user.name}</span>님
-        </p>
-
-        <p className="logOutTextStyle" onClick={logoutClickHandler}>
-          로그아웃
-        </p>
-      </div>
-      <div className="dateBar">
-        <TimeBar />
-        <div
-          style={{
-            textAlign: 'center',
-            fontSize: '1.3em',
-            fontWeight: 'bold',
-            color: 'white',
-          }}
-        ></div>
-      </div>
+      </body>
+      <footer>
+        <div className="logOutBar">
+          <p>
+            <span style={{ fontWeight: 'bolder' }}>{user.name}</span>님
+          </p>
+          <p className="logOutTextStyle" onClick={logoutClickHandler}>
+            로그아웃
+          </p>
+        </div>
+        <div className="dateBar">
+          <TimeBar />
+          <div
+            style={{
+              textAlign: 'center',
+              fontSize: '1.3em',
+              fontWeight: 'bold',
+              color: 'white',
+            }}
+          ></div>
+        </div>
+      </footer>
     </div>
   );
 };
