@@ -17,7 +17,6 @@ export const BoardContainer = ({ floor, userId }) => {
   });
 
   const [board, setBoard] = useState([]);
-  const [originBoard, setOriginBoard] = useState([]);
 
   const [seats, setSeats] = useState([]);
   const [rooms, setRooms] = useState([]);
@@ -28,13 +27,9 @@ export const BoardContainer = ({ floor, userId }) => {
     name: '',
     x: -1,
     y: -1,
-    width: 0,
-    height: 0,
-    maxUser: 0,
     stage: 0,
   });
 
-  const [tab, setTab] = useState(0);
   useEffect(() => {
     setBoard(
       Array.from({ length: floor.height }, () =>
@@ -133,7 +128,6 @@ export const BoardContainer = ({ floor, userId }) => {
     }
 
     setBoard(newMap);
-    setOriginBoard(newMap);
   }, [facilities]);
 
   return (
@@ -141,14 +135,9 @@ export const BoardContainer = ({ floor, userId }) => {
       <Board
         selection={selection}
         setSelection={setSelection}
-        tab={tab}
-        setTab={setTab}
         board={board}
         setBoard={setBoard}
-        originBoard={originBoard}
         seats={seats}
-        rooms={rooms}
-        facilities={facilities}
       />
       <DateTimeForm selection={selection} userId={userId} />
     </div>
