@@ -101,6 +101,7 @@ const SeatPage = () => {
               <Dropdown.Menu>
                 {floors.map(floor => (
                   <Dropdown.Item
+                    key={floor.id}
                     onClick={e => {
                       setSelectedFloor(floor);
                     }}

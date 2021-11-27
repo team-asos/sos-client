@@ -7,6 +7,7 @@ import {
   ROOM,
   FACILITY,
   SELECTION,
+  RESERVED_SEAT,
 } from '../const/object-type.const';
 
 import { PREV_SELECTION, FIRST_SELECTION } from '../const/selection-type.const';
@@ -77,6 +78,7 @@ export const Board = ({ selection, setSelection, setBoard, board, seats }) => {
     else if (type === ROOM) return { backgroundColor: 'blue' };
     else if (type === FACILITY) return { backgroundColor: 'yellow' };
     else if (type === SELECTION) return { backgroundColor: 'red' };
+    else if (type === RESERVED_SEAT) return { backgroundColor: 'brown' };
   };
 
   const Item = ({ board }) => {

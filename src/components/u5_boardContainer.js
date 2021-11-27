@@ -9,6 +9,7 @@ import {
   ROOM,
   FACILITY,
   SELECTION,
+  RESERVED_SEAT,
 } from '../const/object-type.const';
 
 export const BoardContainer = ({ floor, userId }) => {
@@ -100,7 +101,14 @@ export const BoardContainer = ({ floor, userId }) => {
     );
 
     for (let seat of seats) {
-      newMap[seat.y][seat.x] = { type: SEAT, id: seat.id, name: seat.name };
+      if (seat.reservations.length === 0)
+        newMap[seat.y][seat.x] = { type: SEAT, id: seat.id, name: seat.name };
+      else
+        newMap[seat.y][seat.x] = {
+          type: RESERVED_SEAT,
+          id: seat.id,
+          name: seat.reservations[0].user.name,
+        };
     }
 
     for (let room of rooms) {
