@@ -84,7 +84,7 @@ export const Board = ({ selection, setSelection, setBoard, board, seats }) => {
       row.map((col, x) => (
         <div
           className={col.type === SEAT ? 'u_boardSeatItem' : 'u_boardItem'}
-          key={x + y}
+          key={x + y * row.length}
           onClick={() => {
             handleSelection(x, y);
           }}
