@@ -158,7 +158,7 @@ export const Board = ({
     return board.map((row, y) =>
       row.map((col, x) => (
         <div
-          className="u_boardItem"
+          className={col.type === SEAT ? 'u_boardSeatItem' : 'u_boardItem'}
           key={x + y}
           onClick={() => {
             handleSelection(x, y);

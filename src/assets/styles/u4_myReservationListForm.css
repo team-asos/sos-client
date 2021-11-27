@@ -12,6 +12,8 @@
 }
 .seatReservationList,
 .roomReservationList {
+  height: 300px;
+  overflow: auto;
 }
 .u4seatTextStyle,
 .u4roomTextStyle {
@@ -22,6 +24,9 @@
 .myReservationListTable {
   /* position: relative; */
   font-size: 1em;
+}
+.mobileInfoTable {
+  font-size: 0.8em;
 }
 .reservationCancelBtn,
 .checkOutBtn {

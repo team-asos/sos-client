@@ -22,6 +22,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  /* border: 1px solid #c2c2c2; */
-  border: none;
+  border: 1px solid #c2c2c2;
+}
+.u_boardSeatItem {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #c2c2c2;
+}
+.u_boardSeatItem:hover {
+  cursor: pointer;
 }

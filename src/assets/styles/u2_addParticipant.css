@@ -11,6 +11,17 @@
   display: flex;
   align-self: flex-start;
 }
+.dropDownToggle {
+  background-color: rgb(230, 230, 230);
+  border: none;
+  color: black;
+}
+.m_dropDownToggle {
+  background-color: rgb(230, 230, 230);
+  border: none;
+  color: black;
+  font-size: 0.9em;
+}
 .addAndButtonForm {
   display: flex;
   flex-direction: column;
@@ -101,4 +112,12 @@
   height: 4vh;
   border-radius: 5px;
   width: 100%;
+}
+.m_topicInput {
+  width: 300px;
+  border: none;
+  background-color: rgb(236, 236, 236);
+  height: 40px;
+  border-radius: 5px;
+  font-size: 0.8em;
 }

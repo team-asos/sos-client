@@ -4,9 +4,7 @@ import { useCookies } from 'react-cookie';
 import { Table, Dropdown } from 'react-bootstrap';
 import * as AiIcon from 'react-icons/ai';
 import { useMediaQuery } from 'react-responsive';
-import * as moment from 'moment';
 import '../assets/styles/u2_addParticipant.css';
-import { MdSentimentDissatisfied } from 'react-icons/md';
 //회의실 인원 검색해서 추가
 const AddParticipant = ({
   START,
@@ -178,11 +176,15 @@ const AddParticipant = ({
     <div className="roomReservationFormRight">
       <div className="selectedTime">
         <Dropdown style={{ marginRight: '40%' }}>
-          <Dropdown.Toggle variant="secondary" id="dropdown-basic">
+          <Dropdown.Toggle
+            variant="secondary"
+            id="dropdown-basic"
+            className={isPc ? 'dropDownToggle' : 'm_dropDownToggle'}
+          >
             {start}
           </Dropdown.Toggle>
 
-          <Dropdown.Menu>
+          <Dropdown.Menu style={{ height: '40vh', overflow: 'auto' }}>
             <Dropdown.Item onClick={() => setStart('시작')}>
               선택 안함
             </Dropdown.Item>
@@ -194,11 +196,15 @@ const AddParticipant = ({
           </Dropdown.Menu>
         </Dropdown>
         <Dropdown>
-          <Dropdown.Toggle variant="secondary" id="dropdown-basic">
+          <Dropdown.Toggle
+            variant="secondary"
+            id="dropdown-basic"
+            className={isPc ? 'dropDownToggle' : 'm_dropDownToggle'}
+          >
             {end}
           </Dropdown.Toggle>
 
-          <Dropdown.Menu>
+          <Dropdown.Menu style={{ height: '40vh', overflow: 'auto' }}>
             <Dropdown.Item onClick={() => setEnd('종료')}>
               선택 안함
             </Dropdown.Item>
@@ -212,7 +218,7 @@ const AddParticipant = ({
       </div>
       <div className="meetingTopicForm">
         <input
-          className="topicInput"
+          className={isPc ? 'topicInput' : 'm_topicInput'}
           onChange={inputTopic}
           placeholder="회의 주제를 입력해주세요."
         ></input>

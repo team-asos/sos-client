@@ -51,16 +51,15 @@ const Calendar = props => {
       ) : (
         <>
           <div className="mPicker">
-            <p className="pickerText">시작</p>
+            {/* <p className="pickerText"></p> */}
             <DatePicker
               selected={startDate}
               onChange={date => setStartDate(date)}
               locale={ko}
-              dateFormat="yyyy-MM-dd hh:mm"
+              dateFormat="yyyy-MM-dd"
               minDate={new Date()} //오늘 이전 날짜 선택 안되게
               maxDate={addDays(new Date(), 6)} //일주일 뒤는 예약 못함
               placeholderText="예약 날짜 선택"
-              showTimeInput
               closeOnScroll={true} //스크롤 했을 때 닫힘
               customInput={<MyCustom />}
             />

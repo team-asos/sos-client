@@ -37,7 +37,6 @@ const RoomReservationInfo = props => {
   useEffect(() => {
     if (props.user.id !== 'undefined') res();
   }, [props.user.id]);
-  console.log(reservation);
   /* 예약 날짜 정렬 */
   const sortedReservation = reservation.sort((a, b) =>
     a.startTime.split('-').join().localeCompare(b.startTime.split('-').join()),

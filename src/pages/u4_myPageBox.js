@@ -197,9 +197,8 @@ const MyPageBox = props => {
   const dropClick = () => {
     handleClose();
     const dropUser = async () => {
-      console.log(props.match.params.idx);
       const response = await fetch(
-        `${process.env.REACT_APP_SERVER_BASE_URL}/users/${props.match.params.idx}`,
+        `${process.env.REACT_APP_SERVER_BASE_URL}/users/${props.user.id}`,
         {
           headers: {
             'Content-type': 'application/json',
