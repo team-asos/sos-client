@@ -101,6 +101,10 @@ export const Board = ({ selection, setSelection, setBoard, board, seats }) => {
             height: `${col.height * 50}px`,
             left: `${x * 50}px`,
             top: `${y * 50}px`,
+            border:
+              col.width && col.type === ROOM
+                ? `2px solid rgb(141, 153, 174)`
+                : `none`,
           }}
         >
           {col.name}

@@ -141,7 +141,7 @@ export const BoardContainer = ({ floor, userId }) => {
             };
           else if (colIndex >= room.x && colIndex < room.x + room.width)
             if (rowIndex >= room.y && rowIndex < room.y + room.height)
-              return { ...col, type: -1 };
+              return { ...col, width: 0, height: 0 };
 
           return col;
         }),

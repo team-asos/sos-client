@@ -24,33 +24,70 @@ export const Board = ({
   setTab,
   setBoard,
   board,
-  originBoard,
   seats,
   rooms,
   facilities,
 }) => {
-  useEffect(() => {
-    if (selection.stage === PREV_SELECTION) {
-      setBoard(originBoard);
-    } else {
-      let newMap = board;
+  const [history, setHistory] = useState({
+    x: -1,
+    y: -1,
+    width: 0,
+    height: 0,
+    type: EMPTY,
+  });
 
-      newMap = newMap.map((row, rowIndex) =>
+  const [scale, setScale] = useState(false);
+
+  const scaleHandler = () => {
+    if (scale === true) setScale(false);
+    else setScale(true);
+  };
+
+  const clearBoard = () => {
+    setBoard(
+      board.map((row, rowIndex) =>
         row.map((col, colIndex) => {
           if (
-            colIndex >= selection.x &&
-            colIndex < selection.x + selection.width
+            colIndex >= history.x &&
+            colIndex < history.x + history.width &&
+            rowIndex >= history.y &&
+            rowIndex < history.y + history.height
           )
-            if (
-              rowIndex >= selection.y &&
-              rowIndex < selection.y + selection.height
-            )
-              return { type: SELECTION, name: '' };
+            return { ...col, type: history.type };
           return col;
         }),
-      );
+      ),
+    );
+  };
 
-      setBoard(newMap);
+  useEffect(() => {
+    if (selection.stage === PREV_SELECTION) {
+      clearBoard();
+    } else {
+      setHistory({
+        x: selection.x,
+        y: selection.y,
+        width: selection.width,
+        height: selection.height,
+        type: selection.type,
+      });
+
+      setBoard(
+        board.map((row, rowIndex) =>
+          row.map((col, colIndex) => {
+            if (
+              colIndex >= selection.x &&
+              colIndex < selection.x + selection.width
+            )
+              if (
+                rowIndex >= selection.y &&
+                rowIndex < selection.y + selection.height
+              )
+                return { ...col, type: SELECTION };
+            return col;
+          }),
+        ),
+      );
     }
   }, [selection]);
 
@@ -66,6 +103,7 @@ export const Board = ({
           setSelection({
             ...selectedSeat,
             stage: EDIT_SELECTION,
+            type: SEAT,
           });
         } else if (board[y][x].type === ROOM) {
           setTab(1);
@@ -75,6 +113,7 @@ export const Board = ({
           setSelection({
             ...selectedRoom,
             stage: EDIT_SELECTION,
+            type: ROOM,
           });
         } else if (board[y][x].type === FACILITY) {
           setTab(2);
@@ -87,6 +126,7 @@ export const Board = ({
             ...selectedFacility,
             name: selectedFacility.type,
             stage: EDIT_SELECTION,
+            type: FACILITY,
           });
         }
       }
@@ -103,6 +143,7 @@ export const Board = ({
             height: 1,
             maxUser: 0,
             stage: FIRST_SELECTION,
+            type: EMPTY,
           });
         } else {
           setSelection({
@@ -114,6 +155,7 @@ export const Board = ({
             height: 1,
             maxUser: 0,
             stage: SECOND_SELECTION,
+            type: EMPTY,
           });
         }
       } else if (selection.stage === FIRST_SELECTION) {
@@ -124,6 +166,7 @@ export const Board = ({
           width: Math.abs(x - selection.x + 1),
           height: Math.abs(y - selection.y + 1),
           stage: SECOND_SELECTION,
+          type: EMPTY,
         });
       } else if (
         selection.stage === SECOND_SELECTION ||
@@ -138,6 +181,7 @@ export const Board = ({
           height: 0,
           maxUser: 0,
           stage: PREV_SELECTION,
+          type: EMPTY,
         });
       }
     }
@@ -166,25 +210,24 @@ export const Board = ({
       row.map((col, x) => (
         <div
           className="board-item"
-          key={x + y}
+          key={x + y * row.length}
           onClick={() => {
             handleSelection(x, y);
           }}
-          style={itemStyle(col.type)}
+          style={{
+            ...itemStyle(col.type),
+            position: 'absolute',
+            width: `${col.width * 50}px`,
+            height: `${col.height * 50}px`,
+            left: `${x * 50}px`,
+            top: `${y * 50}px`,
+            border: col.width ? `1px solid #c2c2c2` : `none`,
+          }}
         >
-          {col.type === ROOM ? '' : col.name}
+          {col.name}
         </div>
       )),
     );
-  };
-
-  const [scale, setScale] = useState(false);
-
-  const scaleHandler = () => {
-    if (scale === true) setScale(false);
-    else setScale(true);
-
-    console.log(scale);
   };
 
   const Board = () => {
@@ -208,13 +251,7 @@ export const Board = ({
                 scale === false ? 'board-item-cover ' : 'board-item-cover-scale'
               }
               style={{
-                display: 'grid',
-                gridTemplateColumns: `repeat(${
-                  board.length > 0 ? board[0].length : '1'
-                }, 2.8vw)`,
-                gridTemplateRows: `repeat(${
-                  board.length > 0 ? board.length : '1'
-                }, 2.8vw)`,
+                position: 'relative',
               }}
             >
               <Item board={board} />
