@@ -5,7 +5,7 @@ import { SeatTab } from './SeatTab';
 import { RoomTab } from './RoomTab';
 import { FacilityTab } from './FacilityTab';
 
-import { EDIT_SELECTION } from '../../const/selection-type.const';
+import { SELECTION_EDIT } from '../../const/selection-type.const';
 import './BoardSetting.css';
 
 export const BoardSetting = ({
@@ -22,7 +22,7 @@ export const BoardSetting = ({
   setFacilities,
 }) => {
   const handleTab = tab => {
-    if (selection.stage === EDIT_SELECTION) return;
+    if (selection.stage === SELECTION_EDIT) return;
 
     setTab(tab);
   };
@@ -32,6 +32,7 @@ export const BoardSetting = ({
       return (
         <SeatTab
           selection={selection}
+          setSelection={setSelection}
           floor={floor}
           seats={seats}
           setSeats={setSeats}
@@ -51,6 +52,7 @@ export const BoardSetting = ({
       return (
         <FacilityTab
           selection={selection}
+          setSelection={setSelection}
           floor={floor}
           facilities={facilities}
           setFacilities={setFacilities}

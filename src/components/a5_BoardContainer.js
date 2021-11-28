@@ -6,7 +6,7 @@ import { BoardSetting } from './BoardSetting';
 
 import { EMPTY, SEAT, ROOM, FACILITY } from '../const/object-type.const';
 
-import { PREV_SELECTION } from '../const/selection-type.const';
+import { SELECTION_FIRST } from '../const/selection-type.const';
 
 export const BoardContainer = ({ floor }) => {
   const [board, setBoard] = useState([]);
@@ -23,7 +23,7 @@ export const BoardContainer = ({ floor }) => {
     width: 0,
     height: 0,
     maxUser: 0,
-    stage: PREV_SELECTION,
+    stage: SELECTION_FIRST,
     type: EMPTY,
   });
 

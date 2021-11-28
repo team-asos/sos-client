@@ -2,7 +2,10 @@ import React, { useState } from 'react';
 import * as bs from 'react-icons/bs';
 import * as io from 'react-icons/io';
 
-import { EDIT_SELECTION } from '../../const/selection-type.const';
+import {
+  SELECTION_FIRST,
+  SELECTION_EDIT,
+} from '../../const/selection-type.const';
 import './BoardSetting.css';
 
 export const RoomTab = ({
@@ -55,6 +58,7 @@ export const RoomTab = ({
         alert('회의실이 생성되었습니다.');
         const json = await response.json();
         setRooms([...rooms, json]);
+        setSelection({ ...selection, stage: SELECTION_FIRST });
       }
     };
 
@@ -78,6 +82,7 @@ export const RoomTab = ({
         alert('회의실이 삭제되었습니다.');
         const json = await response.json();
         setRooms(rooms.filter(room => room.id !== json.id));
+        setSelection({ ...selection, stage: SELECTION_FIRST });
       }
     };
 
@@ -86,7 +91,7 @@ export const RoomTab = ({
 
   return (
     <div className="seat-tab">
-      {selection.stage !== EDIT_SELECTION && (
+      {selection.stage !== SELECTION_EDIT && (
         <p className="text-notification">
           회의실 생성 시, <bs.BsCheckAll style={{ color: '#c00000' }} />는{' '}
           <span className="text-notification-strong">필수 입력칸</span> 입니다.
@@ -94,7 +99,7 @@ export const RoomTab = ({
           도면의 흰색 부분 선택 시, 생성이 종료됩니다.
         </p>
       )}
-      {selection.stage === EDIT_SELECTION && (
+      {selection.stage === SELECTION_EDIT && (
         <p className="text-notification">
           <io.IoIosNotifications size={18} style={{ color: '#c00000' }} />{' '}
           도면의 흰색 부분 선택 시, <br />
@@ -150,7 +155,7 @@ export const RoomTab = ({
         </label>
       </div>
 
-      {selection.stage !== EDIT_SELECTION && (
+      {selection.stage !== SELECTION_EDIT && (
         <>
           <label style={{ marginTop: '3%' }}>
             <bs.BsCheckAll style={{ color: '#c00000' }} />
@@ -203,7 +208,7 @@ export const RoomTab = ({
         </>
       )}
 
-      {selection.stage === EDIT_SELECTION && (
+      {selection.stage === SELECTION_EDIT && (
         <>
           <label style={{ marginTop: '5%' }}>
             <bs.BsCheckAll style={{ color: 'transparent' }} />

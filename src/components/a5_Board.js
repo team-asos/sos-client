@@ -5,10 +5,10 @@ import { GiExpand } from 'react-icons/gi';
 import { EMPTY, SEAT, ROOM, FACILITY } from '../const/object-type.const';
 
 import {
-  PREV_SELECTION,
-  FIRST_SELECTION,
-  EDIT_SELECTION,
-  SECOND_SELECTION,
+  SELECTION_FIRST,
+  SELECTION_SECOND,
+  SELECTION_EDIT,
+  SELECTION_THIRD,
 } from '../const/selection-type.const';
 
 export const Board = ({
@@ -39,8 +39,22 @@ export const Board = ({
     );
   };
 
+  const clearSelection = () => {
+    setSelection({
+      id: -1,
+      name: '',
+      x: -1,
+      y: -1,
+      width: 0,
+      height: 0,
+      maxUser: 0,
+      stage: SELECTION_FIRST,
+      type: EMPTY,
+    });
+  };
+
   useEffect(() => {
-    if (selection.stage === PREV_SELECTION) {
+    if (selection.stage === SELECTION_FIRST) {
       clearBoard();
     } else {
       setBoard(
@@ -63,7 +77,7 @@ export const Board = ({
   const handleSelection = (x, y) => {
     if (board[y][x].type !== EMPTY) {
       // 기존 배치 선택
-      if (selection.stage === PREV_SELECTION) {
+      if (selection.stage === SELECTION_FIRST) {
         const TYPE = board[y][x].type;
         const TAB_TYPE = TYPE - 1;
         let selectedItem;
@@ -81,47 +95,37 @@ export const Board = ({
 
         setSelection({
           ...selectedItem,
-          stage: EDIT_SELECTION,
+          stage: SELECTION_EDIT,
           type: TYPE,
         });
       }
     } else {
       // 신규 배치 선택
-      if (selection.stage === PREV_SELECTION) {
+      if (selection.stage === SELECTION_FIRST) {
         setSelection({
           ...selection,
           x,
           y,
           width: 1,
           height: 1,
-          stage: tab === 1 ? FIRST_SELECTION : SECOND_SELECTION,
+          stage: tab === 1 ? SELECTION_SECOND : SELECTION_THIRD,
           type: EMPTY,
         });
-      } else if (selection.stage === FIRST_SELECTION) {
+      } else if (selection.stage === SELECTION_SECOND) {
         setSelection({
           ...selection,
           x: x < selection.x ? x : selection.x,
           y: y < selection.y ? y : selection.y,
           width: Math.abs(x - selection.x) + 1,
           height: Math.abs(y - selection.y) + 1,
-          stage: SECOND_SELECTION,
+          stage: SELECTION_THIRD,
           type: EMPTY,
         });
       } else if (
-        selection.stage === SECOND_SELECTION ||
-        selection.stage === EDIT_SELECTION
+        selection.stage === SELECTION_THIRD ||
+        selection.stage === SELECTION_EDIT
       ) {
-        setSelection({
-          id: -1,
-          name: '',
-          x: -1,
-          y: -1,
-          width: 0,
-          height: 0,
-          maxUser: 0,
-          stage: PREV_SELECTION,
-          type: EMPTY,
-        });
+        clearSelection();
       }
     }
   };

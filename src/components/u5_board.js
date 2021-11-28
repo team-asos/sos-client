@@ -10,7 +10,10 @@ import {
   RESERVED_SEAT,
 } from '../const/object-type.const';
 
-import { PREV_SELECTION, FIRST_SELECTION } from '../const/selection-type.const';
+import {
+  SELECTION_FIRST,
+  SELECTION_SECOND,
+} from '../const/selection-type.const';
 
 import '../assets/styles/u5_board.css';
 
@@ -34,7 +37,7 @@ export const Board = ({ selection, setSelection, setBoard, board, seats }) => {
   };
 
   useEffect(() => {
-    if (selection.stage === PREV_SELECTION) {
+    if (selection.stage === SELECTION_FIRST) {
       clearBoard();
     } else {
       setHistory({ x: selection.x, y: selection.y });
@@ -59,7 +62,7 @@ export const Board = ({ selection, setSelection, setBoard, board, seats }) => {
 
       setSelection({
         ...selectedSeat,
-        stage: FIRST_SELECTION,
+        stage: SELECTION_SECOND,
       });
     } else if (board[y][x].type === EMPTY) {
       setSelection({
@@ -67,7 +70,7 @@ export const Board = ({ selection, setSelection, setBoard, board, seats }) => {
         name: '',
         x: -1,
         y: -1,
-        stage: PREV_SELECTION,
+        stage: SELECTION_FIRST,
       });
     }
   };
