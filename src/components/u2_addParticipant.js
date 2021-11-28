@@ -116,6 +116,7 @@ const AddParticipant = ({
           userId: Number(myId),
           roomId: Number(ROOMID),
           participantIds: membersId,
+          topic,
         }),
       },
     );

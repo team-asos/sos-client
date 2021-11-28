@@ -35,7 +35,7 @@ const Calendar = props => {
     <div style={{ width: '100%' }}>
       {isPc ? (
         <div className="roomDatePicker">
-          <div className="pickersTextStyle">날짜 선택</div>
+          {/* <div className="pickersTextStyle">날짜 선택</div> */}
           <DatePicker
             selected={startDate}
             onChange={date => setStartDate(date)}
