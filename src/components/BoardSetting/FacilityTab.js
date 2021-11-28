@@ -2,12 +2,16 @@ import React, { useState } from 'react';
 import * as bs from 'react-icons/bs';
 import * as io from 'react-icons/io';
 
-import { EDIT_SELECTION } from '../../const/selection-type.const';
+import {
+  SELECTION_FIRST,
+  SELECTION_EDIT,
+} from '../../const/selection-type.const';
 
 import { FormControl, Select, MenuItem } from '@mui/material';
 
 export const FacilityTab = ({
   selection,
+  setSelection,
   floor,
   facilities,
   setFacilities,
@@ -70,6 +74,7 @@ export const FacilityTab = ({
         alert('시설이 생성되었습니다.');
         const json = await response.json();
         setFacilities([...facilities, json]);
+        setSelection({ ...selection, stage: SELECTION_FIRST });
       }
     };
 
@@ -93,6 +98,7 @@ export const FacilityTab = ({
         alert('시설이 삭제되었습니다.');
         const json = await response.json();
         setFacilities(facilities.filter(facility => facility.id !== json.id));
+        setSelection({ ...selection, stage: SELECTION_FIRST });
       }
     };
 
@@ -108,7 +114,7 @@ export const FacilityTab = ({
 
   return (
     <div className="seat-tab">
-      {selection.stage !== EDIT_SELECTION && (
+      {selection.stage !== SELECTION_EDIT && (
         <p className="text-notification">
           시설 생성 시, <bs.BsCheckAll style={{ color: '#c00000' }} />는{' '}
           <span className="text-notification-strong">필수 선택칸</span>입니다.
@@ -116,7 +122,7 @@ export const FacilityTab = ({
           도면의 흰색 부분 선택 시, 생성이 종료됩니다.
         </p>
       )}
-      {selection.stage === EDIT_SELECTION && (
+      {selection.stage === SELECTION_EDIT && (
         <p className="text-notification">
           <io.IoIosNotifications size={18} style={{ color: '#c00000' }} />{' '}
           도면의 흰색 부분 선택 시, <br />
@@ -142,7 +148,7 @@ export const FacilityTab = ({
           <input value={selection.y} className="seat-input-location" disabled />
         </label>
       </div>
-      {selection.stage !== EDIT_SELECTION && (
+      {selection.stage !== SELECTION_EDIT && (
         <>
           <label style={{ marginTop: '5%' }}>
             <bs.BsCheckAll style={{ color: '#c00000' }} />
@@ -173,7 +179,7 @@ export const FacilityTab = ({
           </button>
         </>
       )}
-      {selection.stage === EDIT_SELECTION && (
+      {selection.stage === SELECTION_EDIT && (
         <>
           <label style={{ marginTop: '5%' }}>
             <bs.BsCheckAll style={{ color: 'transparent' }} />

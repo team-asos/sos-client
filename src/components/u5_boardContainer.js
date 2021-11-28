@@ -12,6 +12,8 @@ import {
   RESERVED_SEAT,
 } from '../const/object-type.const';
 
+import { SELECTION_FIRST } from '../const/selection-type.const';
+
 export const BoardContainer = ({ floor, userId }) => {
   const isPc = useMediaQuery({
     query: '(min-width:768px)',
@@ -28,7 +30,7 @@ export const BoardContainer = ({ floor, userId }) => {
     name: '',
     x: -1,
     y: -1,
-    stage: 0,
+    stage: SELECTION_FIRST,
   });
 
   useEffect(() => {
@@ -141,7 +143,7 @@ export const BoardContainer = ({ floor, userId }) => {
             };
           else if (colIndex >= room.x && colIndex < room.x + room.width)
             if (rowIndex >= room.y && rowIndex < room.y + room.height)
-              return { ...col, type: -1 };
+              return { ...col, width: 0, height: 0 };
 
           return col;
         }),

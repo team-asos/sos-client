@@ -42,9 +42,9 @@ const NavBox = () => {
       <Link to="/user-management">
         <header className="logoBar"></header>
       </Link>
-      <body className="appBar">
+      <div className="appBar">
         <AppBar />
-      </body>
+      </div>
       <footer>
         <div className="logOutBar">
           <p>
