@@ -10,6 +10,7 @@ import './BoardSetting.css';
 
 export const BoardSetting = ({
   selection,
+  setSelection,
   tab,
   setTab,
   floor,
@@ -40,6 +41,7 @@ export const BoardSetting = ({
       return (
         <RoomTab
           selection={selection}
+          setSelection={setSelection}
           floor={floor}
           rooms={rooms}
           setRooms={setRooms}
@@ -55,8 +57,6 @@ export const BoardSetting = ({
         />
       );
   };
-
-  console.log(floor);
 
   const Setting = () => {
     return (

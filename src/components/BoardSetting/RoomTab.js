@@ -5,7 +5,13 @@ import * as io from 'react-icons/io';
 import { EDIT_SELECTION } from '../../const/selection-type.const';
 import './BoardSetting.css';
 
-export const RoomTab = ({ selection, floor, rooms, setRooms }) => {
+export const RoomTab = ({
+  selection,
+  setSelection,
+  floor,
+  rooms,
+  setRooms,
+}) => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState(0);
   const [tag, setTag] = useState(0);
@@ -123,8 +129,11 @@ export const RoomTab = ({ selection, floor, rooms, setRooms }) => {
           가로 :{'  '}
           <input
             value={selection.width}
+            onChange={e => {
+              setSelection({ ...selection, width: Number(e.target.value) });
+            }}
             className="seat-input-location"
-            disabled
+            // disabled={selection.width === 0 ? true : false}
           />{' '}
           ,
         </label>
@@ -132,8 +141,11 @@ export const RoomTab = ({ selection, floor, rooms, setRooms }) => {
           세로 :{'  '}
           <input
             value={selection.height}
+            onChange={e => {
+              setSelection({ ...selection, height: Number(e.target.value) });
+            }}
             className="seat-input-location"
-            disabled
+            // disabled={selection.height === 0 ? true : false}
           />
         </label>
       </div>
@@ -150,9 +162,7 @@ export const RoomTab = ({ selection, floor, rooms, setRooms }) => {
               onChange={e => {
                 inputName(e);
               }}
-              disabled={
-                selection.width <= 1 && selection.height <= 1 ? true : false
-              }
+              disabled={selection.width === 0 ? true : false}
             />
           </label>
           <label style={{ marginTop: '3%' }}>
@@ -164,9 +174,7 @@ export const RoomTab = ({ selection, floor, rooms, setRooms }) => {
               onChange={e => {
                 inputNumber(e);
               }}
-              disabled={
-                selection.width <= 1 && selection.height <= 1 ? true : false
-              }
+              disabled={name === '' ? true : false}
             />
           </label>
           <label style={{ marginTop: '3%' }}>
@@ -179,9 +187,7 @@ export const RoomTab = ({ selection, floor, rooms, setRooms }) => {
               onChange={e => {
                 inputTag(e);
               }}
-              disabled={
-                selection.width <= 1 && selection.height <= 1 ? true : false
-              }
+              disabled={number === 0 ? true : false}
             />
           </label>
           <button
@@ -190,7 +196,7 @@ export const RoomTab = ({ selection, floor, rooms, setRooms }) => {
             onClick={() => {
               handleSave();
             }}
-            disabled={name !== '' && number !== 0 ? false : true}
+            disabled={tag === 0 ? true : false}
           >
             생성하기
           </button>

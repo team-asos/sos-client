@@ -135,7 +135,7 @@ export const SeatTab = ({ selection, floor, seats, setSeats }) => {
               onChange={e => {
                 inputTag(e);
               }}
-              disabled={selection.x === -1 ? true : false}
+              disabled={name === '' ? true : false}
             />
           </label>
           <button
@@ -143,7 +143,7 @@ export const SeatTab = ({ selection, floor, seats, setSeats }) => {
             onClick={() => {
               handleSave();
             }}
-            disabled={name === '' ? true : false}
+            disabled={tag === 0 ? true : false}
           >
             생성하기
           </button>

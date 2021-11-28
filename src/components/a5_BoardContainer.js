@@ -28,7 +28,7 @@ export const BoardContainer = ({ floor }) => {
     height: 0,
     maxUser: 0,
     stage: 0,
-    type: 0,
+    type: EMPTY,
   });
 
   const [tab, setTab] = useState(0);
@@ -37,7 +37,14 @@ export const BoardContainer = ({ floor }) => {
     setBoard(
       Array.from({ length: floor.height }, () =>
         Array.from({ length: floor.width }, () => {
-          return { type: EMPTY, id: -1, name: '', width: 1, height: 1 };
+          return {
+            type: EMPTY,
+            id: -1,
+            name: '',
+            width: 1,
+            height: 1,
+            select: false,
+          };
         }),
       ),
     );
@@ -98,7 +105,14 @@ export const BoardContainer = ({ floor }) => {
     newMap = newMap.map(row =>
       row.map(col => {
         if (col.type === SELECTION)
-          return { type: EMPTY, id: -1, name: '', width: 1, height: 1 };
+          return {
+            type: EMPTY,
+            id: -1,
+            name: '',
+            width: 1,
+            height: 1,
+            select: false,
+          };
         return col;
       }),
     );
@@ -110,6 +124,7 @@ export const BoardContainer = ({ floor }) => {
         name: seat.name,
         width: 1,
         height: 1,
+        select: false,
       };
     }
 
@@ -123,6 +138,7 @@ export const BoardContainer = ({ floor }) => {
               name: room.name,
               width: room.width,
               height: room.height,
+              select: false,
             };
           else if (colIndex >= room.x && colIndex < room.x + room.width)
             if (rowIndex >= room.y && rowIndex < room.y + room.height)
@@ -144,11 +160,12 @@ export const BoardContainer = ({ floor }) => {
         name: facility.type,
         width: 1,
         height: 1,
+        select: false,
       };
     }
 
     setBoard(newMap);
-  }, [facilities]);
+  }, [seats, rooms, facilities]);
 
   return (
     <div
@@ -172,6 +189,7 @@ export const BoardContainer = ({ floor }) => {
       />
       <BoardSetting
         selection={selection}
+        setSelection={setSelection}
         tab={tab}
         setTab={setTab}
         floor={floor}

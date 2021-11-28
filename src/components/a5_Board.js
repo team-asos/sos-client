@@ -2,19 +2,13 @@ import React, { useEffect, useState } from 'react';
 import '../../src/assets/styles/a5_Board.css';
 import { GiExpand } from 'react-icons/gi';
 
-import {
-  EMPTY,
-  SEAT,
-  ROOM,
-  FACILITY,
-  SELECTION,
-} from '../const/object-type.const';
+import { EMPTY, SEAT, ROOM, FACILITY } from '../const/object-type.const';
 
 import {
   PREV_SELECTION,
   FIRST_SELECTION,
-  SECOND_SELECTION,
   EDIT_SELECTION,
+  SECOND_SELECTION,
 } from '../const/selection-type.const';
 
 export const Board = ({
@@ -28,14 +22,6 @@ export const Board = ({
   rooms,
   facilities,
 }) => {
-  const [history, setHistory] = useState({
-    x: -1,
-    y: -1,
-    width: 0,
-    height: 0,
-    type: EMPTY,
-  });
-
   const [scale, setScale] = useState(false);
 
   const scaleHandler = () => {
@@ -45,16 +31,9 @@ export const Board = ({
 
   const clearBoard = () => {
     setBoard(
-      board.map((row, rowIndex) =>
-        row.map((col, colIndex) => {
-          if (
-            colIndex >= history.x &&
-            colIndex < history.x + history.width &&
-            rowIndex >= history.y &&
-            rowIndex < history.y + history.height
-          )
-            return { ...col, type: history.type };
-          return col;
+      board.map(row =>
+        row.map(col => {
+          return { ...col, select: false };
         }),
       ),
     );
@@ -64,26 +43,16 @@ export const Board = ({
     if (selection.stage === PREV_SELECTION) {
       clearBoard();
     } else {
-      setHistory({
-        x: selection.x,
-        y: selection.y,
-        width: selection.width,
-        height: selection.height,
-        type: selection.type,
-      });
-
       setBoard(
         board.map((row, rowIndex) =>
           row.map((col, colIndex) => {
             if (
               colIndex >= selection.x &&
-              colIndex < selection.x + selection.width
+              colIndex < selection.x + selection.width &&
+              rowIndex >= selection.y &&
+              rowIndex < selection.y + selection.height
             )
-              if (
-                rowIndex >= selection.y &&
-                rowIndex < selection.y + selection.height
-              )
-                return { ...col, type: SELECTION };
+              return { ...col, select: true };
             return col;
           }),
         ),
@@ -93,7 +62,7 @@ export const Board = ({
 
   const handleSelection = (x, y) => {
     if (board[y][x].type !== EMPTY) {
-      // 기존 좌석 선택
+      // 기존 배치 선택
       if (selection.stage === PREV_SELECTION) {
         if (board[y][x].type === SEAT) {
           setTab(0);
@@ -131,33 +100,19 @@ export const Board = ({
         }
       }
     } else {
-      // 신규 선택
+      // 신규 배치 선택
       if (selection.stage === PREV_SELECTION) {
-        if (tab === 1) {
-          setSelection({
-            id: -1,
-            name: '',
-            x,
-            y,
-            width: 1,
-            height: 1,
-            maxUser: 0,
-            stage: FIRST_SELECTION,
-            type: EMPTY,
-          });
-        } else {
-          setSelection({
-            id: -1,
-            name: '',
-            x,
-            y,
-            width: 1,
-            height: 1,
-            maxUser: 0,
-            stage: SECOND_SELECTION,
-            type: EMPTY,
-          });
-        }
+        setSelection({
+          id: -1,
+          name: '',
+          x,
+          y,
+          width: 1,
+          height: 1,
+          maxUser: 0,
+          stage: tab === 1 ? FIRST_SELECTION : SECOND_SELECTION,
+          type: EMPTY,
+        });
       } else if (selection.stage === FIRST_SELECTION) {
         setSelection({
           id: -1,
@@ -189,7 +144,10 @@ export const Board = ({
     }
   };
 
-  const itemStyle = type => {
+  const itemStyle = (type, select) => {
+    if (select)
+      return { backgroundColor: '#D01C1F', border: '1px solid #D01C1F' };
+
     if (type === EMPTY) return { backgroundColor: 'white' };
     else if (type === SEAT)
       return {
@@ -203,8 +161,6 @@ export const Board = ({
       };
     else if (type === FACILITY)
       return { backgroundColor: 'rgb(245,223,77)', border: 'rgb(245,223,77)' };
-    else if (type === SELECTION)
-      return { backgroundColor: '#D01C1F', border: '1px solid #D01C1F' };
   };
 
   const Item = ({ board }) => {
@@ -217,7 +173,7 @@ export const Board = ({
             handleSelection(x, y);
           }}
           style={{
-            ...itemStyle(col.type),
+            ...itemStyle(col.type, col.select),
             position: 'absolute',
             width: `${col.width * 50}px`,
             height: `${col.height * 50}px`,
