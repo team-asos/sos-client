@@ -133,7 +133,7 @@ export const RoomTab = ({
               setSelection({ ...selection, width: Number(e.target.value) });
             }}
             className="seat-input-location"
-            // disabled={selection.width === 0 ? true : false}
+            disabled
           />{' '}
           ,
         </label>
@@ -145,7 +145,7 @@ export const RoomTab = ({
               setSelection({ ...selection, height: Number(e.target.value) });
             }}
             className="seat-input-location"
-            // disabled={selection.height === 0 ? true : false}
+            disabled
           />
         </label>
       </div>

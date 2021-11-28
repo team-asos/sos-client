@@ -64,64 +64,46 @@ export const Board = ({
     if (board[y][x].type !== EMPTY) {
       // 기존 배치 선택
       if (selection.stage === PREV_SELECTION) {
-        if (board[y][x].type === SEAT) {
-          setTab(0);
+        const TYPE = board[y][x].type;
+        const TAB_TYPE = TYPE - 1;
+        let selectedItem;
 
-          const selectedSeat = seats.find(seat => seat.id === board[y][x].id);
-
-          setSelection({
-            ...selectedSeat,
-            stage: EDIT_SELECTION,
-            type: SEAT,
-          });
-        } else if (board[y][x].type === ROOM) {
-          setTab(1);
-
-          const selectedRoom = rooms.find(room => room.id === board[y][x].id);
-
-          setSelection({
-            ...selectedRoom,
-            stage: EDIT_SELECTION,
-            type: ROOM,
-          });
-        } else if (board[y][x].type === FACILITY) {
-          setTab(2);
-
-          const selectedFacility = facilities.find(
+        if (TYPE === SEAT)
+          selectedItem = seats.find(seat => seat.id === board[y][x].id);
+        else if (TYPE === ROOM)
+          selectedItem = rooms.find(room => room.id === board[y][x].id);
+        else if (TYPE === FACILITY)
+          selectedItem = facilities.find(
             facility => facility.id === board[y][x].id,
           );
 
-          setSelection({
-            ...selectedFacility,
-            name: selectedFacility.type,
-            stage: EDIT_SELECTION,
-            type: FACILITY,
-          });
-        }
+        setTab(TAB_TYPE);
+
+        setSelection({
+          ...selectedItem,
+          stage: EDIT_SELECTION,
+          type: TYPE,
+        });
       }
     } else {
       // 신규 배치 선택
       if (selection.stage === PREV_SELECTION) {
         setSelection({
-          id: -1,
-          name: '',
+          ...selection,
           x,
           y,
           width: 1,
           height: 1,
-          maxUser: 0,
           stage: tab === 1 ? FIRST_SELECTION : SECOND_SELECTION,
           type: EMPTY,
         });
       } else if (selection.stage === FIRST_SELECTION) {
         setSelection({
-          id: -1,
-          name: '',
+          ...selection,
           x: x < selection.x ? x : selection.x,
           y: y < selection.y ? y : selection.y,
           width: Math.abs(x - selection.x) + 1,
           height: Math.abs(y - selection.y) + 1,
-          maxUser: selection.maxUser,
           stage: SECOND_SELECTION,
           type: EMPTY,
         });

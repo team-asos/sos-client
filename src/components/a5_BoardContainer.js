@@ -4,13 +4,9 @@ import { Board } from './a5_Board.js';
 
 import { BoardSetting } from './BoardSetting';
 
-import {
-  EMPTY,
-  SEAT,
-  ROOM,
-  FACILITY,
-  SELECTION,
-} from '../const/object-type.const';
+import { EMPTY, SEAT, ROOM, FACILITY } from '../const/object-type.const';
+
+import { PREV_SELECTION } from '../const/selection-type.const';
 
 export const BoardContainer = ({ floor }) => {
   const [board, setBoard] = useState([]);
@@ -27,7 +23,7 @@ export const BoardContainer = ({ floor }) => {
     width: 0,
     height: 0,
     maxUser: 0,
-    stage: 0,
+    stage: PREV_SELECTION,
     type: EMPTY,
   });
 
@@ -102,18 +98,16 @@ export const BoardContainer = ({ floor }) => {
   useEffect(() => {
     let newMap = board;
 
-    newMap = newMap.map(row =>
-      row.map(col => {
-        if (col.type === SELECTION)
-          return {
-            type: EMPTY,
-            id: -1,
-            name: '',
-            width: 1,
-            height: 1,
-            select: false,
-          };
-        return col;
+    newMap = Array.from({ length: floor.height }, () =>
+      Array.from({ length: floor.width }, () => {
+        return {
+          type: EMPTY,
+          id: -1,
+          name: '',
+          width: 1,
+          height: 1,
+          select: false,
+        };
       }),
     );
 
