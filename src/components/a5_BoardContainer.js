@@ -4,17 +4,12 @@ import { Board } from './a5_Board.js';
 
 import { BoardSetting } from './BoardSetting';
 
-import {
-  EMPTY,
-  SEAT,
-  ROOM,
-  FACILITY,
-  SELECTION,
-} from '../const/object-type.const';
+import { EMPTY, SEAT, ROOM, FACILITY } from '../const/object-type.const';
+
+import { SELECTION_FIRST } from '../const/selection-type.const';
 
 export const BoardContainer = ({ floor }) => {
   const [board, setBoard] = useState([]);
-  const [originBoard, setOriginBoard] = useState([]);
 
   const [seats, setSeats] = useState([]);
   const [rooms, setRooms] = useState([]);
@@ -28,7 +23,8 @@ export const BoardContainer = ({ floor }) => {
     width: 0,
     height: 0,
     maxUser: 0,
-    stage: 0,
+    stage: SELECTION_FIRST,
+    type: EMPTY,
   });
 
   const [tab, setTab] = useState(0);
@@ -37,7 +33,14 @@ export const BoardContainer = ({ floor }) => {
     setBoard(
       Array.from({ length: floor.height }, () =>
         Array.from({ length: floor.width }, () => {
-          return { type: EMPTY, id: -1, name: '' };
+          return {
+            type: EMPTY,
+            id: -1,
+            name: '',
+            width: 1,
+            height: 1,
+            select: false,
+          };
         }),
       ),
     );
@@ -95,26 +98,48 @@ export const BoardContainer = ({ floor }) => {
   useEffect(() => {
     let newMap = board;
 
-    newMap = newMap.map(row =>
-      row.map(col => {
-        if (col.type === SELECTION) return { type: EMPTY, id: -1, name: '' };
-        return col;
+    newMap = Array.from({ length: floor.height }, () =>
+      Array.from({ length: floor.width }, () => {
+        return {
+          type: EMPTY,
+          id: -1,
+          name: '',
+          width: 1,
+          height: 1,
+          select: false,
+        };
       }),
     );
 
     for (let seat of seats) {
-      newMap[seat.y][seat.x] = { type: SEAT, id: seat.id, name: seat.name };
+      newMap[seat.y][seat.x] = {
+        type: SEAT,
+        id: seat.id,
+        name: seat.name,
+        width: 1,
+        height: 1,
+        select: false,
+      };
     }
 
     for (let room of rooms) {
       newMap = newMap.map((row, rowIndex) =>
         row.map((col, colIndex) => {
-          if (colIndex >= room.x && colIndex < room.x + room.width)
+          if (colIndex === room.x && rowIndex === room.y)
+            return {
+              type: ROOM,
+              id: room.id,
+              name: room.name,
+              width: room.width,
+              height: room.height,
+              select: false,
+            };
+          else if (colIndex >= room.x && colIndex < room.x + room.width)
             if (rowIndex >= room.y && rowIndex < room.y + room.height)
               return {
-                type: ROOM,
-                id: room.id,
-                name: room.name,
+                ...col,
+                width: 0,
+                height: 0,
               };
 
           return col;
@@ -127,12 +152,14 @@ export const BoardContainer = ({ floor }) => {
         type: FACILITY,
         id: facility.id,
         name: facility.type,
+        width: 1,
+        height: 1,
+        select: false,
       };
     }
 
     setBoard(newMap);
-    setOriginBoard(newMap);
-  }, [facilities]);
+  }, [seats, rooms, facilities]);
 
   return (
     <div
@@ -150,13 +177,13 @@ export const BoardContainer = ({ floor }) => {
         setTab={setTab}
         board={board}
         setBoard={setBoard}
-        originBoard={originBoard}
         seats={seats}
         rooms={rooms}
         facilities={facilities}
       />
       <BoardSetting
         selection={selection}
+        setSelection={setSelection}
         tab={tab}
         setTab={setTab}
         floor={floor}

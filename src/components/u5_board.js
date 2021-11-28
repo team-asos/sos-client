@@ -11,7 +11,10 @@ import {
   SEARCH_USER_SEAT,
 } from '../const/object-type.const';
 
-import { PREV_SELECTION, FIRST_SELECTION } from '../const/selection-type.const';
+import {
+  SELECTION_FIRST,
+  SELECTION_SECOND,
+} from '../const/selection-type.const';
 
 import '../assets/styles/u5_board.css';
 
@@ -40,7 +43,7 @@ export const Board = ({
   };
 
   useEffect(() => {
-    if (selection.stage === PREV_SELECTION) {
+    if (selection.stage === SELECTION_FIRST) {
       clearBoard();
     } else {
       setHistory({ x: selection.x, y: selection.y });
@@ -65,7 +68,7 @@ export const Board = ({
 
       setSelection({
         ...selectedSeat,
-        stage: FIRST_SELECTION,
+        stage: SELECTION_SECOND,
       });
     } else if (board[y][x].type === EMPTY) {
       setSelection({
@@ -73,7 +76,7 @@ export const Board = ({
         name: '',
         x: -1,
         y: -1,
-        stage: PREV_SELECTION,
+        stage: SELECTION_FIRST,
       });
     }
   };
@@ -129,6 +132,10 @@ export const Board = ({
               height: `${col.height * 50}px`,
               left: `${x * 50}px`,
               top: `${y * 50}px`,
+              border:
+                col.width && col.type === ROOM
+                  ? `2px solid rgb(141, 153, 174)`
+                  : `none`,
             }}
           >
             {col.name}

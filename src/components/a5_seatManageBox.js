@@ -80,6 +80,7 @@ const SeatManageBox = () => {
               <Dropdown.Item>층 선택</Dropdown.Item>
               {floor.map(floor => (
                 <Dropdown.Item
+                  key={floor.id}
                   onClick={e => {
                     setSelectFloor(floor);
                   }}
