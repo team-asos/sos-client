@@ -66,10 +66,6 @@ const MyReservationListForm = props => {
   /* 좌석 사용 종료 */
   const finishClick = reservationId => {
     handleClose();
-<<<<<<< HEAD
-    console.log(reservationId);
-=======
->>>>>>> develop
     const finishHandler = async () => {
       const res = await fetch(
         `${process.env.REACT_APP_SERVER_BASE_URL}/reservations/${reservationId}/seat`,
@@ -106,10 +102,6 @@ const MyReservationListForm = props => {
       <div style={{ display: 'flex', flexDirection: 'column' }}>
         <div className="u4seatTextStyle"> 좌석 </div>
         <div className="seatReservationList">
-<<<<<<< HEAD
-          <div className="u4seatTextStyle"> 좌석 </div>
-=======
->>>>>>> develop
           <Table
             striped
             hover
@@ -213,10 +205,6 @@ const MyReservationListForm = props => {
         </div>
         <div className="u4roomTextStyle"> 회의실 </div>
         <div className="roomReservationList">
-<<<<<<< HEAD
-          <div className="u4roomTextStyle"> 회의실 </div>
-=======
->>>>>>> develop
           <Table
             striped
             hover

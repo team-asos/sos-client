@@ -38,10 +38,6 @@ const SeatReservationInfo = props => {
   /*좌석 사용 종료 */
   const finishClick = reservationId => {
     seathandleClose();
-<<<<<<< HEAD
-    console.log(reservationId);
-=======
->>>>>>> develop
     const finishHandler = async () => {
       const res = await fetch(
         `${process.env.REACT_APP_SERVER_BASE_URL}/reservations/${reservationId}/seat`,

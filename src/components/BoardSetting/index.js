@@ -5,11 +5,7 @@ import { SeatTab } from './SeatTab';
 import { RoomTab } from './RoomTab';
 import { FacilityTab } from './FacilityTab';
 
-<<<<<<< HEAD
-import { EDIT_SELECTION } from '../../const/selection-type.const';
-=======
 import { SELECTION_EDIT } from '../../const/selection-type.const';
->>>>>>> develop
 import './BoardSetting.css';
 
 export const BoardSetting = ({

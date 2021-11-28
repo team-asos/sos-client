@@ -3,20 +3,14 @@ import Select from 'react-select';
 import { useCookies } from 'react-cookie';
 import { Table } from 'react-bootstrap';
 import { formatISO } from 'date-fns';
-<<<<<<< HEAD
-=======
 import { useMediaQuery } from 'react-responsive';
->>>>>>> develop
 
 import '../assets/styles/u5_userSearchForm.css';
 //좌석 예약 페이지->직원 검색
 const UserSearchForm = () => {
-<<<<<<< HEAD
-=======
   const isPc = useMediaQuery({
     query: '(min-width:768px)',
   });
->>>>>>> develop
   const now = formatISO(new Date());
   const [users, setUsers] = useState([]);
   const [ID, setID] = useState();
@@ -66,11 +60,6 @@ const UserSearchForm = () => {
       });
   };
   const search = () => {
-<<<<<<< HEAD
-    console.log('들어옴');
-    console.log(userReservation);
-=======
->>>>>>> develop
     userReservation.map(item => {
       if (item.room === null && item.status === 1) {
         if (item.endTime === null) {
@@ -83,10 +72,6 @@ const UserSearchForm = () => {
       }
       if (item.status === 1 && item.room != null) {
         if (item.endTime >= now) {
-<<<<<<< HEAD
-          console.log('미팅중', item.id);
-=======
->>>>>>> develop
           setUserLocation({
             roomFloor: item.room.floor.name,
             roomLocation: item.room.name,

@@ -1,12 +1,6 @@
 import React, { useState } from 'react';
 import * as bs from 'react-icons/bs';
 import * as io from 'react-icons/io';
-<<<<<<< HEAD
-
-import { EDIT_SELECTION } from '../../const/selection-type.const';
-import './BoardSetting.css';
-=======
->>>>>>> develop
 
 import {
   SELECTION_FIRST,

@@ -2,14 +2,10 @@ import React, { useState } from 'react';
 import * as bs from 'react-icons/bs';
 import * as io from 'react-icons/io';
 
-<<<<<<< HEAD
-import { EDIT_SELECTION } from '../../const/selection-type.const';
-=======
 import {
   SELECTION_FIRST,
   SELECTION_EDIT,
 } from '../../const/selection-type.const';
->>>>>>> develop
 
 import { FormControl, Select, MenuItem } from '@mui/material';
 
