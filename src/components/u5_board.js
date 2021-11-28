@@ -73,12 +73,16 @@ export const Board = ({ selection, setSelection, setBoard, board, seats }) => {
   };
 
   const itemStyle = type => {
-    if (type === EMPTY) return { backgroundColor: 'none' };
-    else if (type === SEAT) return { backgroundColor: 'green' };
-    else if (type === ROOM) return { backgroundColor: 'blue' };
-    else if (type === FACILITY) return { backgroundColor: 'yellow' };
-    else if (type === SELECTION) return { backgroundColor: 'red' };
-    else if (type === RESERVED_SEAT) return { backgroundColor: 'brown' };
+    if (type === EMPTY) return { backgroundColor: '#fff' };
+    else if (type === SEAT)
+      return { backgroundColor: '#293241', color: '#fff' };
+    else if (type === ROOM)
+      return { backgroundColor: '#fff', border: '2px solid #8d99ae' };
+    else if (type === FACILITY) return { backgroundColor: '#f5df4d' };
+    else if (type === SELECTION)
+      return { backgroundColor: '#a70000', color: '#fff' };
+    else if (type === RESERVED_SEAT)
+      return { backgroundColor: '#8d99ae', color: '#fff' };
   };
 
   const Item = ({ board }) => {
@@ -97,7 +101,6 @@ export const Board = ({ selection, setSelection, setBoard, board, seats }) => {
             height: `${col.height * 50}px`,
             left: `${x * 50}px`,
             top: `${y * 50}px`,
-            border: col.type !== -1 ? '1px solid #c2c2c2' : 'none',
           }}
         >
           {col.name}

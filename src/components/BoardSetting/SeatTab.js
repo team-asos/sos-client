@@ -7,9 +7,14 @@ import './BoardSetting.css';
 
 export const SeatTab = ({ selection, floor, seats, setSeats }) => {
   const [name, setName] = useState('');
+  const [tag, setTag] = useState(0);
 
   const inputName = e => {
     setName(e.target.value);
+  };
+
+  const inputTag = e => {
+    setTag(e.target.value);
   };
 
   const handleSave = () => {
@@ -29,6 +34,7 @@ export const SeatTab = ({ selection, floor, seats, setSeats }) => {
             width: selection.width,
             height: selection.height,
             floorId: floor.id,
+            tagId: Number(tag),
           }),
         },
       );
@@ -124,11 +130,11 @@ export const SeatTab = ({ selection, floor, seats, setSeats }) => {
             ESL 아이디 :
             <input
               className="seat-input-name"
-              // value={}
+              value={tag}
               placeholder="입력해 주세요."
-              // onChange={e => {
-              //   inputName(e);
-              // }}
+              onChange={e => {
+                inputTag(e);
+              }}
               disabled={selection.x === -1 ? true : false}
             />
           </label>

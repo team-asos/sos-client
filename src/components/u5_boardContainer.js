@@ -153,6 +153,8 @@ export const BoardContainer = ({ floor, userId }) => {
         type: FACILITY,
         id: facility.id,
         name: facility.type,
+        width: 1,
+        height: 1,
       };
     }
 
