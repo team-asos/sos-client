@@ -160,11 +160,13 @@ export const Board = ({
         }
       } else if (selection.stage === FIRST_SELECTION) {
         setSelection({
-          ...selection,
           id: -1,
           name: '',
-          width: Math.abs(x - selection.x + 1),
-          height: Math.abs(y - selection.y + 1),
+          x: x < selection.x ? x : selection.x,
+          y: y < selection.y ? y : selection.y,
+          width: Math.abs(x - selection.x) + 1,
+          height: Math.abs(y - selection.y) + 1,
+          maxUser: selection.maxUser,
           stage: SECOND_SELECTION,
           type: EMPTY,
         });
