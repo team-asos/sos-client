@@ -45,11 +45,25 @@ const DateTimeForm = ({ selection, userId }) => {
 
   return (
     <div className={isPc ? 'reservationAndSearch' : 'm_reservationAndSearch'}>
+<<<<<<< HEAD
       <div className="dateTimeAndBtnForm">
         <div className={isPc ? 'dateTimeForm' : 'm_dateTimeForm'}>
           <div className="seatNameTextStyle">좌석 {selection.name}</div>
 
           <div className="seatReservationButtonForm">
+=======
+      <div className={isPc ? 'dateTimeAndBtnForm' : 'm_dateTimeAndBtnForm'}>
+        <div className={isPc ? 'dateTimeForm' : 'm_dateTimeForm'}>
+          <div className={isPc ? 'seatNameTextStyle' : 'm_seatNameTextStyle'}>
+            좌석 {selection.name}
+          </div>
+
+          <div
+            className={
+              isPc ? 'seatReservationButtonForm' : 'm_seatReservationButtonForm'
+            }
+          >
+>>>>>>> develop
             <button
               className={isPc ? 'seatReservationBtn' : 'm_seatReservationBtn'}
               onClick={handleShow}

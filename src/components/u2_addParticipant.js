@@ -6,7 +6,10 @@ import * as AiIcon from 'react-icons/ai';
 import { useMediaQuery } from 'react-responsive';
 import * as moment from 'moment';
 import '../assets/styles/u2_addParticipant.css';
+<<<<<<< HEAD
 import { MdSentimentDissatisfied } from 'react-icons/md';
+=======
+>>>>>>> develop
 //회의실 인원 검색해서 추가
 const AddParticipant = ({
   START,
@@ -178,6 +181,7 @@ const AddParticipant = ({
     <div className="roomReservationFormRight">
       <div className="selectedTime">
         <Dropdown style={{ marginRight: '40%' }}>
+<<<<<<< HEAD
           <Dropdown.Toggle variant="secondary" id="dropdown-basic">
             {start}
           </Dropdown.Toggle>
@@ -205,10 +209,28 @@ const AddParticipant = ({
             {timeTable.map((time, idx) => (
               <Dropdown.Item onClick={() => setEndThisClick(time.end_time)}>
                 {time.end_time}
+=======
+          <Dropdown.Toggle
+            variant="secondary"
+            id="dropdown-basic"
+            className={isPc ? 'dropDownToggle' : 'm_dropDownToggle'}
+          >
+            {start}
+          </Dropdown.Toggle>
+
+          <Dropdown.Menu style={{ height: '40vh', overflow: 'auto' }}>
+            <Dropdown.Item onClick={() => setStart('시작')}>
+              선택 안함
+            </Dropdown.Item>
+            {timeTable.map((time, idx) => (
+              <Dropdown.Item onClick={() => setStartThisClick(time.start_time)}>
+                {time.start_time}
+>>>>>>> develop
               </Dropdown.Item>
             ))}
           </Dropdown.Menu>
         </Dropdown>
+<<<<<<< HEAD
       </div>
       <div className="meetingTopicForm">
         <input
@@ -277,6 +299,96 @@ const AddParticipant = ({
             className={isPc ? 'roomReservationBtn' : 'mRoomReservationBtn'}
             onClick={reservationClickHandler}
           >
+=======
+        <Dropdown>
+          <Dropdown.Toggle
+            variant="secondary"
+            id="dropdown-basic"
+            className={isPc ? 'dropDownToggle' : 'm_dropDownToggle'}
+          >
+            {end}
+          </Dropdown.Toggle>
+
+          <Dropdown.Menu style={{ height: '40vh', overflow: 'auto' }}>
+            <Dropdown.Item onClick={() => setEnd('종료')}>
+              선택 안함
+            </Dropdown.Item>
+            {timeTable.map((time, idx) => (
+              <Dropdown.Item onClick={() => setEndThisClick(time.end_time)}>
+                {time.end_time}
+              </Dropdown.Item>
+            ))}
+          </Dropdown.Menu>
+        </Dropdown>
+      </div>
+      <div className="meetingTopicForm">
+        <input
+          className={isPc ? 'topicInput' : 'm_topicInput'}
+          onChange={inputTopic}
+          placeholder="회의 주제를 입력해주세요."
+        ></input>
+      </div>
+      <div className={isPc ? 'addAndButtonForm' : 'mAddAndButtonForm'}>
+        <div className={isPc ? 'addParticipantForm' : 'mParticipantForm'}>
+          <p className={isPc ? 'rrp_centerTextStyle' : 'mrrp_centerTextStyle'}>
+            회의 참석자를 입력하세요. [ 사용 가능 인원 : {MAXUSER}명 ]
+          </p>
+
+          <div className={isPc ? 'searchForm' : 'mSearchForm'}>
+            <Select
+              menuPosition={'center'}
+              options={users.map(item => ({
+                value: item.id,
+                label: [item.name, ' (', item.employeeId, ')'],
+              }))}
+              //options={getOptions}
+              placeholder="회원 검색"
+              onChange={e => handleChange(e)}
+              noOptionsMessage={() => '검색 결과가 없습니다.'}
+              isDisabled={selectedMembers.length < MAXUSER ? 0 : 1}
+            />
+          </div>
+          <div className="participantForm">
+            <Table
+              striped
+              hover
+              className={isPc ? 'selectedMembersList' : 'mSelectedMembersList'}
+            >
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>이름</th>
+                  <th>이메일</th>
+                  <th>부서</th>
+                </tr>
+              </thead>
+              <tbody>
+                {selectedMembers.map((item, idx) => (
+                  <tr key={idx}>
+                    <td>{idx + 1}</td>
+                    <td>{users[participantInfo(item.value)].name}</td>
+                    <td>{users[participantInfo(item.value)].email}</td>
+                    <td>{users[participantInfo(item.value)].department}</td>
+                    <td>
+                      <AiIcon.AiOutlineMinus
+                        style={{
+                          cursor: 'pointer',
+                        }}
+                        onClick={() => deleteParticipant(item.value)}
+                      ></AiIcon.AiOutlineMinus>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
+          </div>
+        </div>
+        <div className={isMobile ? 'divButton' : ''}>
+          <button
+            className={isPc ? 'roomReservationBtn' : 'mRoomReservationBtn'}
+            onClick={reservationClickHandler}
+          >
+>>>>>>> develop
             예약하기
           </button>
         </div>

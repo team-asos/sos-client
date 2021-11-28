@@ -11,6 +11,10 @@
   flex-direction: column;
   height: 20%;
 }
+.m_dateTimeAndBtnForm {
+  display: flex;
+  flex-direction: row;
+}
 .dateTimeForm {
   background: #c4c4c4;
   width: 20vw;
@@ -23,7 +27,7 @@
   box-shadow: 1px rgba(64, 64, 64, 0.4);
 }
 .m_dateTimeForm {
-  background: #c4c4c4;
+  /* background: #c4c4c4;
   width: 95%;
   height: 25vh;
   display: flex;
@@ -32,7 +36,8 @@
   flex-direction: column;
   align-items: center;
   border-radius: 10px;
-  box-shadow: 1px rgba(64, 64, 64, 0.4);
+  box-shadow: 1px rgba(64, 64, 64, 0.4); */
+  display: flex;
 }
 /*좌석 이름*/
 .seatNameTextStyle {
@@ -41,7 +46,12 @@
   text-align: center;
   margin-top: 4%;
 }
-
+.m_seatNameTextStyle {
+  font-weight: bold;
+  font-size: 1.3em;
+  margin-top: 4vh;
+  margin-left: 3vw;
+}
 .seatReservationBtn {
   width: 10vw;
   height: 80%;
@@ -58,12 +68,14 @@
   transform: scale(1.01);
 }
 .m_seatReservationBtn {
-  width: 30vw;
+  width: 20vw;
   height: 5vh;
+  position: absolute;
+  left: 150px;
   font-size: 1em;
   background-color: #155924;
   color: white;
-  border: 0;
+  border: none;
   border-radius: 8px;
   margin-top: 4vh;
 }

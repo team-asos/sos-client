@@ -2,14 +2,28 @@ import React, { useState } from 'react';
 import * as bs from 'react-icons/bs';
 import * as io from 'react-icons/io';
 
-import { EDIT_SELECTION } from '../../const/selection-type.const';
+import {
+  SELECTION_FIRST,
+  SELECTION_EDIT,
+} from '../../const/selection-type.const';
 import './BoardSetting.css';
 
-export const SeatTab = ({ selection, floor, seats, setSeats }) => {
+export const SeatTab = ({
+  selection,
+  setSelection,
+  floor,
+  seats,
+  setSeats,
+}) => {
   const [name, setName] = useState('');
+  const [tag, setTag] = useState(0);
 
   const inputName = e => {
     setName(e.target.value);
+  };
+
+  const inputTag = e => {
+    setTag(e.target.value);
   };
 
   const handleSave = () => {
@@ -29,6 +43,7 @@ export const SeatTab = ({ selection, floor, seats, setSeats }) => {
             width: selection.width,
             height: selection.height,
             floorId: floor.id,
+            tagId: Number(tag),
           }),
         },
       );
@@ -37,6 +52,7 @@ export const SeatTab = ({ selection, floor, seats, setSeats }) => {
         alert('좌석이 생성되었습니다.');
         const json = await response.json();
         setSeats([...seats, json]);
+        setSelection({ ...selection, stage: SELECTION_FIRST });
       }
     };
 
@@ -60,6 +76,7 @@ export const SeatTab = ({ selection, floor, seats, setSeats }) => {
         alert('좌석이 삭제되었습니다.');
         const json = await response.json();
         setSeats(seats.filter(seat => seat.id !== json.id));
+        setSelection({ ...selection, stage: SELECTION_FIRST });
       }
     };
 
@@ -68,7 +85,7 @@ export const SeatTab = ({ selection, floor, seats, setSeats }) => {
 
   return (
     <div className="seat-tab">
-      {selection.stage !== EDIT_SELECTION && (
+      {selection.stage !== SELECTION_EDIT && (
         <p className="text-notification">
           좌석 생성 시, <bs.BsCheckAll style={{ color: '#c00000' }} />는{' '}
           <span className="text-notification-strong">필수 입력칸</span> 입니다.
@@ -76,7 +93,7 @@ export const SeatTab = ({ selection, floor, seats, setSeats }) => {
           도면의 흰색 부분 선택 시, 생성이 종료됩니다.
         </p>
       )}
-      {selection.stage === EDIT_SELECTION && (
+      {selection.stage === SELECTION_EDIT && (
         <p className="text-notification">
           <io.IoIosNotifications size={18} style={{ color: '#c00000' }} />{' '}
           도면의 흰색 부분 선택 시, <br />
@@ -104,7 +121,7 @@ export const SeatTab = ({ selection, floor, seats, setSeats }) => {
         </label>
       </div>
 
-      {selection.stage !== EDIT_SELECTION && (
+      {selection.stage !== SELECTION_EDIT && (
         <div>
           <label style={{ marginTop: '10%' }}>
             <bs.BsCheckAll style={{ color: '#c00000' }} />
@@ -124,12 +141,12 @@ export const SeatTab = ({ selection, floor, seats, setSeats }) => {
             ESL 아이디 :
             <input
               className="seat-input-name"
-              // value={}
+              value={tag}
               placeholder="입력해 주세요."
-              // onChange={e => {
-              //   inputName(e);
-              // }}
-              disabled={selection.x === -1 ? true : false}
+              onChange={e => {
+                inputTag(e);
+              }}
+              disabled={name === '' ? true : false}
             />
           </label>
           <button
@@ -137,13 +154,13 @@ export const SeatTab = ({ selection, floor, seats, setSeats }) => {
             onClick={() => {
               handleSave();
             }}
-            disabled={name === '' ? true : false}
+            disabled={tag === 0 ? true : false}
           >
             생성하기
           </button>
         </div>
       )}
-      {selection.stage === EDIT_SELECTION && (
+      {selection.stage === SELECTION_EDIT && (
         <label style={{ marginTop: '10%' }}>
           <bs.BsCheckAll style={{ color: 'transparent' }} />
           좌석 이름 :{'     '}

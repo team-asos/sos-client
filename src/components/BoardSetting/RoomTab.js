@@ -1,19 +1,40 @@
 import React, { useState } from 'react';
 import * as bs from 'react-icons/bs';
 import * as io from 'react-icons/io';
+<<<<<<< HEAD
 
 import { EDIT_SELECTION } from '../../const/selection-type.const';
 import './BoardSetting.css';
+=======
+>>>>>>> develop
 
-export const RoomTab = ({ selection, floor, rooms, setRooms }) => {
+import {
+  SELECTION_FIRST,
+  SELECTION_EDIT,
+} from '../../const/selection-type.const';
+import './BoardSetting.css';
+
+export const RoomTab = ({
+  selection,
+  setSelection,
+  floor,
+  rooms,
+  setRooms,
+}) => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState(0);
+  const [tag, setTag] = useState(0);
 
   const inputName = e => {
     setName(e.target.value);
   };
+
   const inputNumber = e => {
     setNumber(Number(e.target.value));
+  };
+
+  const inputTag = e => {
+    setTag(e.target.value);
   };
 
   const handleSave = () => {
@@ -34,6 +55,7 @@ export const RoomTab = ({ selection, floor, rooms, setRooms }) => {
             height: selection.height,
             floorId: floor.id,
             maxUser: number,
+            tagId: Number(tag),
           }),
         },
       );
@@ -42,6 +64,7 @@ export const RoomTab = ({ selection, floor, rooms, setRooms }) => {
         alert('회의실이 생성되었습니다.');
         const json = await response.json();
         setRooms([...rooms, json]);
+        setSelection({ ...selection, stage: SELECTION_FIRST });
       }
     };
 
@@ -65,6 +88,7 @@ export const RoomTab = ({ selection, floor, rooms, setRooms }) => {
         alert('회의실이 삭제되었습니다.');
         const json = await response.json();
         setRooms(rooms.filter(room => room.id !== json.id));
+        setSelection({ ...selection, stage: SELECTION_FIRST });
       }
     };
 
@@ -73,7 +97,7 @@ export const RoomTab = ({ selection, floor, rooms, setRooms }) => {
 
   return (
     <div className="seat-tab">
-      {selection.stage !== EDIT_SELECTION && (
+      {selection.stage !== SELECTION_EDIT && (
         <p className="text-notification">
           회의실 생성 시, <bs.BsCheckAll style={{ color: '#c00000' }} />는{' '}
           <span className="text-notification-strong">필수 입력칸</span> 입니다.
@@ -81,7 +105,7 @@ export const RoomTab = ({ selection, floor, rooms, setRooms }) => {
           도면의 흰색 부분 선택 시, 생성이 종료됩니다.
         </p>
       )}
-      {selection.stage === EDIT_SELECTION && (
+      {selection.stage === SELECTION_EDIT && (
         <p className="text-notification">
           <io.IoIosNotifications size={18} style={{ color: '#c00000' }} />{' '}
           도면의 흰색 부분 선택 시, <br />
@@ -116,6 +140,9 @@ export const RoomTab = ({ selection, floor, rooms, setRooms }) => {
           가로 :{'  '}
           <input
             value={selection.width}
+            onChange={e => {
+              setSelection({ ...selection, width: Number(e.target.value) });
+            }}
             className="seat-input-location"
             disabled
           />{' '}
@@ -125,13 +152,16 @@ export const RoomTab = ({ selection, floor, rooms, setRooms }) => {
           세로 :{'  '}
           <input
             value={selection.height}
+            onChange={e => {
+              setSelection({ ...selection, height: Number(e.target.value) });
+            }}
             className="seat-input-location"
             disabled
           />
         </label>
       </div>
 
-      {selection.stage !== EDIT_SELECTION && (
+      {selection.stage !== SELECTION_EDIT && (
         <>
           <label style={{ marginTop: '3%' }}>
             <bs.BsCheckAll style={{ color: '#c00000' }} />
@@ -143,9 +173,7 @@ export const RoomTab = ({ selection, floor, rooms, setRooms }) => {
               onChange={e => {
                 inputName(e);
               }}
-              disabled={
-                selection.width <= 1 && selection.height <= 1 ? true : false
-              }
+              disabled={selection.width === 0 ? true : false}
             />
           </label>
           <label style={{ marginTop: '3%' }}>
@@ -157,9 +185,7 @@ export const RoomTab = ({ selection, floor, rooms, setRooms }) => {
               onChange={e => {
                 inputNumber(e);
               }}
-              disabled={
-                selection.width <= 1 && selection.height <= 1 ? true : false
-              }
+              disabled={name === '' ? true : false}
             />
           </label>
           <label style={{ marginTop: '3%' }}>
@@ -167,14 +193,12 @@ export const RoomTab = ({ selection, floor, rooms, setRooms }) => {
             ESL 아이디 :{'     '}
             <input
               className="seat-input-name"
-              // value={name}
+              value={tag}
               placeholder="입력해 주세요."
-              // onChange={e => {
-              //   inputName(e);
-              // }}
-              disabled={
-                selection.width <= 1 && selection.height <= 1 ? true : false
-              }
+              onChange={e => {
+                inputTag(e);
+              }}
+              disabled={number === 0 ? true : false}
             />
           </label>
           <button
@@ -183,14 +207,14 @@ export const RoomTab = ({ selection, floor, rooms, setRooms }) => {
             onClick={() => {
               handleSave();
             }}
-            disabled={name !== '' && number !== 0 ? false : true}
+            disabled={tag === 0 ? true : false}
           >
             생성하기
           </button>
         </>
       )}
 
-      {selection.stage === EDIT_SELECTION && (
+      {selection.stage === SELECTION_EDIT && (
         <>
           <label style={{ marginTop: '5%' }}>
             <bs.BsCheckAll style={{ color: 'transparent' }} />

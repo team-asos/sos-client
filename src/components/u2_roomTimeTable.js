@@ -4,9 +4,19 @@ import { Table } from 'react-bootstrap';
 import { useMediaQuery } from 'react-responsive';
 import * as moment from 'moment';
 import AddParticipant from './u2_addParticipant';
+<<<<<<< HEAD
 
 import '../assets/styles/u2_roomTimeTable.css';
 const RoomTimeTable = ({ MAXUSER, selectedDate, roomId }) => {
+=======
+import * as GrIcon from 'react-icons/gr';
+
+import '../assets/styles/u2_roomTimeTable.css';
+const RoomTimeTable = ({ MAXUSER, selectedDate, roomId }) => {
+  const isPc = useMediaQuery({
+    query: '(min-width:768px)',
+  });
+>>>>>>> develop
   const [timeTable, setTimeTable] = useState([]);
   const [isReserved, setIsReserved] = useState([]); //예약 되어있는지 확인
   //const isClicked = Array.from({ length: 20 }, () => 0); 이렇게 하고 싶지만 1로 바꿔주는게 밑에 있어서 색상 적용이 안됨
@@ -34,9 +44,15 @@ const RoomTimeTable = ({ MAXUSER, selectedDate, roomId }) => {
     idx: null,
   });
   const fetchRoomTable = async () => {
+<<<<<<< HEAD
     for (let i = 0; i < 20; i++) {
       isClicked[i] = 0;
     }
+=======
+    // for (let i = 0; i < 20; i++) {
+    //   isClicked[i] = 0;
+    // }
+>>>>>>> develop
     const result = await fetch(
       `${
         process.env.REACT_APP_SERVER_BASE_URL
@@ -54,12 +70,22 @@ const RoomTimeTable = ({ MAXUSER, selectedDate, roomId }) => {
         setTimeTable(json);
       });
   };
+<<<<<<< HEAD
   const tableColorStyle = isClicked => {
     if (isClicked) return { backgroundColor: 'crimson' };
     else if (!isClicked) return { backgroundColor: 'none' };
   };
   /*테이블 시간 클릭 했을 때 */
   const clickHandler = (startTime, endTime, i, e) => {
+=======
+
+  /*테이블 시간 클릭 했을 때 */
+  const clickHandler = (startTime, endTime, i, e) => {
+    /*전 시간을 예약하려고 할 때 */
+    if (selectedDate.slice(0, 10) === date && startTime < time) {
+      return alert('예약 불가능한 시간입니다.');
+    }
+>>>>>>> develop
     if (!firstClick.isClicked) {
       //첫번째가 선택 안됐을 때
       setFirstClick({
@@ -78,8 +104,13 @@ const RoomTimeTable = ({ MAXUSER, selectedDate, roomId }) => {
       if (startTime === firstClick.Start && endTime === firstClick.End) {
         //똑같은거 다시 눌렀을 때
         setFirstClick({ Start: '', End: '', isClicked: 0, idx: null }); //초기화
+<<<<<<< HEAD
         setStart('');
         setEnd('');
+=======
+        setStart('시작');
+        setEnd('종료');
+>>>>>>> develop
       } else if (!secondClick.isClicked) {
         //첫번째랑 다를 때 두번째로 설정
         setSecondClick({
@@ -104,7 +135,11 @@ const RoomTimeTable = ({ MAXUSER, selectedDate, roomId }) => {
     if (secondClick.idx) {
       if (secondClick.idx > firstClick.idx) {
         setEnd(secondClick.End); //이것도 위에서 해주면 좋음
+<<<<<<< HEAD
         for (let i = 0; i <= timeTable.length; i++) {
+=======
+        for (let i = 0; i < timeTable.length; i++) {
+>>>>>>> develop
           //시작~끝 색상 변경하기 위해.. 원래는 위에서 secondClick되자마자 해줘야함
           if (i >= firstClick.idx && i <= secondClick.idx) {
             isClicked[i] = 1;
@@ -114,21 +149,39 @@ const RoomTimeTable = ({ MAXUSER, selectedDate, roomId }) => {
         }
       } else {
         alert('시작 시간을 먼저 선택해주세요.');
+<<<<<<< HEAD
         setStart('');
         setEnd('');
+=======
+        setStart('시작');
+        setEnd('종료');
+>>>>>>> develop
       }
     }
   };
   //선택 삭제 버튼 눌렀을 때
   const deleteSelection = () => {
+<<<<<<< HEAD
     setDeleteClick(!deleteClick);
     for (let i = 0; i < 20; i++) {
+=======
+    // if (firstClick.idx===null && secondClick.idx===null)
+    //   alert('시간을 선택해주세요.');
+    setDeleteClick(!deleteClick);
+    for (let i = 0; i < 20; i++) {
+      //0으로 초기화는 되는데 색 변경이 안됨
+>>>>>>> develop
       isClicked[i] = 0;
     }
     setFirstClick({ Start: '', End: '', isClicked: 0, idx: null }); //초기화
     setSecondClick({ Start: '', End: '', isClicked: 0, idx: null }); //초기화
+<<<<<<< HEAD
     setStart('');
     setEnd('');
+=======
+    setStart('시작');
+    setEnd('종료');
+>>>>>>> develop
   };
   //예약,클릭 되어있는지 색칠한거 초기화
   const resetIsReserved = () => {
@@ -160,6 +213,7 @@ const RoomTimeTable = ({ MAXUSER, selectedDate, roomId }) => {
         timeTable[i].startTime = moment(timeTable[i].startTime).format('HH:mm');
         timeTable[i].endTime = moment(timeTable[i].endTime).format('HH:mm');
       }
+<<<<<<< HEAD
       // if (
       //   //만약에 지금 시간보다 전이면
       //   selectedDate.slice(0, 10) === date &&
@@ -167,6 +221,8 @@ const RoomTimeTable = ({ MAXUSER, selectedDate, roomId }) => {
       // ) {
       //   isPast[i] = 1;
       // } else isPast[i] = 0;
+=======
+>>>>>>> develop
     }
   };
   console.log(isReserved);
@@ -181,6 +237,7 @@ const RoomTimeTable = ({ MAXUSER, selectedDate, roomId }) => {
           overflow: 'auto',
         }}
       >
+<<<<<<< HEAD
         <Table>
           <thead>
             <tr>
@@ -189,6 +246,21 @@ const RoomTimeTable = ({ MAXUSER, selectedDate, roomId }) => {
               </th>
               <th style={{ width: '10%' }}>대표자</th>
               <th>참석자</th>
+=======
+        <Table className={isPc ? '' : 'm_roomTimeTable'}>
+          <thead>
+            <tr>
+              <th style={isPc ? { width: '13%' } : { width: '20%' }}>
+                시간
+                <GrIcon.GrPowerReset
+                  onClick={() => deleteSelection()}
+                  className="resetSelectTime"
+                />
+              </th>
+              <th style={{ width: '40%' }}>회의 주제</th>
+              <th style={{ width: '10%' }}>대표자</th>
+              {isPc ? <th style={{ width: '40%' }}>참석자</th> : null}
+>>>>>>> develop
             </tr>
           </thead>
           <tbody>
@@ -198,10 +270,17 @@ const RoomTimeTable = ({ MAXUSER, selectedDate, roomId }) => {
               timeTable[0].start_time.length < 10 &&
               timeTable.map(
                 (item, idx) => (
+<<<<<<< HEAD
                   //item.start_time.length < 10 ? (
                   <>
                     <tr key={idx}>
                       {/*시간 */}
+=======
+                  <>
+                    <tr key={idx}>
+                      {/*시간 */}
+                      {console.log(secondClick)}
+>>>>>>> develop
                       <td
                         className={
                           isReserved[idx] ? 'isReserved' : 'isNotReserved'
@@ -217,17 +296,44 @@ const RoomTimeTable = ({ MAXUSER, selectedDate, roomId }) => {
                                 )
                             : null
                         }
+<<<<<<< HEAD
                         style={tableColorStyle(isClicked[idx])}
                       >
                         {item.start_time}-{item.end_time}
                       </td>
                       {item.id ? (
                         <td className="isReserved">{item.user.name}</td>
+=======
+                        //style={tableColorStyle(isClicked[idx])}
+
+                        style={
+                          isClicked[idx]
+                            ? { backgroundColor: 'crimson' }
+                            : isClicked[idx] && deleteClick
+                            ? { backgroundColor: 'none' }
+                            : null
+                        }
+                      >
+                        {item.start_time}-{item.end_time}
+                      </td>
+                      {/*회의주제 추가해야함 */}
+                      {item.id ? (
+                        <td className="isReserved">회의주제</td>
+>>>>>>> develop
                       ) : (
                         /*예약되어있지는 않지만 지금 시간보다 전이면 */
                         <td></td>
                       )}
                       {item.id ? (
+<<<<<<< HEAD
+=======
+                        <td className="isReserved">{item.user.name}</td>
+                      ) : (
+                        /*예약되어있지는 않지만 지금 시간보다 전이면 */
+                        <td></td>
+                      )}
+                      {isPc && item.id ? (
+>>>>>>> develop
                         <td className="isReserved">
                           {item.participants.map((users, idx) =>
                             idx === item.participants.length - 1
@@ -235,10 +341,17 @@ const RoomTimeTable = ({ MAXUSER, selectedDate, roomId }) => {
                               : users.user.name + ', ',
                           )}
                         </td>
+<<<<<<< HEAD
                       ) : (
                         /*예약되어있지는 않지만 지금 시간보다 전이면 */
                         <td></td>
                       )}
+=======
+                      ) : isPc ? (
+                        /*예약되어있지는 않지만 지금 시간보다 전이면 */
+                        <td></td>
+                      ) : !isPc ? null : null}
+>>>>>>> develop
                     </tr>
                   </>
                 ),
