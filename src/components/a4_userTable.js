@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import '../assets/styles/a4_userTable.css';
-
+import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
 import Button from 'react-bootstrap/Button';
+
 import UserDetailModalContent from './a4_userDetailModal';
 import tableHeadertoKR from './a4_tableHeadertoKR';
-import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
-
 import UsePagination from './a4_usePagination';
 
+import '../assets/styles/a4_userTable.css';
 export default function UserTable({ data }) {
   //헤더들
   const columns = data[0] && Object.keys(data[0]);
