@@ -211,7 +211,7 @@ const AnswerCompleteList = () => {
             <div>
               {search(question).map((item, idx) =>
                 isReplied(item) ? (
-                  <ul style={{ marginTop: '1%' }}>
+                  <ul key={item.id} style={{ marginTop: '1%' }}>
                     <li
                       className={
                         selectQuestion === item ? 'clickedLi' : 'normalLi'

@@ -183,8 +183,6 @@ export const Board = ({
   const scaleHandler = () => {
     if (scale === true) setScale(false);
     else setScale(true);
-
-    console.log(scale);
   };
 
   const Board = () => {

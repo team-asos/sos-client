@@ -1,15 +1,16 @@
 import React from 'react';
 
 class DateTimeBox extends React.Component {
-  //시간과 날짜 불러오는 변수와 함수
   state = {
     date: new Date(),
   };
+
   callTime() {
     setInterval(() => {
       this.setState({ date: new Date() });
     }, 1000);
   }
+
   //요일 불러우는 함수
   getToday() {
     var today = this.state.date.getDay();
@@ -34,6 +35,7 @@ class DateTimeBox extends React.Component {
       lineHeight: '40%',
       fontSize: '1em',
     };
+
     return (
       <div style={boxStyle}>
         <p style={{ fontWeight: 'bold', color: 'gray' }}>

@@ -22,6 +22,7 @@ const SeatReservationInfo = props => {
   const [seatshow, setseatShow] = useState(false);
   const seathandleClose = () => setseatShow(false);
   const seathandleShow = () => setseatShow(true);
+
   const res = async () => {
     const id = Number(props.user.id);
     await fetch(
@@ -35,6 +36,7 @@ const SeatReservationInfo = props => {
         setReservation(json);
       });
   };
+
   /*좌석 사용 종료 */
   const finishClick = reservationId => {
     seathandleClose();
@@ -68,6 +70,7 @@ const SeatReservationInfo = props => {
         .join()
         .localeCompare(b.startTime.split('-').join()),
     );
+
   return (
     <div className="reservationInfo">
       <div>

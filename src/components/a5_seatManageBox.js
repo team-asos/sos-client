@@ -46,40 +46,16 @@ const SeatManageBox = () => {
         <div className="seatManageUpperFirstChild">배치 관리</div>
 
         {/* .header-floor // 층 선택 */}
-        <div className="seatManageUpperSecondChild">
-          {/* 여기에 select 다시 작성하기 */}
-          {/* <div>
-            <label>층을 선택해주세요:</label>
-            <select className="form-control" name="floor">
-
-              {floor.map(floor => (
-                <option onClick={e => setSelectFloor(floor), console.log}>
-                  {floor.name}
-                </option>
-              ))}
-            </select>
-          </div> */}
-          {/* <label>
-            층을 선택해주세요 : {'         '}
-            <select
-              onChange={e => setSelectFloor(e.target.value)}
-              value={selectFloor}
-              style={{ width: '10vw' }}
-            >
-              {floor.map(item => (
-                <option value={item.id}>{item.name}</option>
-              ))}
-            </select>
-          </label> */}
-          <p style={{ fontSize: '0.75em' }}>층을 선택해주세요.</p>
+        <div className="seatManageUpperSecondChild" style={{ marginTop: '1%' }}>
           <Dropdown className="dropdownFloor">
             <Dropdown.Toggle id="dropdown-basic" variant="secondary">
               {selectFloor.length === 0 ? '층 선택' : selectFloor.name}
             </Dropdown.Toggle>
             <Dropdown.Menu>
-              <Dropdown.Item>층 선택</Dropdown.Item>
+              <Dropdown.Item key={-1}>층 선택</Dropdown.Item>
               {floor.map(floor => (
                 <Dropdown.Item
+                  key={floor.id}
                   onClick={e => {
                     setSelectFloor(floor);
                   }}

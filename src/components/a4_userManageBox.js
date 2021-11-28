@@ -61,9 +61,7 @@ const UserManageBox = () => {
       </div>
       {/* 아래,  부분 */}
       <div className="userManageBottomBox">
-        <div>
-          <UserTable data={search(data)} />
-        </div>
+        <div>{search(data).length && <UserTable data={search(data)} />}</div>
       </div>
     </div>
   );

@@ -2,14 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { ListGroup } from 'react-bootstrap';
 import * as hi from 'react-icons/hi';
 import moment from 'moment';
+import { useCookies } from 'react-cookie';
+
 import '../assets/styles/a3_answerWaitingList.css';
 
 //답변 내용 컴포넌트만 분리해서 사용할까 고민중 ¯\_( ͡❛ ͜ʖ ͡❛)_/¯
 const MessageCompleteBox = ({ messageInfo, answerInfo, show, isEmpty }) => {
-  console.log(answerInfo);
-  console.log(messageInfo);
-
   const [answer, getAnswer] = useState('');
+  const [cookie] = useCookies('access_token');
+
+  show = 'true';
 
   useEffect(() => {
     const findAnswerMessage = (answerInfo, id) => {
@@ -21,6 +23,42 @@ const MessageCompleteBox = ({ messageInfo, answerInfo, show, isEmpty }) => {
     };
     findAnswerMessage(answerInfo, messageInfo.id);
   }, [messageInfo, answerInfo]);
+
+  const [userId, setUserId] = useState(0);
+  const [userInfo, setUserInfo] = useState([]);
+
+  useEffect(() => {
+    const findUserInfo = () => {
+      if (messageInfo.user !== undefined) {
+        setUserId(messageInfo.user.id);
+      } else if (messageInfo.user === undefined) {
+        setUserInfo({
+          ...userInfo,
+          email: '탈퇴한 회원입니다.',
+        });
+      }
+    };
+    findUserInfo();
+  }, [messageInfo]);
+
+  const res = async () => {
+    if (userId !== 0) {
+      await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/users/${userId}`, {
+        headers: {
+          Authorization: `Bearer ${cookie.access_token}`,
+        },
+        method: 'GET',
+      })
+        .then(response => response.json())
+        .then(json => {
+          setUserInfo(json);
+        });
+    }
+  };
+
+  useEffect(() => {
+    if (userId !== undefined) res();
+  }, [userId]);
 
   return (
     <div>
@@ -50,7 +88,7 @@ const MessageCompleteBox = ({ messageInfo, answerInfo, show, isEmpty }) => {
               </ListGroup.Item>
               <ListGroup.Item>
                 <span style={{ fontWeight: '650' }}>발신자 이메일 : </span>
-                {messageInfo.id}
+                {userInfo.email} / {userInfo.name}
               </ListGroup.Item>
               <ListGroup.Item>
                 <span style={{ fontWeight: '650' }}>수신 시간 : </span>

@@ -5,17 +5,19 @@ import '../assets/styles/a4_userManagePage.css';
 import NavBox from '../components/a2_navBox';
 import UserManageBox from '../components/a4_userManageBox';
 
-function userManagePage({ match }) {
-  return (
-    <div className="userManagePage">
-      <div>
-        <NavBox />
+class UserManagePage extends React.Component {
+  render() {
+    return (
+      <div className="userManagePage">
+        <nav>
+          <NavBox />
+        </nav>
+        <div className="userManagePageRight">
+          <UserManageBox />
+        </div>
       </div>
-      <div className="userManagePageRight">
-        <UserManageBox />
-      </div>
-    </div>
-  );
+    );
+  }
 }
 
-export default userManagePage;
+export default UserManagePage;

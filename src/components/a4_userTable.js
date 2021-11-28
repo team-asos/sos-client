@@ -23,11 +23,30 @@ export default function UserTable({ data }) {
     setShowModal(handleShow);
   };
 
-  useEffect(() => {
-    console.log(modalInfo);
-  }, [modalInfo]);
+  useEffect(() => {}, [modalInfo]);
 
   //pagination
+  // const [windowSize, setWindowSize] = useState({
+  //   width: undefined,
+  //   height: undefined,
+  // });
+
+  // useEffect(() => {
+  //   function handleResize() {
+  //     setWindowSize({
+  //       width: window.innerWidth,
+  //       height: window.innerHeight,
+  //     });
+  //   }
+  //   window.addEventListener('resize', handleResize);
+
+  //   handleResize();
+
+  //   return () => window.removeEventListener('resize', handleResize);
+  // });
+
+  //console.log(window.innerHeight); //13inch 683
+
   const [currentPage, setCurrentPage] = useState(1);
   const [userPerPage] = useState(10);
 
@@ -44,27 +63,34 @@ export default function UserTable({ data }) {
       <MDBTable hover className="userTable" cellPadding={0} cellSpacing={0}>
         {/* 헤더 */}
         <MDBTableHead>
-          <tr style={{ fontSize: '0.8em' }}>
-            {data[0] &&
-              columns.map(heading =>
-                heading === 'role' ? '' : <th>{tableHeadertoKR(heading)}</th>,
-              )}
+          <tr key={-1} style={{ fontSize: '0.8em' }}>
+            <th></th>
+            <th>이메일</th>
+            <th>이름</th>
+            <th>전화번호</th>
+            <th>사원번호</th>
+            <th>부서</th>
+            <th>직급</th>
+            <th>생성일자</th>
+            <th>수정일자</th>
+            <th></th>
           </tr>
         </MDBTableHead>
+
         {/* 바디 */}
         <MDBTableBody>
           {currentUsers.map((row, idx) => (
-            <tr style={{ fontSize: '0.8em' }}>
+            <tr key={row.id} style={{ fontSize: '0.8em' }}>
               <td>{idx + 1}</td>
-              {columns.map(column =>
-                column === 'role' || column === 'id' ? (
-                  ''
-                ) : column === 'createdAt' || column === 'updatedAt' ? (
-                  <td>{row[column].slice(0, 10)}</td>
-                ) : (
-                  <td>{row[column]}</td>
-                ),
-              )}
+              <td>{row.email}</td>
+              <td>{row.name}</td>
+              <td>{row.tel}</td>
+              <td>{row.employeeId}</td>
+              <td>{row.department}</td>
+              <td>{row.position}</td>
+              <td>{row.createdAt.slice(0, 10)}</td>
+              <td>{row.updatedAt.slice(0, 10)}</td>
+
               <td style={{ fontSize: '0.7em' }}>
                 <Button
                   variant="outline-danger"
