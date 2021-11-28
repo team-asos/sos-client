@@ -24,6 +24,8 @@ const SeatPage = () => {
   const [isToggleOn, setIsToggleOn] = useState(1);
   const [floors, setFloors] = useState([]);
   const [selectedFloor, setSelectedFloor] = useState([]);
+  const [reservedSeatsCnt, setReservedSeatsCnt] = useState(0);
+  const [seatsCnt, setSeatsCnt] = useState(0);
   const handleClick = e => {
     setIsToggleOn(!isToggleOn);
     isToggleOn
@@ -63,6 +65,16 @@ const SeatPage = () => {
     fetchFloors();
   }, []);
 
+  const getReservedSeatsCnt = cnt => {
+    setReservedSeatsCnt(cnt);
+  };
+  const getSeatsCnt = cnt => {
+    setSeatsCnt(cnt);
+  };
+  useEffect(() => {
+    setReservedSeatsCnt(0);
+  }, [selectedFloor]);
+
   return (
     <div className="userSeatPage">
       <div>{isPc ? <NavBarUser /> : ''}</div>
@@ -76,9 +88,7 @@ const SeatPage = () => {
                 onClick={navClick}
                 style={{ color: '#820101' }}
               />
-            ) : (
-              ''
-            )}
+            ) : null}
           </div>
           <div
             className={
@@ -131,16 +141,25 @@ const SeatPage = () => {
             {/*좌석 현황*/}
             <div className="reservedSeats">
               <div className="reservedSeatShape"></div>
-              <div className="reservedSeatsTextStyle">사용 좌석 20석</div>
+              <div className="reservedSeatsTextStyle">
+                사용 중인 좌석 {reservedSeatsCnt}석
+              </div>
             </div>
             <div className="ableSeats">
               <div className="ableSeatShape"></div>
-              <div className="ableSeatsTextStyle">예약 가능 13석</div>
+              <div className="ableSeatsTextStyle">
+                예약 가능 {seatsCnt - reservedSeatsCnt}석
+              </div>
             </div>
           </div>
         </div>
         <div className="content">
-          <BoardContainer floor={selectedFloor} userId={myId} />
+          <BoardContainer
+            floor={selectedFloor}
+            userId={myId}
+            getSeatsCnt={getSeatsCnt}
+            getReservedSeatsCnt={getReservedSeatsCnt}
+          />
         </div>
       </div>
     </div>

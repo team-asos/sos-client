@@ -1,6 +1,7 @@
 .reservationAndSearch {
   display: flex;
   flex-direction: column;
+  height: 20%;
 }
 .m_reservationAndSearch {
   width: 100%;
@@ -9,7 +10,7 @@
 .dateTimeAndBtnForm {
   display: flex;
   flex-direction: column;
-  height: 20%;
+  height: 100%;
 }
 .m_dateTimeAndBtnForm {
   display: flex;
@@ -53,14 +54,14 @@
   margin-left: 3vw;
 }
 .seatReservationBtn {
-  width: 10vw;
-  height: 80%;
-  font-size: 1.2em;
+  width: 8vw;
+  height: 4vh;
+  font-size: 1em;
   background-color: #155924;
+  margin-top: 3vh;
   color: white;
   border: 0;
   border-radius: 8px;
-  margin-top: 20%;
 }
 .seatReservationBtn:hover {
   background-color: #0f4119;

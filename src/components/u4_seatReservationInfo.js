@@ -46,7 +46,7 @@ const SeatReservationInfo = props => {
         },
       );
       if (res.status === 200) {
-        alert('정상적으로 처리 되었습니다.');
+        alert('좌석 사용이 종료되었습니다.');
       } else {
         const json = await res.json();
         alert(json.message);
