@@ -26,11 +26,7 @@ export const BoardSetting = ({
   setFacilities,
 }) => {
   const handleTab = tab => {
-<<<<<<< HEAD
-    if (selection.stage === EDIT_SELECTION) return;
-=======
     if (selection.stage === SELECTION_EDIT) return;
->>>>>>> develop
 
     setTab(tab);
   };
