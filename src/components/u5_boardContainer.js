@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import DateTimeForm from './u5_dateTimeForm';
 import { Board } from './u5_board';
+import UserSearchForm from './u5_userSearchForm';
+
 import './BoardContainer/index.scss';
 import {
   EMPTY,
@@ -11,12 +13,22 @@ import {
   SELECTION,
   RESERVED_SEAT,
 } from '../const/object-type.const';
-
-export const BoardContainer = ({ floor, userId }) => {
+import { SELECTION_FIRST } from '../const/selection-type.const';
+export const BoardContainer = ({
+  floor,
+  userId,
+  getSeatsCnt,
+  getReservedSeatsCnt,
+}) => {
   const isPc = useMediaQuery({
     query: '(min-width:768px)',
   });
 
+  const [searchUserId, setSearchUserId] = useState(0);
+
+  const getUserId = id => {
+    setSearchUserId(id);
+  };
   const [board, setBoard] = useState([]);
 
   const [seats, setSeats] = useState([]);
@@ -28,7 +40,7 @@ export const BoardContainer = ({ floor, userId }) => {
     name: '',
     x: -1,
     y: -1,
-    stage: 0,
+    stage: SELECTION_FIRST,
   });
 
   useEffect(() => {
@@ -89,6 +101,7 @@ export const BoardContainer = ({ floor, userId }) => {
     fetchRooms();
     fetchFacilities();
   }, [floor.id]);
+  const [reservedSeatsCnt, setReservedSeatsCnt] = useState(0);
 
   useEffect(() => {
     let newMap = board;
@@ -100,8 +113,8 @@ export const BoardContainer = ({ floor, userId }) => {
         return col;
       }),
     );
-
     for (let seat of seats) {
+      getSeatsCnt(seats.length);
       if (seat.reservations.length === 0)
         newMap[seat.y][seat.x] = {
           type: SEAT,
@@ -110,7 +123,7 @@ export const BoardContainer = ({ floor, userId }) => {
           width: 1,
           height: 1,
         };
-      else
+      else {
         newMap[seat.y][seat.x] = {
           type: RESERVED_SEAT,
           id: seat.id,
@@ -118,6 +131,7 @@ export const BoardContainer = ({ floor, userId }) => {
           width: 1,
           height: 1,
         };
+      }
     }
 
     for (let room of rooms) {
@@ -141,7 +155,7 @@ export const BoardContainer = ({ floor, userId }) => {
             };
           else if (colIndex >= room.x && colIndex < room.x + room.width)
             if (rowIndex >= room.y && rowIndex < room.y + room.height)
-              return { ...col, type: -1 };
+              return { ...col, width: 0, height: 0 };
 
           return col;
         }),
@@ -161,6 +175,13 @@ export const BoardContainer = ({ floor, userId }) => {
     setBoard(newMap);
   }, [facilities]);
 
+  useEffect(() => {
+    for (let seat of seats) {
+      if (seat.reservations.length !== 0) {
+        getReservedSeatsCnt(reservedSeatsCnt + 1);
+      }
+    }
+  }, [facilities]);
   return (
     <div className={isPc ? 'u_boardContainer' : 'mobileBoardContainer'}>
       <Board
@@ -169,8 +190,12 @@ export const BoardContainer = ({ floor, userId }) => {
         board={board}
         setBoard={setBoard}
         seats={seats}
+        searchUserId={searchUserId}
       />
-      <DateTimeForm selection={selection} userId={userId} />
+      <div style={{ display: 'flex', flexDirection: 'column', height: '80vh' }}>
+        <DateTimeForm selection={selection} userId={userId} />
+        <UserSearchForm getUserId={getUserId} />
+      </div>
     </div>
   );
 };

@@ -2,19 +2,13 @@ import React, { useEffect, useState } from 'react';
 import '../../src/assets/styles/a5_Board.css';
 import { GiExpand } from 'react-icons/gi';
 
-import {
-  EMPTY,
-  SEAT,
-  ROOM,
-  FACILITY,
-  SELECTION,
-} from '../const/object-type.const';
+import { EMPTY, SEAT, ROOM, FACILITY } from '../const/object-type.const';
 
 import {
-  PREV_SELECTION,
-  FIRST_SELECTION,
-  SECOND_SELECTION,
-  EDIT_SELECTION,
+  SELECTION_FIRST,
+  SELECTION_SECOND,
+  SELECTION_EDIT,
+  SELECTION_THIRD,
 } from '../const/selection-type.const';
 
 export const Board = ({
@@ -24,126 +18,122 @@ export const Board = ({
   setTab,
   setBoard,
   board,
-  originBoard,
   seats,
   rooms,
   facilities,
 }) => {
-  useEffect(() => {
-    if (selection.stage === PREV_SELECTION) {
-      setBoard(originBoard);
-    } else {
-      let newMap = board;
+  const [scale, setScale] = useState(false);
 
-      newMap = newMap.map((row, rowIndex) =>
-        row.map((col, colIndex) => {
-          if (
-            colIndex >= selection.x &&
-            colIndex < selection.x + selection.width
-          )
+  const scaleHandler = () => {
+    if (scale === true) setScale(false);
+    else setScale(true);
+  };
+
+  const clearBoard = () => {
+    setBoard(
+      board.map(row =>
+        row.map(col => {
+          return { ...col, select: false };
+        }),
+      ),
+    );
+  };
+
+  const clearSelection = () => {
+    setSelection({
+      id: -1,
+      name: '',
+      x: -1,
+      y: -1,
+      width: 0,
+      height: 0,
+      maxUser: 0,
+      stage: SELECTION_FIRST,
+      type: EMPTY,
+    });
+  };
+
+  useEffect(() => {
+    if (selection.stage === SELECTION_FIRST) {
+      clearBoard();
+    } else {
+      setBoard(
+        board.map((row, rowIndex) =>
+          row.map((col, colIndex) => {
             if (
+              colIndex >= selection.x &&
+              colIndex < selection.x + selection.width &&
               rowIndex >= selection.y &&
               rowIndex < selection.y + selection.height
             )
-              return { type: SELECTION, name: '' };
-          return col;
-        }),
+              return { ...col, select: true };
+            return col;
+          }),
+        ),
       );
-
-      setBoard(newMap);
     }
   }, [selection]);
 
   const handleSelection = (x, y) => {
     if (board[y][x].type !== EMPTY) {
-      // 기존 좌석 선택
-      if (selection.stage === PREV_SELECTION) {
-        if (board[y][x].type === SEAT) {
-          setTab(0);
+      // 기존 배치 선택
+      if (selection.stage === SELECTION_FIRST) {
+        const TYPE = board[y][x].type;
+        const TAB_TYPE = TYPE - 1;
+        let selectedItem;
 
-          const selectedSeat = seats.find(seat => seat.id === board[y][x].id);
-
-          setSelection({
-            ...selectedSeat,
-            stage: EDIT_SELECTION,
-          });
-        } else if (board[y][x].type === ROOM) {
-          setTab(1);
-
-          const selectedRoom = rooms.find(room => room.id === board[y][x].id);
-
-          setSelection({
-            ...selectedRoom,
-            stage: EDIT_SELECTION,
-          });
-        } else if (board[y][x].type === FACILITY) {
-          setTab(2);
-
-          const selectedFacility = facilities.find(
+        if (TYPE === SEAT)
+          selectedItem = seats.find(seat => seat.id === board[y][x].id);
+        else if (TYPE === ROOM)
+          selectedItem = rooms.find(room => room.id === board[y][x].id);
+        else if (TYPE === FACILITY)
+          selectedItem = facilities.find(
             facility => facility.id === board[y][x].id,
           );
 
-          setSelection({
-            ...selectedFacility,
-            name: selectedFacility.type,
-            stage: EDIT_SELECTION,
-          });
-        }
+        setTab(TAB_TYPE);
+
+        setSelection({
+          ...selectedItem,
+          stage: SELECTION_EDIT,
+          type: TYPE,
+        });
       }
     } else {
-      // 신규 선택
-      if (selection.stage === PREV_SELECTION) {
-        if (tab === 1) {
-          setSelection({
-            id: -1,
-            name: '',
-            x,
-            y,
-            width: 1,
-            height: 1,
-            maxUser: 0,
-            stage: FIRST_SELECTION,
-          });
-        } else {
-          setSelection({
-            id: -1,
-            name: '',
-            x,
-            y,
-            width: 1,
-            height: 1,
-            maxUser: 0,
-            stage: SECOND_SELECTION,
-          });
-        }
-      } else if (selection.stage === FIRST_SELECTION) {
+      // 신규 배치 선택
+      if (selection.stage === SELECTION_FIRST) {
         setSelection({
           ...selection,
-          id: -1,
-          name: '',
-          width: Math.abs(x - selection.x + 1),
-          height: Math.abs(y - selection.y + 1),
-          stage: SECOND_SELECTION,
+          x,
+          y,
+          width: 1,
+          height: 1,
+          stage: tab === 1 ? SELECTION_SECOND : SELECTION_THIRD,
+          type: EMPTY,
+        });
+      } else if (selection.stage === SELECTION_SECOND) {
+        setSelection({
+          ...selection,
+          x: x < selection.x ? x : selection.x,
+          y: y < selection.y ? y : selection.y,
+          width: Math.abs(x - selection.x) + 1,
+          height: Math.abs(y - selection.y) + 1,
+          stage: SELECTION_THIRD,
+          type: EMPTY,
         });
       } else if (
-        selection.stage === SECOND_SELECTION ||
-        selection.stage === EDIT_SELECTION
+        selection.stage === SELECTION_THIRD ||
+        selection.stage === SELECTION_EDIT
       ) {
-        setSelection({
-          id: -1,
-          name: '',
-          x: -1,
-          y: -1,
-          width: 0,
-          height: 0,
-          maxUser: 0,
-          stage: PREV_SELECTION,
-        });
+        clearSelection();
       }
     }
   };
 
-  const itemStyle = type => {
+  const itemStyle = (type, select) => {
+    if (select)
+      return { backgroundColor: '#D01C1F', border: '1px solid #D01C1F' };
+
     if (type === EMPTY) return { backgroundColor: 'white' };
     else if (type === SEAT)
       return {
@@ -157,8 +147,6 @@ export const Board = ({
       };
     else if (type === FACILITY)
       return { backgroundColor: 'rgb(245,223,77)', border: 'rgb(245,223,77)' };
-    else if (type === SELECTION)
-      return { backgroundColor: '#D01C1F', border: '1px solid #D01C1F' };
   };
 
   const Item = ({ board }) => {
@@ -166,23 +154,24 @@ export const Board = ({
       row.map((col, x) => (
         <div
           className="board-item"
-          key={x + y}
+          key={x + y * row.length}
           onClick={() => {
             handleSelection(x, y);
           }}
-          style={itemStyle(col.type)}
+          style={{
+            ...itemStyle(col.type, col.select),
+            position: 'absolute',
+            width: `${col.width * 50}px`,
+            height: `${col.height * 50}px`,
+            left: `${x * 50}px`,
+            top: `${y * 50}px`,
+            border: col.width ? `1px solid #c2c2c2` : `none`,
+          }}
         >
-          {col.type === ROOM ? '' : col.name}
+          {col.name}
         </div>
       )),
     );
-  };
-
-  const [scale, setScale] = useState(false);
-
-  const scaleHandler = () => {
-    if (scale === true) setScale(false);
-    else setScale(true);
   };
 
   const Board = () => {
@@ -206,13 +195,7 @@ export const Board = ({
                 scale === false ? 'board-item-cover ' : 'board-item-cover-scale'
               }
               style={{
-                display: 'grid',
-                gridTemplateColumns: `repeat(${
-                  board.length > 0 ? board[0].length : '1'
-                }, 2.8vw)`,
-                gridTemplateRows: `repeat(${
-                  board.length > 0 ? board.length : '1'
-                }, 2.8vw)`,
+                position: 'relative',
               }}
             >
               <Item board={board} />
