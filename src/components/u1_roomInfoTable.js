@@ -45,7 +45,7 @@ const RoomInfoTable = () => {
   });
 
   return (
-    <div>
+    <div className="roomInfoTableDiv">
       <MDBTable hover className={isPc ? 'infoTable' : 'mobileInfoTable'}>
         <MDBTableHead className="rHeader">
           <tr>

@@ -9,6 +9,7 @@ import {
   ROOM,
   FACILITY,
   SELECTION,
+  RESERVED_SEAT,
 } from '../const/object-type.const';
 
 export const BoardContainer = ({ floor, userId }) => {
@@ -17,7 +18,6 @@ export const BoardContainer = ({ floor, userId }) => {
   });
 
   const [board, setBoard] = useState([]);
-  const [originBoard, setOriginBoard] = useState([]);
 
   const [seats, setSeats] = useState([]);
   const [rooms, setRooms] = useState([]);
@@ -28,18 +28,14 @@ export const BoardContainer = ({ floor, userId }) => {
     name: '',
     x: -1,
     y: -1,
-    width: 0,
-    height: 0,
-    maxUser: 0,
     stage: 0,
   });
 
-  const [tab, setTab] = useState(0);
   useEffect(() => {
     setBoard(
       Array.from({ length: floor.height }, () =>
         Array.from({ length: floor.width }, () => {
-          return { type: EMPTY, id: -1, name: '' };
+          return { type: EMPTY, id: -1, name: '', width: 1, height: 1 };
         }),
       ),
     );
@@ -99,25 +95,53 @@ export const BoardContainer = ({ floor, userId }) => {
 
     newMap = newMap.map(row =>
       row.map(col => {
-        if (col.type === SELECTION) return { type: EMPTY, id: -1, name: '' };
+        if (col.type === SELECTION)
+          return { type: EMPTY, id: -1, name: '', width: 1, height: 1 };
         return col;
       }),
     );
 
     for (let seat of seats) {
-      newMap[seat.y][seat.x] = { type: SEAT, id: seat.id, name: seat.name };
+      if (seat.reservations.length === 0)
+        newMap[seat.y][seat.x] = {
+          type: SEAT,
+          id: seat.id,
+          name: seat.name,
+          width: 1,
+          height: 1,
+        };
+      else
+        newMap[seat.y][seat.x] = {
+          type: RESERVED_SEAT,
+          id: seat.id,
+          name: seat.reservations[0].user.name,
+          width: 1,
+          height: 1,
+        };
     }
 
     for (let room of rooms) {
+      newMap[room.y][room.x] = {
+        type: ROOM,
+        id: room.id,
+        name: room.name,
+        width: room.width,
+        height: room.height,
+      };
+
       newMap = newMap.map((row, rowIndex) =>
         row.map((col, colIndex) => {
-          if (colIndex >= room.x && colIndex < room.x + room.width)
+          if (colIndex === room.x && rowIndex === room.y)
+            return {
+              type: ROOM,
+              id: room.id,
+              name: room.name,
+              width: room.width,
+              height: room.height,
+            };
+          else if (colIndex >= room.x && colIndex < room.x + room.width)
             if (rowIndex >= room.y && rowIndex < room.y + room.height)
-              return {
-                type: ROOM,
-                id: room.id,
-                name: room.name,
-              };
+              return { ...col, type: -1 };
 
           return col;
         }),
@@ -129,11 +153,12 @@ export const BoardContainer = ({ floor, userId }) => {
         type: FACILITY,
         id: facility.id,
         name: facility.type,
+        width: 1,
+        height: 1,
       };
     }
 
     setBoard(newMap);
-    setOriginBoard(newMap);
   }, [facilities]);
 
   return (
@@ -141,14 +166,9 @@ export const BoardContainer = ({ floor, userId }) => {
       <Board
         selection={selection}
         setSelection={setSelection}
-        tab={tab}
-        setTab={setTab}
         board={board}
         setBoard={setBoard}
-        originBoard={originBoard}
         seats={seats}
-        rooms={rooms}
-        facilities={facilities}
       />
       <DateTimeForm selection={selection} userId={userId} />
     </div>

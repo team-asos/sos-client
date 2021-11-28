@@ -3,11 +3,11 @@ import DatePicker from 'react-datepicker';
 import { ko } from 'date-fns/esm/locale';
 import * as FaIcon from 'react-icons/fa';
 import 'react-datepicker/dist/react-datepicker.css';
-import { formatISO } from 'date-fns';
 import { addDays } from 'date-fns';
 import AddParticipant from './u2_addParticipant';
 import RoomTimeTable from './u2_roomTimeTable';
 import { useMediaQuery } from 'react-responsive';
+import * as moment from 'moment';
 import '../assets/styles/u2_calendar.css';
 //회의실 예약 페이지-> 이용시간 선택
 const Calendar = props => {
@@ -51,16 +51,15 @@ const Calendar = props => {
       ) : (
         <>
           <div className="mPicker">
-            <p className="pickerText">시작</p>
+            {/* <p className="pickerText"></p> */}
             <DatePicker
               selected={startDate}
               onChange={date => setStartDate(date)}
               locale={ko}
-              dateFormat="yyyy-MM-dd hh:mm"
+              dateFormat="yyyy-MM-dd"
               minDate={new Date()} //오늘 이전 날짜 선택 안되게
               maxDate={addDays(new Date(), 6)} //일주일 뒤는 예약 못함
               placeholderText="예약 날짜 선택"
-              showTimeInput
               closeOnScroll={true} //스크롤 했을 때 닫힘
               customInput={<MyCustom />}
             />
@@ -74,7 +73,7 @@ const Calendar = props => {
       >
         <RoomTimeTable
           MAXUSER={roomMAXUSER}
-          selectedDate={formatISO(startDate)}
+          selectedDate={moment(startDate).format('YYYY-MM-DD HH:mm')}
           roomId={roomID}
         />
       </div>

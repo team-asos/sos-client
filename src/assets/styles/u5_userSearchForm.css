@@ -5,6 +5,12 @@
   flex-direction: column;
   margin-left: 1vw;
 }
+.m_userSearchForm {
+  width: 96%;
+  height: 400px;
+  margin-left: 2%;
+  margin-right: 2%;
+}
 .userLocation {
   width: inherit;
 }
@@ -17,4 +23,10 @@
   font-size: 1.5em;
   font-weight: bold;
   color: #494949;
+}
+.m_searchUserTextStyle {
+  font-size: 1.1em;
+  font-weight: bold;
+  color: #494949;
+  margin-bottom: 1vh;
 }

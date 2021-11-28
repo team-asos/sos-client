@@ -8,12 +8,18 @@ import './BoardSetting.css';
 export const RoomTab = ({ selection, floor, rooms, setRooms }) => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState(0);
+  const [tag, setTag] = useState(0);
 
   const inputName = e => {
     setName(e.target.value);
   };
+
   const inputNumber = e => {
     setNumber(Number(e.target.value));
+  };
+
+  const inputTag = e => {
+    setTag(e.target.value);
   };
 
   const handleSave = () => {
@@ -34,6 +40,7 @@ export const RoomTab = ({ selection, floor, rooms, setRooms }) => {
             height: selection.height,
             floorId: floor.id,
             maxUser: number,
+            tagId: Number(tag),
           }),
         },
       );
@@ -167,11 +174,11 @@ export const RoomTab = ({ selection, floor, rooms, setRooms }) => {
             ESL 아이디 :{'     '}
             <input
               className="seat-input-name"
-              // value={name}
+              value={tag}
               placeholder="입력해 주세요."
-              // onChange={e => {
-              //   inputName(e);
-              // }}
+              onChange={e => {
+                inputTag(e);
+              }}
               disabled={
                 selection.width <= 1 && selection.height <= 1 ? true : false
               }
