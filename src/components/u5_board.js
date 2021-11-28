@@ -90,7 +90,15 @@ export const Board = ({ selection, setSelection, setBoard, board, seats }) => {
           onClick={() => {
             handleSelection(x, y);
           }}
-          style={itemStyle(col.type)}
+          style={{
+            ...itemStyle(col.type),
+            position: 'absolute',
+            width: `${col.width * 50}px`,
+            height: `${col.height * 50}px`,
+            left: `${x * 50}px`,
+            top: `${y * 50}px`,
+            border: col.type !== -1 ? '1px solid #c2c2c2' : 'none',
+          }}
         >
           {col.name}
         </div>
@@ -103,13 +111,7 @@ export const Board = ({ selection, setSelection, setBoard, board, seats }) => {
       <div className={isPc ? 'u_boardCover' : 'mobileBoardCover'}>
         <div
           style={{
-            display: 'grid',
-            gridTemplateColumns: `repeat(${
-              board.length > 0 ? board[0].length : '1'
-            }, 50px)`,
-            gridTemplateRows: `repeat(${
-              board.length > 0 ? board.length : '1'
-            }, 50px)`,
+            position: 'relative',
           }}
         >
           <Item board={board} />

@@ -35,7 +35,7 @@ export const BoardContainer = ({ floor, userId }) => {
     setBoard(
       Array.from({ length: floor.height }, () =>
         Array.from({ length: floor.width }, () => {
-          return { type: EMPTY, id: -1, name: '' };
+          return { type: EMPTY, id: -1, name: '', width: 1, height: 1 };
         }),
       ),
     );
@@ -95,32 +95,53 @@ export const BoardContainer = ({ floor, userId }) => {
 
     newMap = newMap.map(row =>
       row.map(col => {
-        if (col.type === SELECTION) return { type: EMPTY, id: -1, name: '' };
+        if (col.type === SELECTION)
+          return { type: EMPTY, id: -1, name: '', width: 1, height: 1 };
         return col;
       }),
     );
 
     for (let seat of seats) {
       if (seat.reservations.length === 0)
-        newMap[seat.y][seat.x] = { type: SEAT, id: seat.id, name: seat.name };
+        newMap[seat.y][seat.x] = {
+          type: SEAT,
+          id: seat.id,
+          name: seat.name,
+          width: 1,
+          height: 1,
+        };
       else
         newMap[seat.y][seat.x] = {
           type: RESERVED_SEAT,
           id: seat.id,
           name: seat.reservations[0].user.name,
+          width: 1,
+          height: 1,
         };
     }
 
     for (let room of rooms) {
+      newMap[room.y][room.x] = {
+        type: ROOM,
+        id: room.id,
+        name: room.name,
+        width: room.width,
+        height: room.height,
+      };
+
       newMap = newMap.map((row, rowIndex) =>
         row.map((col, colIndex) => {
-          if (colIndex >= room.x && colIndex < room.x + room.width)
+          if (colIndex === room.x && rowIndex === room.y)
+            return {
+              type: ROOM,
+              id: room.id,
+              name: room.name,
+              width: room.width,
+              height: room.height,
+            };
+          else if (colIndex >= room.x && colIndex < room.x + room.width)
             if (rowIndex >= room.y && rowIndex < room.y + room.height)
-              return {
-                type: ROOM,
-                id: room.id,
-                name: room.name,
-              };
+              return { ...col, type: -1 };
 
           return col;
         }),
