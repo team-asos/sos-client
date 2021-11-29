@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useCookies } from 'react-cookie';
-import * as ai from 'react-icons/ai';
 import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
 import { OverlayTrigger, Tooltip, Modal, Button } from 'react-bootstrap';
+
 import * as moment from 'moment';
+import * as ai from 'react-icons/ai';
 
 import '../assets/styles/u4_reservationInfo.css';
 
@@ -22,6 +23,7 @@ const SeatReservationInfo = props => {
   const [seatshow, setseatShow] = useState(false);
   const seathandleClose = () => setseatShow(false);
   const seathandleShow = () => setseatShow(true);
+
   const res = async () => {
     const id = Number(props.user.id);
     await fetch(
@@ -35,6 +37,7 @@ const SeatReservationInfo = props => {
         setReservation(json);
       });
   };
+
   /*좌석 사용 종료 */
   const finishClick = reservationId => {
     seathandleClose();
@@ -68,6 +71,7 @@ const SeatReservationInfo = props => {
         .join()
         .localeCompare(b.startTime.split('-').join()),
     );
+
   return (
     <div className="reservationInfo">
       <div>

@@ -129,8 +129,8 @@ export const Board = ({
               position: 'absolute',
               width: `${col.width * 50}px`,
               height: `${col.height * 50}px`,
-              left: `${x * 50}px`,
-              top: `${y * 50}px`,
+              left: `${x * 50 + 50}px`,
+              top: `${y * 50 + 50}px`,
               border:
                 col.width && col.type === ROOM
                   ? `2px solid rgb(141, 153, 174)`

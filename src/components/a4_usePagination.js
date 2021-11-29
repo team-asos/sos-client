@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import '../assets/styles/a4_userTable.css';
 
 const UsePagination = ({ totalUsers, usersPerPage, paginate }) => {
@@ -12,12 +12,9 @@ const UsePagination = ({ totalUsers, usersPerPage, paginate }) => {
       <ul className="pagination">
         {pageNumbers.map(number => (
           <li key={number} className="page-item">
-            <a 
-            onClick={() => paginate(number)} 
-            href="#" 
-            className="page-link">
+            <button onClick={() => paginate(number)} className="page-link">
               {number}
-            </a>
+            </button>
           </li>
         ))}
       </ul>

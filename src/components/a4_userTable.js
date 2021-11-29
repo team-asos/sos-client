@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import '../assets/styles/a4_userTable.css';
-
+import { MDBTable, MDBTableBody, MDBTableFoot, MDBTableHead } from 'mdbreact';
 import Button from 'react-bootstrap/Button';
-import UserDetailModalContent from './a4_userDetailModal';
-import tableHeadertoKR from './a4_tableHeadertoKR';
-import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
 
+import UserDetailModalContent from './a4_userDetailModal';
 import UsePagination from './a4_usePagination';
+
+import '../assets/styles/a4_userTable.css';
 
 export default function UserTable({ data }) {
   //헤더들
@@ -24,11 +23,8 @@ export default function UserTable({ data }) {
     setShowModal(handleShow);
   };
 
-  useEffect(() => {
-    console.log(modalInfo);
-  }, [modalInfo]);
+  useEffect(() => {}, [modalInfo]);
 
-  //pagination
   const [currentPage, setCurrentPage] = useState(1);
   const [userPerPage] = useState(10);
 
@@ -41,32 +37,51 @@ export default function UserTable({ data }) {
   };
 
   return (
-    <div>
-      <MDBTable hover className="userTable" cellPadding={0} cellSpacing={0}>
+    <div style={{ overflow: 'auto' }}>
+      <MDBTable
+        hover
+        className="userTable"
+        cellPadding={0}
+        cellSpacing={0}
+        maxHeight="80vh"
+      >
         {/* 헤더 */}
         <MDBTableHead>
-          <tr style={{ fontSize: '0.8em' }}>
-            {data[0] &&
-              columns.map(heading =>
-                heading === 'role' ? '' : <th>{tableHeadertoKR(heading)}</th>,
-              )}
+          <tr key={-1} style={{ fontSize: '0.8em' }}>
+            <th></th>
+            <th>이메일</th>
+            <th>이름</th>
+            <th>전화번호</th>
+            <th>사원번호</th>
+            <th>부서</th>
+            <th>직급</th>
+            <th>생성일자</th>
+            <th>수정일자</th>
+            <th></th>
           </tr>
         </MDBTableHead>
+
         {/* 바디 */}
         <MDBTableBody>
           {currentUsers.map((row, idx) => (
-            <tr style={{ fontSize: '0.8em' }}>
+            <tr
+              key={row.id}
+              style={{
+                fontSize: '1em',
+                height: '8vh',
+              }}
+            >
               <td>{idx + 1}</td>
-              {columns.map(column =>
-                column === 'role' || column === 'id' ? (
-                  ''
-                ) : column === 'createdAt' || column === 'updatedAt' ? (
-                  <td>{row[column].slice(0, 10)}</td>
-                ) : (
-                  <td>{row[column]}</td>
-                ),
-              )}
-              <td style={{ fontSize: '0.7em' }}>
+              <td>{row.email}</td>
+              <td>{row.name}</td>
+              <td>{row.tel}</td>
+              <td>{row.employeeId}</td>
+              <td>{row.department}</td>
+              <td>{row.position}</td>
+              <td>{row.createdAt.slice(0, 10)}</td>
+              <td>{row.updatedAt.slice(0, 10)}</td>
+
+              <td style={{ fontSize: '1em' }}>
                 <Button
                   variant="outline-danger"
                   size="sm"
@@ -78,6 +93,7 @@ export default function UserTable({ data }) {
                 >
                   조회하기
                 </Button>
+
                 {show ? (
                   <UserDetailModalContent
                     show={show}
@@ -93,12 +109,14 @@ export default function UserTable({ data }) {
             </tr>
           ))}
         </MDBTableBody>
+        <MDBTableBody>
+          <UsePagination
+            totalUsers={data.length}
+            usersPerPage={userPerPage}
+            paginate={paginate}
+          />
+        </MDBTableBody>
       </MDBTable>
-      <UsePagination
-        totalUsers={data.length}
-        usersPerPage={userPerPage}
-        paginate={paginate}
-      />
     </div>
   );
 }

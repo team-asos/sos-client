@@ -18,6 +18,7 @@ const RoomInfoTable = () => {
   const isMobile = useMediaQuery({ query: '(max-width:767px)' });
 
   const history = useHistory();
+
   const handleClick = e => {
     if (e) history.push(`/room-reservation/${e}`);
   };

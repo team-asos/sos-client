@@ -11,13 +11,12 @@ export default class answerTabMenu extends React.Component {
             const active = tab === this.props.selected ? 'active' : '';
             return (
               <li className="nav-item" key={tab}>
-                <a
+                <button
                   className={'nav-link ' + active}
                   onClick={() => this.props.setSelected(tab)}
-                  href
                 >
                   {tab}
-                </a>
+                </button>
               </li>
             );
           })}

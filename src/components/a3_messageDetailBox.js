@@ -3,6 +3,7 @@ import { ListGroup } from 'react-bootstrap';
 import moment from 'moment';
 import * as hi from 'react-icons/hi';
 import { useCookies } from 'react-cookie';
+
 import '../assets/styles/a3_answerWaitingList.css';
 
 const MessageDetailBox = ({ messageInfo, show, isEmpty }) => {
@@ -13,6 +14,8 @@ const MessageDetailBox = ({ messageInfo, show, isEmpty }) => {
   const [myInfo, setMyInfo] = useState({});
   const [userId, setUserId] = useState(0);
   const [userInfo, setUserInfo] = useState([]);
+
+  show = 'true';
 
   useEffect(() => {
     const findUserInfo = () => {
@@ -46,20 +49,24 @@ const MessageDetailBox = ({ messageInfo, show, isEmpty }) => {
 
   /*발신자 정보 */
   const res = async () => {
-    await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/users/${userId}`, {
-      headers: {
-        Authorization: `Bearer ${cookie.access_token}`,
-      },
-      method: 'GET',
-    })
-      .then(response => response.json())
-      .then(json => {
-        setUserInfo(json);
-      });
+    if (userId !== 0) {
+      await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/users/${userId}`, {
+        headers: {
+          Authorization: `Bearer ${cookie.access_token}`,
+        },
+        method: 'GET',
+      })
+        .then(response => response.json())
+        .then(json => {
+          setUserInfo(json);
+        });
+    }
   };
+
   useEffect(() => {
     if (userId !== undefined) res();
   }, [userId]);
+
   const submitHandler = async () => {
     const result = await fetch(
       `${process.env.REACT_APP_SERVER_BASE_URL}/answers`,
@@ -112,7 +119,7 @@ const MessageDetailBox = ({ messageInfo, show, isEmpty }) => {
               <ListGroup.Item>
                 {/* 데이터베이스에서 있는 userid -> 이름, 이메일 받기 */}
                 <span style={{ fontWeight: '650' }}>발신자 이메일 : </span>
-                {userInfo.email}
+                {userInfo.email} / {userInfo.name}
               </ListGroup.Item>
               <ListGroup.Item>
                 <span style={{ fontWeight: '650' }}>수신 시간 : </span>
