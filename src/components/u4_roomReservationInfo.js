@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useCookies } from 'react-cookie';
 import * as ai from 'react-icons/ai';
 import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
-import { OverlayTrigger, Tooltip, Modal, Button } from 'react-bootstrap';
+import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import * as moment from 'moment';
 
 import '../assets/styles/u4_reservationInfo.css';
@@ -51,40 +51,20 @@ const RoomReservationInfo = props => {
               fontSize: '1.4em',
               marginLeft: '3%',
               marginTop: '1%',
-              width: '24%',
+              width: '27%',
             }}
           >
             회의실 예약 내역
           </p>
-          <OverlayTrigger
-            key="right"
-            placement="right"
-            overlay={
-              <Tooltip
-                id="tooltip-right"
-                style={{
-                  backgroundColor: 'transparent',
-                  border: 'none',
-                  marginLeft: '1%',
-                }}
-              >
-                이용내역 조회하기
-              </Tooltip>
-            }
-          >
-            <p>
-              <ai.AiOutlineHistory
-                size={25}
-                className="reservation-history-icon"
-                onClick={handleShow}
-              />
-            </p>
-          </OverlayTrigger>
         </div>
-        <div>
+        <div style={{ height: '35vh' }}>
           <MDBTable
             hover
-            style={{ width: '90%', marginLeft: '5%', height: '100%' }}
+            style={{
+              width: '90%',
+              marginLeft: '5%',
+              height: 'fit-content',
+            }}
             scrollY="true"
           >
             <MDBTableHead style={{ fontSize: '0.9em' }}>

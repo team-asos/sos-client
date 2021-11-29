@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useCookies } from 'react-cookie';
-import * as ai from 'react-icons/ai';
 import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
 import { OverlayTrigger, Tooltip, Modal, Button } from 'react-bootstrap';
+
 import * as moment from 'moment';
+import * as ai from 'react-icons/ai';
 
 import '../assets/styles/u4_reservationInfo.css';
 

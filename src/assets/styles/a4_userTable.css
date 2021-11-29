@@ -1,16 +1,10 @@
-/* tr {
-  font-size: smaller;
-}
-td {
-  font-size: small;
-} */
 .usePaginationBox {
+  width: 100%;
   display: flex;
   justify-content: center;
 }
 .page-item {
   width: 30px;
-
   margin-left: 5%;
 }
 .page-link {
@@ -20,4 +14,13 @@ td {
 
   text-decoration: none;
   animation: none;
+}
+
+.userTable {
+  width: 98%;
+  overflow: auto;
+}
+
+.test:hover {
+  background-color: #fff !important;
 }

@@ -9,9 +9,9 @@ class UserManagePage extends React.Component {
   render() {
     return (
       <div className="userManagePage">
-        <nav>
+        <div>
           <NavBox />
-        </nav>
+        </div>
         <div className="userManagePageRight">
           <UserManageBox />
         </div>

@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
+import { MDBTable, MDBTableBody, MDBTableFoot, MDBTableHead } from 'mdbreact';
 import Button from 'react-bootstrap/Button';
 
 import UserDetailModalContent from './a4_userDetailModal';
-import tableHeadertoKR from './a4_tableHeadertoKR';
 import UsePagination from './a4_usePagination';
 
 import '../assets/styles/a4_userTable.css';
+
 export default function UserTable({ data }) {
   //헤더들
   const columns = data[0] && Object.keys(data[0]);
@@ -25,28 +25,6 @@ export default function UserTable({ data }) {
 
   useEffect(() => {}, [modalInfo]);
 
-  //pagination
-  // const [windowSize, setWindowSize] = useState({
-  //   width: undefined,
-  //   height: undefined,
-  // });
-
-  // useEffect(() => {
-  //   function handleResize() {
-  //     setWindowSize({
-  //       width: window.innerWidth,
-  //       height: window.innerHeight,
-  //     });
-  //   }
-  //   window.addEventListener('resize', handleResize);
-
-  //   handleResize();
-
-  //   return () => window.removeEventListener('resize', handleResize);
-  // });
-
-  //console.log(window.innerHeight); //13inch 683
-
   const [currentPage, setCurrentPage] = useState(1);
   const [userPerPage] = useState(10);
 
@@ -59,8 +37,14 @@ export default function UserTable({ data }) {
   };
 
   return (
-    <div>
-      <MDBTable hover className="userTable" cellPadding={0} cellSpacing={0}>
+    <div style={{ overflow: 'auto' }}>
+      <MDBTable
+        hover
+        className="userTable"
+        cellPadding={0}
+        cellSpacing={0}
+        maxHeight="80vh"
+      >
         {/* 헤더 */}
         <MDBTableHead>
           <tr key={-1} style={{ fontSize: '0.8em' }}>
@@ -80,7 +64,13 @@ export default function UserTable({ data }) {
         {/* 바디 */}
         <MDBTableBody>
           {currentUsers.map((row, idx) => (
-            <tr key={row.id} style={{ fontSize: '0.8em' }}>
+            <tr
+              key={row.id}
+              style={{
+                fontSize: '1em',
+                height: '8vh',
+              }}
+            >
               <td>{idx + 1}</td>
               <td>{row.email}</td>
               <td>{row.name}</td>
@@ -91,7 +81,7 @@ export default function UserTable({ data }) {
               <td>{row.createdAt.slice(0, 10)}</td>
               <td>{row.updatedAt.slice(0, 10)}</td>
 
-              <td style={{ fontSize: '0.7em' }}>
+              <td style={{ fontSize: '1em' }}>
                 <Button
                   variant="outline-danger"
                   size="sm"
@@ -103,6 +93,7 @@ export default function UserTable({ data }) {
                 >
                   조회하기
                 </Button>
+
                 {show ? (
                   <UserDetailModalContent
                     show={show}
@@ -118,12 +109,14 @@ export default function UserTable({ data }) {
             </tr>
           ))}
         </MDBTableBody>
+        <MDBTableBody>
+          <UsePagination
+            totalUsers={data.length}
+            usersPerPage={userPerPage}
+            paginate={paginate}
+          />
+        </MDBTableBody>
       </MDBTable>
-      <UsePagination
-        totalUsers={data.length}
-        usersPerPage={userPerPage}
-        paginate={paginate}
-      />
     </div>
   );
 }

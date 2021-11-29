@@ -181,22 +181,41 @@ export default function UserDetailModalContent({
                     <td>
                       {item.seat.floor.name}-{item.seat.name}
                     </td>
-                    <td>{moment(item.startTime).format('YYYY-MM-DD')}</td>
+                    <td>
+                      {moment(item.startTime).format('YYYY-MM-DD HH:mm:ss')}
+                    </td>
                     {item.endTime !== null ? (
-                      <td>{moment(item.endTime).format('YYYY-MM-DD')}</td>
+                      <td>
+                        {moment(item.endTime).format('YYYY-MM-DD HH:mm:ss')}
+                      </td>
                     ) : (
                       <td>-</td>
                     )}
                   </tr>
                 ) : (
                   //회의실일 경우
-                  <tr>
+                  <tr style={{ fontSize: 'small' }}>
+                    {item.status === 0 ? (
+                      <td style={{ color: 'gray' }}>예약완료</td>
+                    ) : item.status === 1 ? (
+                      <td style={{ color: 'green' }}>사용중</td>
+                    ) : (
+                      <td style={{ color: 'gray' }}>사용완료</td>
+                    )}
                     <td>회의실</td>
-                    <td></td>
-                    <td>{item.startTime.slice(0, 10)}</td>
-                    <td>{item.startTime.slice(12, 19)}</td>
-                    <td>{item.endTime?.slice(12, 19)}</td>
-                    {item.status === 1 ? <td>사용완료</td> : <td>사용중</td>}
+                    <td>
+                      {item.room.floor.name}-{item.room.name}
+                    </td>
+                    <td>
+                      {moment(item.startTime).format('YYYY-MM-DD HH:mm:ss')}
+                    </td>
+                    {item.endTime !== null ? (
+                      <td>
+                        {moment(item.endTime).format('YYYY-MM-DD HH:mm:ss')}
+                      </td>
+                    ) : (
+                      <td>-</td>
+                    )}
                   </tr>
                 ),
               )}

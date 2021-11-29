@@ -45,7 +45,7 @@ const NavBox = () => {
       <div className="appBar">
         <AppBar />
       </div>
-      <footer>
+      <div>
         <div className="logOutBar">
           <p>
             <span style={{ fontWeight: 'bolder' }}>{user.name}</span>님
@@ -65,7 +65,7 @@ const NavBox = () => {
             }}
           ></div>
         </div>
-      </footer>
+      </div>
     </div>
   );
 };
