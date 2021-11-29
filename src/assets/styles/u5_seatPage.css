@@ -89,10 +89,21 @@
   align-items: center;
   margin-left: 15vw;
 }
+.m_statusForm {
+  display: flex;
+  align-items: center;
+}
 /*아이콘*/
 .facilityicon {
   width: 5vw;
   height: 5vh;
+}
+.m_facilityIcon {
+  margin-top: 7px;
+  margin-right: 10px;
+  margin-left: 20px;
+  width: 30px;
+  height: 30px;
 }
 .facilityicon:hover {
   transition: ease-in 0.1s;
@@ -142,9 +153,19 @@
   height: 2vw;
   background-color: #646464;
 }
+.m_reservedSeatShape {
+  width: 9vw;
+  height: 4vh;
+  background-color: #646464;
+}
 .ableSeatShape {
   width: 2vw;
   height: 2vw;
+  background-color: #00a023;
+}
+.m_ableSeatShape {
+  width: 9vw;
+  height: 4vh;
   background-color: #00a023;
 }
 .reservedSeatsTextStyle,
@@ -153,7 +174,12 @@
   font-weight: bold;
   margin-left: 7px;
 }
-
+.m_reservedSeatsTextStyle,
+.m_ableSeatsTextStyle {
+  font-size: 1em;
+  font-weight: bold;
+  width: 100%;
+}
 .u_seatFormBottom {
   width: 63vw;
   height: 100vh;
