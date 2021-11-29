@@ -117,6 +117,7 @@ const AnswerWaitingList = props => {
         <div className="answerWaitingListLeftTop">
           <ul>
             <li
+              key={-1}
               style={{
                 width: '100%',
                 listStyleType: 'none',
@@ -181,12 +182,11 @@ const AnswerWaitingList = props => {
             <div>
               {search(question).map((item, idx) =>
                 isReplied(item) ? (
-                  <ul style={{ marginTop: '1%' }}>
+                  <ul key={item.id} style={{ marginTop: '1%' }}>
                     <li
                       className={
                         selectQuestion === item ? 'clickedLi' : 'normalLi'
                       }
-                      key={idx}
                       onClick={e => {
                         if (item.user === null) item.user = undefined;
                         setSelectQuestion(item);

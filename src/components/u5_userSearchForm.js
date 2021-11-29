@@ -7,7 +7,7 @@ import { useMediaQuery } from 'react-responsive';
 
 import '../assets/styles/u5_userSearchForm.css';
 //좌석 예약 페이지->직원 검색
-const UserSearchForm = () => {
+const UserSearchForm = ({ getUserId }) => {
   const isPc = useMediaQuery({
     query: '(min-width:768px)',
   });
@@ -23,6 +23,7 @@ const UserSearchForm = () => {
     roomLocation: '',
     seatStatus: '',
     roomStatus: '',
+    seatId: 0,
   });
   /*검색한 직원의 ID */
   const handleChange = value => {
@@ -57,6 +58,7 @@ const UserSearchForm = () => {
       .then(response => response.json())
       .then(json => {
         setUserReservation(json);
+        getUserId(json);
       });
   };
   const search = () => {
@@ -67,6 +69,7 @@ const UserSearchForm = () => {
             seatFloor: item.seat.floor.name,
             seatLocation: item.seat.name,
             seatStatus: '사용중',
+            seatId: item.seat.id,
           });
         }
       }

@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import Modal from 'react-bootstrap/Modal';
-import tableHeadertoKR from './a4_tableHeadertoKR';
 import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
-import '../assets/styles/a4_userDetailBox.css';
-
 import * as fa from 'react-icons/fa';
+import * as moment from 'moment';
+
+import tableHeadertoKR from './a4_tableHeadertoKR';
+
+import '../assets/styles/a4_userDetailBox.css';
 
 export default function UserDetailModalContent({
   show,
@@ -19,12 +21,11 @@ export default function UserDetailModalContent({
 
   //예약 내역 테이블 헤더
   const reservationTitle = [
-    '타입',
-    '번호',
-    '사용날짜',
-    '입실시간',
-    '퇴실시간',
     '이용상태',
+    '타입',
+    '좌석 정보',
+    '이용시작일',
+    '이용종료일',
   ];
 
   //예약 내역 불러오기
@@ -43,6 +44,8 @@ export default function UserDetailModalContent({
     };
     res(modalInfo.id);
   }, []);
+
+  console.log(reservation);
 
   const [inquiry, setInquiry] = useState('');
   //문의 내역 테이블 헤더
@@ -158,7 +161,7 @@ export default function UserDetailModalContent({
         ) : (
           <MDBTable hover className="userTable" cellPadding={0} cellSpacing={0}>
             <MDBTableHead>
-              <tr>
+              <tr style={{ fontSize: 'small' }}>
                 {reservationTitle.map(heading => (
                   <th>{heading}</th>
                 ))}
@@ -168,13 +171,22 @@ export default function UserDetailModalContent({
               {reservation.map(item =>
                 item.room === null ? (
                   //좌석일 경우
-                  <tr>
+                  <tr style={{ fontSize: 'small' }}>
+                    {item.endTime !== null ? (
+                      <td style={{ color: 'gray' }}>사용완료</td>
+                    ) : (
+                      <td style={{ color: 'green' }}>사용중</td>
+                    )}
                     <td>좌석</td>
-                    <td></td>
-                    <td>{item.startTime.slice(0, 10)}</td>
-                    <td>{item.startTime.slice(12, 19)}</td>
-                    <td>{item.endTime.slice(12, 19)}</td>
-                    {item.status === 0 ? <td>사용완료</td> : <td>사용중</td>}
+                    <td>
+                      {item.seat.floor.name}-{item.seat.name}
+                    </td>
+                    <td>{moment(item.startTime).format('YYYY-MM-DD')}</td>
+                    {item.endTime !== null ? (
+                      <td>{moment(item.endTime).format('YYYY-MM-DD')}</td>
+                    ) : (
+                      <td>-</td>
+                    )}
                   </tr>
                 ) : (
                   //회의실일 경우
@@ -183,8 +195,8 @@ export default function UserDetailModalContent({
                     <td></td>
                     <td>{item.startTime.slice(0, 10)}</td>
                     <td>{item.startTime.slice(12, 19)}</td>
-                    <td>{item.endTime.slice(12, 19)}</td>
-                    {item.status === 0 ? <td>사용완료</td> : <td>사용중</td>}
+                    <td>{item.endTime?.slice(12, 19)}</td>
+                    {item.status === 1 ? <td>사용완료</td> : <td>사용중</td>}
                   </tr>
                 ),
               )}

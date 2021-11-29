@@ -37,7 +37,7 @@ const DateTimeForm = ({ selection, userId }) => {
       },
     );
     if (response.status === 201) {
-      alert('정상적으로 처리되었습니다.');
+      alert('좌석 사용이 시작되었습니다!');
     } else {
       alert(response.status);
     }
@@ -79,7 +79,7 @@ const DateTimeForm = ({ selection, userId }) => {
           </Modal>
         </div>
       </div>
-      <UserSearchForm />
+      {/* <UserSearchForm /> */}
     </div>
   );
 };

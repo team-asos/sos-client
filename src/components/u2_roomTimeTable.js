@@ -237,7 +237,7 @@ const RoomTimeTable = ({ MAXUSER, selectedDate, roomId }) => {
                       </td>
                       {/*회의주제 추가해야함 */}
                       {item.id ? (
-                        <td className="isReserved">회의주제</td>
+                        <td className="isReserved">{item.topic}</td>
                       ) : (
                         /*예약되어있지는 않지만 지금 시간보다 전이면 */
                         <td></td>

@@ -22,6 +22,7 @@ const SeatReservationInfo = props => {
   const [seatshow, setseatShow] = useState(false);
   const seathandleClose = () => setseatShow(false);
   const seathandleShow = () => setseatShow(true);
+
   const res = async () => {
     const id = Number(props.user.id);
     await fetch(
@@ -35,6 +36,7 @@ const SeatReservationInfo = props => {
         setReservation(json);
       });
   };
+
   /*좌석 사용 종료 */
   const finishClick = reservationId => {
     seathandleClose();
@@ -46,7 +48,7 @@ const SeatReservationInfo = props => {
         },
       );
       if (res.status === 200) {
-        alert('정상적으로 처리 되었습니다.');
+        alert('좌석 사용이 종료되었습니다.');
       } else {
         const json = await res.json();
         alert(json.message);
@@ -68,6 +70,7 @@ const SeatReservationInfo = props => {
         .join()
         .localeCompare(b.startTime.split('-').join()),
     );
+
   return (
     <div className="reservationInfo">
       <div>
