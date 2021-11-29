@@ -48,20 +48,13 @@ const AddParticipant = ({
   }, []);
   /*참석자 선택 */
   const handleChange = e => {
-    setSelectedMembers([...selectedMembers, e]); //멀티 아닐 때 근데 옵션에서 사라져야함
-    // setSelectedMembers([
-    //   ...selectedMembers.filter(member => member.value !== e.value),
-    // ]);
-    // const newMember = selectedMembers.filter(item => item.value !== e.value);
-    // setSelectedMembers(newMember);
-    // console.log(selectedMembers);
-    // console.log(e);
-    //setUsers([...users.filter(user => user.id !== e.value)]);
+    setUsers(users.filter(user => user.id !== e.value));
+    setSelectedMembers([
+      ...selectedMembers,
+      users.find(user => user.id === e.value),
+    ]);
   };
-  // const removeMember = p => {
-  //   const newMember = selectedMembers.filter(item => item.value !== p.value);
-  //   setSelectedMembers(newMember);
-  // };
+
   /*회원 검색 */
   useEffect(() => {
     const res = async () => {
@@ -88,10 +81,12 @@ const AddParticipant = ({
     setEndTime(selectedDate.slice(0, 11) + END);
   };
   useEffect(() => {
-    if (START !== null) getStartTime();
+    if (START === '시작') setStart(START);
+    else if (START !== null) getStartTime();
   }, [START]);
   useEffect(() => {
-    if (END !== null) getEndTime();
+    if (END === '종료') setEnd(END);
+    else if (END !== null) getEndTime();
   }, [END]);
   useEffect(() => {
     setStart('시작');
@@ -101,7 +96,7 @@ const AddParticipant = ({
   const reservationClickHandler = async () => {
     for (let i = 0; i < selectedMembers.length; i++) {
       //setMembersId(selectedMembers[i].value);
-      membersId.push(selectedMembers[i].value);
+      membersId.push(selectedMembers[i].id);
     }
     const response = await fetch(
       `${process.env.REACT_APP_SERVER_BASE_URL}/reservations/room`,
@@ -129,16 +124,8 @@ const AddParticipant = ({
   /*마이너스 누르면 참석자 삭제 */
   const deleteParticipant = id => {
     setSelectedMembers(
-      selectedMembers.filter(selectedMembers => selectedMembers.value !== id),
+      selectedMembers.filter(selectedMembers => selectedMembers.id !== id),
     );
-  };
-  /* id 접근 안돼서 만든 함수 */
-  const participantInfo = id => {
-    for (let i = 0; i < users.length; i++) {
-      if (users[i].id === id) {
-        return i;
-      }
-    }
   };
   /*드롭다운에서 선택 했을 때 예약할 때 보낼 값 */
   const setStartThisClick = dropDownStartTime => {
@@ -165,14 +152,7 @@ const AddParticipant = ({
   const inputTopic = e => {
     setTopic(e.target.value);
   };
-  const getOptions = () => {
-    users.map(user => ({
-      value: user.id,
-      label: [user.name, ' (', user.employeeId, ')'],
-    }));
-  };
-  console.log(users);
-  console.log(selectedMembers);
+
   return (
     <div className="roomReservationFormRight">
       <div className="selectedTime">
@@ -181,6 +161,7 @@ const AddParticipant = ({
             variant="secondary"
             id="dropdown-basic"
             className={isPc ? 'dropDownToggle' : 'm_dropDownToggle'}
+            disabled="true"
           >
             {start}
           </Dropdown.Toggle>
@@ -201,6 +182,7 @@ const AddParticipant = ({
             variant="secondary"
             id="dropdown-basic"
             className={isPc ? 'dropDownToggle' : 'm_dropDownToggle'}
+            disabled="true"
           >
             {end}
           </Dropdown.Toggle>
@@ -237,7 +219,6 @@ const AddParticipant = ({
                 value: item.id,
                 label: [item.name, ' (', item.employeeId, ')'],
               }))}
-              //options={getOptions}
               placeholder="회원 검색"
               onChange={e => handleChange(e)}
               noOptionsMessage={() => '검색 결과가 없습니다.'}
@@ -262,15 +243,18 @@ const AddParticipant = ({
                 {selectedMembers.map((item, idx) => (
                   <tr key={idx}>
                     <td>{idx + 1}</td>
-                    <td>{users[participantInfo(item.value)].name}</td>
+                    <td>{item.name}</td>
+                    <td>{item.email}</td>
+                    <td>{item.department}</td>
+                    {/* <td>{users[participantInfo(item.value)].name}</td>
                     <td>{users[participantInfo(item.value)].email}</td>
-                    <td>{users[participantInfo(item.value)].department}</td>
+                    <td>{users[participantInfo(item.value)].department}</td> */}
                     <td>
                       <AiIcon.AiOutlineMinus
                         style={{
                           cursor: 'pointer',
                         }}
-                        onClick={() => deleteParticipant(item.value)}
+                        onClick={() => deleteParticipant(item.id)}
                       ></AiIcon.AiOutlineMinus>
                     </td>
                   </tr>

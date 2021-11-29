@@ -21,14 +21,14 @@ const SeatPage = () => {
   };
   const [myId, setMyId] = useState();
   const [cookie] = useCookies(['access_token']);
-  const [isToggleOn, setIsToggleOn] = useState(1);
+  const [isToggleOn, setIsToggleOn] = useState(0);
   const [floors, setFloors] = useState([]);
   const [selectedFloor, setSelectedFloor] = useState([]);
   const [reservedSeatsCnt, setReservedSeatsCnt] = useState(0);
   const [seatsCnt, setSeatsCnt] = useState(0);
   const handleClick = e => {
     setIsToggleOn(!isToggleOn);
-    isToggleOn
+    !isToggleOn
       ? (e.target.style.color = '#820101')
       : (e.target.style.color = 'black');
   };
@@ -159,6 +159,7 @@ const SeatPage = () => {
             userId={myId}
             getSeatsCnt={getSeatsCnt}
             getReservedSeatsCnt={getReservedSeatsCnt}
+            isToggleOn={isToggleOn}
           />
         </div>
       </div>
