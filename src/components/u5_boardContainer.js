@@ -176,19 +176,6 @@ export const BoardContainer = ({
   }, [facilities]);
   const getFacilityType = type => {
     return `/images/${type}.png`;
-    // if (type==='airconditional'){
-
-    // }else if (type==='fan'){
-
-    // }else if (type==='toliet'){
-
-    // }else if (type==='door'){
-
-    // }else if (type==='elevator'){
-
-    // }else if (type==='stair'){
-
-    // }
   };
   console.log(seats);
   useEffect(() => {
