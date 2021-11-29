@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useReducer } from 'react';
-import { useCookies } from 'react-cookie';
 import { Table } from 'react-bootstrap';
 import { useMediaQuery } from 'react-responsive';
 import * as moment from 'moment';
@@ -13,12 +12,9 @@ const RoomTimeTable = ({ MAXUSER, selectedDate, roomId }) => {
   });
   const [timeTable, setTimeTable] = useState([]);
   const [isReserved, setIsReserved] = useState([]); //예약 되어있는지 확인
-  //const isClicked = Array.from({ length: 20 }, () => 0); 이렇게 하고 싶지만 1로 바꿔주는게 밑에 있어서 색상 적용이 안됨
   const [start, setStart] = useState(''); //진짜 예약할 시간 보내줘야함
   const [end, setEnd] = useState(''); //진짜 예약할 시간
   const [deleteClick, setDeleteClick] = useState(0); //선택취소가 눌렸는지 안눌렸는지
-  const [isClicked, setIsClicked] = useState([]); //색상 지정하기 위해
-  const [isPast, setIsPast] = useState([]);
   const [time, setTime] = useState(
     moment(new Date()).format('HH:mm').toString(),
   ); //지금 시간
@@ -54,7 +50,6 @@ const RoomTimeTable = ({ MAXUSER, selectedDate, roomId }) => {
     )
       .then(response => response.json())
       .then(json => {
-        // setTimeTable(json);
         setTimeTable(
           json.map(time => {
             if (time.id) {
@@ -76,14 +71,6 @@ const RoomTimeTable = ({ MAXUSER, selectedDate, roomId }) => {
         );
       });
   };
-  // const getFirstClick = (startTime, endTime, i) => {
-  //   setFirstClick({
-  //     Start: startTime,
-  //     End: endTime,
-  //     isClicked: 1,
-  //     idx: i,
-  //   });
-  // };
 
   useEffect(() => {
     if (secondClick.isClicked) {
@@ -97,7 +84,7 @@ const RoomTimeTable = ({ MAXUSER, selectedDate, roomId }) => {
   const reset = () => {
     setFirstClick({ Start: '', End: '', isClicked: 0, idx: null }); //초기화
     setSecondClick({ Start: '', End: '', isClicked: 0, idx: null }); //초기화
-    setStart('시작'); //초기화 하면 input값이 사라짐 ㅠ
+    setStart('시작');
     setEnd('종료');
     setClickes([]);
   };
@@ -153,56 +140,14 @@ const RoomTimeTable = ({ MAXUSER, selectedDate, roomId }) => {
     setDeleteClick(!deleteClick);
     reset();
   };
-  //예약,클릭 되어있는지 색칠한거 초기화
-  const resetIsReserved = () => {
-    for (let i = 0; i < 20; i++) {
-      isReserved[i] = 0; //예약표시한거 초기화
-      isClicked[i] = 0; //클릭 표시한 거 초기화
-    }
-  };
+
   useEffect(() => {
     if (roomId !== null && selectedDate !== null) {
       fetchRoomTable();
-      resetIsReserved(); //예약, 클릭 상태초기화
+      reset();
     }
   }, [selectedDate]);
 
-  // useEffect(() => {
-  //   if (timeTable !== null) convertToKST();
-  // }, [timeTable]); //selectedDate넣으면 왜 안뜨는지
-
-  const convertToKST = () => {
-    setTimeTable(
-      timeTable.map(time => {
-        if (time.id) {
-          return {
-            ...time,
-            start_time: moment(time.start_time).format('HH:mm'),
-            end_time: moment(time.end_time).format('HH:mm'),
-            startTime: moment(time.startTime).format('HH:mm'),
-            endTime: moment(time.endTime).format('HH:mm'),
-          };
-        } else {
-          return {
-            ...time,
-            start_time: moment(time.start_time).format('HH:mm'),
-            end_time: moment(time.end_time).format('HH:mm'),
-          };
-        }
-      }),
-    );
-    // for (let i = 0; i < timeTable.length; i++) {
-    //   timeTable[i].start_time = moment(timeTable[i].start_time).format('HH:mm');
-    //   timeTable[i].end_time = moment(timeTable[i].end_time).format('HH:mm');
-    //   if (timeTable[i].id) {
-    //     for (let j = 0; j < timeTable.length; j++) {
-    //       if (i == j) isReserved[j] = 1;
-    //     }
-    //     timeTable[i].startTime = moment(timeTable[i].startTime).format('HH:mm');
-    //     timeTable[i].endTime = moment(timeTable[i].endTime).format('HH:mm');
-    //   }
-    // }
-  };
   return (
     <>
       <div
