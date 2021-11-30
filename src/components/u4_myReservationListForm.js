@@ -44,6 +44,7 @@ const MyReservationListForm = props => {
   /* 회의실 예약 취소 */
   const deleteClick = reservationId => {
     handleClose();
+    console.log(reservationId);
     const deleteHandler = async () => {
       const res = await fetch(
         `${process.env.REACT_APP_SERVER_BASE_URL}/reservations/${reservationId}`,

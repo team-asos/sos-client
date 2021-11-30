@@ -4,6 +4,7 @@ import { useCookies } from 'react-cookie';
 import { Table, Dropdown } from 'react-bootstrap';
 import * as AiIcon from 'react-icons/ai';
 import { useMediaQuery } from 'react-responsive';
+import * as moment from 'moment';
 import '../assets/styles/u2_addParticipant.css';
 //회의실 인원 검색해서 추가
 const AddParticipant = ({
@@ -54,7 +55,6 @@ const AddParticipant = ({
       users.find(user => user.id === e.value),
     ]);
   };
-
   /*회원 검색 */
   useEffect(() => {
     const res = async () => {

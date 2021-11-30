@@ -104,6 +104,7 @@ export const BoardContainer = ({
     fetchRooms();
     fetchFacilities();
   }, [floor.id]);
+  const [reservedSeatsCnt, setReservedSeatsCnt] = useState(0);
 
   useEffect(() => {
     let newMap = board;

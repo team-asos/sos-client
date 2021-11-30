@@ -60,6 +60,8 @@ export const BoardSetting = ({
       );
   };
 
+  console.log(floor);
+
   const Setting = () => {
     return (
       <div className="board-setting">
