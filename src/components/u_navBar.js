@@ -4,6 +4,7 @@ import { useCookies } from 'react-cookie';
 
 import AppBar from './u_appBar';
 import TimeBar from './2_timeBar';
+
 import '../assets/styles/a2_navBox.css';
 
 const NavBar = props => {
