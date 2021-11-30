@@ -12,7 +12,7 @@ class NotificationPage extends React.Component {
         <div>
           <NavBox />
         </div>
-        <div>
+        <div className="notificationPageRight">
           <MessageBox />
         </div>
       </div>

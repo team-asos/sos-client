@@ -1,0 +1,36 @@
+.floorModalSelect {
+  width: fit-content;
+
+  display: flex;
+  flex-direction: row;
+}
+
+.floorModalSelect div {
+  margin-left: 1vw;
+}
+.floorRadio {
+  margin-left: 0.5vw;
+  font-size: 0.6em;
+}
+.floorInputForm {
+  width: 55%;
+  margin-top: 2%;
+}
+.floorInputForm::placeholder {
+  font-style: italic;
+  font-size: smaller;
+}
+.createFloorModal {
+  padding-left: 15%;
+}
+.createFloorModal label {
+  width: 26%;
+}
+
+.floorControlButton {
+  margin-left: 20vw;
+  background: #c00000;
+  color: white;
+  border: none;
+  border-radius: 2px;
+}

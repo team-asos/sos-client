@@ -3,12 +3,15 @@ import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
+import './assets/fonts/font.css';
+
 //공통 페이지
 import Login from './pages/1_loginPage';
 import SignUp from './pages/1_signupPage';
 import Loading from './pages/1_loadingPage';
 import SignUpLoading from './pages/1_signuploadingPage';
 import LoginNoti from './pages/1_loginNotificationPage';
+import QrPage from './pages/1_qrPage';
 
 //사용자 페이지
 import RoomReservationPage from './pages/u2_roomReservationPage';
@@ -35,6 +38,8 @@ function App() {
           <Route path="/loading" component={Loading} />
           <Route path="/login-noti" component={LoginNoti} />
           <Route path="/sign-up-loading" component={SignUpLoading} />
+          {/* <Route path="/회의실정보/:reservationId" component={QrPage}/> */}
+          <Route path="/reservation-info/:reservationId" component={QrPage} />
 
           <Route
             path="/room-reservation/:idx"
@@ -43,7 +48,7 @@ function App() {
           <Route path="/room-check" component={RoomCheckPage} />
           <Route path="/inquire" component={InquirePage} />
           <Route path="/user-mypage" component={UserMyPage} />
-          <Route path="/user-mypage-myinfo" component={MyInfo} />
+          <Route path="/user-mypage-myinfo/:idx" component={MyInfo} />
           <Route path="/seat-reservation" component={SeatReservationPage} />
 
           <Route exact path="/user-management" component={UserManagePage} />

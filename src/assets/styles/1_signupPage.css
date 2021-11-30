@@ -1,4 +1,5 @@
 .register {
+  font-family: NotoSansRegular;
   display: flex;
   flex-direction: column;
   align-content: flex-start;
@@ -7,6 +8,29 @@
   background-image: url('../images/logo_transparent.png');
   background-repeat: no-repeat;
   background-size: 25vw; /*300px*/
+  background-position: center;
+}
+.m_register {
+  /*위치와 크기 지정*/
+  width: 90%; /*55%*/
+  height: 94%; /*60%*/
+
+  margin-left: 5%;
+  margin-top: 5%;
+
+  position: absolute;
+
+  /*배경과 그림자 지정*/
+  background: #c4c4c4;
+  box-shadow: 1px rgba(64, 64, 64, 0.4);
+  border-radius: 44px;
+
+  display: flex;
+  flex-direction: column;
+  /*밑 이미지 설정(로고)*/
+  background-image: url('../images/logo_transparent.png');
+  background-repeat: no-repeat;
+  background-size: 95vw; /*300px*/
   background-position: center;
 }
 /*회원가입 텍스트 영역*/
@@ -18,6 +42,18 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  font-weight: bold;
+}
+.m_upper {
+  position: relative;
+
+  margin-top: 15%;
+  padding-left: 5vw;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
   font-weight: bold;
 }
 /*뒤로가기 아이콘 영역*/
@@ -38,7 +74,6 @@
   color: #c00000;
   font-size: 1.5em;
 }
-
 /*Form 영역*/
 .bottom {
   position: relative;
@@ -50,22 +85,45 @@
   font-size: 0.8em; /*12px*/
   font-weight: bolder;
 }
+.m_bottom {
+  margin-top: 5%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 /*각 줄 스타일 넣기*/
 .column {
   display: flex;
   flex-direction: row;
   margin-bottom: 2%;
 }
+
 .column div {
   display: block;
   margin: auto 1%;
 }
-
+.m_column div {
+  margin: auto 1%;
+}
 /*입력 폼 크기와 글씨 지정*/
 .form-control {
   width: 21vw; /*250px*/
   height: 5vh; /*30px*/
   font-size: 0.9em; /*14px*/
+}
+.m_form-control {
+  width: 55vw; /*250px*/
+  height: 5vh; /*30px*/
+  font-size: 0.9em; /*14px*/
+  position: relative;
+  margin-bottom: 1vh;
+  display: flex;
+  align-items: center;
+
+  font-size: 0.8em; /*12px*/
+  font-weight: bolder;
+  border: none;
+  border-radius: 5px;
 }
 /*버튼 스타일링*/
 .registerButton {
@@ -77,6 +135,7 @@
   border-radius: 5px;
   font-size: 0.9em; /*14px*/
   font-weight: bolder;
+  margin-top: 4vh;
 }
 .registerButton:hover {
   transition: ease 0.2s;
@@ -84,4 +143,19 @@
   color: white;
   border: none;
   box-shadow: 0 0 40px 40px #8f0202 inset;
+}
+.m_registerButton {
+  width: 35vw; /*250px*/
+  height: 5vh; /*30px*/
+
+  margin-top: 6vh;
+
+  font-size: 0.9em; /*14px*/
+  font-weight: bolder;
+  color: #ffffff;
+
+  background: #c00000;
+
+  border: none;
+  border-radius: 2px;
 }

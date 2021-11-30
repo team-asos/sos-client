@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import AccountIcon from './icons/u_accountIcon';
 import SeatReservationIcon from './icons/u_seatReservationIcon';
@@ -9,10 +10,18 @@ class AppBox extends React.Component {
   render() {
     return (
       <div>
-        <SeatReservationIcon />
-        <RoomReservationIcon />
-        <InquireIcon />
-        <AccountIcon />
+        <Link to="/seat-reservation" style={{ color: 'black' }}>
+          <SeatReservationIcon />
+        </Link>
+        <Link to="/room-check" style={{ color: 'black' }}>
+          <RoomReservationIcon />
+        </Link>
+        <Link to="/inquire" style={{ color: 'black' }}>
+          <InquireIcon />
+        </Link>
+        <Link to="/user-mypage" style={{ color: 'black' }}>
+          <AccountIcon />
+        </Link>
       </div>
     );
   }

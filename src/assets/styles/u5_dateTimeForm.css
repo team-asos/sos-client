@@ -1,66 +1,82 @@
+.reservationAndSearch {
+  display: flex;
+  flex-direction: column;
+  height: 20%;
+}
+.m_reservationAndSearch {
+  width: 100%;
+}
 /*datetime+예약버튼*/
 .dateTimeAndBtnForm {
   display: flex;
   flex-direction: column;
+  height: 100%;
+}
+.m_dateTimeAndBtnForm {
+  display: flex;
+  flex-direction: row;
 }
 .dateTimeForm {
   background: #c4c4c4;
-  width: 27vw;
-  height: 18vh;
+  width: 20vw;
+  height: 100%;
   display: flex;
-  margin-top: 10vh;
+  margin-left: 1vw;
   flex-direction: column;
+  align-items: center;
+  border-radius: 10px;
+  box-shadow: 1px rgba(64, 64, 64, 0.4);
+}
+.m_dateTimeForm {
+  /* background: #c4c4c4;
+  width: 95%;
+  height: 25vh;
+  display: flex;
+  margin-top: 2vh;
+  margin-left: 2.5%;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 10px;
+  box-shadow: 1px rgba(64, 64, 64, 0.4); */
+  display: flex;
 }
 /*좌석 이름*/
 .seatNameTextStyle {
   font-weight: bold;
   font-size: 1.6em;
   text-align: center;
-  margin-top: 3%;
-  margin-bottom: 3%;
+  margin-top: 4%;
 }
-/*시작+종료 가로 정렬*/
-.reservationDatePicker {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin-left: 0.5vw;
-  margin-right: 0.5vw;
-  margin-bottom: 3vh;
-}
-/*시작만*/
-.reservationDatePicker_start {
-  display: flex;
-  flex-direction: column;
-}
-/*시작/종료 글씨*/
-.startTimeTextStyle {
-  font-size: 1.4em;
+.m_seatNameTextStyle {
   font-weight: bold;
-  text-align: center;
-}
-.customPicker2 {
-  background-color: white;
-  border: 0;
-  font-size: 1.2em;
-  font-weight: bold;
-  width: fit-content;
-  height: 4vh;
-  padding-left: 1vw;
-  padding-right: 1vw;
+  font-size: 1.3em;
+  margin-top: 4vh;
+  margin-left: 3vw;
 }
 .seatReservationBtn {
-  margin-top: 1vh;
-  width: 27vw;
-  height: 6vh;
-  font-size: 1.4em;
-  font-weight: bold;
+  width: 8vw;
+  height: 4vh;
+  font-size: 1em;
   background-color: #155924;
+  margin-top: 3vh;
   color: white;
   border: 0;
+  border-radius: 8px;
 }
 .seatReservationBtn:hover {
   background-color: #0f4119;
   transition: ease 0.2s;
   transform: scale(1.01);
+}
+.m_seatReservationBtn {
+  width: 20vw;
+  height: 5vh;
+  position: absolute;
+  left: 150px;
+  font-size: 1em;
+  background-color: #155924;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  margin-top: 4vh;
 }

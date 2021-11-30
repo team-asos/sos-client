@@ -1,0 +1,15 @@
+.board-container {
+  .board-cover {
+    flex: 1;
+    height: 840px;
+    overflow: auto;
+    border: 1px solid red;
+
+    .board-item {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid #c2c2c2;
+    }
+  }
+}

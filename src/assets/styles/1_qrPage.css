@@ -1,0 +1,70 @@
+.qrPage-container {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  background-color: whitesmoke;
+}
+.section-1 {
+  width: 100%;
+  height: 150px;
+
+  padding: 40px;
+}
+.section-2 {
+  width: 100%;
+  height: 100px;
+
+  padding: 15px;
+  margin-top: -10px;
+  margin-bottom: 10px;
+
+  background-color: white;
+}
+.section-3 {
+  width: 100%;
+  height: 200px;
+
+  padding: 30px;
+}
+.section-3 p {
+  margin-bottom: 0px;
+
+  color: gray;
+}
+.section-3 h2 {
+  width: fit-content;
+  height: fit-content;
+
+  padding: 20px;
+  margin-left: 110px;
+
+  border-radius: 20px;
+
+  font-weight: bolder;
+
+  background-color: white;
+}
+.section-4-grid {
+  width: 100%;
+  height: 251px;
+
+  display: grid;
+  grid-template-columns: 120px 120px;
+  grid-template-rows: 45px;
+  column-gap: 10px;
+}
+.section-4-grid div {
+  height: 35px;
+  padding-top: 5px;
+
+  border-radius: 5px;
+
+  background-color: white;
+}

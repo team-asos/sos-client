@@ -1,23 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
+import { useCookies } from 'react-cookie';
+import * as ai from 'react-icons/ai';
+import * as cg from 'react-icons/cg';
+import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 import MessageDetailBox from './a3_messageDetailBox';
 import '../assets/styles/a3_answerWaitingList.css';
 
-const AnswerWaitingList = () => {
-  const [question, setQestion] = useState([]);
-  const [answer, setAnswer] = useState([]);
-  const [selectQuestion, setSelectQuestion] = useState([]);
-  const [showDetail, setShowDetail] = useState(false);
-  const [show, setShow] = useState(true);
-  const handleShow = () => setShow(true);
+const AnswerWaitingList = props => {
+  //쿠키 받아오기
+  const [cookie] = useCookies('access_token');
+
+  //문의 받아오기
+  const [question, setQestion] = useState([]); //전체 문의
+  const [selectQuestion, setSelectQuestion] = useState({}); //선택된 문의
 
   useEffect(() => {
     const res = async () => {
       await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/questions`, {
-        headers: {
-          Authorization:
-            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IuyKpO2OgOyngOuwpSIsInJvbGUiOjAsImlhdCI6MTYzNjQzNDQzMSwiZXhwIjoxNjM2NTIwODMxfQ.IQU8OkiENv1gtf88GTngwk-Rya51_USgY-GWFL-zU2E',
-        },
+        headers: { Authorization: `Bearer ${cookie.access_token}` },
         method: 'GET',
       })
         .then(response => response.json())
@@ -28,22 +29,10 @@ const AnswerWaitingList = () => {
     res();
   }, []);
 
-  useEffect(() => {
-    const res2 = async () => {
-      await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/answers`, {
-        headers: {
-          Authorization:
-            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IuyKpO2OgOyngOuwpSIsInJvbGUiOjAsImlhdCI6MTYzNjQzNDQzMSwiZXhwIjoxNjM2NTIwODMxfQ.IQU8OkiENv1gtf88GTngwk-Rya51_USgY-GWFL-zU2E',
-        },
-        method: 'GET',
-      })
-        .then(response => response.json())
-        .then(json => {
-          setAnswer(json);
-        });
-    };
-    res2();
-  }, []);
+  //MessageDetailBox 컴포넌트 불러오는 함수
+  const [showDetail, setShowDetail] = useState(false);
+  const [show, setShow] = useState(true);
+  const handleShow = () => setShow(true);
 
   const toggleTrueFalse = () => {
     setShowDetail(handleShow);
@@ -56,37 +45,205 @@ const AnswerWaitingList = () => {
     }
   };
 
+  const isEmpty = question => {
+    for (let i = 0; i < question.length; i++) {
+      if (isReplied(question[i])) {
+        return 1; //문의들이 있는 경우
+      }
+    }
+  };
+
+  //체크박스 설정
+  const [checkedList, setCheckedList] = useState([]);
+
+  //체크박스 전체 상태 설정하기
+  const onCheckedAll = useCallback(
+    checked => {
+      if (checked) {
+        const checkedListArray = [];
+        question.forEach(item => checkedListArray.push(item.id));
+        setCheckedList(checkedListArray);
+      } else {
+        setCheckedList([]);
+      }
+    },
+    [question],
+  );
+
+  //체크박스 개별 상태 설정하기
+  const onCheckedElement = useCallback(
+    (checked, id) => {
+      if (checked) {
+        setCheckedList([...checkedList, id]);
+      } else {
+        setCheckedList(checkedList.filter(el => el !== id));
+      }
+    },
+    [checkedList],
+  );
+
+  //삭제 아이콘
+  const deleteClickHandler = checkedList => {
+    checkedList.map(async id => {
+      const result = await fetch(
+        `${process.env.REACT_APP_SERVER_BASE_URL}/questions/${id}`,
+        {
+          headers: { Authorization: `Bearer ${cookie.access_token}` },
+          method: 'DELETE',
+        },
+      );
+
+      window.location.href = '/notification';
+    });
+  };
+
+  //검색창
+  const [q, setQ] = useState('');
+
+  function search(rows) {
+    const columns = rows[0] && Object.keys(rows[0]);
+    return rows.filter(row =>
+      columns.some(column =>
+        row[column] === null
+          ? ''
+          : row[column].toString().toLowerCase().indexOf(q) > -1,
+      ),
+    );
+  }
+
   return (
     <div className="answerWaitingList">
       <div className="answerWaitingListLeft">
-        {question.map((item, idx) => (
+        <div className="answerWaitingListLeftTop">
           <ul>
-            {isReplied(item) ? (
-              <li
-                key={idx}
-                onClick={e => {
-                  setSelectQuestion(item);
-                  toggleTrueFalse();
+            <li
+              key={-1}
+              style={{
+                width: '100%',
+                listStyleType: 'none',
+              }}
+            >
+              {/* 전체 체크박스  */}
+              <input
+                type="checkbox"
+                onChange={e => onCheckedAll(e.target.checked)}
+                checked={
+                  checkedList.length === 0
+                    ? false
+                    : checkedList.length === question.length
+                    ? true
+                    : false
+                }
+              />
+              {/* 삭제 아이콘 tooltip*/}
+              <span>
+                <OverlayTrigger
+                  placement="right"
+                  overlay={
+                    <Tooltip
+                      id="button-tooltip"
+                      style={{
+                        fontSize: 'x-small',
+                        height: 'fit-content',
+                        backgroundColor: 'transparent',
+                        border: 'none',
+                      }}
+                    >
+                      선택 삭제
+                    </Tooltip>
+                  }
+                >
+                  <span>
+                    <ai.AiTwotoneDelete
+                      className="deleteIcon"
+                      size={20}
+                      onClick={() => deleteClickHandler(checkedList)}
+                    />
+                  </span>
+                </OverlayTrigger>
+
+                {/* 검색창 */}
+                <input
+                  className="searchQuestionForm"
+                  type="text"
+                  placeholder="검색할 문의를 입력하세요."
+                  value={q}
+                  onChange={e => setQ(e.target.value)}
+                />
+                <ai.AiOutlineSearch className="deleteIcon" size={20} />
+              </span>
+            </li>
+          </ul>
+        </div>
+
+        {/* 문의 리스트 부분 */}
+        <div className="answerWaitingListLeftBottom">
+          {isEmpty(question) ? (
+            <div>
+              {search(question).map((item, idx) =>
+                isReplied(item) ? (
+                  <ul key={item.id} style={{ marginTop: '1%' }}>
+                    <li
+                      className={
+                        selectQuestion === item ? 'clickedLi' : 'normalLi'
+                      }
+                      onClick={e => {
+                        if (item.user === null) item.user = undefined;
+                        setSelectQuestion(item);
+                        toggleTrueFalse();
+                      }}
+                    >
+                      <div className="waitinglistStyle">
+                        <div style={{ width: '3%' }}>
+                          <input
+                            type="checkbox"
+                            onChange={e =>
+                              onCheckedElement(e.target.checked, item.id)
+                            }
+                            checked={
+                              checkedList.includes(item.id) ? true : false
+                            }
+                          />
+                        </div>
+                        <div style={{ width: '5%', paddingLeft: '4%' }}></div>
+                        <div style={{ width: '70%' }}>{item.title}</div>
+                        <div style={{ width: '17%' }}>
+                          {item.createdAt.slice(0, 10)}
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                ) : (
+                  ''
+                ),
+              )}
+            </div>
+          ) : (
+            <div className="noMessageBox">
+              <cg.CgCloseO
+                size={20}
+                style={{ color: '#820101', marginTop: '5%' }}
+              />
+              <p
+                style={{
+                  fontSize: 'smaller',
+                  fontStyle: 'italic',
+                  marginTop: '1.5%',
                 }}
               >
-                <div className="waitinglistStyle">
-                  <div style={{ width: '5%' }}>-</div>
-                  <div style={{ width: '10%' }}>{item.id}</div>
-                  <div style={{ width: '70%' }}>{item.title}</div>
-                  <div style={{ width: '17%' }}>
-                    {item.createdAt.slice(0, 10)}
-                  </div>
-                </div>
-              </li>
-            ) : (
-              ''
-            )}
-          </ul>
-        ))}
+                답변을 대기 중인 문의가 없습니다.
+              </p>
+            </div>
+          )}
+        </div>
       </div>
       <div className="answerWaitingListRight">
         {show ? (
-          <MessageDetailBox show={show} messageInfo={selectQuestion} />
+          <MessageDetailBox
+            show={show}
+            messageInfo={selectQuestion}
+            isEmpty={isEmpty(question) ? 1 : 0}
+          />
         ) : (
           ''
         )}

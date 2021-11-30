@@ -5,23 +5,46 @@
   display: flex;
   flex-direction: row;
 }
+/* .m_roomCheckPage {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+} */
 .roomCheckForm {
-  width: 95vw;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(240, 240, 240);
   display: flex;
   flex-direction: column;
 }
+.m_roomCheckForm {
+  width: 100%;
+}
 .checkHeader {
   position: relative;
-  height: 10vh;
-  background: #c4c4c4;
+  height: 10%;
+  /* background: #c4c4c45b; */
   display: flex;
   flex-direction: row;
   align-items: center;
 }
 .roomCheck_titleTextStyle {
   position: relative;
-  font-weight: bold;
-  font-size: 2em;
+
   margin-left: 2%;
   margin-right: 4%;
+
+  font-weight: bold;
+  font-size: 1.8em;
+}
+.m_roomCheck_titleTextStyle {
+  font-size: 1.2em;
+  margin-left: 2%;
+  font-weight: bold;
+}
+.roomInfoTable {
+  background-color: white;
+  border-radius: 30px;
+  width: 90%;
+  margin-left: 5%;
 }

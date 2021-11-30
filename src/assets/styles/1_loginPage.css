@@ -1,27 +1,54 @@
 .login {
+  font-family: NotoSansRegular;
+
   /*포함 컨텐츠들 정렬*/
   display: flex;
   flex-direction: row;
   align-items: center;
 }
+.m_login {
+  position: absolute;
 
+  /*위치와 크기 지정*/
+  width: 90%; /*55%*/
+  height: 94%; /*60%*/
+
+  margin-left: 5%;
+  margin-top: 5%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  /*배경과 그림자 지정*/
+  background: #c4c4c4;
+  box-shadow: 1px rgba(64, 64, 64, 0.4);
+  border-radius: 44px;
+}
 /*화면 중앙 기준 왼쪽*/
 .left {
   width: 50vw; /*80%*/
   text-align: center;
 }
+
 /*화면 중앙 기준 가운데*/
 .line {
   width: 0.2vw;
   height: 40vh;
   background-color: #c00000;
 }
+
 /*화면 중앙 기준 오른쪽*/
 .right {
   width: 50vw;
   text-align: center;
 }
-
+.m_right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 /*Input형식 크기,위치, 글자크기 지정*/
 .form-control-login {
   display: block;
@@ -37,7 +64,16 @@
 .form-control-login:focus {
   outline: none;
 }
-
+.m_form-control-login {
+  display: block;
+  margin: 7px auto;
+  width: 55vw;
+  height: 5vh; /*30px*/
+  font-size: 0.8em; /*12px*/
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+}
 /*Button 요소와 이벤트 지정*/
 .Button {
   width: 22vw; /*80%*/
@@ -70,12 +106,20 @@
   border: none;
   box-shadow: 0 0 40px 40px #8f0202 inset;
 }
+.m_Button {
+  width: 55vw; /*80%*/
+  height: 5vh; /*30px*/
+  border-radius: 5px;
+  font-size: 0.8em; /*12px*/
+  font-weight: bold;
+  margin-bottom: 12px;
+}
 
 /*계정이 없으신가요? 텍스트 스타일 지정*/
 .or {
   text-align: center;
-  font-size: 0.6em; /*10px*/
+  font-size: 0.8em; /*10px*/
   font-weight: bolder;
-  margin-top: 14px;
+  margin-top: 20px;
   margin-bottom: 2px;
 }

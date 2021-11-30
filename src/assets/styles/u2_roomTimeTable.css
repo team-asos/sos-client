@@ -1,0 +1,20 @@
+.m_roomTimeTable {
+  font-size: 0.8em;
+  width: 96%;
+  margin: 2%;
+}
+Table .isReserved {
+  background-color: gray !important;
+}
+Table .isNotReserved {
+  cursor: pointer;
+}
+Table .isNotReserved:hover {
+  transition: ease 0.2s;
+  transform: scale(1.02);
+  background-color: crimson;
+}
+.resetSelectTime {
+  cursor: pointer;
+  margin-left: 1vw;
+}

@@ -1,7 +1,10 @@
 .icon-box {
-  text-align: center;
-  height: 10vh; /*54px*/
+  height: 10vh;
+
   padding-top: 15%;
+  text-align: center;
+
+  color: black;
 }
 .icon {
   width: 7vw;
@@ -9,15 +12,21 @@
 }
 .text {
   font-size: 0.55em;
-  font-weight: 1000;
-  color: rgba(255, 255, 255, 0.829);
+  font-weight: bold;
+
+  color: #820101;
+
   visibility: hidden;
+
+  text-decoration: overline;
+  text-decoration-color: black;
 }
 .icon-box:hover {
   color: #820101;
   transition: ease-in 0.1s;
   transform: scale(1.05);
   cursor: pointer;
+  text-decoration: none;
 }
 .icon-box:hover .text {
   visibility: visible;

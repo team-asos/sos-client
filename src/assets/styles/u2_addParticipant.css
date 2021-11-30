@@ -1,26 +1,80 @@
+.roomReservationFormRight {
+  width: 40%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  margin-left: 1%;
+  align-items: flex-start;
+}
+.selectedTime {
+  margin-bottom: 2vh;
+  display: flex;
+  align-self: flex-start;
+}
+.dropDownToggle {
+  background-color: rgb(230, 230, 230);
+  border: none;
+  color: black;
+}
+.m_dropDownToggle {
+  background-color: rgb(230, 230, 230);
+  border: none;
+  color: black;
+  font-size: 0.9em;
+}
+.addAndButtonForm {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+}
+.mAddAndButtonForm {
+  display: flex;
+  flex-direction: column;
+}
 .addParticipantForm {
   display: flex;
   flex-direction: column;
+  width: 100%;
+}
+.mParticipantForm {
+  display: flex;
+  flex-direction: column;
   margin-left: 2vw;
-  margin-top: 3vh;
-  width: 60vw;
+  margin-top: 2vh;
+  width: 95vw;
+  height: 50vh;
 }
 /*회의 참석자를 입력하세요*/
 .rrp_centerTextStyle {
   position: relative;
-  font-size: 1.3em;
+  font-size: 1em;
   font-weight: bold;
 }
-
-.searchParticipant {
+.mrrp_centerTextStyle {
+  font-size: 0.9em;
+  font-weight: bold;
+}
+.mSearchForm {
 }
 .selectedMembersList {
+}
+.mSelectedMembersList {
+  font-size: 0.7em;
+  height: 50px;
+  overflow: scroll;
+}
+.divButton {
+  margin-left: 38%;
 }
 .roomReservationBtn {
   width: fit-content;
   height: 5vh;
+  margin-top: 2vh;
+  /*
+  margin-left: 10vw;
   padding-left: 2vw;
-  padding-right: 2vw;
+  padding-right: 2vw; */
   font-size: 1.2em;
   background-color: #820101;
   color: white;
@@ -33,8 +87,37 @@
   transition: ease 0.2s;
   transform: scale(1.02);
 }
+.mRoomReservationBtn {
+  width: fit-content;
+  height: 5vh;
+  font-size: 1.2em;
+  background-color: #820101;
+  color: white;
+  border-radius: 10px;
+  outline: 0;
+  border: 0;
+}
 /*참석자 리스트*/
 .participantForm {
-  height: 53vh;
+  height: 45vh;
   overflow: auto;
+}
+.meetingTopicForm {
+  width: 100%;
+  margin-bottom: 2vh;
+}
+.topicInput {
+  border: none;
+  background-color: rgb(236, 236, 236);
+  height: 4vh;
+  border-radius: 5px;
+  width: 100%;
+}
+.m_topicInput {
+  width: 300px;
+  border: none;
+  background-color: rgb(236, 236, 236);
+  height: 40px;
+  border-radius: 5px;
+  font-size: 0.8em;
 }
