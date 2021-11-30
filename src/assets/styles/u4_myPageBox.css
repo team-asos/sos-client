@@ -35,6 +35,7 @@
   border-radius: 4px;
 
   background-color: white;
+  box-shadow: 1px 1px 8px 1px gray;
 }
 .myPageBox-text-info {
   width: 100%;
@@ -126,16 +127,20 @@
 .myPageBox-right-seat {
   width: 100%;
   height: 40%;
-
-  border: 1px solid white;
+  background-color: white;
+  box-shadow: 1px 1px 8px 1px gray;
+  border: none;
+  border-radius: 3px;
 }
 .myPageBox-right-room {
   width: 100%;
   height: 56%;
 
   margin-top: 2%;
-
-  border: 1px solid white;
+  background-color: white;
+  border: none;
+  box-shadow: 1px 1px 8px 1px gray;
+  border-radius: 3px;
 }
 .edit-button-group {
   margin-left: -10%;

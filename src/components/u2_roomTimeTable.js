@@ -192,10 +192,13 @@ const RoomTimeTable = ({ MAXUSER, selectedDate, roomId }) => {
                         }
                         style={
                           clickes.includes(idx)
-                            ? { backgroundColor: 'crimson' }
+                            ? {
+                                backgroundColor: 'firebrick',
+                                color: 'whitesmoke',
+                              }
                             : clickes.includes(idx) && deleteClick
-                            ? { backgroundColor: '#fff' }
-                            : { backgroundColor: '#fff' }
+                            ? { backgroundColor: 'rgb(240, 240, 240)' }
+                            : { backgroundColor: 'rgb(240, 240, 240)' }
                         }
                       >
                         {item.start_time}-{item.end_time}

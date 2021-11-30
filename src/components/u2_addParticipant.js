@@ -246,9 +246,6 @@ const AddParticipant = ({
                     <td>{item.name}</td>
                     <td>{item.email}</td>
                     <td>{item.department}</td>
-                    {/* <td>{users[participantInfo(item.value)].name}</td>
-                    <td>{users[participantInfo(item.value)].email}</td>
-                    <td>{users[participantInfo(item.value)].department}</td> */}
                     <td>
                       <AiIcon.AiOutlineMinus
                         style={{

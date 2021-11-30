@@ -25,7 +25,7 @@
   flex-direction: column;
   align-items: center;
   border-radius: 10px;
-  box-shadow: 1px rgba(64, 64, 64, 0.4);
+  box-shadow: 1px 1px 7px 1px gray;
 }
 .m_dateTimeForm {
   /* background: #c4c4c4;

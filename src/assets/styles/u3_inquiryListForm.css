@@ -8,6 +8,7 @@
 .inquiryListUpper {
   display: flex;
   flex-direction: row;
+  justify-content: center;
 }
 .inquiryListUpper button {
   width: fit-content;
@@ -73,12 +74,13 @@
 
 .accordion {
   width: 90%;
-  height: 73vh;
+  height: 79vh;
   margin-left: 5%;
 
-  border-top: 1px solid gray;
+  /* border-top: 1px solid gray;
   border-bottom: 1px solid gray;
-  border-radius: 3px;
+  border-radius: 3px; */
+  box-shadow: 1px 1px 10px 2px gray;
 
   overflow: auto;
 }
