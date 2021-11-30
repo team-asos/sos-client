@@ -5,6 +5,7 @@ import * as cg from 'react-icons/cg';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 import MessageDetailBox from './a3_messageDetailBox';
+
 import '../assets/styles/a3_answerWaitingList.css';
 
 const AnswerWaitingList = props => {

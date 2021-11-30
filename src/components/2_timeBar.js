@@ -4,9 +4,12 @@ const DateTimeBox = () => {
   const [date, setDate] = useState(new Date());
 
   const callTime = () => {
-    setInterval(() => {
+    let time = setInterval(() => {
       setDate(new Date());
     }, 1000);
+    return () => {
+      clearInterval(time);
+    };
   };
 
   //요일 불러우는 함수

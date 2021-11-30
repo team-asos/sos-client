@@ -210,33 +210,36 @@ export const RoomTab = ({
 
       {selection.stage === SELECTION_EDIT && (
         <>
-          <label style={{ marginTop: '5%' }}>
+          <label style={{ marginTop: '3%' }}>
             <bs.BsCheckAll style={{ color: 'transparent' }} />
             회의실 이름 :{'     '}
             <input
               className="seat-input-name-show"
               value={selection.name}
-              placeholder="입력해 주세요."
-              onChange={e => {
-                inputName(e);
-              }}
               disabled
             />
           </label>
-          <label style={{ marginTop: '5%' }}>
+          <label style={{ marginTop: '3%' }}>
             <bs.BsCheckAll style={{ color: 'transparent' }} />
             회의실 최대 인원 수 :{'     '}
             <input
               className="room-input-maxuser-show"
               value={selection.maxUser}
-              onChange={e => {
-                inputNumber(e);
-              }}
               disabled
+            />
+          </label>
+          <label style={{ marginTop: '3%' }}>
+            <bs.BsCheckAll style={{ color: 'transparent' }} />
+            ESL 아이디 :{'     '}
+            <input
+              className="seat-input-name-show"
+              value={selection.tagId}
+              disabled={number === 0 ? true : false}
             />
           </label>
           <button
             className="seat-btn-make"
+            style={{ marginTop: '3.5%' }}
             onClick={() => {
               handleDelete();
             }}
