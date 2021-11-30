@@ -93,6 +93,13 @@ export const Board = ({
     });
   };
 
+  const transformLength = (type, length) => {
+    if (type === ROOM) {
+      if (length === 0) return `0px`;
+      else return `${length * 50 + 10 * (length - 1)}px`;
+    } else return `${length * 50}px`;
+  };
+
   const itemStyle = type => {
     if (type === EMPTY) return { backgroundColor: 'rgb(245, 245, 245)' };
     else if (type === SEAT)
@@ -134,8 +141,8 @@ export const Board = ({
             style={{
               ...itemStyle(col.type),
               position: 'absolute',
-              width: `${col.width * 50}px`,
-              height: `${col.height * 50}px`,
+              width: transformLength(col.type, col.width),
+              height: transformLength(col.type, col.height),
               left: `${x * 50 + 50 + 10 * x}px`,
               top: `${y * 50 + 50 + 10 * y}px`,
             }}
@@ -144,6 +151,7 @@ export const Board = ({
               <img
                 style={{ width: '100%', height: '100%', opacity: '40%' }}
                 src={col.name}
+                alt=""
               />
             ) : col.type !== FACILITY ? (
               col.name
