@@ -21,14 +21,14 @@ const SeatPage = () => {
   };
   const [myId, setMyId] = useState();
   const [cookie] = useCookies(['access_token']);
-  const [isToggleOn, setIsToggleOn] = useState(1);
+  const [isToggleOn, setIsToggleOn] = useState(0);
   const [floors, setFloors] = useState([]);
   const [selectedFloor, setSelectedFloor] = useState([]);
   const [reservedSeatsCnt, setReservedSeatsCnt] = useState(0);
   const [seatsCnt, setSeatsCnt] = useState(0);
   const handleClick = e => {
     setIsToggleOn(!isToggleOn);
-    isToggleOn
+    !isToggleOn
       ? (e.target.style.color = '#820101')
       : (e.target.style.color = 'black');
   };
@@ -124,14 +124,13 @@ const SeatPage = () => {
             {isPc && <p className="selectFloorTextStyle">층을 선택하세요.</p>}
           </div>
 
-          <div className="statusForm">
+          <div className={isPc ? 'statusForm' : 'm_statusForm'}>
             <div className="showFacility">
               {/*시설 아이콘*/}
               <div className="facility-icon-box">
                 <div className="facility-icon-div">
                   <BsIcon.BsFillInfoCircleFill
-                    className="facilityicon"
-                    size={35}
+                    className={isPc ? 'facilityicon' : 'm_facilityIcon'}
                     onClick={handleClick}
                     style={{ cursor: 'pointer' }}
                   ></BsIcon.BsFillInfoCircleFill>
@@ -140,14 +139,22 @@ const SeatPage = () => {
             </div>
             {/*좌석 현황*/}
             <div className="reservedSeats">
-              <div className="reservedSeatShape"></div>
-              <div className="reservedSeatsTextStyle">
-                사용 중인 좌석 {reservedSeatsCnt}석
+              <div
+                className={isPc ? 'reservedSeatShape' : 'm_reservedSeatShape'}
+              ></div>
+              <div
+                className={
+                  isPc ? 'reservedSeatsTextStyle' : 'm_reservedSeatsTextStyle'
+                }
+              >
+                사용 중 {reservedSeatsCnt}석
               </div>
             </div>
             <div className="ableSeats">
-              <div className="ableSeatShape"></div>
-              <div className="ableSeatsTextStyle">
+              <div className={isPc ? 'ableSeatShape' : 'm_ableSeatShape'}></div>
+              <div
+                className={isPc ? 'ableSeatsTextStyle' : 'm_ableSeatsTextStyle'}
+              >
                 예약 가능 {seatsCnt - reservedSeatsCnt}석
               </div>
             </div>
@@ -159,6 +166,7 @@ const SeatPage = () => {
             userId={myId}
             getSeatsCnt={getSeatsCnt}
             getReservedSeatsCnt={getReservedSeatsCnt}
+            isToggleOn={isToggleOn}
           />
         </div>
       </div>

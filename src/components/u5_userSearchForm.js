@@ -29,6 +29,20 @@ const UserSearchForm = ({ getUserId }) => {
   const handleChange = value => {
     setID(value);
   };
+  const resetSearchUser = () => {
+    setUserLocation({
+      seatFloor: '',
+      roomFloor: '',
+      seatLocation: '',
+      roomLocation: '',
+      seatStatus: '',
+      roomStatus: '',
+      seatId: 0,
+    });
+  };
+  useEffect(() => {
+    resetSearchUser();
+  }, [userReservation]);
   useEffect(() => {
     const fetchUsers = async () => {
       await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/users/search`, {

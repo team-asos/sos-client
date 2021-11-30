@@ -19,6 +19,7 @@ export const BoardContainer = ({
   userId,
   getSeatsCnt,
   getReservedSeatsCnt,
+  isToggleOn,
 }) => {
   const isPc = useMediaQuery({
     query: '(min-width:768px)',
@@ -34,6 +35,8 @@ export const BoardContainer = ({
   const [seats, setSeats] = useState([]);
   const [rooms, setRooms] = useState([]);
   const [facilities, setFacilities] = useState([]);
+
+  const [reservedSeatsCnt, setReservedSeatsCnt] = useState(0);
 
   const [selection, setSelection] = useState({
     id: -1,
@@ -101,7 +104,6 @@ export const BoardContainer = ({
     fetchRooms();
     fetchFacilities();
   }, [floor.id]);
-  const [reservedSeatsCnt, setReservedSeatsCnt] = useState(0);
 
   useEffect(() => {
     let newMap = board;
@@ -161,27 +163,33 @@ export const BoardContainer = ({
         }),
       );
     }
-
     for (let facility of facilities) {
       newMap[facility.y][facility.x] = {
         type: FACILITY,
         id: facility.id,
-        name: facility.type,
+        name: getFacilityType(facility.type),
         width: 1,
         height: 1,
       };
     }
-
     setBoard(newMap);
   }, [facilities]);
-
+  const getFacilityType = type => {
+    return `/images/${type}.png`;
+  };
+  console.log(seats);
   useEffect(() => {
-    for (let seat of seats) {
-      if (seat.reservations.length !== 0) {
-        getReservedSeatsCnt(reservedSeatsCnt + 1);
+    let count = 0;
+    seats.map(seat => {
+      if (seat.reservations.length > 0) {
+        console.log(reservedSeatsCnt);
+        // setReservedSeatsCnt(reservedSeatsCnt + 1);
+        count++;
       }
-    }
-  }, [facilities]);
+    });
+
+    getReservedSeatsCnt(count);
+  }, [seats]);
   return (
     <div className={isPc ? 'u_boardContainer' : 'mobileBoardContainer'}>
       <Board
@@ -191,6 +199,7 @@ export const BoardContainer = ({
         setBoard={setBoard}
         seats={seats}
         searchUserId={searchUserId}
+        isToggleOn={isToggleOn}
       />
       <div style={{ display: 'flex', flexDirection: 'column', height: '80vh' }}>
         <DateTimeForm selection={selection} userId={userId} />

@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useReducer } from 'react';
-import { useCookies } from 'react-cookie';
 import { Table } from 'react-bootstrap';
 import { useMediaQuery } from 'react-responsive';
 import * as moment from 'moment';
@@ -13,12 +12,9 @@ const RoomTimeTable = ({ MAXUSER, selectedDate, roomId }) => {
   });
   const [timeTable, setTimeTable] = useState([]);
   const [isReserved, setIsReserved] = useState([]); //예약 되어있는지 확인
-  //const isClicked = Array.from({ length: 20 }, () => 0); 이렇게 하고 싶지만 1로 바꿔주는게 밑에 있어서 색상 적용이 안됨
   const [start, setStart] = useState(''); //진짜 예약할 시간 보내줘야함
   const [end, setEnd] = useState(''); //진짜 예약할 시간
   const [deleteClick, setDeleteClick] = useState(0); //선택취소가 눌렸는지 안눌렸는지
-  const [isClicked, setIsClicked] = useState([]); //색상 지정하기 위해
-  const [isPast, setIsPast] = useState([]);
   const [time, setTime] = useState(
     moment(new Date()).format('HH:mm').toString(),
   ); //지금 시간
@@ -37,10 +33,9 @@ const RoomTimeTable = ({ MAXUSER, selectedDate, roomId }) => {
     isClicked: 0,
     idx: null,
   });
+
+  const [clickes, setClickes] = useState([]);
   const fetchRoomTable = async () => {
-    // for (let i = 0; i < 20; i++) {
-    //   isClicked[i] = 0;
-    // }
     const result = await fetch(
       `${
         process.env.REACT_APP_SERVER_BASE_URL
@@ -55,8 +50,43 @@ const RoomTimeTable = ({ MAXUSER, selectedDate, roomId }) => {
     )
       .then(response => response.json())
       .then(json => {
-        setTimeTable(json);
+        setTimeTable(
+          json.map(time => {
+            if (time.id) {
+              return {
+                ...time,
+                start_time: moment(time.start_time).format('HH:mm'),
+                end_time: moment(time.end_time).format('HH:mm'),
+                startTime: moment(time.startTime).format('HH:mm'),
+                endTime: moment(time.endTime).format('HH:mm'),
+              };
+            } else {
+              return {
+                ...time,
+                start_time: moment(time.start_time).format('HH:mm'),
+                end_time: moment(time.end_time).format('HH:mm'),
+              };
+            }
+          }),
+        );
       });
+  };
+
+  useEffect(() => {
+    if (secondClick.isClicked) {
+      setEnd(secondClick.End);
+    } else if (firstClick.isClicked) {
+      setStart(firstClick.Start);
+      setEnd(firstClick.End);
+    }
+  }, [firstClick, secondClick]);
+
+  const reset = () => {
+    setFirstClick({ Start: '', End: '', isClicked: 0, idx: null }); //초기화
+    setSecondClick({ Start: '', End: '', isClicked: 0, idx: null }); //초기화
+    setStart('시작');
+    setEnd('종료');
+    setClickes([]);
   };
 
   /*테이블 시간 클릭 했을 때 */
@@ -73,19 +103,17 @@ const RoomTimeTable = ({ MAXUSER, selectedDate, roomId }) => {
         isClicked: 1,
         idx: i,
       });
-      //firstClick.startTime으로 바꾸고 싶은데 비동기 처리를 못 하겠음
-      //일단 임시방편임 실시간으로 input값에 들어가게 하고 싶어서
-      setStart(startTime);
-      setEnd(endTime);
+      setClickes([i]);
+
+      console.log(firstClick.Start);
     } else if (firstClick.isClicked) {
-      //여기는 firstClick에 값 들어감
+      console.log(firstClick);
       //첫번째가 선택 됐을 때
       if (startTime === firstClick.Start && endTime === firstClick.End) {
         //똑같은거 다시 눌렀을 때
-        setFirstClick({ Start: '', End: '', isClicked: 0, idx: null }); //초기화
-        setStart('시작');
-        setEnd('종료');
+        reset();
       } else if (!secondClick.isClicked) {
+        console.log(secondClick);
         //첫번째랑 다를 때 두번째로 설정
         setSecondClick({
           Start: startTime,
@@ -93,34 +121,15 @@ const RoomTimeTable = ({ MAXUSER, selectedDate, roomId }) => {
           isClicked: 1,
           idx: i,
         });
-      } else if (secondClick.isClicked) {
-        //누르자 마자 바뀌어야하기 때문에 여기에 있는게 맞음
-        for (let i = firstClick.idx; i < secondClick.idx; i++) {
-          isClicked[i] = 0;
-        }
-        setFirstClick({ Start: '', End: '', isClicked: 0, idx: null }); //초기화
-        setSecondClick({ Start: '', End: '', isClicked: 0, idx: null }); //초기화
-        //setStart('');//초기화 하면 input값이 사라짐 ㅠ
-        setEnd('');
-      }
-    }
-    //여기부터는 first,second뜸
-    //setSecondClick 설정되고 바로 설정해주고 싶음
-    if (secondClick.idx) {
-      if (secondClick.idx > firstClick.idx) {
-        setEnd(secondClick.End); //이것도 위에서 해주면 좋음
-        for (let i = 0; i < timeTable.length; i++) {
-          //시작~끝 색상 변경하기 위해.. 원래는 위에서 secondClick되자마자 해줘야함
-          if (i >= firstClick.idx && i <= secondClick.idx) {
-            isClicked[i] = 1;
-          } else {
-            isClicked[i] = 0;
-          }
-        }
-      } else {
-        alert('시작 시간을 먼저 선택해주세요.');
-        setStart('시작');
-        setEnd('종료');
+        setClickes(
+          Array.from(
+            { length: i - firstClick.idx + 1 },
+            (_, i) => i + firstClick.idx,
+          ),
+        );
+        console.log(secondClick);
+      } else if (secondClick.isClicked === 1) {
+        reset();
       }
     }
   };
@@ -129,49 +138,16 @@ const RoomTimeTable = ({ MAXUSER, selectedDate, roomId }) => {
     // if (firstClick.idx===null && secondClick.idx===null)
     //   alert('시간을 선택해주세요.');
     setDeleteClick(!deleteClick);
-    for (let i = 0; i < 20; i++) {
-      //0으로 초기화는 되는데 색 변경이 안됨
-      isClicked[i] = 0;
-    }
-    setFirstClick({ Start: '', End: '', isClicked: 0, idx: null }); //초기화
-    setSecondClick({ Start: '', End: '', isClicked: 0, idx: null }); //초기화
-    setStart('시작');
-    setEnd('종료');
+    reset();
   };
-  //예약,클릭 되어있는지 색칠한거 초기화
-  const resetIsReserved = () => {
-    console.log('여기들어옴');
-    for (let i = 0; i < 20; i++) {
-      isReserved[i] = 0; //예약표시한거 초기화
-      isClicked[i] = 0; //클릭 표시한 거 초기화
-    }
-  };
+
   useEffect(() => {
     if (roomId !== null && selectedDate !== null) {
       fetchRoomTable();
-      resetIsReserved(); //예약, 클릭 상태초기화
+      reset();
     }
   }, [selectedDate]);
 
-  console.log(timeTable);
-  useEffect(() => {
-    if (timeTable !== null) convertToKST();
-  }, [timeTable]); //selectedDate넣으면 왜 안뜨는지
-  const convertToKST = () => {
-    for (let i = 0; i < timeTable.length; i++) {
-      timeTable[i].start_time = moment(timeTable[i].start_time).format('HH:mm');
-      timeTable[i].end_time = moment(timeTable[i].end_time).format('HH:mm');
-      if (timeTable[i].id) {
-        for (let j = 0; j < timeTable.length; j++) {
-          if (i == j) isReserved[j] = 1;
-        }
-        timeTable[i].startTime = moment(timeTable[i].startTime).format('HH:mm');
-        timeTable[i].endTime = moment(timeTable[i].endTime).format('HH:mm');
-      }
-    }
-  };
-  console.log(isReserved);
-  console.log(isClicked);
   return (
     <>
       <div
@@ -200,14 +176,13 @@ const RoomTimeTable = ({ MAXUSER, selectedDate, roomId }) => {
           <tbody>
             {timeTable &&
               selectedDate &&
-              timeTable[0] &&
-              timeTable[0].start_time.length < 10 &&
+              // timeTable[0] &&
+              // timeTable[0].start_time.length < 10 &&
               timeTable.map(
                 (item, idx) => (
                   <>
                     <tr key={idx}>
                       {/*시간 */}
-                      {console.log(secondClick)}
                       <td
                         className={
                           isReserved[idx] ? 'isReserved' : 'isNotReserved'
@@ -223,14 +198,19 @@ const RoomTimeTable = ({ MAXUSER, selectedDate, roomId }) => {
                                 )
                             : null
                         }
-                        //style={tableColorStyle(isClicked[idx])}
-
                         style={
-                          isClicked[idx]
+                          clickes.includes(idx)
                             ? { backgroundColor: 'crimson' }
-                            : isClicked[idx] && deleteClick
-                            ? { backgroundColor: 'none' }
-                            : null
+                            : clickes.includes(idx) && deleteClick
+                            ? { backgroundColor: '#fff' }
+                            : { backgroundColor: '#fff' }
+                          // isClicked[idx]
+                          //   ? { backgroundColor: 'crimson' }
+                          //   : isClicked[idx] && deleteClick
+                          //   ? { backgroundColor: 'none' }
+                          //   : isClicked[idx] && thirdClick.isClicked
+                          //   ? { backgroundColor: 'none' }
+                          //   : null
                         }
                       >
                         {item.start_time}-{item.end_time}

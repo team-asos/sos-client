@@ -41,6 +41,7 @@ const RoomReservationInfo = props => {
   const sortedReservation = reservation.sort((a, b) =>
     a.startTime.split('-').join().localeCompare(b.startTime.split('-').join()),
   );
+  console.log(reservation);
   return (
     <div className="reservationInfo">
       <div>
@@ -60,12 +61,9 @@ const RoomReservationInfo = props => {
         <div style={{ height: '35vh' }}>
           <MDBTable
             hover
-            style={{
-              width: '90%',
-              marginLeft: '5%',
-              height: 'fit-content',
-            }}
+            style={{ width: '90%', marginLeft: '5%' }}
             scrollY="true"
+            maxHeight="30vh"
           >
             <MDBTableHead style={{ fontSize: '0.9em' }}>
               <tr>

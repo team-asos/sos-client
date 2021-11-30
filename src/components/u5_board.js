@@ -25,6 +25,7 @@ export const Board = ({
   board,
   seats,
   searchUserId,
+  isToggleOn,
 }) => {
   const isPc = useMediaQuery({
     query: '(min-width:768px)',
@@ -98,7 +99,7 @@ export const Board = ({
       return { backgroundColor: '#00a023', color: '#fff' };
     else if (type === ROOM)
       return { backgroundColor: '#fff', border: '2px solid #8d99ae' };
-    else if (type === FACILITY) return { backgroundColor: '#f5df4d' };
+    //else if (type === FACILITY) return { backgroundColor: '#f5df4d' };
     else if (type === SELECTION)
       return { backgroundColor: '#a70000', color: '#fff' };
     else if (type === RESERVED_SEAT)
@@ -107,8 +108,6 @@ export const Board = ({
       return {
         backgroundColor: 'red',
         color: '#fff',
-        width: '60px',
-        height: '60px',
       };
   };
 
@@ -138,7 +137,11 @@ export const Board = ({
                   : `none`,
             }}
           >
-            {col.name}
+            {col.type === FACILITY && isToggleOn ? (
+              <img style={{ width: '100%', height: '100%' }} src={col.name} />
+            ) : col.type !== FACILITY ? (
+              col.name
+            ) : null}
           </div>
         );
       }),
