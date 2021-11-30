@@ -22,7 +22,6 @@ const RoomCheckPage = () => {
   const history = useHistory();
 
   useEffect(() => {
-    console.log(history);
     //if (history.action === 'POP') {
     // history.push('/room-check');
     //}

@@ -104,16 +104,12 @@ const RoomTimeTable = ({ MAXUSER, selectedDate, roomId }) => {
         idx: i,
       });
       setClickes([i]);
-
-      console.log(firstClick.Start);
     } else if (firstClick.isClicked) {
-      console.log(firstClick);
       //첫번째가 선택 됐을 때
       if (startTime === firstClick.Start && endTime === firstClick.End) {
         //똑같은거 다시 눌렀을 때
         reset();
       } else if (!secondClick.isClicked) {
-        console.log(secondClick);
         //첫번째랑 다를 때 두번째로 설정
         setSecondClick({
           Start: startTime,
@@ -127,7 +123,6 @@ const RoomTimeTable = ({ MAXUSER, selectedDate, roomId }) => {
             (_, i) => i + firstClick.idx,
           ),
         );
-        console.log(secondClick);
       } else if (secondClick.isClicked === 1) {
         reset();
       }
@@ -147,7 +142,6 @@ const RoomTimeTable = ({ MAXUSER, selectedDate, roomId }) => {
       reset();
     }
   }, [selectedDate]);
-
   return (
     <>
       <div
@@ -184,11 +178,9 @@ const RoomTimeTable = ({ MAXUSER, selectedDate, roomId }) => {
                     <tr key={idx}>
                       {/*시간 */}
                       <td
-                        className={
-                          isReserved[idx] ? 'isReserved' : 'isNotReserved'
-                        }
+                        className={item.id ? 'isReserved' : 'isNotReserved'}
                         onClick={
-                          !isReserved[idx]
+                          !item.id
                             ? e =>
                                 clickHandler(
                                   item.start_time,
@@ -204,13 +196,6 @@ const RoomTimeTable = ({ MAXUSER, selectedDate, roomId }) => {
                             : clickes.includes(idx) && deleteClick
                             ? { backgroundColor: '#fff' }
                             : { backgroundColor: '#fff' }
-                          // isClicked[idx]
-                          //   ? { backgroundColor: 'crimson' }
-                          //   : isClicked[idx] && deleteClick
-                          //   ? { backgroundColor: 'none' }
-                          //   : isClicked[idx] && thirdClick.isClicked
-                          //   ? { backgroundColor: 'none' }
-                          //   : null
                         }
                       >
                         {item.start_time}-{item.end_time}

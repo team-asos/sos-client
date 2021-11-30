@@ -35,7 +35,6 @@ const MyReservationListForm = props => {
         setReservation(json);
       });
   };
-  //console.log(reservation);
 
   //예외처리
   useEffect(() => {

@@ -4,7 +4,7 @@
   margin: 2%;
 }
 Table .isReserved {
-  background-color: gray;
+  background-color: gray !important;
 }
 Table .isNotReserved {
   cursor: pointer;

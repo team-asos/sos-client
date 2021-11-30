@@ -177,13 +177,10 @@ export const BoardContainer = ({
   const getFacilityType = type => {
     return `/images/${type}.png`;
   };
-  console.log(seats);
   useEffect(() => {
     let count = 0;
     seats.map(seat => {
       if (seat.reservations.length > 0) {
-        console.log(reservedSeatsCnt);
-        // setReservedSeatsCnt(reservedSeatsCnt + 1);
         count++;
       }
     });

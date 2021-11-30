@@ -203,7 +203,6 @@ const InquiryListForm = props => {
                             />
                           </div>
                           <div
-                            style={{ width: '90%' }}
                             className={
                               isPc
                                 ? 'inquiryBodyMessage'

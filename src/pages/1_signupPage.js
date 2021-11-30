@@ -77,7 +77,19 @@ const SignUp = () => {
     setIdNo(e.target.value);
   };
   const inputPhone = e => {
-    setPhone(e.target.value);
+    //setPhone(e.target.value);
+    const str = e.target.value.replace(/[^0-9]/g, '');
+    if (str.length < 3) {
+      setPhone(str);
+    } else if (str.length < 4) {
+      setPhone(str.substr(0, 2) + '-' + str.substr(2));
+    } else if (str.length < 7) {
+      setPhone(str.substr(0, 3) + '-' + str.substr(3));
+    } else if (str.length < 11) {
+      setPhone(str.substr(0, 3) + '-' + str.substr(3, 3) + '-' + str.substr(6));
+    } else if (str.length < 12) {
+      setPhone(str.substr(0, 3) + '-' + str.substr(3, 4) + '-' + str.substr(7));
+    }
   };
   const inputDep = e => {
     setDep(e.target.value);
@@ -160,7 +172,7 @@ const SignUp = () => {
                 <input
                   type="text"
                   className="form-control"
-                  placeholder="- 를 제외하고 입력하세요"
+                  placeholder="010-0000-0000"
                   onChange={inputPhone}
                   value={tel}
                 />

@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import Select from 'react-select';
 import { useCookies } from 'react-cookie';
 import { Table } from 'react-bootstrap';
-import { formatISO } from 'date-fns';
 import { useMediaQuery } from 'react-responsive';
+import * as moment from 'moment';
 
 import '../assets/styles/u5_userSearchForm.css';
 //좌석 예약 페이지->직원 검색
@@ -11,33 +11,33 @@ const UserSearchForm = ({ getUserId }) => {
   const isPc = useMediaQuery({
     query: '(min-width:768px)',
   });
-  const now = formatISO(new Date());
+  const now = moment(new Date()).format('HH:mm');
   const [users, setUsers] = useState([]);
   const [ID, setID] = useState();
   const [cookie] = useCookies(['access_token']);
   const [userReservation, setUserReservation] = useState([]);
-  const [userLocation, setUserLocation] = useState({
+  const [userSeatLocation, setUserSeatLocation] = useState({
     seatFloor: '',
-    roomFloor: '',
     seatLocation: '',
+  });
+  const [userRoomLocation, setUserRoomLocation] = useState({
+    roomFloor: '',
     roomLocation: '',
-    seatStatus: '',
-    roomStatus: '',
-    seatId: 0,
+    roomTopic: '',
   });
   /*검색한 직원의 ID */
   const handleChange = value => {
     setID(value);
   };
   const resetSearchUser = () => {
-    setUserLocation({
+    setUserSeatLocation({
       seatFloor: '',
-      roomFloor: '',
       seatLocation: '',
+    });
+    setUserRoomLocation({
+      roomFloor: '',
       roomLocation: '',
-      seatStatus: '',
-      roomStatus: '',
-      seatId: 0,
+      roomTopic: '',
     });
   };
   useEffect(() => {
@@ -76,23 +76,22 @@ const UserSearchForm = ({ getUserId }) => {
       });
   };
   const search = () => {
+    console.log(userReservation);
     userReservation.map(item => {
       if (item.room === null && item.status === 1) {
         if (item.endTime === null) {
-          setUserLocation({
+          setUserSeatLocation({
             seatFloor: item.seat.floor.name,
             seatLocation: item.seat.name,
-            seatStatus: '사용중',
-            seatId: item.seat.id,
           });
         }
       }
-      if (item.status === 1 && item.room != null) {
+      if (item.status === 1 && item.room) {
         if (item.endTime >= now) {
-          setUserLocation({
+          setUserRoomLocation({
             roomFloor: item.room.floor.name,
             roomLocation: item.room.name,
-            roomStatus: '미팅중',
+            roomTopic: item.topic,
           });
         }
       }
@@ -113,7 +112,7 @@ const UserSearchForm = ({ getUserId }) => {
       <div className={isPc ? 'searchUserTextStyle' : 'm_searchUserTextStyle'}>
         <hr></hr>직원 검색
       </div>
-      <div>
+      <div style={{ marginBottom: '2vh' }}>
         <Select
           menuPosition={'center'}
           options={users.map(item => ({
@@ -131,6 +130,7 @@ const UserSearchForm = ({ getUserId }) => {
         {users.map(item =>
           item.id === ID ? (
             <>
+              <div className="searchUserInfoText">회원 정보</div>
               <Table striped hover className="userLocationInfo">
                 <thead>
                   <tr>
@@ -149,39 +149,40 @@ const UserSearchForm = ({ getUserId }) => {
                   </tr>
                 </tbody>
               </Table>
+              <div className="searchUserInfoText">좌석</div>
+
               <Table striped hover className="userLocationInfo">
                 <thead>
                   <tr>
                     <th></th>
                     <th>층</th>
-                    <th>좌석 위치</th>
-                    <th>이용 상태</th>
+                    <th>이름</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
                     <td />
-                    <td>{userLocation.seatFloor}</td>
-                    <td>{userLocation.seatLocation}</td>
-                    <td>{userLocation.seatStatus}</td>
+                    <td>{userSeatLocation.seatFloor}</td>
+                    <td>{userSeatLocation.seatLocation}</td>
                   </tr>
                 </tbody>
               </Table>
+              <div className="searchUserInfoText">회의실</div>
               <Table striped hover className="userLocationInfo">
                 <thead>
                   <tr>
                     <th></th>
                     <th>층</th>
-                    <th>회의실 위치</th>
-                    <th>이용 상태</th>
+                    <th>이름</th>
+                    <th>회의 주제</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
                     <td />
-                    <td>{userLocation.roomFloor}</td>
-                    <td>{userLocation.roomLocation}</td>
-                    <td>{userLocation.roomStatus}</td>
+                    <td>{userRoomLocation.roomFloor}</td>
+                    <td>{userRoomLocation.roomLocation}</td>
+                    <td>{userRoomLocation.roomTopic}</td>
                   </tr>
                 </tbody>
               </Table>

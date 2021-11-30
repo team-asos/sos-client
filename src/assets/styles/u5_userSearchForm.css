@@ -15,7 +15,6 @@
   width: inherit;
 }
 .userLocationInfo {
-  margin-top: 3vh;
 }
 .searchUserTextStyle {
   margin-top: 2vh;
@@ -28,5 +27,11 @@
   font-size: 1.1em;
   font-weight: bold;
   color: #494949;
+  margin-bottom: 1vh;
+}
+.searchUserInfoText {
+  font-size: 1.1em;
+  font-weight: bold;
+  color: #820101;
   margin-bottom: 1vh;
 }

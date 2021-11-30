@@ -133,6 +133,10 @@
   font-size: 0.9em;
   font-weight: bold;
 }
+.inquiryBodyMessage {
+  width: 90%;
+  overflow-wrap: anywhere;
+}
 .m_inquiryBodyMessage {
   font-size: 0.9em;
 }
