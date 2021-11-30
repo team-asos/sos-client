@@ -134,8 +134,8 @@ export const Board = ({
             style={{
               ...itemStyle(col.type),
               position: 'absolute',
-              width: `${col.width * 50}px`,
-              height: `${col.height * 50}px`,
+              width: `${col.width * 50 + 10 * x}px`,
+              height: `${col.height * 50 + 10 * y}px`,
               left: `${x * 50 + 50 + 10 * x}px`,
               top: `${y * 50 + 50 + 10 * y}px`,
             }}
