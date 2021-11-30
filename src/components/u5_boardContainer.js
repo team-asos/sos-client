@@ -36,8 +36,6 @@ export const BoardContainer = ({
   const [rooms, setRooms] = useState([]);
   const [facilities, setFacilities] = useState([]);
 
-  const [reservedSeatsCnt, setReservedSeatsCnt] = useState(0);
-
   const [selection, setSelection] = useState({
     id: -1,
     name: '',
