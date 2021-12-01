@@ -72,7 +72,7 @@ export const Search = () => {
   };
 
   return (
-    <>
+    <div>
       <div>
         <Select
           menuPosition={'center'}
@@ -138,10 +138,12 @@ export const Search = () => {
       </div>
       {seatReservation && (
         <Minimap
+          // size={window.innerWidth}
+          size={800}
           seatId={seatReservation.seat.id}
           floorId={seatReservation.seat.floor.id}
         />
       )}
-    </>
+    </div>
   );
 };

@@ -8,7 +8,7 @@ import {
   SELECTION,
 } from '../../const/object-type.const';
 
-export const Minimap = ({ seatId, floorId }) => {
+export const Minimap = ({ size, seatId, floorId }) => {
   const [board, setBoard] = useState([]);
 
   const [floor, setFloor] = useState(null);
@@ -132,6 +132,7 @@ export const Minimap = ({ seatId, floorId }) => {
           if (colIndex === room.x && rowIndex === room.y)
             return {
               type: ROOM,
+              name: room.name,
               width: room.width,
               height: room.height,
             };
@@ -160,10 +161,9 @@ export const Minimap = ({ seatId, floorId }) => {
       if (col.width === 0) return `0px`;
       else
         return `${
-          ((window.innerWidth - (length - 1) * 4) / length) * col.width +
-          4 * (col.width - 1)
+          ((size - (length - 1) * 4) / length) * col.width + 4 * (col.width - 1)
         }px`;
-    } else return `${(window.innerWidth - (length - 1) * 4) / length}px`;
+    } else return `${(size - (length - 1) * 4) / length}px`;
   };
 
   const transformHeight = (col, length) => {
@@ -171,10 +171,10 @@ export const Minimap = ({ seatId, floorId }) => {
       if (col.width === 0) return `0px`;
       else
         return `${
-          ((window.innerWidth - (length - 1) * 4) / length) * col.height +
+          ((size - (length - 1) * 4) / length) * col.height +
           4 * (col.height - 1)
         }px`;
-    } else return `${(window.innerWidth - (length - 1) * 4) / length}px`;
+    } else return `${(size - (length - 1) * 4) / length}px`;
   };
 
   const itemStyle = type => {
@@ -186,12 +186,22 @@ export const Minimap = ({ seatId, floorId }) => {
       };
     // 좌석
     else if (type === SEAT)
-      return { backgroundColor: '#99D98C', color: '#fff', borderRadius: '4px' };
+      return {
+        backgroundColor: '#99D98C',
+        color: '#fff',
+        borderRadius: '4px',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+      };
     // 회의실
     else if (type === ROOM)
       return {
         backgroundColor: '#E5E5E5',
         borderRadius: '4px',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
       };
     // 회의실
     else if (type === FACILITY)
@@ -220,14 +230,10 @@ export const Minimap = ({ seatId, floorId }) => {
               width: transformWidth(col, floor.width),
               height: transformHeight(col, floor.width),
               left: `${
-                x *
-                  ((window.innerWidth - (floor.width - 1) * 4) / floor.width) +
-                4 * x
+                x * ((size - (floor.width - 1) * 4) / floor.width) + 4 * x
               }px`,
               top: `${
-                y *
-                  ((window.innerWidth - (floor.width - 1) * 4) / floor.width) +
-                4 * y
+                y * ((size - (floor.width - 1) * 4) / floor.width) + 4 * y
               }px`,
             }}
           >
@@ -242,10 +248,19 @@ export const Minimap = ({ seatId, floorId }) => {
     return (
       <div
         style={{
-          position: 'relative',
+          overflowX: 'auto',
+          overflowY: 'auto',
         }}
       >
-        <Item board={board} />
+        <div
+          style={{
+            width: `${size}px`,
+            height: `360px`,
+            position: 'relative',
+          }}
+        >
+          <Item board={board} />
+        </div>
       </div>
     );
   };
