@@ -98,6 +98,7 @@ const SignUp = () => {
   const inputPosition = e => {
     setPosition(e.target.value);
   };
+
   return (
     <>
       {isPc && (
@@ -158,7 +159,7 @@ const SignUp = () => {
                     <input
                       type="password"
                       className="form-control"
-                      placeholder="대소문자와 숫자를 포함한 8~12자리"
+                      placeholder="8자리 이상으로 입력해주세요."
                       onChange={inputPw}
                       value={password}
                     />
@@ -197,7 +198,7 @@ const SignUp = () => {
                     <input
                       type="text"
                       className="form-control"
-                      placeholder="- 를 제외하고 입력하세요"
+                      placeholder="010-0000-0000"
                       onChange={inputPhone}
                       value={tel}
                     />
@@ -278,7 +279,7 @@ const SignUp = () => {
 
             <div>
               <Form.Text style={{ marginTop: '-1%' }}>
-                알파벳을 포함한 5~12자리
+                8자리 이상의 비밀번호
               </Form.Text>
               <InputGroup className="mb-2">
                 <InputGroup.Text>
@@ -308,7 +309,6 @@ const SignUp = () => {
                 />
               </InputGroup>
             </div>
-
             <div>
               <InputGroup className="mb-2">
                 <InputGroup.Text>
@@ -322,21 +322,19 @@ const SignUp = () => {
                 />
               </InputGroup>
             </div>
-
             <div>
               <InputGroup className="mb-2">
                 <InputGroup.Text>
                   <ai.AiFillPhone style={{ color: 'gray' }} />
                 </InputGroup.Text>
                 <FormControl
-                  placeholder="전화번호를 입력하세요."
+                  placeholder="전화번호"
                   onChange={inputPhone}
                   value={tel}
                   style={{ width: '60vw' }}
                 />
               </InputGroup>
             </div>
-
             <div>
               <InputGroup className="mb-2">
                 <InputGroup.Text>
