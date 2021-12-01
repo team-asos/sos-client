@@ -44,6 +44,57 @@ export const BoardContainer = ({
     stage: SELECTION_FIRST,
   });
 
+  const fetchSeats = async () => {
+    const result = await fetch(
+      `${process.env.REACT_APP_SERVER_BASE_URL}/seats/search?floorId=${floor.id}`,
+      {
+        method: 'GET',
+        headers: {
+          'Content-type': 'application/json',
+          Accept: 'application/json',
+        },
+      },
+    );
+
+    setSeats(await result.json());
+  };
+
+  const fetchRooms = async () => {
+    const result = await fetch(
+      `${process.env.REACT_APP_SERVER_BASE_URL}/rooms/search?floorId=${floor.id}`,
+      {
+        method: 'GET',
+        headers: {
+          'Content-type': 'application/json',
+          Accept: 'application/json',
+        },
+      },
+    );
+
+    setRooms(await result.json());
+  };
+
+  const fetchFacilities = async () => {
+    const result = await fetch(
+      `${process.env.REACT_APP_SERVER_BASE_URL}/facilities/search?floorId=${floor.id}`,
+      {
+        method: 'GET',
+        headers: {
+          'Content-type': 'application/json',
+          Accept: 'application/json',
+        },
+      },
+    );
+
+    setFacilities(await result.json());
+  };
+
+  const fetchArrangement = async () => {
+    await fetchSeats();
+    await fetchRooms();
+    await fetchFacilities();
+  };
+
   useEffect(() => {
     setBoard(
       Array.from({ length: floor.height }, () =>
@@ -53,54 +104,7 @@ export const BoardContainer = ({
       ),
     );
 
-    const fetchSeats = async () => {
-      const result = await fetch(
-        `${process.env.REACT_APP_SERVER_BASE_URL}/seats/search?floorId=${floor.id}`,
-        {
-          method: 'GET',
-          headers: {
-            'Content-type': 'application/json',
-            Accept: 'application/json',
-          },
-        },
-      );
-
-      setSeats(await result.json());
-    };
-
-    const fetchRooms = async () => {
-      const result = await fetch(
-        `${process.env.REACT_APP_SERVER_BASE_URL}/rooms/search?floorId=${floor.id}`,
-        {
-          method: 'GET',
-          headers: {
-            'Content-type': 'application/json',
-            Accept: 'application/json',
-          },
-        },
-      );
-
-      setRooms(await result.json());
-    };
-
-    const fetchFacilities = async () => {
-      const result = await fetch(
-        `${process.env.REACT_APP_SERVER_BASE_URL}/facilities/search?floorId=${floor.id}`,
-        {
-          method: 'GET',
-          headers: {
-            'Content-type': 'application/json',
-            Accept: 'application/json',
-          },
-        },
-      );
-
-      setFacilities(await result.json());
-    };
-
-    fetchSeats();
-    fetchRooms();
-    fetchFacilities();
+    fetchArrangement();
   }, [floor.id]);
 
   useEffect(() => {
@@ -172,9 +176,12 @@ export const BoardContainer = ({
     }
     setBoard(newMap);
   }, [facilities]);
+
   const getFacilityType = type => {
     return `/images/${type}.png`;
   };
+
+  console.log(seats);
   useEffect(() => {
     let count = 0;
     seats.map(seat => {

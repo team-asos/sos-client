@@ -9,6 +9,8 @@
   border: 1px rgb(212, 212, 212);
   border-style: none solid solid solid;
   border-radius: 2px;
+
+  background-color: white;
 }
 
 .answerWaitingListLeft {
@@ -100,7 +102,7 @@
   padding: 2%;
 
   border-radius: 3px;
-  background: rgba(107, 107, 107, 0.308);
+  border: 1px solid rgb(219, 219, 219);
 
   overflow: auto;
 }
@@ -112,6 +114,7 @@
   text-align: center;
 
   border: 0.7px solid rgba(128, 128, 128, 0.267);
+  box-shadow: 1px 1px 10px 4px rgba(231, 231, 231, 0.226);
 }
 
 .detailList {
@@ -133,11 +136,11 @@
   display: block;
   margin: 0 auto;
   border-radius: 5px;
-  border: 1px solid #c00000;
+  border: 1px solid rgb(151, 32, 32);
 
   background: transparent;
 }
 .sendBtn:hover {
-  background: #c00000d0;
+  background: rgb(151, 32, 32);
   color: white;
 }

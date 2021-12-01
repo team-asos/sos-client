@@ -6,7 +6,7 @@
 
   padding-top: 2%;
 
-  border: 1.5px solid gray;
+  border: none;
   border-radius: 3px;
 }
 
@@ -28,4 +28,20 @@
 }
 .reservation-history-icon:hover {
   color: gray;
+}
+/*좌석 내역*/
+.seatUseEndButton {
+  height: 3vh;
+  width: fit-content;
+  border: 1px solid #c00000;
+  border-radius: 3px;
+  color: #c00000;
+  background-color: transparent;
+}
+.seatUseEndButton:hover {
+  background-color: #8f0202;
+  color: white;
+
+  transition: ease 0.05s;
+  transform: scale(1.02);
 }

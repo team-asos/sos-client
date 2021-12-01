@@ -7,7 +7,11 @@ import InquiryForm from './u3_inquiryForm';
 import '../assets/styles/u3_inquiryListForm.css';
 import * as moment from 'moment';
 
-const InquiryListForm = props => {
+const InquiryListForm = ({ user, addInquiryClick }) => {
+  const [click, setClick] = useState(0);
+  const setterAddInquiryClick = () => {
+    setClick(0);
+  };
   const isPc = useMediaQuery({
     query: '(min-width:768px)',
   });
@@ -19,7 +23,7 @@ const InquiryListForm = props => {
 
   const res = async () => {
     await fetch(
-      `${process.env.REACT_APP_SERVER_BASE_URL}/questions/search?userId=${props.user.id}`,
+      `${process.env.REACT_APP_SERVER_BASE_URL}/questions/search?userId=${user.id}`,
       {
         headers: { Authorization: `Bearer ${cookie.access_token}` },
         method: 'GET',
@@ -32,10 +36,10 @@ const InquiryListForm = props => {
   };
 
   useEffect(() => {
-    if (props.user.id !== 'undefined') {
+    if (user.id !== 'undefined') {
       res();
     }
-  }, [props.user.id]);
+  }, [user.id]);
 
   //문의 답변 삭제 버튼
   const deleteClick = questionId => {
@@ -60,47 +64,30 @@ const InquiryListForm = props => {
   const [showModal, setShowModal] = useState(false);
 
   const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
+  const handleClose = () => {
+    setShow(false);
+    if (addInquiryClick) {
+      addInquiryClick = 0;
+    }
+  };
   const handleShow = () => setShow(true);
-
+  console.log(addInquiryClick);
   const toggleTrueFalse = () => {
     setShowModal(handleShow);
   };
-
+  const mobileHandleShow = () => {
+    if (addInquiryClick) {
+      setShowModal(handleShow);
+      console.log('보여줘');
+    }
+  };
+  useEffect(() => {
+    mobileHandleShow();
+  }, [addInquiryClick]);
   return (
     /*전체 문의 리스트 */
     <div>
       <div className="inquiryListTotal">
-        <div className="inquiryListUpper">
-          <p className={isPc ? 'myListText' : 'm_myListText'}>나의 문의 내역</p>
-          <span>
-            <OverlayTrigger
-              placement="right"
-              overlay={
-                <Tooltip
-                  id={`tooltip-bottom`}
-                  style={{
-                    fontSize: 'small',
-                    height: 'fit-content',
-                    backgroundColor: 'transparent',
-                    border: 'none',
-                  }}
-                >
-                  <strong style={{ color: '#c00000' }}>새로운 문의</strong>{' '}
-                  작성하기
-                </Tooltip>
-              }
-            >
-              <span>
-                <AiIcon.AiOutlinePlusSquare
-                  className="newInquiryIcon"
-                  size={30}
-                  onClick={e => toggleTrueFalse()}
-                />
-              </span>
-            </OverlayTrigger>
-          </span>
-        </div>
         {question.length === 0 ? (
           <div className={isPc ? 'noInquiryList' : 'm_noInquiryList'}>
             <div>
@@ -120,7 +107,7 @@ const InquiryListForm = props => {
           </div>
         ) : (
           <div>
-            <Accordion className="accordion" defaultActiveKey="0" flush>
+            <Accordion className="u3_accordion" defaultActiveKey="0" flush>
               {/*하나의 문의 제목, 내용/답변*/}
               {question &&
                 question
@@ -194,13 +181,15 @@ const InquiryListForm = props => {
                             >
                               {isPc ? '문의 내용' : '문의'}
                             </p>
-                            <AiIcon.AiTwotoneDelete
+
+                            <div
                               className={
                                 isPc ? 'deleteInquiry' : 'm_deleteInquiry'
                               }
-                              size={20}
                               onClick={() => deleteClick(item.id)}
-                            />
+                            >
+                              삭제
+                            </div>
                           </div>
                           <div
                             className={
@@ -257,8 +246,34 @@ const InquiryListForm = props => {
             </Accordion>
           </div>
         )}
+        {
+          isPc ? (
+            <div>
+              <button
+                className="inquiryButton"
+                onClick={e => toggleTrueFalse()}
+              >
+                문의 하기{' '}
+              </button>
+            </div>
+          ) : null
+          // <div className="inquiryListUpper">
+          //   <p className={isPc ? 'myListText' : 'm_myListText'}>
+          //     나의 문의 내역
+          //   </p>
+
+          //   <AiIcon.AiOutlinePlusSquare
+          //     className="newInquiryIcon"
+          //     size={30}
+          //     onClick={e => toggleTrueFalse()}
+          //   />
+          // </div>
+        }
       </div>
       {show ? <InquiryForm show={show} handleClose={handleClose} /> : null}
+      {addInquiryClick ? (
+        <InquiryForm show={show} handleClose={handleClose} />
+      ) : null}
     </div>
   );
 };

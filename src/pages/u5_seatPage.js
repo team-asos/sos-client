@@ -77,28 +77,23 @@ const SeatPage = () => {
 
   return (
     <div className="userSeatPage">
-      <div>{isPc ? <NavBarUser /> : ''}</div>
+      <div>{isPc ? <NavBarUser /> : null}</div>
 
-      <div className={isPc ? 'userSeatForm' : 'm_roomCheckForm'}>
-        <div className="u_seatHeader">
-          <div>
-            {isMobile ? (
+      <div className={isPc ? 'userSeatForm' : 'm_userSeatForm'}>
+        {isPc ? null : (
+          <div className="m_u_seatHeader">
+            <div>
               <FiMenu
                 size={40}
                 onClick={navClick}
                 style={{ color: '#820101' }}
               />
-            ) : null}
+            </div>
+            <div className="m_u_seatHeaderTextStyle">좌석 예약</div>
           </div>
-          <div
-            className={
-              isPc ? 'u_seatHeaderTextStyle' : 'm_roomCheck_titleTextStyle'
-            }
-          >
-            좌석 예약
-          </div>
-        </div>
-        {open ? <MobileNavBar open={open} /> : ''}
+        )}
+
+        {open ? <MobileNavBar open={open} /> : null}
 
         <div className="u_seatFormUpper">
           {/*층 이름, 시설 아이콘, 좌석 현황 */}
@@ -127,15 +122,11 @@ const SeatPage = () => {
           <div className={isPc ? 'statusForm' : 'm_statusForm'}>
             <div className="showFacility">
               {/*시설 아이콘*/}
-              <div className="facility-icon-box">
-                <div className="facility-icon-div">
-                  <BsIcon.BsFillInfoCircleFill
-                    className={isPc ? 'facilityicon' : 'm_facilityIcon'}
-                    onClick={handleClick}
-                    style={{ cursor: 'pointer' }}
-                  ></BsIcon.BsFillInfoCircleFill>
-                </div>
-              </div>
+              <BsIcon.BsFillInfoCircleFill
+                className={isPc ? 'facilityicon' : 'm_facilityIcon'}
+                onClick={handleClick}
+                style={{ cursor: 'pointer' }}
+              ></BsIcon.BsFillInfoCircleFill>
             </div>
             {/*좌석 현황*/}
             <div className="reservedSeats">
@@ -160,7 +151,7 @@ const SeatPage = () => {
             </div>
           </div>
         </div>
-        <div className="content">
+        <div className="seatContent">
           <BoardContainer
             floor={selectedFloor}
             userId={myId}

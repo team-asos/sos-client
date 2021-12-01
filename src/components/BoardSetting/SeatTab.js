@@ -161,14 +161,25 @@ export const SeatTab = ({
         </div>
       )}
       {selection.stage === SELECTION_EDIT && (
-        <label style={{ marginTop: '10%' }}>
-          <bs.BsCheckAll style={{ color: 'transparent' }} />
-          좌석 이름 :{'     '}
-          <input
-            className="seat-input-name-show"
-            value={selection.name}
-            disabled
-          />
+        <>
+          <label style={{ marginTop: '10%' }}>
+            <bs.BsCheckAll style={{ color: 'transparent' }} />
+            좌석 이름 :{'     '}
+            <input
+              className="seat-input-name-show"
+              value={selection.name}
+              disabled
+            />
+          </label>
+          <label style={{ marginTop: '8%' }}>
+            <bs.BsCheckAll style={{ color: 'transparent' }} />
+            ESL 아이디 :
+            <input
+              className="seat-input-name-show"
+              value={selection.tagId}
+              disabled={name === '' ? true : false}
+            />
+          </label>
           <button
             className="seat-btn-make"
             onClick={() => {
@@ -177,7 +188,7 @@ export const SeatTab = ({
           >
             삭제하기
           </button>
-        </label>
+        </>
       )}
     </div>
   );

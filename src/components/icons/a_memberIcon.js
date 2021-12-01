@@ -1,18 +1,15 @@
 import React from 'react';
 
-import * as HiIcon from "react-icons/hi"
+import * as HiIcon from 'react-icons/hi';
 
-import '../../assets/styles/IconStyle.css'
+import '../../assets/styles/IconStyle.css';
 
-class MemberIcon extends React.Component{
-    render(){
-        return(  
-            <div className="icon-box">
-                <HiIcon.HiUserGroup className="icon" size={35}/>
-                <p className="text">사용자 관리</p>
-            </div> 
-        );
-    }
-}
+const MemberIcon = () => {
+  return (
+    <div className="icon-box">
+      <HiIcon.HiUserGroup className="icon" size={27} />
+    </div>
+  );
+};
 
-export default MemberIcon
+export default MemberIcon;

@@ -21,37 +21,27 @@ const RoomCheckPage = () => {
   };
   const history = useHistory();
 
-  useEffect(() => {
-    //if (history.action === 'POP') {
-    // history.push('/room-check');
-    //}
-  }, []);
   return (
     <div className="roomCheckPage">
       <div>{isPc ? <NavBarUser /> : null}</div>
 
       <div className={isPc ? 'roomCheckForm' : 'm_roomCheckForm'}>
-        <div className="checkHeader">
-          <div>
-            {isMobile ? (
-              <FiMenu
-                size={40}
-                onClick={navClick}
-                style={{ color: '#820101' }}
-              />
-            ) : (
-              ''
-            )}
-          </div>
+        {isPc ? null : (
+          <div className="m_checkHeader">
+            <div>
+              {isMobile ? (
+                <FiMenu
+                  size={40}
+                  onClick={navClick}
+                  style={{ color: 'firebrick' }}
+                />
+              ) : null}
+            </div>
 
-          <div
-            className={
-              isPc ? 'roomCheck_titleTextStyle' : 'm_roomCheck_titleTextStyle'
-            }
-          >
-            회의실 조회
+            <div className="m_roomCheck_titleTextStyle">회의실 조회</div>
           </div>
-        </div>
+        )}
+
         {open ? <MobileNavBar open={open} /> : null}
         <div className="roomInfoTable">
           <RoomInfoTable />

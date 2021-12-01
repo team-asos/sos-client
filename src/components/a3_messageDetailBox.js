@@ -93,7 +93,7 @@ const MessageDetailBox = ({ messageInfo, show, isEmpty }) => {
   return (
     <div>
       {isEmpty === 1 ? (
-        messageInfo.length === 0 ? (
+        messageInfo.id === undefined ? (
           <div className="noMessageBox">
             <hi.HiCursorClick
               size={20}

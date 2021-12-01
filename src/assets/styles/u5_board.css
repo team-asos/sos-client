@@ -1,15 +1,18 @@
 .u_boardContainer {
   display: flex;
+  height: 97%;
 }
 .mobileBoardContainer {
   display: flex;
   flex-direction: column;
 }
 .u_boardCover {
+  margin-left: 1%;
   width: 70vw;
-  height: 80vh;
+  height: 100%;
   overflow: auto;
-  background-color: rgb(245, 245, 245);
+  background-color: white;
+  border-radius: 3px;
 }
 .mobileBoardCover {
   width: 95%;

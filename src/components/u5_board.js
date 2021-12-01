@@ -101,16 +101,20 @@ export const Board = ({
   };
 
   const itemStyle = type => {
-    if (type === EMPTY) return { backgroundColor: 'rgb(245, 245, 245)' };
+    if (type === EMPTY) return { backgroundColor: 'white' };
     else if (type === SEAT)
-      return { backgroundColor: '#99D98C', color: '#fff', borderRadius: '4px' };
+      return { backgroundColor: '#51bf60', color: '#fff', borderRadius: '4px' };
     else if (type === ROOM)
       return {
         backgroundColor: '#E5E5E5',
       };
     //else if (type === FACILITY) return { backgroundColor: '#f5df4d' };
     else if (type === SELECTION)
-      return { backgroundColor: '#eb6767', color: '#fff', borderRadius: '4px' };
+      return {
+        backgroundColor: 'rgb(199, 43, 43)',
+        color: '#fff',
+        borderRadius: '4px',
+      };
     else if (type === RESERVED_SEAT)
       return {
         backgroundColor: 'rgb(160, 160, 160)',
@@ -149,7 +153,7 @@ export const Board = ({
           >
             {col.type === FACILITY && isToggleOn ? (
               <img
-                style={{ width: '100%', height: '100%', opacity: '40%' }}
+                style={{ width: '100%', height: '100%', opacity: '60%' }}
                 src={col.name}
                 alt=""
               />

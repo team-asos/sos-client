@@ -29,21 +29,17 @@ class MessageBox extends React.Component {
           </div>
         </div>
 
-        {/* 아래, 메세지 부분 */}
+        <div></div>
         <div className="messageBottomBox mt-2">
           <div>
-            {/* 탭 메뉴와 컨텐츠 */}
             <AnswerTabMenu
               tabs={['답변대기', '답변완료']}
               selected={this.state.selected}
               setSelected={this.setSelected}
             >
-              {/* 답변 대기 목록 */}
               <Tab isSelected={this.state.selected === '답변대기'}>
                 <AnswerWaitingList />
               </Tab>
-
-              {/* 답변 대기 목록 */}
               <Tab isSelected={this.state.selected === '답변완료'}>
                 <AnswerCompleteList />
               </Tab>

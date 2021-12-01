@@ -6,25 +6,23 @@ import SeatReservationIcon from './icons/u_seatReservationIcon';
 import RoomReservationIcon from './icons/u_roomReservationIcon';
 import InquireIcon from './icons/u_inquireIcon';
 
-class AppBox extends React.Component {
-  render() {
-    return (
-      <div>
-        <Link to="/seat-reservation" style={{ color: 'black' }}>
-          <SeatReservationIcon />
-        </Link>
-        <Link to="/room-check" style={{ color: 'black' }}>
-          <RoomReservationIcon />
-        </Link>
-        <Link to="/inquire" style={{ color: 'black' }}>
-          <InquireIcon />
-        </Link>
-        <Link to="/user-mypage" style={{ color: 'black' }}>
-          <AccountIcon />
-        </Link>
-      </div>
-    );
-  }
-}
+const AppBox = () => {
+  return (
+    <div>
+      <Link to="/seat-reservation" style={{ color: 'black' }}>
+        <SeatReservationIcon />
+      </Link>
+      <Link to="/room-check" style={{ color: 'black' }}>
+        <RoomReservationIcon />
+      </Link>
+      <Link to="/inquire" style={{ color: 'black' }}>
+        <InquireIcon />
+      </Link>
+      <Link to="/user-mypage" style={{ color: 'black' }}>
+        <AccountIcon />
+      </Link>
+    </div>
+  );
+};
 
 export default AppBox;

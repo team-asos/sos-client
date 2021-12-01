@@ -5,7 +5,7 @@ import '../assets/styles/u3_inquiryForm.css';
 import Modal from 'react-bootstrap/Modal';
 
 //문의 작성 폼
-const InquiryForm = props => {
+const InquiryForm = ({ show, handleClose }) => {
   const isPc = useMediaQuery({
     query: '(min-width:768px)',
   });
@@ -14,7 +14,6 @@ const InquiryForm = props => {
 
   //내 계정 가져오기
   const [user, setUser] = useState({});
-
   useEffect(() => {
     const res = async () => {
       await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/auth`, {
@@ -52,6 +51,10 @@ const InquiryForm = props => {
     }
   };
   const submitHandler = async () => {
+    if (title.length === 0) {
+      alert('제목을 입력해주세요');
+      return;
+    }
     const res = await fetch(
       `${process.env.REACT_APP_SERVER_BASE_URL}/questions`,
       {
@@ -71,9 +74,9 @@ const InquiryForm = props => {
       window.location.href = '/inquire';
     }
   };
-
+  console.log(title.length);
   return (
-    <Modal show={props.show} onHide={props.handleClose} size="ml">
+    <Modal show={show} onHide={handleClose} size="ml">
       <Modal.Header closeButton>
         <Modal.Title>새로운 문의 작성하기</Modal.Title>
       </Modal.Header>

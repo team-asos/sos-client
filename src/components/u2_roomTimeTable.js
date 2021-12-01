@@ -145,12 +145,23 @@ const RoomTimeTable = ({ MAXUSER, selectedDate, roomId }) => {
   return (
     <>
       <div
-        style={{
-          marginTop: '1%',
-          width: '100%',
-          height: '70vh',
-          overflow: 'auto',
-        }}
+        style={
+          isPc
+            ? {
+                marginTop: '1%',
+                width: '100%',
+                height: '70vh',
+                overflow: 'auto',
+                marginBottom: '1%',
+              }
+            : {
+                height: '40vh',
+                marginTop: '1%',
+                width: '100%',
+                overflow: 'auto',
+                marginBottom: '1%',
+              }
+        }
       >
         <Table className={isPc ? '' : 'm_roomTimeTable'}>
           <thead>
@@ -192,10 +203,13 @@ const RoomTimeTable = ({ MAXUSER, selectedDate, roomId }) => {
                         }
                         style={
                           clickes.includes(idx)
-                            ? { backgroundColor: 'crimson' }
+                            ? {
+                                backgroundColor: 'firebrick',
+                                color: 'whitesmoke',
+                              }
                             : clickes.includes(idx) && deleteClick
-                            ? { backgroundColor: '#fff' }
-                            : { backgroundColor: '#fff' }
+                            ? { backgroundColor: 'rgb(240, 240, 240)' }
+                            : { backgroundColor: 'rgb(240, 240, 240)' }
                         }
                       >
                         {item.start_time}-{item.end_time}

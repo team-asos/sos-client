@@ -97,26 +97,32 @@ export const BoardSetting = ({
             </p>
           ) : (
             <div className="floor-info-detail">
-              <p style={{ fontSize: '1.1em' }}>
+              <p>
                 <BsInfoSquareFill
-                  style={{ marginRight: '3%', color: '#c00000' }}
+                  style={{ marginRight: '3%', color: 'rgb(151,32,32)' }}
                 />
                 층 정보
               </p>
-              <div style={{ width: '100%' }}>
-                <label>층 이름 </label>: {floor.name}
-              </div>
-              <div>
-                <label>층 크기(가로, 세로) </label>: ({floor.width},
-                {floor.height})
-              </div>
-              <div>
-                <label>좌석 개수 </label>: {seats.length}
-              </div>
-              <div>
-                <label>회의실 개수 </label>: {'  '}
-                {rooms.length}
-              </div>
+              <table>
+                <tr>
+                  <th>층 이름</th>
+                  <td>{floor.name}</td>
+                </tr>
+                <tr>
+                  <th>층 크기(가로, 세로)</th>
+                  <td>
+                    ({floor.width},{floor.height})
+                  </td>
+                </tr>
+                <tr>
+                  <th>좌석 개수</th>
+                  <td>{seats.length}</td>
+                </tr>
+                <tr>
+                  <th>회의실 개수</th>
+                  <td>{rooms.length}</td>
+                </tr>
+              </table>
             </div>
           )}
         </div>

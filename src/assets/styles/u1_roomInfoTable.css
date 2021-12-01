@@ -1,12 +1,12 @@
+.roomInfoTableDiv {
+}
 .infoTable {
   position: relative;
 
   width: 95%;
   height: 100%;
-
   margin-top: 1%;
   margin-left: 2%;
-
   text-align: center;
 }
 .mobileInfoTable {

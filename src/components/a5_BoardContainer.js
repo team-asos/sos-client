@@ -27,6 +27,10 @@ export const BoardContainer = ({ floor }) => {
     type: EMPTY,
   });
 
+  const getFacilityType = type => {
+    return `/images/${type}.png`;
+  };
+
   const [tab, setTab] = useState(0);
 
   useEffect(() => {
@@ -151,7 +155,7 @@ export const BoardContainer = ({ floor }) => {
       newMap[facility.y][facility.x] = {
         type: FACILITY,
         id: facility.id,
-        name: facility.type,
+        name: getFacilityType(facility.type),
         width: 1,
         height: 1,
         select: false,

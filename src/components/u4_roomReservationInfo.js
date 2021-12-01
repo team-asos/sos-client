@@ -62,7 +62,7 @@ const RoomReservationInfo = props => {
             hover
             style={{ width: '90%', marginLeft: '5%' }}
             scrollY="true"
-            maxHeight="30vh"
+            maxHeight="40vh"
           >
             <MDBTableHead style={{ fontSize: '0.9em' }}>
               <tr>

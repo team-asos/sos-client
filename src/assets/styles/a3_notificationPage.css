@@ -5,6 +5,8 @@
   flex-direction: row;
 
   align-items: center;
+
+  background-color: rgb(240, 240, 240);
 }
 .notificationPageRight {
   margin-left: 2%;

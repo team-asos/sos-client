@@ -1,13 +1,29 @@
 /*문의가 존재할 경우*/
 .inquiryListTotal {
   width: 100%;
-  height: 90vh;
+  height: 100%;
 
-  padding-top: 1%;
+  /* padding-top: 2%; */
+  margin-top: 3%;
+}
+.inquiryButton {
+  width: 7vw;
+  height: 4vh;
+  border-radius: 4px;
+  border: none;
+  background-color: rgb(94, 94, 94);
+  color: white;
+  margin-left: 80vw;
+  margin-top: 3%;
+}
+.inquiryButton:hover {
+  transition: 0.1s ease-in;
+  transform: scale(1.05);
 }
 .inquiryListUpper {
   display: flex;
   flex-direction: row;
+  justify-content: center;
 }
 .inquiryListUpper button {
   width: fit-content;
@@ -71,16 +87,20 @@
   text-align: center;
 }
 
-.accordion {
+.u3_accordion {
   width: 90%;
-  height: 73vh;
+  /* height: 80vh; */
   margin-left: 5%;
-
-  border-top: 1px solid gray;
+  margin-top: 2%;
+  /* border-top: 1px solid gray;
   border-bottom: 1px solid gray;
-  border-radius: 3px;
-
+  border-radius: 3px; */
+  box-shadow: 1px 1px 2px 0.1px rgb(202, 202, 202);
+  /* border: 1px solid rgb(182, 182, 182); */
+  /* border: none; */
+  border-radius: 5px;
   overflow: auto;
+  max-height: 80vh;
 }
 /*제목 폼에서 화살표 버튼 제외한 부분*/
 .inquiryTitleMain {
@@ -115,7 +135,7 @@
   flex-direction: row;
   position: relative;
   justify-content: space-between;
-  background-color: #c4c4c415;
+  /* background-color: #c4c4c415; */
 }
 .inquiryMsg {
   width: 95%;
@@ -139,11 +159,11 @@
 }
 .m_inquiryBodyMessage {
   font-size: 0.9em;
+  overflow-wrap: anywhere;
 }
 
 .m_deleteInquiry {
-  width: 15px;
-  height: 15px;
+  font-size: 0.8em;
   color: gray;
 }
 /*제목 폼에서 윗 부분(제목, 날짜)*/

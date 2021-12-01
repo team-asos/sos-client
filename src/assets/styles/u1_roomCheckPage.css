@@ -19,15 +19,24 @@
 }
 .m_roomCheckForm {
   width: 100%;
+  background-color: rgb(240, 240, 240);
 }
 .checkHeader {
   position: relative;
   height: 10%;
-  /* background: #c4c4c45b; */
+  background-color: rgb(240, 240, 240);
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: center;
 }
+.m_checkHeader {
+  display: flex;
+  position: relative;
+  height: 10%;
+  align-items: center;
+}
+
 .roomCheck_titleTextStyle {
   position: relative;
 
@@ -39,12 +48,14 @@
 }
 .m_roomCheck_titleTextStyle {
   font-size: 1.2em;
-  margin-left: 2%;
   font-weight: bold;
+  margin-left: 27%;
 }
 .roomInfoTable {
   background-color: white;
-  border-radius: 30px;
+  border-radius: 10px;
   width: 90%;
   margin-left: 5%;
+  margin-top: 3%;
+  box-shadow: 1px 1px 5px 0.1px rgb(202, 202, 202);
 }

@@ -76,44 +76,31 @@ const UserMyPage = props => {
       {/* PC - Box(오른쪽) */}
       <div className={isPc ? 'u_myPageForm' : 'm_u_myPageForm'}>
         {/* 페이지(위쪽)  */}
-        <div className="u_myPageHeader">
-          {/* Mobile - NavBar(위쪽) */}
-          <div>
-            {isMobile ? (
+        {isPc ? null : (
+          <div className="m_u_myPageHeader">
+            {/* Mobile - NavBar(위쪽) */}
+            <div>
               <FiMenu
                 size={40}
                 onClick={navClick}
                 style={{ color: '#820101' }}
               />
-            ) : (
-              ''
-            )}
-          </div>
-          {/* PC - Header Text(오른쪽 위 텍스트) */}
-          <div
-            className={
-              isPc ? 'u_myPageHeaderTextStyle' : 'm_u_myPageHeaderTextStyle'
-            }
-          >
-            마이페이지
-          </div>
+            </div>
+            {/* PC - Header Text(오른쪽 위 텍스트) */}
+            <div className="m_u_myPageHeaderTextStyle">마이페이지</div>
 
-          {/* Mobile - Tab Text(오른쪽 위 탭 텍스트) */}
-          <div
-            onClick={() => clickHandler(0)}
-            className={isPc ? 'myRLMenuTextStyle' : 'm_myPageMenuText'}
-          >
-            {isPc ? '' : '예약 내역'}
+            {/* Mobile - Tab Text(오른쪽 위 탭 텍스트) */}
+            <div onClick={() => clickHandler(0)} className="m_myPageMenuText">
+              예약 내역
+            </div>
+            <div onClick={() => clickHandler(1)} className="m_myPageMenuText">
+              정보 수정
+            </div>
           </div>
-          <div
-            onClick={() => clickHandler(1)}
-            className={isPc ? 'myInfoMenuTextStyle' : 'm_myPageMenuText'}
-          >
-            {isPc ? '' : '정보 수정'}
-          </div>
-        </div>
+        )}
+
         {/* Mobile - Menu */}
-        {open ? <MobileNavBar open={open} /> : ''}
+        {open ? <MobileNavBar open={open} /> : null}
         {/* Mobile - 컨텐츠 */}
         <div className="myPageContents">
           {isMobile ? getPage() : <MyPageBox user={user} />}
