@@ -36,8 +36,6 @@ export const BoardContainer = ({
   const [rooms, setRooms] = useState([]);
   const [facilities, setFacilities] = useState([]);
 
-  const [reservedSeatsCnt, setReservedSeatsCnt] = useState(0);
-
   const [selection, setSelection] = useState({
     id: -1,
     name: '',
@@ -184,8 +182,6 @@ export const BoardContainer = ({
     let count = 0;
     seats.map(seat => {
       if (seat.reservations.length > 0) {
-        console.log(reservedSeatsCnt);
-        // setReservedSeatsCnt(reservedSeatsCnt + 1);
         count++;
       }
     });

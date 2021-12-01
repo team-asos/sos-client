@@ -35,14 +35,27 @@ const InquiryForm = props => {
   const [title, setTitle] = useState('');
   const [message, setMessage] = useState('');
 
+  const [messageLength, setMessageLength] = useState(0);
+  const [allMessageLength, setAllMessageLength] = useState(0);
   const titleHandler = e => {
     setTitle(e.target.value);
   };
   const messageHandler = e => {
-    setMessage(e.target.value);
+    setAllMessageLength(e.target.value.length);
+    if (e.target.value.length > 500) {
+      e.preventDefault();
+      alert('글자 수를 초과했습니다.');
+      return;
+    } else if (e.target.value.length <= 500) {
+      setMessage(e.target.value);
+      setMessageLength(e.target.value.length);
+    }
   };
-
   const submitHandler = async () => {
+    if (title.length === 0) {
+      alert('제목을 입력해주세요');
+      return;
+    }
     const res = await fetch(
       `${process.env.REACT_APP_SERVER_BASE_URL}/questions`,
       {
@@ -59,10 +72,10 @@ const InquiryForm = props => {
     );
     if (res.status === 201) {
       alert('문의가 등록되었습니다.');
-      window.location.href = '/inquire'; //수정해야함
+      window.location.href = '/inquire';
     }
   };
-
+  console.log(title.length);
   return (
     <Modal show={props.show} onHide={props.handleClose} size="ml">
       <Modal.Header closeButton>
@@ -82,13 +95,25 @@ const InquiryForm = props => {
             className={
               isPc ? 'inquiryFormContentStyle' : 'm_inquiryFormContentStyle'
             }
-            placeholder="  문의 내용을 입력해주세요."
-            onChange={messageHandler}
+            placeholder="  문의 내용을 입력해주세요.(500자 이내)"
+            onChange={
+              allMessageLength <= 500
+                ? messageHandler
+                : alert('글자 수를 초과했습니다.')
+            }
           ></textarea>
+          <div>{messageLength}/500</div>
         </div>
       </Modal.Body>
       <Modal.Footer>
-        <button className="inquiryFormButton" onClick={submitHandler}>
+        <button
+          className="inquiryFormButton"
+          onClick={
+            allMessageLength <= 500
+              ? submitHandler
+              : alert('글자 수를 초과했습니다.')
+          }
+        >
           문의하기
         </button>
       </Modal.Footer>

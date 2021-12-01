@@ -8,20 +8,31 @@
   flex-direction: row;
 }
 .reservationForm {
-  width: 95vw;
+  /* width: 95vw; */
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
+  background-color: rgb(240, 240, 240);
 }
 .m_reservationForm {
   width: 100%;
+  background-color: rgb(240, 240, 240);
 }
 /*회의실 예약 페이지 헤더*/
 .reservationHeader {
   position: relative;
   height: 10%;
-  background: #c4c4c45b;
+  background-color: rgb(240, 240, 240);
   display: flex;
   flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.m_reservationHeader {
+  display: flex;
+  position: relative;
+  height: 10%;
   align-items: center;
 }
 /*회의실 예약*/

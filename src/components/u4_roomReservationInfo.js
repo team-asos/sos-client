@@ -41,7 +41,6 @@ const RoomReservationInfo = props => {
   const sortedReservation = reservation.sort((a, b) =>
     a.startTime.split('-').join().localeCompare(b.startTime.split('-').join()),
   );
-  console.log(reservation);
   return (
     <div className="reservationInfo">
       <div>

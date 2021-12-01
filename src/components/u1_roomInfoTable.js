@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useCookies } from 'react-cookie';
 import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
 import { Link } from 'react-router-dom';
-import { getMonth, getDate, getYear } from 'date-fns';
+import { getMonth, getDate, getYear, addDays } from 'date-fns';
+import * as moment from 'moment';
+
 import { useMediaQuery } from 'react-responsive';
 import { useHistory } from 'react-router-dom';
 
@@ -63,17 +65,9 @@ const RoomInfoTable = () => {
               <td>{item.floor.name}</td>
               <td>{item.name}</td>
               <td>
-                {getYear(new Date()) +
-                  '-' +
-                  (getMonth(new Date()) + 1) +
-                  '-' +
-                  getDate(new Date()) +
+                {moment(new Date()).format('YYYY-MM-DD') +
                   ' ~ ' +
-                  getYear(new Date()) +
-                  '-' +
-                  (getMonth(new Date()) + 1) +
-                  '-' +
-                  (getDate(new Date()) + 6)}
+                  moment(addDays(new Date(), 6)).format('YYYY-MM-DD')}
               </td>
               <td>{item.maxUser}명</td>
               <td>

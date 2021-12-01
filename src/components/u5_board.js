@@ -93,21 +93,35 @@ export const Board = ({
     });
   };
 
+  const transformLength = (type, length) => {
+    if (type === ROOM) {
+      if (length === 0) return `0px`;
+      else return `${length * 50 + 10 * (length - 1)}px`;
+    } else return `${length * 50}px`;
+  };
+
   const itemStyle = type => {
-    if (type === EMPTY) return { backgroundColor: '#fff' };
+    if (type === EMPTY) return { backgroundColor: 'rgb(245, 245, 245)' };
     else if (type === SEAT)
-      return { backgroundColor: '#00a023', color: '#fff' };
+      return { backgroundColor: '#99D98C', color: '#fff', borderRadius: '4px' };
     else if (type === ROOM)
-      return { backgroundColor: '#fff', border: '2px solid #8d99ae' };
+      return {
+        backgroundColor: '#E5E5E5',
+      };
     //else if (type === FACILITY) return { backgroundColor: '#f5df4d' };
     else if (type === SELECTION)
-      return { backgroundColor: '#a70000', color: '#fff' };
+      return { backgroundColor: '#eb6767', color: '#fff', borderRadius: '4px' };
     else if (type === RESERVED_SEAT)
-      return { backgroundColor: '#646464', color: '#fff' };
+      return {
+        backgroundColor: 'rgb(160, 160, 160)',
+        color: '#fff',
+        borderRadius: '4px',
+      };
     else if (type === SEARCH_USER_SEAT)
       return {
         backgroundColor: 'red',
         color: '#fff',
+        borderRadius: '4px',
       };
   };
 
@@ -127,18 +141,18 @@ export const Board = ({
             style={{
               ...itemStyle(col.type),
               position: 'absolute',
-              width: `${col.width * 50}px`,
-              height: `${col.height * 50}px`,
-              left: `${x * 50 + 50}px`,
-              top: `${y * 50 + 50}px`,
-              border:
-                col.width && col.type === ROOM
-                  ? `2px solid rgb(141, 153, 174)`
-                  : `none`,
+              width: transformLength(col.type, col.width),
+              height: transformLength(col.type, col.height),
+              left: `${x * 50 + 50 + 10 * x}px`,
+              top: `${y * 50 + 50 + 10 * y}px`,
             }}
           >
             {col.type === FACILITY && isToggleOn ? (
-              <img style={{ width: '100%', height: '100%' }} src={col.name} />
+              <img
+                style={{ width: '100%', height: '100%', opacity: '60%' }}
+                src={col.name}
+                alt=""
+              />
             ) : col.type !== FACILITY ? (
               col.name
             ) : null}

@@ -3,6 +3,12 @@
   /* text-align: center; */
   font-size: 1em;
 }
+.u2_selectedTable {
+  box-shadow: 1px 1px 3px 0.01px gray;
+  background-color: white;
+  border-radius: 5px;
+  width: 90vw;
+}
 .sHeader {
   /* background: #cccccc; */
 }

@@ -164,7 +164,9 @@ export const BoardContainer = ({ floor }) => {
 
     setBoard(newMap);
   }, [seats, rooms, facilities]);
-
+  const getFacilityType = type => {
+    return `/images/${type}.png`;
+  };
   return (
     <div
       className="board-container"

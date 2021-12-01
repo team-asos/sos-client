@@ -47,26 +47,19 @@ const InquirePage = () => {
 
       <div className={isPc ? 'inquireForm_main' : 'm_inquireForm_main'}>
         {/* 문의하기, 문의내역 이동 탭 */}
-        <div className="inquireHeader">
-          <div>
-            {isMobile ? (
+        {isPc ? null : (
+          <div className="m_inquireHeader">
+            <div>
               <FiMenu
                 size={40}
                 onClick={navClick}
                 style={{ color: '#820101' }}
               />
-            ) : (
-              ''
-            )}
+            </div>
+            <div className="m_inquire_titleTextStyle">문의</div>
           </div>
-          <div
-            className={
-              isPc ? 'inquire_titleTextStyle' : 'm_roomCheck_titleTextStyle'
-            }
-          >
-            문의
-          </div>
-        </div>
+        )}
+
         {open ? <MobileNavBar open={open} /> : null}
 
         {/* 내용이 담기는 content */}

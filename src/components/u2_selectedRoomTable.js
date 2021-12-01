@@ -35,28 +35,34 @@ const SelectedRoomTable = props => {
   }, []);
 
   return (
-    <div>
-      <MDBTable hover className={isPc ? 'infoTable' : 'mobileInfoTable'}>
-        <MDBTableHead className="rHeader">
-          <tr>
-            <th>회의실명</th>
-            <th>예약 가능 일</th>
-            <th>사용 가능 인원</th>
-          </tr>
-        </MDBTableHead>
-        <MDBTableBody>
-          <tr>
-            <td>{data.name}</td>
-            <td>
-              {moment(new Date()).format('YYYY-MM-DD')}~
-              {moment(addDays(new Date(), 6)).format('YYYY-MM-DD')}
-            </td>
-            <td>{data.maxUser}명</td>
-          </tr>
-        </MDBTableBody>
-      </MDBTable>
+    <>
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <MDBTable
+          hover
+          className={isPc ? 'u2_selectedTable' : 'mobileInfoTable'}
+        >
+          <MDBTableHead className="rHeader">
+            <tr>
+              <th>회의실명</th>
+              <th>예약 가능 일</th>
+              <th>사용 가능 인원</th>
+            </tr>
+          </MDBTableHead>
+          <MDBTableBody>
+            <tr>
+              <td>{data.name}</td>
+              <td>
+                {moment(new Date()).format('YYYY-MM-DD')}~
+                {moment(addDays(new Date(), 6)).format('YYYY-MM-DD')}
+              </td>
+              <td>{data.maxUser}명</td>
+            </tr>
+          </MDBTableBody>
+        </MDBTable>
+      </div>
+
       <Calendar roomMAXUSER={data.maxUser} roomID={roomID} />
-    </div>
+    </>
   );
 };
 
