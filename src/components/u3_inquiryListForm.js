@@ -88,29 +88,25 @@ const InquiryListForm = ({ user, addInquiryClick }) => {
     /*전체 문의 리스트 */
     <div>
       <div className="inquiryListTotal">
-        {
-          isPc ? (
-            <div>
-              <button
-                className="inquiryButton"
-                onClick={e => toggleTrueFalse()}
-              >
-                문의 하기{' '}
-              </button>
-            </div>
-          ) : null
-          // <div className="inquiryListUpper">
-          //   <p className={isPc ? 'myListText' : 'm_myListText'}>
-          //     나의 문의 내역
-          //   </p>
+        {isPc ? (
+          <div>
+            <button className="inquiryButton" onclick={() => toggleTrueFalse()}>
+              문의 하기{' '}
+            </button>
+          </div>
+        ) : (
+          <div className="inquiryListUpper">
+            <p className={isPc ? 'myListText' : 'm_myListText'}>
+              나의 문의 내역
+            </p>
 
-          //   <AiIcon.AiOutlinePlusSquare
-          //     className="newInquiryIcon"
-          //     size={30}
-          //     onClick={e => toggleTrueFalse()}
-          //   />
-          // </div>
-        }
+            <AiIcon.AiOutlinePlusSquare
+              className="newInquiryIcon"
+              size={30}
+              onClick={e => toggleTrueFalse()}
+            />
+          </div>
+        )}
 
         {question.length === 0 ? (
           <div className={isPc ? 'noInquiryList' : 'm_noInquiryList'}>
