@@ -130,18 +130,17 @@ export const Board = ({
 
   const itemStyle = (type, select) => {
     if (select)
-      return { backgroundColor: '#D01C1F', border: '1px solid #D01C1F' };
+      return { backgroundColor: 'rgb(199,43,43)', color: 'whitesmoke' };
 
     if (type === EMPTY) return { backgroundColor: 'white' };
     else if (type === SEAT)
       return {
-        backgroundColor: 'rgb(147,149,151)',
-        border: '1px solid rgb(147,149,151)',
+        backgroundColor: '#51bf60',
+        color: 'whitesmoke',
       };
     else if (type === ROOM)
       return {
-        backgroundColor: 'rgb(15,76,129)',
-        border: '1px solid rgb(15,76,129)',
+        backgroundColor: '#a0a0a0',
       };
     else if (type === FACILITY) return { backgroundColor: 'white' };
   };
