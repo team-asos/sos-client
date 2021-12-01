@@ -1,7 +1,16 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { Table } from 'react-bootstrap';
 import { useCookies } from 'react-cookie';
 import Select from 'react-select';
-import { Accordion, Table } from 'react-bootstrap';
+
+import {
+  EMPTY,
+  SEAT,
+  ROOM,
+  FACILITY,
+  SELECTION,
+  RESERVED_SEAT,
+} from '../../const/object-type.const';
 
 export const Search = () => {
   const [cookie] = useCookies(['access_token']);
@@ -12,10 +21,6 @@ export const Search = () => {
   const [roomReservation, setRoomReservation] = useState(null);
 
   const [userId, setUserId] = useState(0);
-
-  const userHeadings = ['이름', '부서', '직책'];
-  const seatHeadings = ['층', '이름'];
-  const roomHeadings = ['층', '이름', '주제'];
 
   const fetchUsers = useCallback(async () => {
     const response = await fetch(
@@ -70,7 +75,261 @@ export const Search = () => {
     fontSize: '1.1em',
     fontWeight: 'bold',
     color: '#820101',
-    marginBottom: '1vh',
+    marginBottom: '0px',
+  };
+
+  /**
+   * 미니맵
+   */
+
+  const [board, setBoard] = useState([]);
+
+  const [floor, setFloor] = useState(null);
+  const [seats, setSeats] = useState([]);
+  const [rooms, setRooms] = useState([]);
+  const [facilities, setFacilities] = useState([]);
+
+  const fetchFloor = async floorId => {
+    const result = await fetch(
+      `${process.env.REACT_APP_SERVER_BASE_URL}/floors/${floorId}`,
+      {
+        method: 'GET',
+        headers: {
+          'Content-type': 'application/json',
+          Accept: 'application/json',
+        },
+      },
+    );
+
+    setFloor(await result.json());
+  };
+
+  const fetchSeats = async floorId => {
+    const result = await fetch(
+      `${process.env.REACT_APP_SERVER_BASE_URL}/seats/search?floorId=${floorId}`,
+      {
+        method: 'GET',
+        headers: {
+          'Content-type': 'application/json',
+          Accept: 'application/json',
+        },
+      },
+    );
+
+    setSeats(await result.json());
+  };
+
+  const fetchRooms = async floorId => {
+    const result = await fetch(
+      `${process.env.REACT_APP_SERVER_BASE_URL}/rooms/search?floorId=${floorId}`,
+      {
+        method: 'GET',
+        headers: {
+          'Content-type': 'application/json',
+          Accept: 'application/json',
+        },
+      },
+    );
+
+    setRooms(await result.json());
+  };
+
+  const fetchFacilities = async floorId => {
+    const result = await fetch(
+      `${process.env.REACT_APP_SERVER_BASE_URL}/facilities/search?floorId=${floorId}`,
+      {
+        method: 'GET',
+        headers: {
+          'Content-type': 'application/json',
+          Accept: 'application/json',
+        },
+      },
+    );
+
+    setFacilities(await result.json());
+  };
+
+  const fetchArrangement = async floorId => {
+    await fetchSeats(floorId);
+    await fetchRooms(floorId);
+    await fetchFacilities(floorId);
+  };
+
+  useEffect(() => {
+    fetchFloor(1);
+  }, []);
+
+  useEffect(() => {
+    if (floor !== null) {
+      setBoard(
+        Array.from({ length: floor.height }, () =>
+          Array.from({ length: floor.width }, () => {
+            return { type: 0, width: 1, height: 1 };
+          }),
+        ),
+      );
+
+      fetchArrangement(floor.id);
+    }
+  }, [floor]);
+
+  useEffect(() => {
+    let newMap = board;
+
+    for (let seat of seats) {
+      newMap[seat.y][seat.x] = {
+        type: SEAT,
+        width: 1,
+        height: 1,
+      };
+    }
+
+    for (let room of rooms) {
+      newMap[room.y][room.x] = {
+        type: ROOM,
+        width: room.width,
+        height: room.height,
+      };
+
+      newMap = newMap.map((row, rowIndex) =>
+        row.map((col, colIndex) => {
+          if (colIndex === room.x && rowIndex === room.y)
+            return {
+              type: ROOM,
+              width: room.width,
+              height: room.height,
+            };
+          else if (colIndex >= room.x && colIndex < room.x + room.width)
+            if (rowIndex >= room.y && rowIndex < room.y + room.height)
+              return { type: ROOM, width: 0, height: 0 };
+
+          return col;
+        }),
+      );
+    }
+
+    for (let facility of facilities) {
+      newMap[facility.y][facility.x] = {
+        type: FACILITY,
+        width: 1,
+        height: 1,
+      };
+    }
+
+    setBoard(newMap);
+  }, [facilities]);
+
+  const transformWidth = (col, length) => {
+    if (col.type === ROOM) {
+      if (col.width === 0) return `0px`;
+      else
+        return `${
+          ((window.innerWidth - (length - 1) * 4) / length) * col.width +
+          4 * (col.width - 1)
+        }px`;
+      // else return `${length * 4 + 4 * (length - 1)}px`;
+    } else return `${(window.innerWidth - (length - 1) * 4) / length}px`;
+
+    // ${
+    //   (window.innerWidth - (floor.width - 1) * 4) / floor.width
+    // }
+  };
+
+  const transformHeight = (col, length) => {
+    if (col.type === ROOM) {
+      if (col.width === 0) return `0px`;
+      else
+        return `${
+          ((window.innerWidth - (length - 1) * 4) / length) * col.height +
+          4 * (col.height - 1)
+        }px`;
+      // else return `${length * 4 + 4 * (length - 1)}px`;
+    } else return `${(window.innerWidth - (length - 1) * 4) / length}px`;
+
+    // ${
+    //   (window.innerWidth - (floor.width - 1) * 4) / floor.width
+    // }
+  };
+
+  const itemStyle = type => {
+    // 빈 좌석
+    if (type === EMPTY)
+      return {
+        backgroundColor: 'rgb(245, 245, 245)',
+        borderRadius: '4px',
+      };
+    // 좌석
+    else if (type === SEAT)
+      return { backgroundColor: '#99D98C', color: '#fff', borderRadius: '4px' };
+    // 회의실
+    else if (type === ROOM)
+      return {
+        backgroundColor: '#E5E5E5',
+        borderRadius: '4px',
+      };
+    // 검색한 좌석
+    else if (type === 3)
+      return {
+        backgroundColor: 'red',
+        color: '#fff',
+        borderRadius: '4px',
+      };
+  };
+
+  const Item = ({ board }) => {
+    return board.map((row, y) =>
+      row.map((col, x) => {
+        return (
+          <div
+            key={x + y * row.length}
+            style={{
+              ...itemStyle(col.type),
+              position: 'absolute',
+              width: transformWidth(col, floor.width),
+              height: transformHeight(col, floor.width),
+              // width: `${
+              //   (window.innerWidth - (floor.width - 1) * 4) / floor.width
+              // }px`,
+              // height: `${
+              //   (window.innerWidth - (floor.width - 1) * 4) / floor.width
+              // }px`,
+              left: `${
+                x *
+                  ((window.innerWidth - (floor.width - 1) * 4) / floor.width) +
+                4 * x
+              }px`,
+              top: `${
+                y *
+                  ((window.innerWidth - (floor.width - 1) * 4) / floor.width) +
+                4 * y
+              }px`,
+              // left: `${
+              //   x *
+              //     ((window.innerWidth - (floor.width - 1) * 4) / floor.width) +
+              //   4 * x
+              // }px`,
+              // top: `${
+              //   y *
+              //     ((window.innerWidth - (floor.width - 1) * 4) / floor.width) +
+              //   4 * y
+              // }px`,
+            }}
+          ></div>
+        );
+      }),
+    );
+  };
+
+  const Board = () => {
+    return (
+      <div
+        style={{
+          position: 'relative',
+        }}
+      >
+        <Item board={board} />
+      </div>
+    );
   };
 
   return (
@@ -88,70 +347,58 @@ export const Search = () => {
         />
       </div>
       <div>
-        {/* {searchUser && (
-          <>
-            <p style={pStyle}>회원 정보</p>
-            <Table>
-              <thead>
+        {searchUser && <p style={pStyle}>회원 정보</p>}
+        <Table>
+          <tbody>
+            {searchUser && (
+              <>
                 <tr>
-                  {userHeadings.map((userHeading, index) => (
-                    <th key={index}>{userHeading}</th>
-                  ))}
+                  <td>사원 번호</td>
+                  <td>{searchUser.employeeId}</td>
                 </tr>
-              </thead>
-              <tbody>
                 <tr>
-                  <td>{searchUser.name}</td>
+                  <td>이름</td>
+                  <td>
+                    {roomReservation
+                      ? `${searchUser.name} (회의중)`
+                      : `${searchUser.name}`}
+                  </td>
+                </tr>
+                <tr>
+                  <td>부서</td>
                   <td>{searchUser.department}</td>
+                </tr>
+                <tr>
+                  <td>직책</td>
                   <td>{searchUser.position}</td>
                 </tr>
-              </tbody>
-            </Table>
-          </>
-        )}
-
-        {seatReservation && (
-          <>
-            <p style={pStyle}>좌석 정보</p>
-            <Table>
-              <thead>
                 <tr>
-                  {seatHeadings.map((seatHeading, index) => (
-                    <th key={index}>{seatHeading}</th>
-                  ))}
+                  <td>이메일</td>
+                  <td>{searchUser.email}</td>
                 </tr>
-              </thead>
-              <tbody>
                 <tr>
-                  <td>{seatReservation.seat.floor.name}</td>
-                  <td>{seatReservation.seat.name}</td>
+                  <td>연락처</td>
+                  <td>{searchUser.tel}</td>
                 </tr>
-              </tbody>
-            </Table>
-          </>
-        )}
-
-        {roomReservation && (
-          <>
-            <p style={pStyle}>회의실 정보</p>
-            <Table>
-              <thead>
-                <tr>
-                  {roomHeadings.map((roomHeading, index) => (
-                    <th key={index}>{roomHeading}</th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>{roomReservation.room.floor.name}</td>
-                  <td>{roomReservation.room.name}</td>
-                  <td>{roomReservation.room.topic}</td>
-                </tr>
-              </tbody>
-            </Table>
-          </>
-        )} */}
+              </>
+            )}
+            {seatReservation && (
+              <tr>
+                <td>좌석 위치</td>
+                <td>{`${seatReservation.seat.floor.name} - ${seatReservation.seat.name}`}</td>
+              </tr>
+            )}
+            {roomReservation && (
+              <tr>
+                <td>회의실 위치</td>
+                <td>{`${roomReservation.room.floor.name} - ${roomReservation.room.name}`}</td>
+              </tr>
+            )}
+          </tbody>
+        </Table>
+      </div>
+      <div>
+        <Board board={board} />
       </div>
     </>
   );
