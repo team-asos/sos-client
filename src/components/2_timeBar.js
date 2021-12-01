@@ -1,21 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import * as moment from 'moment';
 
 const DateTimeBox = () => {
-  const [date, setDate] = useState(new Date());
-
-  const callTime = () => {
-    let time = setInterval(() => {
-      setDate(new Date());
-    }, 1000);
-    return () => {
-      clearInterval(time);
-    };
-  };
-
-  //요일 불러우는 함수
-  const getToday = () => {
-    var today = date.getDay();
-    var week = [
+  moment.updateLocale('ko', {
+    weekdays: [
       '일요일',
       '월요일',
       '화요일',
@@ -23,9 +11,21 @@ const DateTimeBox = () => {
       '목요일',
       '금요일',
       '토요일',
-    ];
-    return week[today];
-  };
+    ],
+    weekdaysShort: ['일', '월', '화', '수', '목', '금', '토'],
+  });
+
+  let timer = null;
+  const [time, setTime] = useState(moment());
+
+  useEffect(() => {
+    timer = setInterval(() => {
+      setTime(moment());
+    }, 1000);
+    return () => {
+      clearInterval(timer);
+    };
+  }, []);
 
   return (
     <div
@@ -40,11 +40,12 @@ const DateTimeBox = () => {
       }}
     >
       <p style={{ fontWeight: 'bold', marginBottom: '25%' }}>
-        {date.toLocaleDateString()}
+        {time.format('YYYY. MM. D.')}
       </p>
-      <p style={{ fontWeight: 'bold', marginBottom: '25%' }}>{getToday()}</p>
-      <p style={{ fontWeight: 'bold' }}>{date.toLocaleTimeString('en-GB')}</p>
-      {callTime()}
+      <p style={{ fontWeight: 'bold', marginBottom: '25%' }}>
+        {time.format('dddd')}
+      </p>
+      <p style={{ fontWeight: 'bold' }}>{time.format('HH:mm:ss')}</p>
     </div>
   );
 };
