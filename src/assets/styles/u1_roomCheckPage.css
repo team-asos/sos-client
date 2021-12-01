@@ -19,16 +19,24 @@
 }
 .m_roomCheckForm {
   width: 100%;
+  background-color: rgb(240, 240, 240);
 }
 .checkHeader {
   position: relative;
   height: 10%;
-  /* background: #c4c4c45b; */
+  background-color: rgb(240, 240, 240);
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
 }
+.m_checkHeader {
+  display: flex;
+  position: relative;
+  height: 10%;
+  align-items: center;
+}
+
 .roomCheck_titleTextStyle {
   position: relative;
 
@@ -40,8 +48,8 @@
 }
 .m_roomCheck_titleTextStyle {
   font-size: 1.2em;
-  margin-left: 2%;
   font-weight: bold;
+  margin-left: 27%;
 }
 .roomInfoTable {
   background-color: white;

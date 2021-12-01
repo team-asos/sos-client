@@ -8,9 +8,14 @@
 }
 /*네비바 제외한 페이지*/
 .userSeatForm {
-  width: 95vw;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
+  background-color: rgb(240, 240, 240);
+}
+.m_userSeatForm {
+  width: 100%;
   background-color: rgb(240, 240, 240);
 }
 /*헤더*/
@@ -23,6 +28,12 @@
   align-items: center;
   justify-content: center;
 }
+.m_u_seatHeader {
+  display: flex;
+  position: relative;
+  height: 10%;
+  align-items: center;
+}
 /*헤더 글씨(층 이름)*/
 .u_seatHeaderTextStyle {
   position: relative;
@@ -31,7 +42,11 @@
   margin-left: 2%;
   margin-right: 4%;
 }
-
+.m_u_seatHeaderTextStyle {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-left: 30%;
+}
 .userSeatReservationForm {
   display: flex;
   flex-direction: column;
@@ -48,7 +63,6 @@
 }
 /*leftForm*/
 .seatForm {
-  /* background-color: lightcoral;*/
   width: 65vw;
   height: 88vh;
   display: flex;
@@ -58,7 +72,7 @@
 .u_seatFormUpper {
   display: flex;
   flex-direction: row;
-  height: 9vh;
+  height: 10%;
   /* justify-content: flex-end;
   align-items: flex-end; */
 }
@@ -89,7 +103,7 @@
 .statusForm {
   display: flex;
   align-items: center;
-  margin-left: 15vw;
+  margin-left: 37%;
 }
 .m_statusForm {
   display: flex;
@@ -97,8 +111,9 @@
 }
 /*아이콘*/
 .facilityicon {
-  width: 5vw;
-  height: 5vh;
+  width: 43px;
+  height: 43px;
+  margin-right: 1vw;
 }
 .m_facilityIcon {
   margin-top: 7px;
@@ -110,38 +125,6 @@
 .facilityicon:hover {
   transition: ease-in 0.1s;
   transform: scale(1.03);
-}
-.facility-icon-box {
-  height: 6vh; /*54px*/
-  position: relative;
-}
-/*.facility-icon-box:hover,
-:visited {
-  color: #820101;
-  transition: ease-in 0.1s;
-  transform: scale(1.05);
-  cursor: pointer;
-}*/
-
-.facility-icon-box:hover .text {
-  visibility: visible;
-}
-.facility-text {
-  font-size: 1.2em;
-  font-weight: 1000;
-  color: rgb(143, 143, 143);
-  text-align: center;
-  cursor: pointer;
-  /*visibility: hidden;*/
-}
-.facility-text-div {
-  position: absolute;
-  width: inherit;
-  left: 1vw;
-  top: 1vh;
-}
-.facility-icon-div {
-  position: relative;
 }
 
 .reservedSeats,

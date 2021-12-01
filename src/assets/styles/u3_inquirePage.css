@@ -13,6 +13,7 @@
 }
 .m_inquireForm_main {
   width: 100%;
+  background-color: rgb(240, 240, 240);
 }
 .inquireHeader {
   position: relative;
@@ -23,6 +24,12 @@
   align-items: center;
   justify-content: center;
 }
+.m_inquireHeader {
+  display: flex;
+  position: relative;
+  height: 10%;
+  align-items: center;
+}
 .inquire_titleTextStyle {
   position: relative;
   font-weight: bold;
@@ -30,7 +37,11 @@
   margin-left: 2%;
   margin-right: 4%;
 }
-
+.m_inquire_titleTextStyle {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-left: 35%;
+}
 .myRLMenuTextStyle:hover {
   color: #c00000;
 }

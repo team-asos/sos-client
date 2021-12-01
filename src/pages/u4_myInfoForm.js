@@ -220,42 +220,43 @@ const MyInfoForm = props => {
 
   return (
     <div className="userMyPage">
-      {open ? <MobileNavBar open={open} /> : ''}
+      {open ? <MobileNavBar open={open} /> : null}
       <div>{isPc ? <NavBarUser /> : null}</div>
       <div className={isPc ? 'u_myPageForm' : 'm_u_myPageForm '}>
-        <div className="u_myPageHeader">
-          <div>
-            {isMobile ? (
-              <FiMenu
-                size={40}
-                onClick={navClick}
-                style={{ color: '#820101' }}
-              />
-            ) : (
-              ''
-            )}
-          </div>
-          <div
-            className={
-              isPc ? 'u_myPageHeaderTextStyle' : 'm_u_myPageHeaderTextStyle'
-            }
-          >
-            마이페이지
-          </div>
+        {isPc ? null : (
+          <div className={isPc ? 'u_myPageHeader' : 'm_u_myPageHeader'}>
+            <div>
+              {isMobile ? (
+                <FiMenu
+                  size={40}
+                  onClick={navClick}
+                  style={{ color: '#820101' }}
+                />
+              ) : null}
+            </div>
+            <div
+              className={
+                isPc ? 'u_myPageHeaderTextStyle' : 'm_u_myPageHeaderTextStyle'
+              }
+            >
+              마이페이지
+            </div>
 
-          <div
-            onClick={() => clickHandler(1)}
-            className={isPc ? 'myRLMenuTextStyle' : 'm_myPageMenuText'}
-          >
-            {isPc ? '나의 예약 내역' : '예약 내역'}
+            <div
+              onClick={() => clickHandler(1)}
+              className={isPc ? 'myRLMenuTextStyle' : 'm_myPageMenuText'}
+            >
+              {isPc ? '나의 예약 내역' : '예약 내역'}
+            </div>
+            <div
+              onClick={() => clickHandler(0)}
+              className={isPc ? 'myInfoMenuTextStyle' : 'm_myPageMenuText'}
+            >
+              {isPc ? '나의 정보 수정' : '정보 수정'}
+            </div>
           </div>
-          <div
-            onClick={() => clickHandler(0)}
-            className={isPc ? 'myInfoMenuTextStyle' : 'm_myPageMenuText'}
-          >
-            {isPc ? '나의 정보 수정' : '정보 수정'}
-          </div>
-        </div>
+        )}
+
         <div className="myInfoForm">
           {/* 탭메뉴 눌렀을 때 */}
           {state === 1 ? (

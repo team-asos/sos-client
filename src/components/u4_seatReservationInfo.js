@@ -144,14 +144,7 @@ const SeatReservationInfo = props => {
 
                       <td>
                         <button
-                          style={{
-                            height: '4vh',
-                            width: '5vw',
-                            border: '1px solid #c00000',
-                            borderRadius: '3px',
-                            color: '#c00000',
-                            backgroundColor: 'transparent',
-                          }}
+                          className="seatUseEndButton"
                           onClick={seathandleShow}
                         >
                           사용종료

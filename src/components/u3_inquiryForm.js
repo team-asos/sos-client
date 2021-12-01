@@ -52,6 +52,10 @@ const InquiryForm = props => {
     }
   };
   const submitHandler = async () => {
+    if (title.length === 0) {
+      alert('제목을 입력해주세요');
+      return;
+    }
     const res = await fetch(
       `${process.env.REACT_APP_SERVER_BASE_URL}/questions`,
       {
@@ -71,7 +75,7 @@ const InquiryForm = props => {
       window.location.href = '/inquire';
     }
   };
-
+  console.log(title.length);
   return (
     <Modal show={props.show} onHide={props.handleClose} size="ml">
       <Modal.Header closeButton>

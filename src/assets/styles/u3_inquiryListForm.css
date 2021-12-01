@@ -1,9 +1,22 @@
 /*문의가 존재할 경우*/
 .inquiryListTotal {
   width: 100%;
-  height: 90vh;
+  height: 100%;
 
-  padding-top: 1%;
+  padding-top: 2%;
+}
+.inquiryButton {
+  width: 7vw;
+  height: 4vh;
+  border-radius: 4px;
+  border: none;
+  background-color: rgb(94, 94, 94);
+  color: white;
+  margin-left: 80vw;
+}
+.inquiryButton:hover {
+  transition: 0.1s ease-in;
+  transform: scale(1.05);
 }
 .inquiryListUpper {
   display: flex;
@@ -72,11 +85,11 @@
   text-align: center;
 }
 
-.accordion {
+.u3_accordion {
   width: 90%;
-  height: 79vh;
+  height: 86vh;
   margin-left: 5%;
-
+  margin-top: 2%;
   /* border-top: 1px solid gray;
   border-bottom: 1px solid gray;
   border-radius: 3px; */
@@ -141,11 +154,11 @@
 }
 .m_inquiryBodyMessage {
   font-size: 0.9em;
+  overflow-wrap: anywhere;
 }
 
 .m_deleteInquiry {
-  width: 15px;
-  height: 15px;
+  font-size: 0.8em;
   color: gray;
 }
 /*제목 폼에서 윗 부분(제목, 날짜)*/

@@ -24,29 +24,22 @@ const RoomReservationPage = props => {
 
   return (
     <div className="roomReservationPage">
-      <div>{isPc ? <NavBarUser /> : ''}</div>
+      <div>{isPc ? <NavBarUser /> : null}</div>
 
       <div className={isPc ? 'reservationForm' : 'm_reservationForm'}>
-        <div className="reservationHeader">
-          <div>
-            {isMobile ? (
+        {isPc ? null : (
+          <div className="m_reservationHeader">
+            <div>
               <FiMenu
                 size={40}
                 onClick={navClick}
                 style={{ color: '#820101' }}
               />
-            ) : (
-              ''
-            )}
+            </div>
+            <div className="m_roomCheck_titleTextStyle">회의실 예약</div>
           </div>
-          <div
-            className={
-              isPc ? 'rrp_titleTextStyle' : 'm_roomCheck_titleTextStyle'
-            }
-          >
-            회의실 예약
-          </div>
-        </div>
+        )}
+
         {open ? <MobileNavBar open={open} /> : ''}
 
         <div className="srTable">

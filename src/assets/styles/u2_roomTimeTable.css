@@ -2,6 +2,7 @@
   font-size: 0.8em;
   width: 96%;
   margin: 2%;
+  height: 40vh;
 }
 Table .isReserved {
   background-color: gray !important;

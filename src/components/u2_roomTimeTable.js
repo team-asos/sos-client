@@ -145,12 +145,23 @@ const RoomTimeTable = ({ MAXUSER, selectedDate, roomId }) => {
   return (
     <>
       <div
-        style={{
-          marginTop: '1%',
-          width: '100%',
-          height: '70vh',
-          overflow: 'auto',
-        }}
+        style={
+          isPc
+            ? {
+                marginTop: '1%',
+                width: '100%',
+                height: '70vh',
+                overflow: 'auto',
+                marginBottom: '1%',
+              }
+            : {
+                height: '40vh',
+                marginTop: '1%',
+                width: '100%',
+                overflow: 'auto',
+                marginBottom: '1%',
+              }
+        }
       >
         <Table className={isPc ? '' : 'm_roomTimeTable'}>
           <thead>
