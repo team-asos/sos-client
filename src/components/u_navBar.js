@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
+import * as fi from 'react-icons/fi';
 
 import AppBar from './u_appBar';
 import TimeBar from './2_timeBar';
+
 import '../assets/styles/a2_navBox.css';
 
 const NavBar = props => {
@@ -46,13 +48,14 @@ const NavBar = props => {
         <AppBar />
       </div>
       <div className="logOutBar">
+        <fi.FiLogOut
+          className="logout-icon"
+          style={{ marginBottom: '5%' }}
+          size={22}
+          onClick={logoutClickHandler}
+        />
         <p>
-          {' '}
           <span style={{ fontWeight: 'bolder' }}>{user.name}</span>님
-        </p>
-
-        <p className="logOutTextStyle" onClick={logoutClickHandler}>
-          로그아웃
         </p>
       </div>
       <div className="dateBar">

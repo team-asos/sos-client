@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { MDBTable, MDBTableBody, MDBTableFoot, MDBTableHead } from 'mdbreact';
+import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
 import Button from 'react-bootstrap/Button';
 
 import UserDetailModalContent from './a4_userDetailModal';

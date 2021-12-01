@@ -52,20 +52,23 @@
   margin-left: 1.5%;
   margin-top: 1%;
 
-  color: #860008;
+  color: rgb(151, 32, 32);
 
   font-size: 1.2em;
   font-weight: bold;
 
-  border: 0.8px solid #636363;
+  border: 1px solid rgb(151, 32, 32);
   border-radius: 15px;
 
+  text-align: center;
   background: transparent;
 }
 
 .seatManageUpperLastChild button:hover {
   border: none;
-  background-color: #860000;
+  background-color: rgb(151, 32, 32);
+
+  text-align: center;
   color: white;
 }
 
@@ -74,5 +77,5 @@
   height: 87vh;
 
   margin-top: 0.5%;
-  background: #c4c4c4;
+  background: rgb(213, 213, 213);
 }

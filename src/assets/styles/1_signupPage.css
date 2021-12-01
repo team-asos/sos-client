@@ -1,161 +1,133 @@
 .register {
   font-family: NotoSansRegular;
+
+  width: 100%;
+  height: 100%;
+
   display: flex;
-  flex-direction: column;
-  align-content: flex-start;
 
-  /*밑 이미지 설정(로고)*/
-  background-image: url('../images/logo_transparent.png');
-  background-repeat: no-repeat;
-  background-size: 25vw; /*300px*/
-  background-position: center;
+  align-items: center;
+  justify-content: center;
 }
-.m_register {
-  /*위치와 크기 지정*/
-  width: 90%; /*55%*/
-  height: 94%; /*60%*/
-
-  margin-left: 5%;
-  margin-top: 5%;
-
-  position: absolute;
-
-  /*배경과 그림자 지정*/
-  background: #c4c4c4;
-  box-shadow: 1px rgba(64, 64, 64, 0.4);
-  border-radius: 44px;
+.left {
+  width: 40%;
+  height: 100%;
 
   display: flex;
   flex-direction: column;
-  /*밑 이미지 설정(로고)*/
-  background-image: url('../images/logo_transparent.png');
-  background-repeat: no-repeat;
-  background-size: 95vw; /*300px*/
-  background-position: center;
-}
-/*회원가입 텍스트 영역*/
-.upper {
-  position: relative;
-  padding-top: 3vh;
-  padding-left: 2vw;
 
-  display: flex;
-  flex-direction: row;
   align-items: center;
-  font-weight: bold;
-}
-.m_upper {
-  position: relative;
+  justify-content: center;
 
-  margin-top: 15%;
-  padding-left: 5vw;
-
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-
-  font-weight: bold;
+  background-color: rgb(231, 231, 231);
+  box-shadow: 2px 2px 4px 4px gray;
 }
-/*뒤로가기 아이콘 영역*/
-.goBackIcon {
-  position: relative;
-  color: #c00000;
-  margin-right: 3vw;
-  margin-top: -4vh;
-  cursor: pointer;
-}
-.goBackIcon:hover {
-  color: #8f0202;
-  transition: ease-in 0.1s;
-  transform: scale(1.05);
-}
-/*회원가입 텍스트 영역*/
-.upper p {
-  color: #c00000;
-  font-size: 1.5em;
-}
-/*Form 영역*/
-.bottom {
-  position: relative;
+.right {
+  width: 60%;
+  height: 100%;
 
   display: flex;
   flex-direction: column;
+
+  justify-content: center;
   align-items: center;
 
-  font-size: 0.8em; /*12px*/
-  font-weight: bolder;
+  background-color: rgb(151, 32, 32);
 }
-.m_bottom {
-  margin-top: 5%;
+.register-form {
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
-/*각 줄 스타일 넣기*/
 .column {
   display: flex;
   flex-direction: row;
+
   margin-bottom: 2%;
 }
-
 .column div {
-  display: block;
-  margin: auto 1%;
+  margin-left: 2%;
 }
-.m_column div {
-  margin: auto 1%;
-}
-/*입력 폼 크기와 글씨 지정*/
 .form-control {
-  width: 21vw; /*250px*/
+  width: 19vw; /*250px*/
   height: 5vh; /*30px*/
   font-size: 0.9em; /*14px*/
 }
-.m_form-control {
-  width: 55vw; /*250px*/
-  height: 5vh; /*30px*/
-  font-size: 0.9em; /*14px*/
-  position: relative;
-  margin-bottom: 1vh;
-  display: flex;
-  align-items: center;
-
-  font-size: 0.8em; /*12px*/
-  font-weight: bolder;
-  border: none;
-  border-radius: 5px;
-}
-/*버튼 스타일링*/
 .registerButton {
-  width: 10vw; /*250px*/
-  height: 5vh; /*30px*/
-  color: #ffffff;
-  background: #c00000;
+  width: 7vw;
+  height: 5vh;
+
+  margin-top: 5%;
+  margin-left: 43%;
+
   border: none;
   border-radius: 5px;
-  font-size: 0.9em; /*14px*/
-  font-weight: bolder;
-  margin-top: 4vh;
+
+  font-size: 0.9em;
+  letter-spacing: 1px;
+
+  background: rgb(231, 231, 231);
 }
 .registerButton:hover {
-  transition: ease 0.2s;
-  transform: scale(1.02);
-  color: white;
+  color: rgb(151, 32, 32);
+  font-weight: bold;
   border: none;
-  box-shadow: 0 0 40px 40px #8f0202 inset;
+
+  box-shadow: 1px 1px 10px 1px gray;
+  font-weight: bold;
 }
-.m_registerButton {
+.m-register {
+  width: 100%; /*55%*/
+  height: 100%; /*60%*/
+
+  position: absolute;
+  padding-top: 20px;
+
+  background: rgb(231, 231, 231);
+
+  display: flex;
+  flex-direction: column;
+}
+.m-upper-register {
+  position: relative;
+
+  width: 100%;
+  height: 20%;
+
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+  text-align: center;
+}
+.m-welcome-text-register {
+  margin-top: 30px;
+
+  margin-bottom: 1px;
+  font-size: 1.3em;
+  font-weight: bolder;
+
+  color: rgb(151, 32, 32);
+}
+.m-bottom-register {
+  margin-top: 15px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.m_registerButton-register {
   width: 35vw; /*250px*/
   height: 5vh; /*30px*/
 
-  margin-top: 6vh;
+  margin-top: 50px;
 
   font-size: 0.9em; /*14px*/
   font-weight: bolder;
-  color: #ffffff;
+  color: whitesmoke;
+  letter-spacing: 2px;
 
-  background: #c00000;
+  background: rgb(151, 32, 32);
 
   border: none;
-  border-radius: 2px;
+  border-radius: 3px;
 }

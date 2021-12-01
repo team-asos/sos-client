@@ -1,15 +1,12 @@
 .icon-box {
-  height: 10vh;
+  height: 8vh;
 
   padding-top: 15%;
   text-align: center;
 
   color: black;
 }
-.icon {
-  width: 7vw;
-  height: 6vh;
-}
+
 .text {
   font-size: 0.55em;
   font-weight: bold;
@@ -21,8 +18,9 @@
   text-decoration: overline;
   text-decoration-color: black;
 }
+
 .icon-box:hover {
-  color: #820101;
+  color: rgb(151, 32, 32);
   transition: ease-in 0.1s;
   transform: scale(1.05);
   cursor: pointer;

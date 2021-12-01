@@ -174,9 +174,11 @@ export const BoardContainer = ({
     }
     setBoard(newMap);
   }, [facilities]);
+
   const getFacilityType = type => {
     return `/images/${type}.png`;
   };
+
   console.log(seats);
   useEffect(() => {
     let count = 0;

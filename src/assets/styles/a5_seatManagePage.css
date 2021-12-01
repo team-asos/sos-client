@@ -1,7 +1,10 @@
 .seatManagePage {
   font-family: NotoSansRegular;
+
   display: flex;
   flex-direction: row;
+
+  background-color: rgb(240, 240, 240);
 }
 
 .seatManagePageRight {

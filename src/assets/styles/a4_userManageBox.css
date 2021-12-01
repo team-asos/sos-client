@@ -20,6 +20,10 @@
   flex-direction: row;
 }
 
+.userManageUpperBox div p {
+  text-shadow: 1px 1px rgba(165, 165, 165, 0.322);
+}
+
 .userManageUpperBoxChild {
   margin-left: 2%;
 

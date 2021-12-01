@@ -19,18 +19,20 @@
   justify-content: center;
 }
 .deleteUserButton {
-  color: #c00000;
+  color: rgb(151, 32, 32);
   background-color: transparent;
   border: 1px solid #c4c4c4;
   border-radius: 2px;
 }
 .deleteUserButton:hover {
   color: white;
-  background-color: #c00000;
+  background-color: rgb(151, 32, 32);
 
   transition: 0.1s ease-in;
-  transform: scale(1.03);
+  transform: scale(1.02);
 
   border: 1px solid transparent;
   border-radius: 2px;
+
+  box-shadow: 1px 1px 1px 1px rgb(151, 32, 32);
 }

@@ -17,7 +17,9 @@
   font-size: 2em;
   font-weight: bold;
 }
-
+.messageUpperBoxChild p {
+  text-shadow: 1px 1px rgba(165, 165, 165, 0.322);
+}
 /*콘텐츠 설정*/
 .messageBottomBox {
   width: 87vw;
