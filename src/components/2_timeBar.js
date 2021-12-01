@@ -4,9 +4,12 @@ const DateTimeBox = () => {
   const [date, setDate] = useState(new Date());
 
   const callTime = () => {
-    setInterval(() => {
+    let time = setInterval(() => {
       setDate(new Date());
     }, 1000);
+    return () => {
+      clearInterval(time);
+    };
   };
 
   //요일 불러우는 함수
@@ -33,15 +36,14 @@ const DateTimeBox = () => {
         justifyContent: 'center',
         lineHeight: '40%',
         fontSize: '1em',
+        color: 'white',
       }}
     >
-      <p style={{ fontWeight: 'bold', color: 'gray' }}>
+      <p style={{ fontWeight: 'bold', marginBottom: '25%' }}>
         {date.toLocaleDateString()}
       </p>
-      <p style={{ fontWeight: 'bold', color: '#c4c4c4' }}>{getToday()}</p>
-      <p style={{ fontWeight: 'bold', color: 'white' }}>
-        {date.toLocaleTimeString('en-GB')}
-      </p>
+      <p style={{ fontWeight: 'bold', marginBottom: '25%' }}>{getToday()}</p>
+      <p style={{ fontWeight: 'bold' }}>{date.toLocaleTimeString('en-GB')}</p>
       {callTime()}
     </div>
   );

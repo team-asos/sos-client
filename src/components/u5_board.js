@@ -149,7 +149,7 @@ export const Board = ({
           >
             {col.type === FACILITY && isToggleOn ? (
               <img
-                style={{ width: '100%', height: '100%', opacity: '40%' }}
+                style={{ width: '100%', height: '100%', opacity: '60%' }}
                 src={col.name}
                 alt=""
               />

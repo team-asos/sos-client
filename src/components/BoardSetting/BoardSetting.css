@@ -21,18 +21,19 @@
   background-color: transparent;
 }
 .createbtn:hover {
-  color: #810000;
-  border-bottom: 2px solid #810000;
+  color: rgb(151, 32, 32);
+  border-bottom: 2px solid rgb(151, 32, 32);
 
   transition: 0.05s ease-in-out;
   transform: scale(1.01);
 }
 .createbtn-click {
-  color: #810000;
+  color: rgb(151, 32, 32);
   background-color: transparent;
   border: none;
-  border-bottom: 2px solid #810000;
+  border-bottom: 2px solid rgb(151, 32, 32);
   transform: scale(1.15);
+  font-weight: bold;
 }
 /* 탭 콘텐츠 */
 .setting-tab {
@@ -98,11 +99,14 @@
   margin-top: 10%;
   border: none;
   border-radius: 3px;
-  box-shadow: 1px 1.2px #888888;
+
+  box-shadow: 1px 1.2px 3px 1px #b3b3b3;
+
+  cursor: pointer;
 }
 .seat-btn-make:hover {
   transition: 0.1s ease-in;
-  background-color: #c00000;
+  background-color: rgb(151, 32, 32);
   color: white;
 }
 
@@ -111,6 +115,7 @@
   width: 4vw;
   border: none;
   background-color: transparent;
+
   border-bottom: 0.2px solid rgb(134, 134, 134);
 }
 /* 회의실 최대인원수 조회 */
@@ -135,16 +140,32 @@
   border-radius: 2px;
 
   background-color: rgba(255, 255, 255, 0.699);
+  box-shadow: 1px 1px 4px 4px rgba(173, 173, 173, 0.37);
 }
 .floor-info-detail {
   width: 100%;
 
   padding-left: 5%;
 }
-.floor-info-detail label {
-  width: 10vw;
+.floor-info-detail p {
+  margin-bottom: 2%;
+  font-weight: 700;
+}
+.floor-info-detail table {
+  width: 93%;
+  font-size: 0.95em;
+  border: 1px solid rgba(128, 128, 128, 0.336);
+}
+.floor-info-detail table tr {
+  border: 1px solid rgba(128, 128, 128, 0.336);
+}
+.floor-info-detail table th {
+  width: 65%;
+  text-align: center;
+  color: rgb(61, 61, 61);
+}
+.floor-info-detail table td {
+  text-align: center;
 
-  margin-left: 10%;
-  margin-right: 1%;
-  margin-bottom: 0.5%;
+  border-left: 1px solid rgba(128, 128, 128, 0.336);
 }

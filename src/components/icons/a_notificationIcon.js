@@ -6,8 +6,11 @@ class NotificationIcon extends React.Component {
   render() {
     return (
       <div className="icon-box">
-        <AiIcon.AiFillMessage className="icon" size={35} />
-        <p className="text">알림</p>
+        <AiIcon.AiFillMessage
+          className="icon"
+          style={{ filter: 'drop-shadow(5px 5px 10px rgb(200,200,200))' }}
+          size={27}
+        />
       </div>
     );
   }
