@@ -46,6 +46,6 @@
 /*회의실 예약 테이블*/
 .srTable {
   position: relative;
-
   text-align: start;
+  margin-top: 3%;
 }

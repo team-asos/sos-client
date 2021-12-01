@@ -7,7 +7,11 @@ import InquiryForm from './u3_inquiryForm';
 import '../assets/styles/u3_inquiryListForm.css';
 import * as moment from 'moment';
 
-const InquiryListForm = props => {
+const InquiryListForm = ({ user, addInquiryClick }) => {
+  const [click, setClick] = useState(0);
+  const setterAddInquiryClick = () => {
+    setClick(0);
+  };
   const isPc = useMediaQuery({
     query: '(min-width:768px)',
   });
@@ -19,7 +23,7 @@ const InquiryListForm = props => {
 
   const res = async () => {
     await fetch(
-      `${process.env.REACT_APP_SERVER_BASE_URL}/questions/search?userId=${props.user.id}`,
+      `${process.env.REACT_APP_SERVER_BASE_URL}/questions/search?userId=${user.id}`,
       {
         headers: { Authorization: `Bearer ${cookie.access_token}` },
         method: 'GET',
@@ -32,10 +36,10 @@ const InquiryListForm = props => {
   };
 
   useEffect(() => {
-    if (props.user.id !== 'undefined') {
+    if (user.id !== 'undefined') {
       res();
     }
-  }, [props.user.id]);
+  }, [user.id]);
 
   //문의 답변 삭제 버튼
   const deleteClick = questionId => {
@@ -60,36 +64,53 @@ const InquiryListForm = props => {
   const [showModal, setShowModal] = useState(false);
 
   const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
+  const handleClose = () => {
+    setShow(false);
+    if (addInquiryClick) {
+      addInquiryClick = 0;
+    }
+  };
   const handleShow = () => setShow(true);
-
+  console.log(addInquiryClick);
   const toggleTrueFalse = () => {
     setShowModal(handleShow);
   };
-
+  const mobileHandleShow = () => {
+    if (addInquiryClick) {
+      setShowModal(handleShow);
+      console.log('보여줘');
+    }
+  };
+  useEffect(() => {
+    mobileHandleShow();
+  }, [addInquiryClick]);
   return (
     /*전체 문의 리스트 */
     <div>
       <div className="inquiryListTotal">
-        {isPc ? (
-          <div>
-            <button className="inquiryButton" onclick={() => toggleTrueFalse()}>
-              문의 하기{' '}
-            </button>
-          </div>
-        ) : (
-          <div className="inquiryListUpper">
-            <p className={isPc ? 'myListText' : 'm_myListText'}>
-              나의 문의 내역
-            </p>
+        {
+          isPc ? (
+            <div>
+              <button
+                className="inquiryButton"
+                onClick={e => toggleTrueFalse()}
+              >
+                문의 하기{' '}
+              </button>
+            </div>
+          ) : null
+          // <div className="inquiryListUpper">
+          //   <p className={isPc ? 'myListText' : 'm_myListText'}>
+          //     나의 문의 내역
+          //   </p>
 
-            <AiIcon.AiOutlinePlusSquare
-              className="newInquiryIcon"
-              size={30}
-              onClick={e => toggleTrueFalse()}
-            />
-          </div>
-        )}
+          //   <AiIcon.AiOutlinePlusSquare
+          //     className="newInquiryIcon"
+          //     size={30}
+          //     onClick={e => toggleTrueFalse()}
+          //   />
+          // </div>
+        }
 
         {question.length === 0 ? (
           <div className={isPc ? 'noInquiryList' : 'm_noInquiryList'}>
@@ -251,6 +272,9 @@ const InquiryListForm = props => {
         )}
       </div>
       {show ? <InquiryForm show={show} handleClose={handleClose} /> : null}
+      {addInquiryClick ? (
+        <InquiryForm show={show} handleClose={handleClose} />
+      ) : null}
     </div>
   );
 };

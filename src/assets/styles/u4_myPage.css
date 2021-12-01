@@ -59,7 +59,7 @@
 }
 /*마이페이지에서 헤더 빼고 나머지 부분*/
 .myPageContents {
-  height: 90vh;
+  height: 100%;
   background-color: rgb(240, 240, 240);
 }
 

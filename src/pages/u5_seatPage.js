@@ -151,7 +151,7 @@ const SeatPage = () => {
             </div>
           </div>
         </div>
-        <div className="content">
+        <div className="seatContent">
           <BoardContainer
             floor={selectedFloor}
             userId={myId}

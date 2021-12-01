@@ -40,7 +40,9 @@
 .m_inquire_titleTextStyle {
   font-size: 1.2em;
   font-weight: bold;
-  margin-left: 35%;
+  margin-left: 27%;
+  display: flex;
+  width: 100%;
 }
 .myRLMenuTextStyle:hover {
   color: #c00000;

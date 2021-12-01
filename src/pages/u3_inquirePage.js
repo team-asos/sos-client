@@ -6,6 +6,7 @@ import NavBarUser from '../components/u_navBar';
 import '../assets/styles/u3_inquirePage.css';
 import { useMediaQuery } from 'react-responsive';
 import { FiMenu } from 'react-icons/fi';
+import * as AiIcon from 'react-icons/ai';
 
 import InquiryListForm from '../components/u3_inquiryListForm';
 
@@ -24,6 +25,8 @@ const InquirePage = () => {
 
   //내 계정 가져오기
   const [user, setUser] = useState({});
+
+  const [addInquiryClick, setAddInquiryClick] = useState(0);
   useEffect(() => {
     const res = async () => {
       await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/auth`, {
@@ -56,7 +59,14 @@ const InquirePage = () => {
                 style={{ color: '#820101' }}
               />
             </div>
-            <div className="m_inquire_titleTextStyle">문의</div>
+            <div className="m_inquire_titleTextStyle">
+              문의 내역
+              <AiIcon.AiOutlinePlusSquare
+                className="newInquiryIcon"
+                size={30}
+                onClick={() => setAddInquiryClick(1)}
+              />
+            </div>
           </div>
         )}
 
@@ -64,7 +74,7 @@ const InquirePage = () => {
 
         {/* 내용이 담기는 content */}
         <div className="myPageContents">
-          <InquiryListForm user={user} />
+          <InquiryListForm user={user} addInquiryClick={addInquiryClick} />
         </div>
       </div>
     </div>
