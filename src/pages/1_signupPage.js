@@ -27,6 +27,15 @@ const SignUp = () => {
   const [position, setPosition] = useState('');
 
   const registerClickHandler = async () => {
+    if (password.length < 8) {
+      alert('8자리 이상의 비밀번호를 입력해주세요.');
+      return;
+    }
+    if (tel.length !== 13) {
+      alert('올바른 전화번호를 입력해주세요.');
+      return;
+    }
+
     const result = await fetch(
       `${process.env.REACT_APP_SERVER_BASE_URL}/users`,
       {
@@ -77,7 +86,6 @@ const SignUp = () => {
     setIdNo(e.target.value);
   };
   const inputPhone = e => {
-    //setPhone(e.target.value);
     const str = e.target.value.replace(/[^0-9]/g, '');
     if (str.length < 3) {
       setPhone(str);
@@ -91,6 +99,7 @@ const SignUp = () => {
       setPhone(str.substr(0, 3) + '-' + str.substr(3, 4) + '-' + str.substr(7));
     }
   };
+
   const inputDep = e => {
     setDep(e.target.value);
   };
