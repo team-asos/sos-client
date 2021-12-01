@@ -45,8 +45,6 @@ export default function UserDetailModalContent({
     res(modalInfo.id);
   }, []);
 
-  console.log(reservation);
-
   const [inquiry, setInquiry] = useState('');
   //문의 내역 테이블 헤더
   const inquiryTitle = ['상태', '문의내용', '답변내용', '문의날짜', '답변날짜'];

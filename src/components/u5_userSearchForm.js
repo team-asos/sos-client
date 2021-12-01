@@ -76,7 +76,6 @@ const UserSearchForm = ({ getUserId }) => {
       });
   };
   const search = () => {
-    console.log(userReservation);
     userReservation.map(item => {
       if (item.room === null && item.status === 1) {
         if (item.endTime === null) {

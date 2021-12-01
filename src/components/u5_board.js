@@ -107,6 +107,7 @@ export const Board = ({
     else if (type === ROOM)
       return {
         backgroundColor: '#E5E5E5',
+        borderRadius: '4px',
       };
     //else if (type === FACILITY) return { backgroundColor: '#f5df4d' };
     else if (type === SELECTION)

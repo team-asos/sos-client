@@ -106,7 +106,6 @@ export const FacilityTab = ({
   };
 
   const FindFacility = ({ name }) => {
-    console.log(name);
     return facilitiesList.map(facility =>
       name === facility.engName ? <>{facility.name}</> : '',
     );

@@ -74,7 +74,6 @@ const InquiryForm = ({ show, handleClose }) => {
       window.location.href = '/inquire';
     }
   };
-  console.log(title.length);
   return (
     <Modal show={show} onHide={handleClose} size="ml">
       <Modal.Header closeButton>
