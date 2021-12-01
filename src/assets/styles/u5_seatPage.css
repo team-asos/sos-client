@@ -103,7 +103,7 @@
 .statusForm {
   display: flex;
   align-items: center;
-  margin-left: 37%;
+  margin-left: 35%;
 }
 .m_statusForm {
   display: flex;
@@ -136,22 +136,26 @@
 .reservedSeatShape {
   width: 2vw;
   height: 2vw;
-  background-color: #646464;
+  background-color: rgb(160, 160, 160);
+  border-radius: 4px;
 }
 .m_reservedSeatShape {
   width: 9vw;
   height: 4vh;
-  background-color: #646464;
+  background-color: rgb(160, 160, 160);
+  border-radius: 4px;
 }
 .ableSeatShape {
   width: 2vw;
   height: 2vw;
-  background-color: #00a023;
+  background-color: #51bf60;
+  border-radius: 4px;
 }
 .m_ableSeatShape {
   width: 9vw;
   height: 4vh;
-  background-color: #00a023;
+  background-color: #51bf60;
+  border-radius: 4px;
 }
 .reservedSeatsTextStyle,
 .ableSeatsTextStyle {

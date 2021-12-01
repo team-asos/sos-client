@@ -57,14 +57,14 @@
   width: 8vw;
   height: 4vh;
   font-size: 1em;
-  background-color: #155924;
+  background-color: rgb(206, 61, 61);
   margin-top: 3vh;
   color: white;
   border: 0;
   border-radius: 8px;
 }
 .seatReservationBtn:hover {
-  background-color: #0f4119;
+  background-color: rgb(199, 43, 43);
   transition: ease 0.2s;
   transform: scale(1.01);
 }
@@ -74,7 +74,7 @@
   position: absolute;
   left: 150px;
   font-size: 1em;
-  background-color: #155924;
+  background-color: rgb(199, 43, 43);
   color: white;
   border: none;
   border-radius: 8px;
