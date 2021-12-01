@@ -122,10 +122,11 @@ const AddParticipant = ({
     }
   };
   /*마이너스 누르면 참석자 삭제 */
-  const deleteParticipant = id => {
+  const deleteParticipant = user => {
     setSelectedMembers(
-      selectedMembers.filter(selectedMembers => selectedMembers.id !== id),
+      selectedMembers.filter(selectedMembers => selectedMembers.id !== user.id),
     );
+    users.push(user);
   };
   /*드롭다운에서 선택 했을 때 예약할 때 보낼 값 */
   const setStartThisClick = dropDownStartTime => {
@@ -251,7 +252,7 @@ const AddParticipant = ({
                         style={{
                           cursor: 'pointer',
                         }}
-                        onClick={() => deleteParticipant(item.id)}
+                        onClick={() => deleteParticipant(item)}
                       ></AiIcon.AiOutlineMinus>
                     </td>
                   </tr>
