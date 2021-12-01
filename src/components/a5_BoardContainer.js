@@ -151,7 +151,7 @@ export const BoardContainer = ({ floor }) => {
       newMap[facility.y][facility.x] = {
         type: FACILITY,
         id: facility.id,
-        name: facility.type,
+        name: getFacilityType(facility.type),
         width: 1,
         height: 1,
         select: false,
@@ -160,7 +160,9 @@ export const BoardContainer = ({ floor }) => {
 
     setBoard(newMap);
   }, [seats, rooms, facilities]);
-
+  const getFacilityType = type => {
+    return `/images/${type}.png`;
+  };
   return (
     <div
       className="board-container"
