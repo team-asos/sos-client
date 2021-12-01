@@ -20,6 +20,7 @@ import InquirePage from './pages/u3_inquirePage';
 import UserMyPage from './pages/u4_myPage';
 import SeatReservationPage from './pages/u5_seatPage';
 import MyInfo from './pages/u4_myInfoForm';
+import SearchPage from './pages/searchPage';
 
 //관리자 페이지
 import NotificationPage from './pages/a3_notificationPage';
@@ -40,6 +41,7 @@ function App() {
           <Route path="/sign-up-loading" component={SignUpLoading} />
           {/* <Route path="/회의실정보/:reservationId" component={QrPage}/> */}
           <Route path="/reservation-info/:reservationId" component={QrPage} />
+          <Route path="/search" component={SearchPage} />
 
           <Route
             path="/room-reservation/:idx"
