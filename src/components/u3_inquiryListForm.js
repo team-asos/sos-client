@@ -86,9 +86,7 @@ const InquiryListForm = props => {
             />
           ) : null}
           {open ? <MobileNavBar open={open} /> : null}
-          <div className={isPc ? 'myListText' : 'm_myListText'}>
-            나의 문의 내역
-          </div>
+          <div className={isPc ? 'myListText' : 'm_myListText'}>문의</div>
           <span>
             <OverlayTrigger
               placement="right"

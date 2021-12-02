@@ -163,17 +163,19 @@ const RoomTimeTable = ({ MAXUSER, selectedDate, roomId }) => {
               }
         }
       >
-        <Table className={isPc ? '' : 'm_roomTimeTable'}>
+        <Table className={isPc ? null : 'm_roomTimeTable'}>
           <thead>
             <tr>
-              <th style={isPc ? { width: '13%' } : { width: '20%' }}>
+              <th style={isPc ? { width: '13%' } : { width: '16%' }}>
                 시간
                 <GrIcon.GrPowerReset
                   onClick={() => deleteSelection()}
                   className="resetSelectTime"
                 />
               </th>
-              <th style={{ width: '40%' }}>회의 주제</th>
+              <th style={isPc ? { width: '40%' } : { width: '29%' }}>
+                회의 주제
+              </th>
               <th style={{ width: '10%' }}>대표자</th>
               {isPc ? <th style={{ width: '40%' }}>참석자</th> : null}
             </tr>

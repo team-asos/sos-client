@@ -7,13 +7,13 @@
   box-shadow: 1px 1px 2px 0.1px rgb(202, 202, 202);
   background-color: white;
   border-radius: 5px;
-  width: 90vw;
+  width: 91vw;
 }
 .m_u2_selectedTable {
   font-size: 0.8em;
   background-color: white;
   border-radius: 10px;
-  width: 90vw;
+  width: 95vw;
   margin-top: 3%;
   box-shadow: 1px 1px 5px 0.1px rgb(202, 202, 202);
 }

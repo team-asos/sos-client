@@ -12,6 +12,14 @@
   align-self: flex-start;
   align-items: baseline;
 }
+.m_selectedTime {
+  display: flex;
+  align-self: flex-start;
+  align-items: baseline;
+  margin-left: 2%;
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
 .dropDownToggle {
   background-color: rgb(230, 230, 230);
   border: none;
@@ -41,10 +49,10 @@
 .mParticipantForm {
   display: flex;
   flex-direction: column;
-  margin-left: 2vw;
-  margin-top: 2vh;
+  margin-left: 1%;
+  margin-top: 2%;
   width: 95vw;
-  height: 50vh;
+  max-height: 50vh;
 }
 /*회의 참석자를 입력하세요*/
 .rrp_centerTextStyle {
@@ -101,12 +109,16 @@
 }
 /*참석자 리스트*/
 .participantForm {
-  height: 45vh;
+  max-height: 45vh;
   overflow: auto;
 }
 .meetingTopicForm {
   width: 100%;
   margin-bottom: 2vh;
+}
+.m_meetingTopicForm {
+  width: 100%;
+  margin-bottom: 1%;
 }
 .topicInput {
   border: none;
