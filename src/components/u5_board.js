@@ -148,8 +148,8 @@ export const Board = ({
               position: 'absolute',
               width: transformLength(col.type, col.width),
               height: transformLength(col.type, col.height),
-              left: `${x * 50 + 50 + 10 * x}px`,
-              top: `${y * 50 + 50 + 10 * y}px`,
+              left: `${x * 50 + 10 * x}px`,
+              top: `${y * 50 + 10 * y}px`,
             }}
           >
             {col.type === FACILITY && isToggleOn ? (
