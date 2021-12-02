@@ -3,6 +3,7 @@ import { useCookies } from 'react-cookie';
 import { useHistory } from 'react-router-dom';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { Modal, Button } from 'react-bootstrap';
+import { useMediaQuery } from 'react-responsive';
 
 import SeatReservationInfo from '../components/u4_seatReservationInfo';
 import RoomReservationInfo from '../components/u4_roomReservationInfo';
@@ -13,6 +14,9 @@ import * as ri from 'react-icons/ri';
 import '../assets/styles/u4_myPageBox.css';
 
 const MyPageBox = props => {
+  const isPc = useMediaQuery({
+    query: '(min-width:768px)',
+  });
   //쿠키 생성
   const [cookie, removeCookie] = useCookies(['access_token']);
 
@@ -227,11 +231,19 @@ const MyPageBox = props => {
 
   return (
     <div className="myPageBox">
-      <div className="myPageBox-left">
+      <div className={isPc ? 'myPageBox-left' : 'm_myPageBox-left'}>
         <div className="myPageBox-left-myinfo">
           <div className="myPageBox-left-myinfo-content">
             <div className="myPageBox-text-info">
-              <p style={{ fontWeight: 'bold', fontSize: '1.6em' }}>나의 정보</p>
+              <p
+                style={
+                  isPc
+                    ? { fontWeight: 'bold', fontSize: '1.6em' }
+                    : { fontWeight: 'bold', fontSize: '1.2em' }
+                }
+              >
+                나의 정보
+              </p>
               <OverlayTrigger
                 key="right"
                 placement="right"
@@ -250,7 +262,7 @@ const MyPageBox = props => {
               >
                 <p>
                   <fa.FaUserEdit
-                    size={25}
+                    size={isPc ? 25 : 20}
                     className="myPage-edit-icon"
                     onClick={e => setShowPwInput(true)}
                     style={
@@ -264,7 +276,7 @@ const MyPageBox = props => {
             </div>
             {showPwInput === false ? (
               <div className="detail-info-container">
-                <div className="detail-info">
+                <div className={isPc ? 'detail-info' : 'm_detail-info'}>
                   <label>이름</label>
                   <input
                     type="text"
@@ -274,7 +286,7 @@ const MyPageBox = props => {
                     disabled={edit === false ? true : false}
                   />
                 </div>
-                <div className="detail-info">
+                <div className={isPc ? 'detail-info' : 'm_detail-info'}>
                   <label>이메일</label>
                   <input
                     type="text"
@@ -284,7 +296,7 @@ const MyPageBox = props => {
                     disabled={edit === false ? true : false}
                   />
                 </div>
-                <div className="detail-info">
+                <div className={isPc ? 'detail-info' : 'm_detail-info'}>
                   <label>비밀번호 </label>
                   <input
                     type="password"
@@ -295,7 +307,7 @@ const MyPageBox = props => {
                     disabled={edit === false ? true : false}
                   />
                 </div>
-                <div className="detail-info">
+                <div className={isPc ? 'detail-info' : 'm_detail-info'}>
                   <label>비밀번호 확인 </label>
                   <input
                     type="password"
@@ -307,7 +319,7 @@ const MyPageBox = props => {
                     disabled={edit === false ? true : false}
                   />
                 </div>
-                <div className="detail-info">
+                <div className={isPc ? 'detail-info' : 'm_detail-info'}>
                   <label>사원번호</label>
                   <input
                     type="text"
@@ -317,7 +329,7 @@ const MyPageBox = props => {
                     disabled={edit === false ? true : false}
                   />
                 </div>
-                <div className="detail-info">
+                <div className={isPc ? 'detail-info' : 'm_detail-info'}>
                   <label>전화번호</label>
                   <input
                     type="text"
@@ -327,7 +339,7 @@ const MyPageBox = props => {
                     disabled={edit === false ? true : false}
                   />
                 </div>
-                <div className="detail-info">
+                <div className={isPc ? 'detail-info' : 'm_detail-info'}>
                   <label>부서</label>
                   <input
                     type="text"
@@ -337,7 +349,7 @@ const MyPageBox = props => {
                     disabled={edit === false ? true : false}
                   />
                 </div>
-                <div className="detail-info">
+                <div className={isPc ? 'detail-info' : 'm_detail-info'}>
                   <label>직급</label>
                   <input
                     type="text"
@@ -383,11 +395,17 @@ const MyPageBox = props => {
                   size={30}
                   style={{ marginBottom: '2.5%', color: '#8f0000' }}
                 />
-                <p style={{ fontWeight: 'bold' }}>
+                <p
+                  style={
+                    isPc
+                      ? { fontWeight: 'bold' }
+                      : { fontWeight: 'bold', fontSize: '0.8em' }
+                  }
+                >
                   본인확인을 위해 비밀번호를 입력해주세요.
                 </p>
                 <input
-                  className="confirmPWInput"
+                  className={isPc ? 'confirmPWInput' : 'm_confirmPWInput'}
                   type="password"
                   placeholder="비밀번호"
                   onChange={inputPw}
@@ -402,13 +420,13 @@ const MyPageBox = props => {
                   }}
                 >
                   <button
-                    className="confirmPwBtn"
+                    className={isPc ? 'confirmPwBtn' : 'm_confirmPwBtn'}
                     onClick={e => setShowPwInput(false)}
                   >
                     취소
                   </button>
                   <button
-                    className="confirmPwBtn"
+                    className={isPc ? 'confirmPwBtn' : 'm_confirmPwBtn'}
                     onClick={loginAgainClickHandler}
                     style={{ marginLeft: '4%' }}
                   >
@@ -420,14 +438,17 @@ const MyPageBox = props => {
           </div>
         </div>
       </div>
-      <div className="myPageBox-right">
-        <div className="myPageBox-right-seat">
-          <SeatReservationInfo user={props.user} />
+      {isPc ? (
+        <div className="myPageBox-right">
+          <div className="myPageBox-right-seat">
+            <SeatReservationInfo user={props.user} />
+          </div>
+
+          <div className="myPageBox-right-room">
+            <RoomReservationInfo user={props.user} />
+          </div>
         </div>
-        <div className="myPageBox-right-room">
-          <RoomReservationInfo user={props.user} />
-        </div>
-      </div>
+      ) : null}
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>회원 탈퇴</Modal.Title>

@@ -9,8 +9,8 @@ import MyPageBox from './u4_myPageBox';
 
 //isMobile import 파일들
 import MobileNavBar from '../components/u_m_navBar';
-import MyInfoLogin from '../components/u4_myInfoLogin'; //정보수정
-import MyReservationList from '../components/u4_myReservationListForm'; //예약내역
+import SeatReservationInfo from '../components/u4_seatReservationInfo';
+import RoomReservationInfo from '../components/u4_roomReservationInfo';
 
 import '../assets/styles/u4_myPage.css';
 
@@ -51,8 +51,13 @@ const UserMyPage = props => {
 
   //나의 예약내역, 나의 로그인 정보 탭 이동
   const tabBar = {
-    0: <MyReservationList user={user} />,
-    1: <MyInfoLogin user={user} />, //나중에 email 받아서 인증해야해서
+    0: (
+      <>
+        <SeatReservationInfo user={user} />
+        <RoomReservationInfo user={user} />
+      </>
+    ),
+    1: <MyPageBox user={user} />, //나중에 email 받아서 인증해야해서
   };
   const [state, setState] = useState(0);
   const clickHandler = id => {
@@ -83,7 +88,7 @@ const UserMyPage = props => {
               <FiMenu
                 size={40}
                 onClick={navClick}
-                style={{ color: '#820101' }}
+                style={{ color: 'firebrick' }}
               />
             </div>
             {/* PC - Header Text(오른쪽 위 텍스트) */}
@@ -94,7 +99,7 @@ const UserMyPage = props => {
               예약 내역
             </div>
             <div onClick={() => clickHandler(1)} className="m_myPageMenuText">
-              정보 수정
+              정보 조회
             </div>
           </div>
         )}
