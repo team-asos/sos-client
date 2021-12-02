@@ -156,25 +156,11 @@ export const Minimap = ({ size, seatId, floorId }) => {
     setBoard(newMap);
   }, [seatId, facilities]);
 
-  const transformWidth = (col, length) => {
-    if (col.type === ROOM) {
-      if (col.width === 0) return `0px`;
-      else
-        return `${
-          ((size - (length - 1) * 4) / length) * col.width + 4 * (col.width - 1)
-        }px`;
-    } else return `${(size - (length - 1) * 4) / length}px`;
-  };
-
-  const transformHeight = (col, length) => {
-    if (col.type === ROOM) {
-      if (col.width === 0) return `0px`;
-      else
-        return `${
-          ((size - (length - 1) * 4) / length) * col.height +
-          4 * (col.height - 1)
-        }px`;
-    } else return `${(size - (length - 1) * 4) / length}px`;
+  const transformLength = (type, length) => {
+    if (type === ROOM) {
+      if (length === 0) return `0px`;
+      else return `${length * 40 + 4 * (length - 1)}px`;
+    } else return `${length * 40}px`;
   };
 
   const itemStyle = type => {
@@ -227,14 +213,10 @@ export const Minimap = ({ size, seatId, floorId }) => {
             style={{
               ...itemStyle(col.type),
               position: 'absolute',
-              width: transformWidth(col, floor.width),
-              height: transformHeight(col, floor.width),
-              left: `${
-                x * ((size - (floor.width - 1) * 4) / floor.width) + 4 * x
-              }px`,
-              top: `${
-                y * ((size - (floor.width - 1) * 4) / floor.width) + 4 * y
-              }px`,
+              width: transformLength(col.type, col.width),
+              height: transformLength(col.type, col.height),
+              left: `${x * 40 + x * 4}px`,
+              top: `${y * 40 + y * 4}px`,
             }}
           >
             {col.name}
@@ -248,18 +230,46 @@ export const Minimap = ({ size, seatId, floorId }) => {
     return (
       <div
         style={{
-          overflowX: 'auto',
-          overflowY: 'auto',
+          height: '100%',
+          marginBottom: '10px',
         }}
       >
         <div
           style={{
-            width: `${size}px`,
-            height: `360px`,
-            position: 'relative',
+            display: 'flex',
+            justifyContent: 'end',
+            alignItems: 'center',
+            marginRight: '10px',
+            marginBottom: '10px',
           }}
         >
-          <Item board={board} />
+          <div
+            style={{
+              width: `24px`,
+              height: `24px`,
+              backgroundColor: '#eb6767',
+              borderRadius: '4px',
+              marginRight: '4px',
+            }}
+          ></div>
+          현재 위치
+        </div>
+        <div
+          style={{
+            overflow: 'auto',
+            height: '90%',
+            margin: '0 10px',
+          }}
+        >
+          <div
+            style={{
+              width: `${size}px`,
+              height: '100%',
+              position: 'relative',
+            }}
+          >
+            <Item board={board} />
+          </div>
         </div>
       </div>
     );

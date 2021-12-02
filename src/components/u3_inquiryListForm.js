@@ -71,14 +71,12 @@ const InquiryListForm = ({ user, addInquiryClick }) => {
     }
   };
   const handleShow = () => setShow(true);
-  console.log(addInquiryClick);
   const toggleTrueFalse = () => {
     setShowModal(handleShow);
   };
   const mobileHandleShow = () => {
     if (addInquiryClick) {
       setShowModal(handleShow);
-      console.log('보여줘');
     }
   };
   useEffect(() => {

@@ -28,7 +28,6 @@ const DeleteFloor = () => {
   const [deleteFloor, setDeleteFloor] = useState('');
 
   const deleteClickHandler = async id => {
-    console.log(deleteFloor);
     const result = await fetch(
       `${process.env.REACT_APP_SERVER_BASE_URL}/floors/${id}`,
       {

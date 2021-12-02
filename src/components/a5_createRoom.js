@@ -8,7 +8,6 @@ const CreateRoom = props => {
   const [height, setHeight] = useState('');
 
   const createClickHandler = async () => {
-    console.log(maxUser);
     const result = await fetch(
       `${process.env.REACT_APP_SERVER_BASE_URL}/rooms`,
       {

@@ -181,7 +181,6 @@ export const BoardContainer = ({
     return `/images/${type}.png`;
   };
 
-  console.log(seats);
   useEffect(() => {
     let count = 0;
     seats.map(seat => {

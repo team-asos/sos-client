@@ -72,74 +72,81 @@ export const Search = () => {
   };
 
   return (
-    <div>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        height: '100vh',
+      }}
+    >
       <div>
-        <Select
-          menuPosition={'center'}
-          options={users.map(user => ({
-            value: user.id,
-            label: `${user.name} / ${user.department} / ${user.position}`,
-          }))}
-          placeholder="검색할 정보를 입력해주세요."
-          onChange={e => setUserId(e.value)}
-          noOptionsMessage={() => '검색 결과가 없습니다.'}
-        />
-      </div>
-      <div>
-        {searchUser && <p style={pStyle}>회원 정보</p>}
-        <Table>
-          <tbody>
-            {searchUser && (
-              <>
+        <div>
+          <Select
+            menuPosition={'center'}
+            options={users.map(user => ({
+              value: user.id,
+              label: `${user.name} / ${user.department} / ${user.position}`,
+            }))}
+            placeholder="검색할 정보를 입력해주세요."
+            onChange={e => setUserId(e.value)}
+            noOptionsMessage={() => '검색 결과가 없습니다.'}
+          />
+        </div>
+        <div>
+          {searchUser && <p style={pStyle}>회원 정보</p>}
+          <Table>
+            <tbody>
+              {searchUser && (
+                <>
+                  <tr>
+                    <td>사원 번호</td>
+                    <td>{searchUser.employeeId}</td>
+                  </tr>
+                  <tr>
+                    <td>이름</td>
+                    <td>
+                      {roomReservation
+                        ? `${searchUser.name} (회의중)`
+                        : `${searchUser.name}`}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>부서</td>
+                    <td>{searchUser.department}</td>
+                  </tr>
+                  <tr>
+                    <td>직책</td>
+                    <td>{searchUser.position}</td>
+                  </tr>
+                  <tr>
+                    <td>이메일</td>
+                    <td>{searchUser.email}</td>
+                  </tr>
+                  <tr>
+                    <td>연락처</td>
+                    <td>{searchUser.tel}</td>
+                  </tr>
+                </>
+              )}
+              {seatReservation && (
                 <tr>
-                  <td>사원 번호</td>
-                  <td>{searchUser.employeeId}</td>
+                  <td>좌석 위치</td>
+                  <td>{`${seatReservation.seat.floor.name} - ${seatReservation.seat.name}`}</td>
                 </tr>
+              )}
+              {roomReservation && (
                 <tr>
-                  <td>이름</td>
-                  <td>
-                    {roomReservation
-                      ? `${searchUser.name} (회의중)`
-                      : `${searchUser.name}`}
-                  </td>
+                  <td>회의실 위치</td>
+                  <td>{`${roomReservation.room.floor.name} - ${roomReservation.room.name}`}</td>
                 </tr>
-                <tr>
-                  <td>부서</td>
-                  <td>{searchUser.department}</td>
-                </tr>
-                <tr>
-                  <td>직책</td>
-                  <td>{searchUser.position}</td>
-                </tr>
-                <tr>
-                  <td>이메일</td>
-                  <td>{searchUser.email}</td>
-                </tr>
-                <tr>
-                  <td>연락처</td>
-                  <td>{searchUser.tel}</td>
-                </tr>
-              </>
-            )}
-            {seatReservation && (
-              <tr>
-                <td>좌석 위치</td>
-                <td>{`${seatReservation.seat.floor.name} - ${seatReservation.seat.name}`}</td>
-              </tr>
-            )}
-            {roomReservation && (
-              <tr>
-                <td>회의실 위치</td>
-                <td>{`${roomReservation.room.floor.name} - ${roomReservation.room.name}`}</td>
-              </tr>
-            )}
-          </tbody>
-        </Table>
+              )}
+            </tbody>
+          </Table>
+        </div>
       </div>
       {seatReservation && (
         <Minimap
-          // size={window.innerWidth}
-          size={800}
+          size={window.innerWidth}
           seatId={seatReservation.seat.id}
           floorId={seatReservation.seat.floor.id}
         />
