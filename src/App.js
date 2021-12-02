@@ -26,6 +26,7 @@ import SearchPage from './pages/searchPage';
 import NotificationPage from './pages/a3_notificationPage';
 import UserManagePage from './pages/a4_userManagePage';
 import SeatManagePage from './pages/a5_seatManagePage';
+import NotFoundPage from './pages/notFoundPage';
 
 function App() {
   return (
@@ -56,6 +57,11 @@ function App() {
           <Route exact path="/user-management" component={UserManagePage} />
           <Route path="/notification" component={NotificationPage} />
           <Route path="/seat-management" component={SeatManagePage} />
+
+          {/**
+          404 Page
+           */}
+          <Route path="*" component={NotFoundPage} />
         </Switch>
       </div>
     </Router>
