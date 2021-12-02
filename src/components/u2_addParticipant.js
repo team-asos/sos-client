@@ -156,7 +156,7 @@ const AddParticipant = ({
 
   return (
     <div className="roomReservationFormRight">
-      <div className="selectedTime">
+      <div className={isPc ? 'selectedTime' : 'm_selectedTime'}>
         <Dropdown>
           <Dropdown.Toggle
             variant="secondary"
@@ -201,7 +201,7 @@ const AddParticipant = ({
           </Dropdown.Menu>
         </Dropdown>
       </div>
-      <div className="meetingTopicForm">
+      <div className={isPc ? 'meetingTopicForm' : 'm_meetingTopicForm'}>
         <input
           className={isPc ? 'topicInput' : 'm_topicInput'}
           onChange={inputTopic}
