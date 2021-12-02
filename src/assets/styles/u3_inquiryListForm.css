@@ -4,7 +4,7 @@
   height: 100%;
 
   /* padding-top: 2%; */
-  margin-top: 3%;
+  margin-top: 2%;
 }
 .m_inquiryListTotal {
   width: 100%;
@@ -28,6 +28,7 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
+  align-items: center;
 }
 .m_inquiryHeader {
   display: flex;
@@ -44,6 +45,7 @@
 .myListText {
   font-size: 1.5em;
   font-weight: bold;
+  margin-right: 1%;
 }
 .m_myListText {
   position: relative;
