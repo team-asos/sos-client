@@ -14,6 +14,12 @@
 
   padding: 1%;
 }
+.m_myPageBox-left {
+  width: 94%;
+  height: 100%;
+
+  padding: 1%;
+}
 .myPageBox-left-myinfo {
   width: 100%;
   height: 100%;
@@ -78,6 +84,14 @@
   border: none;
   border-bottom: 1px solid #707070;
 }
+.m_confirmPWInput {
+  width: 50vw;
+
+  text-align: center;
+
+  border: none;
+  border-bottom: 1px solid #707070;
+}
 .confirmPwBtn {
   width: 3.8vw;
   height: fit-content;
@@ -94,6 +108,17 @@
   color: white;
   background-color: #8f0000;
 }
+.m_confirmPwBtn {
+  width: 20vw;
+  height: fit-content;
+
+  margin-top: 5%;
+
+  border: none;
+  border-radius: 2px;
+
+  background-color: #e6e6e6;
+}
 .detail-info-container {
   width: 100%;
   height: 85%;
@@ -104,6 +129,19 @@
 
   margin-top: 3%;
   margin-left: 13%;
+}
+.m_detail-info {
+  display: flex;
+  flex-direction: row;
+
+  margin-top: 6%;
+  margin-left: 4%;
+}
+.m_detail-info label {
+  width: 25%;
+  margin-right: 3%;
+
+  font-weight: bold;
 }
 .detail-info label {
   width: 20%;
@@ -127,7 +165,8 @@
 }
 .myPageBox-right-seat {
   width: 100%;
-  height: 40%;
+  /* height: 40%; */
+  height: 30%;
   background-color: white;
   box-shadow: 1px 1px 2px 0.1px rgb(202, 202, 202);
   border: none;
@@ -135,8 +174,8 @@
 }
 .myPageBox-right-room {
   width: 100%;
-  height: 56%;
-
+  /* height: 56%; */
+  height: 66%;
   margin-top: 2%;
   background-color: white;
   border: none;

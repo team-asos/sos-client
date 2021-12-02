@@ -157,7 +157,7 @@ const AddParticipant = ({
   return (
     <div className="roomReservationFormRight">
       <div className="selectedTime">
-        <Dropdown style={{ marginRight: '40%' }}>
+        <Dropdown>
           <Dropdown.Toggle
             variant="secondary"
             id="dropdown-basic"
@@ -178,6 +178,7 @@ const AddParticipant = ({
             ))}
           </Dropdown.Menu>
         </Dropdown>
+        <p style={{ marginRight: '8%', marginLeft: '8%' }}>~</p>
         <Dropdown>
           <Dropdown.Toggle
             variant="secondary"

@@ -8,7 +8,7 @@ import {
   SELECTION,
 } from '../../const/object-type.const';
 
-export const Minimap = ({ size, seatId, floorId }) => {
+export const Minimap = ({ size, seatId, roomId, floorId }) => {
   const [board, setBoard] = useState([]);
 
   const [floor, setFloor] = useState(null);
@@ -91,7 +91,7 @@ export const Minimap = ({ size, seatId, floorId }) => {
       setBoard(
         Array.from({ length: floor.height }, () =>
           Array.from({ length: floor.width }, () => {
-            return { type: 0, width: 1, height: 1 };
+            return { type: 0, name: '', width: 1, height: 1, select: false };
           }),
         ),
       );
@@ -106,9 +106,11 @@ export const Minimap = ({ size, seatId, floorId }) => {
     for (let seat of seats) {
       if (seat.id === seatId)
         newMap[seat.y][seat.x] = {
-          type: SELECTION,
+          type: SEAT,
+          name: seat.name,
           width: 1,
           height: 1,
+          select: true,
         };
       else
         newMap[seat.y][seat.x] = {
@@ -116,29 +118,39 @@ export const Minimap = ({ size, seatId, floorId }) => {
           name: seat.name,
           width: 1,
           height: 1,
+          select: false,
         };
     }
 
     for (let room of rooms) {
-      newMap[room.y][room.x] = {
-        type: ROOM,
-        name: room.name,
-        width: room.width,
-        height: room.height,
-      };
-
       newMap = newMap.map((row, rowIndex) =>
         row.map((col, colIndex) => {
-          if (colIndex === room.x && rowIndex === room.y)
-            return {
-              type: ROOM,
-              name: room.name,
-              width: room.width,
-              height: room.height,
-            };
-          else if (colIndex >= room.x && colIndex < room.x + room.width)
+          if (colIndex === room.x && rowIndex === room.y) {
+            if (room.id === roomId)
+              return {
+                type: ROOM,
+                name: room.name,
+                width: room.width,
+                height: room.height,
+                select: true,
+              };
+            else
+              return {
+                type: ROOM,
+                name: room.name,
+                width: room.width,
+                height: room.height,
+                select: false,
+              };
+          } else if (colIndex >= room.x && colIndex < room.x + room.width)
             if (rowIndex >= room.y && rowIndex < room.y + room.height)
-              return { type: ROOM, width: 0, height: 0 };
+              return {
+                type: ROOM,
+                name: '',
+                width: 0,
+                height: 0,
+                select: false,
+              };
 
           return col;
         }),
@@ -148,8 +160,10 @@ export const Minimap = ({ size, seatId, floorId }) => {
     for (let facility of facilities) {
       newMap[facility.y][facility.x] = {
         type: FACILITY,
+        name: `/images/${facility.type}.png`,
         width: 1,
         height: 1,
+        select: false,
       };
     }
 
@@ -163,7 +177,18 @@ export const Minimap = ({ size, seatId, floorId }) => {
     } else return `${length * 40}px`;
   };
 
-  const itemStyle = type => {
+  const itemStyle = (type, select) => {
+    // 검색한 좌석
+    if (select)
+      return {
+        backgroundColor: '#eb6767',
+        color: '#fff',
+        borderRadius: '4px',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+      };
+
     // 빈 좌석
     if (type === EMPTY)
       return {
@@ -195,13 +220,6 @@ export const Minimap = ({ size, seatId, floorId }) => {
         backgroundColor: '#E5E5E5',
         borderRadius: '4px',
       };
-    // 검색한 좌석
-    else if (type === SELECTION)
-      return {
-        backgroundColor: '#eb6767',
-        color: '#fff',
-        borderRadius: '4px',
-      };
   };
 
   const Item = ({ board }) => {
@@ -211,7 +229,7 @@ export const Minimap = ({ size, seatId, floorId }) => {
           <div
             key={x + y * row.length}
             style={{
-              ...itemStyle(col.type),
+              ...itemStyle(col.type, col.select),
               position: 'absolute',
               width: transformLength(col.type, col.width),
               height: transformLength(col.type, col.height),
@@ -219,7 +237,15 @@ export const Minimap = ({ size, seatId, floorId }) => {
               top: `${y * 40 + y * 4}px`,
             }}
           >
-            {col.name}
+            {col.type === FACILITY ? (
+              <img
+                style={{ width: '100%', height: '100%', opacity: '60%' }}
+                src={col.name}
+                alt=""
+              />
+            ) : (
+              col.name
+            )}
           </div>
         );
       }),

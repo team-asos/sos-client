@@ -19,13 +19,13 @@ import RoomCheckPage from './pages/u1_roomCheckPage';
 import InquirePage from './pages/u3_inquirePage';
 import UserMyPage from './pages/u4_myPage';
 import SeatReservationPage from './pages/u5_seatPage';
-import MyInfo from './pages/u4_myInfoForm';
 import SearchPage from './pages/searchPage';
 
 //관리자 페이지
 import NotificationPage from './pages/a3_notificationPage';
 import UserManagePage from './pages/a4_userManagePage';
 import SeatManagePage from './pages/a5_seatManagePage';
+import NotFoundPage from './pages/notFoundPage';
 
 function App() {
   return (
@@ -50,12 +50,16 @@ function App() {
           <Route path="/room-check" component={RoomCheckPage} />
           <Route path="/inquire" component={InquirePage} />
           <Route path="/user-mypage" component={UserMyPage} />
-          <Route path="/user-mypage-myinfo/:idx" component={MyInfo} />
           <Route path="/seat-reservation" component={SeatReservationPage} />
 
           <Route exact path="/user-management" component={UserManagePage} />
           <Route path="/notification" component={NotificationPage} />
           <Route path="/seat-management" component={SeatManagePage} />
+
+          {/**
+          404 Page
+           */}
+          <Route path="*" component={NotFoundPage} />
         </Switch>
       </div>
     </Router>

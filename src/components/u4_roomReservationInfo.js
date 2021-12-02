@@ -4,10 +4,14 @@ import * as ai from 'react-icons/ai';
 import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import * as moment from 'moment';
+import { useMediaQuery } from 'react-responsive';
 
 import '../assets/styles/u4_reservationInfo.css';
 
 const RoomReservationInfo = props => {
+  const isPc = useMediaQuery({
+    query: '(min-width:768px)',
+  });
   //쿠키 생성
   const [cookie] = useCookies(['access_token']);
 
@@ -42,17 +46,27 @@ const RoomReservationInfo = props => {
     a.startTime.split('-').join().localeCompare(b.startTime.split('-').join()),
   );
   return (
-    <div className="reservationInfo">
+    <div className={isPc ? 'roomReservationInfo' : 'm_roomReservationInfo'}>
       <div>
         <div className="reservationInfo-header">
           <p
-            style={{
-              fontWeight: 'bold',
-              fontSize: '1.4em',
-              marginLeft: '3%',
-              marginTop: '1%',
-              width: '27%',
-            }}
+            style={
+              isPc
+                ? {
+                    fontWeight: 'bold',
+                    fontSize: '1.4em',
+                    marginLeft: '3%',
+                    marginTop: '1%',
+                    width: '27%',
+                  }
+                : {
+                    fontWeight: 'bold',
+                    fontSize: '1em',
+                    marginLeft: '3%',
+                    marginTop: '1%',
+                    width: '40%',
+                  }
+            }
           >
             회의실 예약 내역
           </p>
@@ -60,9 +74,13 @@ const RoomReservationInfo = props => {
         <div style={{ height: '35vh' }}>
           <MDBTable
             hover
-            style={{ width: '90%', marginLeft: '5%' }}
+            style={
+              isPc
+                ? { width: '90%', marginLeft: '5%' }
+                : { width: '90%', marginLeft: '5%', fontSize: '0.8em' }
+            }
             scrollY="true"
-            maxHeight="40vh"
+            maxHeight={isPc ? '40vh' : '53vh'}
           >
             <MDBTableHead style={{ fontSize: '0.9em' }}>
               <tr>

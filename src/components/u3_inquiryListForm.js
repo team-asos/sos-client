@@ -6,12 +6,14 @@ import * as AiIcon from 'react-icons/ai';
 import InquiryForm from './u3_inquiryForm';
 import '../assets/styles/u3_inquiryListForm.css';
 import * as moment from 'moment';
+import { FiMenu } from 'react-icons/fi';
+import MobileNavBar from '../components/u_m_navBar';
 
-const InquiryListForm = ({ user, addInquiryClick }) => {
-  const [click, setClick] = useState(0);
-  const setterAddInquiryClick = () => {
-    setClick(0);
+const InquiryListForm = props => {
+  const navClick = () => {
+    setOpen(!open);
   };
+  const [open, setOpen] = useState(false);
   const isPc = useMediaQuery({
     query: '(min-width:768px)',
   });
@@ -23,7 +25,7 @@ const InquiryListForm = ({ user, addInquiryClick }) => {
 
   const res = async () => {
     await fetch(
-      `${process.env.REACT_APP_SERVER_BASE_URL}/questions/search?userId=${user.id}`,
+      `${process.env.REACT_APP_SERVER_BASE_URL}/questions/search?userId=${props.user.id}`,
       {
         headers: { Authorization: `Bearer ${cookie.access_token}` },
         method: 'GET',
@@ -36,10 +38,10 @@ const InquiryListForm = ({ user, addInquiryClick }) => {
   };
 
   useEffect(() => {
-    if (user.id !== 'undefined') {
+    if (props.user.id !== 'undefined') {
       res();
     }
-  }, [user.id]);
+  }, [props.user.id]);
 
   //문의 답변 삭제 버튼
   const deleteClick = questionId => {
@@ -64,28 +66,57 @@ const InquiryListForm = ({ user, addInquiryClick }) => {
   const [showModal, setShowModal] = useState(false);
 
   const [show, setShow] = useState(false);
-  const handleClose = () => {
-    setShow(false);
-    if (addInquiryClick) {
-      addInquiryClick = 0;
-    }
-  };
+  const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
   const toggleTrueFalse = () => {
     setShowModal(handleShow);
   };
-  const mobileHandleShow = () => {
-    if (addInquiryClick) {
-      setShowModal(handleShow);
-    }
-  };
-  useEffect(() => {
-    mobileHandleShow();
-  }, [addInquiryClick]);
+
   return (
     /*전체 문의 리스트 */
     <div>
-      <div className="inquiryListTotal">
+      <div className={isPc ? 'inquiryListTotal' : 'm_inquiryListTotal'}>
+        <div className={isPc ? 'inquiryListUpper' : 'm_inquiryHeader'}>
+          {isMobile ? (
+            <FiMenu
+              size={40}
+              onClick={navClick}
+              style={{ color: 'firebrick' }}
+            />
+          ) : null}
+          {open ? <MobileNavBar open={open} /> : null}
+          <div className={isPc ? 'myListText' : 'm_myListText'}>
+            나의 문의 내역
+          </div>
+          <span>
+            <OverlayTrigger
+              placement="right"
+              overlay={
+                <Tooltip
+                  id={`tooltip-bottom`}
+                  style={{
+                    fontSize: 'small',
+                    height: 'fit-content',
+                    backgroundColor: 'transparent',
+                    border: 'none',
+                  }}
+                >
+                  <strong style={{ color: '#c00000' }}>새로운 문의</strong>{' '}
+                  작성하기
+                </Tooltip>
+              }
+            >
+              <span>
+                <AiIcon.AiOutlinePlusSquare
+                  className="newInquiryIcon"
+                  size={30}
+                  onClick={e => toggleTrueFalse()}
+                />
+              </span>
+            </OverlayTrigger>
+          </span>
+        </div>
         {question.length === 0 ? (
           <div className={isPc ? 'noInquiryList' : 'm_noInquiryList'}>
             <div>
@@ -105,7 +136,11 @@ const InquiryListForm = ({ user, addInquiryClick }) => {
           </div>
         ) : (
           <div>
-            <Accordion className="u3_accordion" defaultActiveKey="0" flush>
+            <Accordion
+              className={isPc ? 'u3_accordion' : 'm_u3_accordion'}
+              defaultActiveKey="0"
+              flush
+            >
               {/*하나의 문의 제목, 내용/답변*/}
               {question &&
                 question
@@ -179,7 +214,6 @@ const InquiryListForm = ({ user, addInquiryClick }) => {
                             >
                               {isPc ? '문의 내용' : '문의'}
                             </p>
-
                             <div
                               className={
                                 isPc ? 'deleteInquiry' : 'm_deleteInquiry'
@@ -244,34 +278,8 @@ const InquiryListForm = ({ user, addInquiryClick }) => {
             </Accordion>
           </div>
         )}
-        {
-          isPc ? (
-            <div>
-              <button
-                className="inquiryButton"
-                onClick={e => toggleTrueFalse()}
-              >
-                문의 하기{' '}
-              </button>
-            </div>
-          ) : null
-          // <div className="inquiryListUpper">
-          //   <p className={isPc ? 'myListText' : 'm_myListText'}>
-          //     나의 문의 내역
-          //   </p>
-
-          //   <AiIcon.AiOutlinePlusSquare
-          //     className="newInquiryIcon"
-          //     size={30}
-          //     onClick={e => toggleTrueFalse()}
-          //   />
-          // </div>
-        }
       </div>
       {show ? <InquiryForm show={show} handleClose={handleClose} /> : null}
-      {addInquiryClick ? (
-        <InquiryForm show={show} handleClose={handleClose} />
-      ) : null}
     </div>
   );
 };

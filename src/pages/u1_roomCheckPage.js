@@ -43,7 +43,7 @@ const RoomCheckPage = () => {
         )}
 
         {open ? <MobileNavBar open={open} /> : null}
-        <div className="roomInfoTable">
+        <div className={isPc ? 'roomInfoTable' : 'm_roomInfoTable'}>
           <RoomInfoTable />
         </div>
       </div>

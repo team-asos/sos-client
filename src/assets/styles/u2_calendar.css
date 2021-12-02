@@ -10,16 +10,14 @@
   padding-right: 1vw;
 }
 .m_customPicker {
-  background-color: #e7e7e7;
+  background-color: white;
   border: 0;
   font-size: 0.9em;
   font-weight: bold;
   width: 110px;
-  height: 4vh;
+  height: 5vh;
   border-radius: 10px;
-  padding-left: 1vw;
-  padding-right: 1vw;
-  margin-left: 5%;
+  margin-left: 2%;
 }
 .roomDatePicker {
   display: flex;
@@ -53,7 +51,7 @@
   margin-right: 20px;
   font-size: 1.1em;
   font-weight: bold;
-  color: #820101;
+  color: firebrick;
 }
 .timeTableAndAddParticipant {
   display: flex;

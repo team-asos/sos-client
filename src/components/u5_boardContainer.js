@@ -202,9 +202,15 @@ export const BoardContainer = ({
         searchUserId={searchUserId}
         isToggleOn={isToggleOn}
       />
-      <div style={{ display: 'flex', flexDirection: 'column', height: '80vh' }}>
+      <div
+        style={
+          isPc
+            ? { display: 'flex', flexDirection: 'column', height: '80vh' }
+            : null
+        }
+      >
         <DateTimeForm selection={selection} userId={userId} />
-        <UserSearchForm getUserId={getUserId} />
+        {isPc ? <UserSearchForm getUserId={getUserId} /> : null}
       </div>
     </div>
   );

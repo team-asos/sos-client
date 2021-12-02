@@ -5,6 +5,9 @@ import Select from 'react-select';
 
 import { Minimap } from './Minimap';
 
+import { FiMenu } from 'react-icons/fi';
+import MobileNavBar from '../u_m_navBar';
+
 export const Search = () => {
   const [cookie] = useCookies(['access_token']);
 
@@ -14,7 +17,11 @@ export const Search = () => {
   const [roomReservation, setRoomReservation] = useState(null);
 
   const [userId, setUserId] = useState(0);
+  const [open, setOpen] = useState(false);
 
+  const navClick = () => {
+    setOpen(!open);
+  };
   const fetchUsers = useCallback(async () => {
     const response = await fetch(
       `${process.env.REACT_APP_SERVER_BASE_URL}/users/search`,
@@ -77,20 +84,32 @@ export const Search = () => {
         display: 'flex',
         flexDirection: 'column',
         height: '100vh',
+        backgroundColor: 'rgb(240,240,240)',
       }}
     >
       <div>
-        <div>
-          <Select
-            menuPosition={'center'}
-            options={users.map(user => ({
-              value: user.id,
-              label: `${user.name} / ${user.department} / ${user.position}`,
-            }))}
-            placeholder="검색할 정보를 입력해주세요."
-            onChange={e => setUserId(e.value)}
-            noOptionsMessage={() => '검색 결과가 없습니다.'}
-          />
+        <div
+          style={{
+            display: 'flex',
+            height: '10vh',
+            alignItems: 'center',
+          }}
+        >
+          {/*햄버거*/}
+          <FiMenu size={40} onClick={navClick} style={{ color: 'firebrick' }} />
+          {open ? <MobileNavBar open={open} /> : null}
+          <div style={{ width: '80%', marginLeft: '5%' }}>
+            <Select
+              menuPosition={'center'}
+              options={users.map(user => ({
+                value: user.id,
+                label: `${user.name} / ${user.department} / ${user.position}`,
+              }))}
+              placeholder="검색할 정보를 입력해주세요."
+              onChange={e => setUserId(e.value)}
+              noOptionsMessage={() => '검색 결과가 없습니다.'}
+            />
+          </div>
         </div>
         <div>
           {searchUser && <p style={pStyle}>회원 정보</p>}
@@ -148,6 +167,7 @@ export const Search = () => {
         <Minimap
           size={window.innerWidth}
           seatId={seatReservation.seat.id}
+          roomId={roomReservation ? roomReservation.room.id : null}
           floorId={seatReservation.seat.floor.id}
         />
       )}

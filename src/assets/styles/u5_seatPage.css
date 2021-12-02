@@ -1,7 +1,7 @@
 /*전체 페이지*/
 .userSeatPage {
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
 
   display: flex;
   flex-direction: row;
@@ -16,6 +16,7 @@
 }
 .m_userSeatForm {
   width: 100%;
+  height: 100%;
   background-color: rgb(240, 240, 240);
 }
 /*헤더*/
@@ -98,7 +99,7 @@
   margin-left: 0.5vw;
   margin-top: 1.5vh;
   font-weight: bold;
-  color: #820101;
+  color: #c00000;
 }
 .statusForm {
   display: flex;
@@ -177,4 +178,7 @@
 }
 .seatContent {
   height: 90%;
+}
+.m_seatContent {
+  height: 80%;
 }

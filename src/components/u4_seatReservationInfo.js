@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useCookies } from 'react-cookie';
 import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
 import { OverlayTrigger, Tooltip, Modal, Button } from 'react-bootstrap';
+import { useMediaQuery } from 'react-responsive';
 
 import * as moment from 'moment';
 import * as ai from 'react-icons/ai';
@@ -9,6 +10,9 @@ import * as ai from 'react-icons/ai';
 import '../assets/styles/u4_reservationInfo.css';
 
 const SeatReservationInfo = props => {
+  const isPc = useMediaQuery({
+    query: '(min-width:768px)',
+  });
   //쿠키 생성
   const [cookie] = useCookies(['access_token']);
   //예약내역 불러오기
@@ -73,17 +77,27 @@ const SeatReservationInfo = props => {
     );
 
   return (
-    <div className="reservationInfo">
+    <div className={isPc ? 'seatReservationInfo' : 'm_seatReservationInfo'}>
       <div>
         <div className="reservationInfo-header">
           <p
-            style={{
-              fontWeight: 'bold',
-              fontSize: '1.4em',
-              marginLeft: '3%',
-              marginTop: '1%',
-              width: '20%',
-            }}
+            style={
+              isPc
+                ? {
+                    fontWeight: 'bold',
+                    fontSize: '1.4em',
+                    marginLeft: '3%',
+                    marginTop: '1%',
+                    width: '20%',
+                  }
+                : {
+                    fontWeight: 'bold',
+                    fontSize: '1em',
+                    marginLeft: '3%',
+                    marginTop: '1%',
+                    width: '30%',
+                  }
+            }
           >
             사용 중인 좌석
           </p>
@@ -115,11 +129,15 @@ const SeatReservationInfo = props => {
         <div>
           <MDBTable
             hover
-            style={{
-              width: '90%',
-              marginLeft: '5%',
-              fontSize: '0.9em',
-            }}
+            style={
+              isPc
+                ? {
+                    width: '90%',
+                    marginLeft: '5%',
+                    fontSize: '0.9em',
+                  }
+                : { width: '90%', marginLeft: '5%', fontSize: '0.8em' }
+            }
           >
             <MDBTableHead>
               <tr>

@@ -107,89 +107,95 @@ const UserSearchForm = ({ getUserId }) => {
     }
   }, [userReservation]);
   return (
-    <div className={isPc ? 'u_userSearchForm' : 'm_userSearchForm'}>
-      <div className={isPc ? 'searchUserTextStyle' : 'm_searchUserTextStyle'}>
-        <hr></hr>직원 검색
-      </div>
-      <div style={{ marginBottom: '2vh' }}>
-        <Select
-          menuPosition={'center'}
-          options={users.map(item => ({
-            value: item.id,
-            label: [item.department + '  ' + item.name + '  ' + item.position],
-          }))}
-          placeholder="이름을 입력해주세요."
-          onChange={e => handleChange(e.value)}
-          noOptionsMessage={() => '검색 결과가 없습니다.'}
-          className="u_userSearch"
-          //value={selectedUser}
-        />
-      </div>
-      <div className="userLocation">
-        {users.map(item =>
-          item.id === ID ? (
-            <>
-              <div className="searchUserInfoText">회원 정보</div>
-              <Table striped hover className="userLocationInfo">
-                <thead>
-                  <tr>
-                    <th></th>
-                    <th>이름</th>
-                    <th>이메일</th>
-                    <th>부서</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td />
-                    <td>{item.name}</td>
-                    <td>{item.email}</td>
-                    <td>{item.department}</td>
-                  </tr>
-                </tbody>
-              </Table>
-              <div className="searchUserInfoText">좌석</div>
+    <>
+      {isPc ? (
+        <div className="u_userSearchForm">
+          <div className="searchUserTextStyle">
+            <hr></hr>직원 검색
+          </div>
+          <div style={{ marginBottom: '2vh' }}>
+            <Select
+              menuPosition={'center'}
+              options={users.map(item => ({
+                value: item.id,
+                label: [
+                  item.department + '  ' + item.name + '  ' + item.position,
+                ],
+              }))}
+              placeholder="이름을 입력해주세요."
+              onChange={e => handleChange(e.value)}
+              noOptionsMessage={() => '검색 결과가 없습니다.'}
+              className="u_userSearch"
+              //value={selectedUser}
+            />
+          </div>
+          <div className="userLocation">
+            {users.map(item =>
+              item.id === ID ? (
+                <>
+                  <div className="searchUserInfoText">회원 정보</div>
+                  <Table striped hover className="userLocationInfo">
+                    <thead>
+                      <tr>
+                        <th></th>
+                        <th>이름</th>
+                        <th>이메일</th>
+                        <th>부서</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td />
+                        <td>{item.name}</td>
+                        <td>{item.email}</td>
+                        <td>{item.department}</td>
+                      </tr>
+                    </tbody>
+                  </Table>
+                  <div className="searchUserInfoText">좌석</div>
 
-              <Table striped hover className="userLocationInfo">
-                <thead>
-                  <tr>
-                    <th></th>
-                    <th>층</th>
-                    <th>이름</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td />
-                    <td>{userSeatLocation.seatFloor}</td>
-                    <td>{userSeatLocation.seatLocation}</td>
-                  </tr>
-                </tbody>
-              </Table>
-              <div className="searchUserInfoText">회의실</div>
-              <Table striped hover className="userLocationInfo">
-                <thead>
-                  <tr>
-                    <th></th>
-                    <th>층</th>
-                    <th>이름</th>
-                    <th>회의 주제</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td />
-                    <td>{userRoomLocation.roomFloor}</td>
-                    <td>{userRoomLocation.roomLocation}</td>
-                    <td>{userRoomLocation.roomTopic}</td>
-                  </tr>
-                </tbody>
-              </Table>
-            </>
-          ) : null,
-        )}
-      </div>
-    </div>
+                  <Table striped hover className="userLocationInfo">
+                    <thead>
+                      <tr>
+                        <th></th>
+                        <th>층</th>
+                        <th>이름</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td />
+                        <td>{userSeatLocation.seatFloor}</td>
+                        <td>{userSeatLocation.seatLocation}</td>
+                      </tr>
+                    </tbody>
+                  </Table>
+                  <div className="searchUserInfoText">회의실</div>
+                  <Table striped hover className="userLocationInfo">
+                    <thead>
+                      <tr>
+                        <th></th>
+                        <th>층</th>
+                        <th>이름</th>
+                        <th>회의 주제</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td />
+                        <td>{userRoomLocation.roomFloor}</td>
+                        <td>{userRoomLocation.roomLocation}</td>
+                        <td>{userRoomLocation.roomTopic}</td>
+                      </tr>
+                    </tbody>
+                  </Table>
+                </>
+              ) : null,
+            )}
+          </div>
+        </div>
+      ) : null}
+    </>
   );
 };
 export default UserSearchForm;
