@@ -148,6 +148,7 @@ export const Search = () => {
         <Minimap
           size={window.innerWidth}
           seatId={seatReservation.seat.id}
+          roomId={roomReservation ? roomReservation.room.id : null}
           floorId={seatReservation.seat.floor.id}
         />
       )}
