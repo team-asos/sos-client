@@ -16,9 +16,6 @@ const Login = () => {
 
   const isMobile = useMediaQuery({ query: '(max-width:767px)' });
 
-  const [loading, setLoading] = useState(0);
-  const [name, setName] = useState('');
-
   const history = useHistory();
   const [cookie, setCookie] = useCookies(['access_token']);
 
@@ -28,7 +25,6 @@ const Login = () => {
   });
 
   const getAuth = async () => {
-    setLoading(1);
     const response = await fetch(
       `${process.env.REACT_APP_SERVER_BASE_URL}/auth`,
       {
@@ -42,7 +38,6 @@ const Login = () => {
     );
 
     const data = await response.json();
-    setName(data.name);
 
     if (data.role === 0) history.push('/seat-reservation');
     else if (data.role === 1) history.push('/user-management');
@@ -73,6 +68,10 @@ const Login = () => {
     }
   };
 
+  const loginEnterHandler = e => {
+    if (e.key === 'Enter') loginClickHandler();
+  };
+
   const inputEmail = e => {
     setLogin({ ...login, email: e.target.value });
   };
@@ -84,7 +83,12 @@ const Login = () => {
   return (
     <>
       {isPc && (
-        <div className="login">
+        <div
+          className="login"
+          onKeyPress={e => {
+            loginEnterHandler(e);
+          }}
+        >
           <div className="left">
             <img src={Logo} alt="Logo" />
           </div>
@@ -115,7 +119,12 @@ const Login = () => {
                 </label>
               </div>
             </div>
-            <button className="Button Login" onClick={loginClickHandler}>
+            <button
+              className="Button Login"
+              onClick={() => {
+                loginClickHandler();
+              }}
+            >
               로그인
             </button>
             <p className="or">계정이 없으신가요?</p>
