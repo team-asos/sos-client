@@ -86,7 +86,7 @@ const SeatPage = () => {
               <FiMenu
                 size={40}
                 onClick={navClick}
-                style={{ color: '#820101' }}
+                style={{ color: 'firebrick' }}
               />
             </div>
             <div className="m_u_seatHeaderTextStyle">좌석 예약</div>
@@ -151,7 +151,7 @@ const SeatPage = () => {
             </div>
           </div>
         </div>
-        <div className="seatContent">
+        <div className={isPc ? 'seatContent' : 'm_seatContent'}>
           <BoardContainer
             floor={selectedFloor}
             userId={myId}

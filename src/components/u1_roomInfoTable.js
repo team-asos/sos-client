@@ -53,9 +53,9 @@ const RoomInfoTable = () => {
         <MDBTableHead className="rHeader">
           <tr>
             <th>층</th>
-            <th>회의실 명</th>
+            <th>{isPc ? '회의실 명' : '이름'}</th>
             <th>예약 가능 일</th>
-            <th>사용 가능 인원</th>
+            <th>{isPc ? '사용 가능 인원' : '인원'}</th>
             <th></th>
           </tr>
         </MDBTableHead>

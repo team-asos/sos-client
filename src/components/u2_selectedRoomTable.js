@@ -39,7 +39,7 @@ const SelectedRoomTable = props => {
       <div style={{ display: 'flex', justifyContent: 'center' }}>
         <MDBTable
           hover
-          className={isPc ? 'u2_selectedTable' : 'mobileInfoTable'}
+          className={isPc ? 'u2_selectedTable' : 'm_u2_selectedTable'}
         >
           <MDBTableHead className="rHeader">
             <tr>

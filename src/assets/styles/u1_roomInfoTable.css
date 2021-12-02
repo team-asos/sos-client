@@ -25,7 +25,8 @@
   color: black;
 }
 .roomReservationButton:hover {
-  background: #8f0202;
+  /* background: #8f0202; */
+  background-color: firebrick;
   color: white;
 
   transition: ease 0.15s;
@@ -33,11 +34,11 @@
 }
 
 .m_roomReservationBtn {
-  background-color: #820101;
+  background-color: firebrick;
   color: ivory;
   border-radius: 10px;
   border: 0;
   outline: 0;
   height: 30px;
-  width: 40px;
+  width: 50px;
 }
