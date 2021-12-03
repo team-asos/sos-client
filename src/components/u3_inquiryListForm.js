@@ -150,6 +150,7 @@ const InquiryListForm = props => {
                   .reverse()
                   .map((item, idx) => (
                     <Accordion.Item
+                      key={idx}
                       eventKey={item.id}
                       className="inquiryTitleAndAnswer"
                     >

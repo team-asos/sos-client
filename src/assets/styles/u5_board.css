@@ -7,16 +7,18 @@
   flex-direction: column;
 }
 .u_boardCover {
-  margin-left: 1%;
-  width: 70vw;
+  margin-left: 2%;
+  margin-right: 2%;
+  /* width: 70vw; */
+  width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: white;
+  /* background-color: ; */
   border-radius: 3px;
 }
 .mobileBoardCover {
   width: 95%;
-  height: 500px;
+  height: 600px;
   margin-left: 2.5%;
   overflow: auto;
 }

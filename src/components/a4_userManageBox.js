@@ -19,7 +19,7 @@ const UserManageBox = () => {
       })
         .then(response => response.json())
         .then(json => {
-          setData(json);
+          setData(json.filter(j => j.role === 0));
         });
     };
     asd();

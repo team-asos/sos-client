@@ -104,7 +104,9 @@ const SeatPage = () => {
           <div className="u_selectFloor">
             <Dropdown className="u_dropdownFloor">
               <Dropdown.Toggle variant="secondary" id="dropdown-basic">
-                {selectedFloor.name}
+                {selectedFloor.length === 0 && floors[0]
+                  ? floors[0].name
+                  : selectedFloor.name}
               </Dropdown.Toggle>
 
               <Dropdown.Menu>
@@ -120,7 +122,6 @@ const SeatPage = () => {
                 ))}
               </Dropdown.Menu>
             </Dropdown>
-            {isPc && <p className="selectFloorTextStyle">층을 선택하세요.</p>}
           </div>
 
           <div className={isPc ? 'statusForm' : 'm_statusForm'}>
@@ -133,36 +134,69 @@ const SeatPage = () => {
               ></BsIcon.BsFillInfoCircleFill>
             </div>
             {/*좌석 현황*/}
-            <div className="reservedSeats">
-              <div
-                className={isPc ? 'reservedSeatShape' : 'm_reservedSeatShape'}
-              ></div>
-              <div
-                className={
-                  isPc ? 'reservedSeatsTextStyle' : 'm_reservedSeatsTextStyle'
-                }
-              >
-                사용 중 {reservedSeatsCnt}석
-              </div>
-            </div>
-            <div className="ableSeats">
-              <div className={isPc ? 'ableSeatShape' : 'm_ableSeatShape'}></div>
-              <div
-                className={isPc ? 'ableSeatsTextStyle' : 'm_ableSeatsTextStyle'}
-              >
-                예약 가능 {seatsCnt - reservedSeatsCnt}석
-              </div>
-            </div>
+            {isPc ? (
+              <>
+                <div className="reservedSeats">
+                  <div className="reservedSeatShape"></div>
+                  <div className="reservedSeatsTextStyle">
+                    사용 중 {reservedSeatsCnt}석
+                  </div>
+                </div>
+                <div className="ableSeats">
+                  <div className="ableSeatShape"></div>
+                  <div className="ableSeatsTextStyle">
+                    예약 가능 {seatsCnt - reservedSeatsCnt}석
+                  </div>
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="reservedSeats">
+                  <div className="m_reservedSeatShape"></div>
+                  <div className="m_reservedSeatsTextStyle">
+                    사용 중<br></br> {reservedSeatsCnt}석
+                  </div>
+                </div>
+                <div className="ableSeats">
+                  <div className="m_ableSeatShape"></div>
+                  <div className="m_ableSeatsTextStyle">
+                    예약 가능 <br></br>
+                    {seatsCnt - reservedSeatsCnt}석
+                  </div>
+                </div>
+              </>
+            )}
           </div>
         </div>
         <div className={isPc ? 'seatContent' : 'm_seatContent'}>
-          <BoardContainer
+          {/* <BoardContainer
             floor={selectedFloor}
             userId={myId}
             getSeatsCnt={getSeatsCnt}
             getReservedSeatsCnt={getReservedSeatsCnt}
             isToggleOn={isToggleOn}
-          />
+          /> */}
+          {selectedFloor.length === 0 && floors[0] ? (
+            <>
+              <BoardContainer
+                floor={floors[0]}
+                userId={myId}
+                getSeatsCnt={getSeatsCnt}
+                getReservedSeatsCnt={getReservedSeatsCnt}
+                isToggleOn={isToggleOn}
+              />
+            </>
+          ) : (
+            <>
+              <BoardContainer
+                floor={selectedFloor}
+                userId={myId}
+                getSeatsCnt={getSeatsCnt}
+                getReservedSeatsCnt={getReservedSeatsCnt}
+                isToggleOn={isToggleOn}
+              />
+            </>
+          )}
         </div>
       </div>
     </div>

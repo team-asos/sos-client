@@ -101,7 +101,8 @@ export const Board = ({
   };
 
   const itemStyle = type => {
-    if (type === EMPTY) return { backgroundColor: 'white' };
+    if (type === EMPTY)
+      return { backgroundColor: 'rgb(245, 245, 245)', borderRadius: '4px' };
     else if (type === SEAT)
       return { backgroundColor: '#51bf60', color: '#fff', borderRadius: '4px' };
     else if (type === ROOM)
