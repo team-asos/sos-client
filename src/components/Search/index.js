@@ -81,88 +81,92 @@ export const Search = () => {
   return (
     <div
       style={{
+        padding: '10px 240px',
+        width: '100%',
         display: 'flex',
         flexDirection: 'column',
+        alignItems: 'center',
         height: '100vh',
         backgroundColor: 'rgb(240,240,240)',
       }}
     >
-      <div>
-        <div
-          style={{
-            display: 'flex',
-            height: '10vh',
-            alignItems: 'center',
-          }}
-        >
-          {/*햄버거*/}
-          <FiMenu size={40} onClick={navClick} style={{ color: 'firebrick' }} />
-          {open ? <MobileNavBar open={open} /> : null}
-          <div style={{ width: '80%', marginLeft: '5%' }}>
-            <Select
-              menuPosition={'center'}
-              options={users.map(user => ({
-                value: user.id,
-                label: `${user.name} / ${user.department} / ${user.position}`,
-              }))}
-              placeholder="검색할 정보를 입력해주세요."
-              onChange={e => setUserId(e.value)}
-              noOptionsMessage={() => '검색 결과가 없습니다.'}
-            />
-          </div>
-        </div>
-        <div>
-          {searchUser && <p style={pStyle}>회원 정보</p>}
-          <Table>
-            <tbody>
-              {searchUser && (
-                <>
-                  <tr>
-                    <td>사원 번호</td>
-                    <td>{searchUser.employeeId}</td>
-                  </tr>
-                  <tr>
-                    <td>이름</td>
-                    <td>
-                      {roomReservation
-                        ? `${searchUser.name} (회의중)`
-                        : `${searchUser.name}`}
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>부서</td>
-                    <td>{searchUser.department}</td>
-                  </tr>
-                  <tr>
-                    <td>직책</td>
-                    <td>{searchUser.position}</td>
-                  </tr>
-                  <tr>
-                    <td>이메일</td>
-                    <td>{searchUser.email}</td>
-                  </tr>
-                  <tr>
-                    <td>연락처</td>
-                    <td>{searchUser.tel}</td>
-                  </tr>
-                </>
-              )}
-              {seatReservation && (
-                <tr>
-                  <td>좌석 위치</td>
-                  <td>{`${seatReservation.seat.floor.name} - ${seatReservation.seat.name}`}</td>
-                </tr>
-              )}
-              {roomReservation && (
-                <tr>
-                  <td>회의실 위치</td>
-                  <td>{`${roomReservation.room.floor.name} - ${roomReservation.room.name}`}</td>
-                </tr>
-              )}
-            </tbody>
-          </Table>
-        </div>
+      <div
+        style={{
+          width: '60%',
+        }}
+      >
+        {/*햄버거*/}
+        {/* <FiMenu size={40} onClick={navClick} style={{ color: 'firebrick' }} /> */}
+        {open ? <MobileNavBar open={open} /> : null}
+        {/* <div style={{ width: '80%', marginLeft: '5%' }}> */}
+        <Select
+          menuPosition={'center'}
+          options={users.map(user => ({
+            value: user.id,
+            label: `${user.name} / ${user.department} / ${user.position}`,
+          }))}
+          placeholder="검색할 정보를 입력해주세요."
+          onChange={e => setUserId(e.value)}
+          noOptionsMessage={() => '검색 결과가 없습니다.'}
+        />
+        {/* </div> */}
       </div>
+      <div
+        style={{
+          width: '100%',
+        }}
+      >
+        {searchUser && <p style={pStyle}>회원 정보</p>}
+        <Table>
+          <tbody>
+            {searchUser && (
+              <>
+                <tr>
+                  <td>사원 번호</td>
+                  <td>{searchUser.employeeId}</td>
+                </tr>
+                <tr>
+                  <td>이름</td>
+                  <td>
+                    {roomReservation
+                      ? `${searchUser.name} (회의중)`
+                      : `${searchUser.name}`}
+                  </td>
+                </tr>
+                <tr>
+                  <td>부서</td>
+                  <td>{searchUser.department}</td>
+                </tr>
+                <tr>
+                  <td>직책</td>
+                  <td>{searchUser.position}</td>
+                </tr>
+                <tr>
+                  <td>이메일</td>
+                  <td>{searchUser.email}</td>
+                </tr>
+                <tr>
+                  <td>연락처</td>
+                  <td>{searchUser.tel}</td>
+                </tr>
+              </>
+            )}
+            {seatReservation && (
+              <tr>
+                <td>좌석 위치</td>
+                <td>{`${seatReservation.seat.floor.name} - ${seatReservation.seat.name}`}</td>
+              </tr>
+            )}
+            {roomReservation && (
+              <tr>
+                <td>회의실 위치</td>
+                <td>{`${roomReservation.room.floor.name} - ${roomReservation.room.name}`}</td>
+              </tr>
+            )}
+          </tbody>
+        </Table>
+      </div>
+
       {seatReservation && (
         <Minimap
           size={window.innerWidth}
