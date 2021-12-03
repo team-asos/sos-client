@@ -35,8 +35,6 @@ const ReserveModal = ({ selection, userId, board, setBoard }) => {
     );
 
     if (response.status === 201) {
-      alert('좌석 사용이 시작되었습니다!');
-
       const json = await response.json();
 
       const seat = json.seat;
@@ -52,6 +50,8 @@ const ReserveModal = ({ selection, userId, board, setBoard }) => {
           }),
         ),
       );
+
+      alert('좌석 사용이 시작되었습니다!');
     } else {
       alert('좌석을 사용할 수 없습니다.');
     }
