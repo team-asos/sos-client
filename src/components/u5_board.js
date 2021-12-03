@@ -43,6 +43,8 @@ export const Board = React.memo(
           color: '#fff',
           borderRadius: '4px',
         };
+      else if (type === FACILITY)
+        return { backgroundColor: 'rgb(245, 245, 245)', borderRadius: '4px' };
       else if (type === ROOM)
         return {
           backgroundColor: '#E5E5E5',
@@ -56,9 +58,7 @@ export const Board = React.memo(
         };
     };
 
-    const facilityStyle = () => {
-      return { width: '100%', height: '100%', opacity: '60%' };
-    };
+    const facilityStyle = { width: '100%', height: '100%', opacity: '60%' };
 
     const Item = ({ board }) => {
       return board.map((row, y) =>
