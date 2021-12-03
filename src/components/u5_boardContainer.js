@@ -13,6 +13,11 @@ import {
   RESERVED_SEAT,
 } from '../const/object-type.const';
 import { SELECTION_FIRST } from '../const/selection-type.const';
+
+import useSeats from '../hooks/useSeats';
+import useRooms from '../hooks/useRooms';
+import useFacilities from '../hooks/useFacilities';
+
 export const BoardContainer = ({
   floor,
   userId,
@@ -26,9 +31,9 @@ export const BoardContainer = ({
 
   const [board, setBoard] = useState([]);
 
-  const [seats, setSeats] = useState([]);
-  const [rooms, setRooms] = useState([]);
-  const [facilities, setFacilities] = useState([]);
+  const seats = useSeats(floor.id);
+  const rooms = useRooms(floor.id);
+  const facilities = useFacilities(floor.id);
 
   const [selection, setSelection] = useState({
     id: -1,
@@ -38,73 +43,14 @@ export const BoardContainer = ({
     stage: SELECTION_FIRST,
   });
 
-  const fetchSeats = async () => {
-    const result = await fetch(
-      `${process.env.REACT_APP_SERVER_BASE_URL}/seats/search?floorId=${floor.id}`,
-      {
-        method: 'GET',
-        headers: {
-          'Content-type': 'application/json',
-          Accept: 'application/json',
-        },
-      },
-    );
-
-    setSeats(await result.json());
-  };
-
-  const fetchRooms = async () => {
-    const result = await fetch(
-      `${process.env.REACT_APP_SERVER_BASE_URL}/rooms/search?floorId=${floor.id}`,
-      {
-        method: 'GET',
-        headers: {
-          'Content-type': 'application/json',
-          Accept: 'application/json',
-        },
-      },
-    );
-
-    setRooms(await result.json());
-  };
-
-  const fetchFacilities = async () => {
-    const result = await fetch(
-      `${process.env.REACT_APP_SERVER_BASE_URL}/facilities/search?floorId=${floor.id}`,
-      {
-        method: 'GET',
-        headers: {
-          'Content-type': 'application/json',
-          Accept: 'application/json',
-        },
-      },
-    );
-
-    setFacilities(await result.json());
-  };
-
-  const fetchArrangement = async () => {
-    await fetchSeats();
-    await fetchRooms();
-    await fetchFacilities();
-  };
-
   useEffect(() => {
-    setBoard(
-      Array.from({ length: floor.height }, () =>
-        Array.from({ length: floor.width }, () => {
-          return { type: EMPTY, id: -1, name: '', width: 1, height: 1 };
-        }),
-      ),
+    let newBoard = Array.from({ length: floor.height }, () =>
+      Array.from({ length: floor.width }, () => {
+        return { type: EMPTY, id: -1, name: '', width: 1, height: 1 };
+      }),
     );
 
-    fetchArrangement();
-  }, [floor.id]);
-
-  useEffect(() => {
-    let newMap = board;
-
-    newMap = newMap.map(row =>
+    newBoard = newBoard.map(row =>
       row.map(col => {
         if (col.type === SELECTION)
           return { type: EMPTY, id: -1, name: '', width: 1, height: 1 };
@@ -113,9 +59,8 @@ export const BoardContainer = ({
     );
 
     for (let seat of seats) {
-      getSeatsCnt(seats.length);
       if (seat.reservations.length === 0)
-        newMap[seat.y][seat.x] = {
+        newBoard[seat.y][seat.x] = {
           type: SEAT,
           id: seat.id,
           name: seat.name,
@@ -123,7 +68,7 @@ export const BoardContainer = ({
           height: 1,
         };
       else {
-        newMap[seat.y][seat.x] = {
+        newBoard[seat.y][seat.x] = {
           type: RESERVED_SEAT,
           id: seat.id,
           name: seat.reservations[0].user.name,
@@ -134,7 +79,7 @@ export const BoardContainer = ({
     }
 
     for (let room of rooms) {
-      newMap[room.y][room.x] = {
+      newBoard[room.y][room.x] = {
         type: ROOM,
         id: room.id,
         name: room.name,
@@ -142,7 +87,7 @@ export const BoardContainer = ({
         height: room.height,
       };
 
-      newMap = newMap.map((row, rowIndex) =>
+      newBoard = newBoard.map((row, rowIndex) =>
         row.map((col, colIndex) => {
           if (colIndex === room.x && rowIndex === room.y)
             return {
@@ -162,32 +107,17 @@ export const BoardContainer = ({
     }
 
     for (let facility of facilities) {
-      newMap[facility.y][facility.x] = {
+      newBoard[facility.y][facility.x] = {
         type: FACILITY,
         id: facility.id,
-        name: getFacilityType(facility.type),
+        name: `/images/${facility.type}.png`,
         width: 1,
         height: 1,
       };
     }
 
-    setBoard(newMap);
-  }, [facilities]);
-
-  const getFacilityType = type => {
-    return `/images/${type}.png`;
-  };
-
-  useEffect(() => {
-    let count = 0;
-    seats.map(seat => {
-      if (seat.reservations.length > 0) {
-        count++;
-      }
-    });
-
-    getReservedSeatsCnt(count);
-  }, [seats]);
+    setBoard(newBoard);
+  }, [floor, rooms, seats, facilities]);
 
   return (
     <div className={isPc ? 'u_boardContainer' : 'mobileBoardContainer'}>
