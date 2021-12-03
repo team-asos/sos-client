@@ -5,7 +5,7 @@ import '../assets/styles/u5_dateTimeForm.css';
 import 'react-datepicker/dist/react-datepicker.css';
 import '../assets/styles/u2_calendar.css';
 
-const DateTimeForm = ({ selection, userId }) => {
+const ReserveModal = ({ selection, userId, board, setBoard }) => {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -36,6 +36,22 @@ const DateTimeForm = ({ selection, userId }) => {
 
     if (response.status === 201) {
       alert('좌석 사용이 시작되었습니다!');
+
+      const json = await response.json();
+
+      const seat = json.seat;
+      const user = json.user;
+
+      setBoard(
+        board.map((row, y) =>
+          row.map((col, x) => {
+            if (x === seat.x && y === seat.y)
+              return { ...col, name: user.name, type: 5 };
+
+            return col;
+          }),
+        ),
+      );
     } else {
       alert('좌석을 사용할 수 없습니다.');
     }
@@ -67,4 +83,4 @@ const DateTimeForm = ({ selection, userId }) => {
     </>
   );
 };
-export default DateTimeForm;
+export default ReserveModal;

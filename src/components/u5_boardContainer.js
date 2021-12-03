@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useMediaQuery } from 'react-responsive';
-import DateTimeForm from './u5_dateTimeForm';
+import ReserveModal from './u5_dateTimeForm';
 import { Board } from './u5_board';
 
 import {
@@ -115,7 +115,7 @@ export const BoardContainer = ({
     }
 
     setBoard(newBoard);
-  }, [floor, rooms, seats, facilities]);
+  }, [floor, rooms, seats, facilities, setSeatCount, setUsedSeatCount]);
 
   return (
     <div className={isPc ? 'u_boardContainer' : 'mobileBoardContainer'}>
@@ -132,7 +132,12 @@ export const BoardContainer = ({
             : null
         }
       >
-        <DateTimeForm selection={selection} userId={userId} />
+        <ReserveModal
+          selection={selection}
+          userId={userId}
+          board={board}
+          setBoard={setBoard}
+        />
       </div>
     </div>
   );
