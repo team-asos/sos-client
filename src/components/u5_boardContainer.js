@@ -42,14 +42,6 @@ export const BoardContainer = ({
   });
 
   useEffect(() => {
-    setSeatCount(seats.reduce(count => count + 1, 0));
-    setUsedSeatCount(
-      seats.reduce(
-        (count, seat) => count + (seat.reservations.length !== 0),
-        0,
-      ),
-    );
-
     let newBoard = Array.from({ length: floor.height }, () =>
       Array.from({ length: floor.width }, () => {
         return { type: EMPTY, id: -1, name: '', width: 1, height: 1 };
@@ -116,6 +108,23 @@ export const BoardContainer = ({
 
     setBoard(newBoard);
   }, [floor, rooms, seats, facilities, setSeatCount, setUsedSeatCount]);
+
+  useEffect(() => {
+    let seatCount = 0;
+    let usedSeatCount = 0;
+
+    board.map(row =>
+      row.map(col => {
+        if (col.type === SEAT) seatCount++;
+        if (col.type === RESERVED_SEAT) usedSeatCount++;
+
+        return col;
+      }),
+    );
+
+    setSeatCount(seatCount + usedSeatCount);
+    setUsedSeatCount(usedSeatCount);
+  }, [board, seats, setSeatCount, setUsedSeatCount]);
 
   return (
     <div className={isPc ? 'u_boardContainer' : 'mobileBoardContainer'}>
