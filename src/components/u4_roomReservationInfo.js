@@ -79,7 +79,7 @@ const RoomReservationInfo = props => {
                 ? { width: '90%', marginLeft: '5%' }
                 : { width: '90%', marginLeft: '5%', fontSize: '0.8em' }
             }
-            scrollY="true"
+            scrollY={true}
             maxHeight={isPc ? '40vh' : '53vh'}
           >
             <MDBTableHead style={{ fontSize: '0.9em' }}>
