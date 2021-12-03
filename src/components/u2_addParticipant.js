@@ -62,7 +62,6 @@ const AddParticipant = ({
   useEffect(() => {
     res();
   }, []);
-
   const handleChange = e => {
     setUsers(users.filter(user => user.id !== e.value));
     setSelectedMembers([
@@ -70,7 +69,6 @@ const AddParticipant = ({
       users.find(user => user.id === e.value),
     ]);
   };
-
   /*테이블에서 선택한 시간으로 예약할 때 */
   const getStartTime = () => {
     setStart(START);

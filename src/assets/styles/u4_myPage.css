@@ -1,5 +1,7 @@
 /* 전체 페이지 */
 .userMyPage {
+  font-family: NotoSansRegular;
+
   width: 100vw;
   height: 100vh;
 
@@ -13,8 +15,10 @@
 .u_myPageForm {
   width: 100%;
   height: 100%;
+
   display: flex;
   flex-direction: column;
+
   background-color: rgb(240, 240, 240);
 }
 /* PC - Header(오른쪽 위) */
