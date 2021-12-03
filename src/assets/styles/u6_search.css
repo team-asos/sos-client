@@ -13,6 +13,3 @@
 .search-user-input-bar {
   width: 60%;
 }
-.search-user-input-bar:focus {
-  outline: none;
-}
