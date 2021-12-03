@@ -13,7 +13,7 @@ const AnswerWaitingList = props => {
   const [cookie] = useCookies('access_token');
 
   //문의 받아오기
-  const [question, setQestion] = useState([]); //전체 문의
+  const [question, setQuestion] = useState([]); //전체 문의
   const [selectQuestion, setSelectQuestion] = useState({}); //선택된 문의
 
   useEffect(() => {
@@ -24,7 +24,7 @@ const AnswerWaitingList = props => {
       })
         .then(response => response.json())
         .then(json => {
-          setQestion(json);
+          setQuestion(json);
         });
     };
     res();
@@ -94,8 +94,10 @@ const AnswerWaitingList = props => {
         },
       );
 
-      window.location.href = '/notification';
+      // window.location.href = '/notification';
     });
+
+    setQuestion(question.filter(q => !checkedList.includes(q.id)));
   };
 
   //검색창
