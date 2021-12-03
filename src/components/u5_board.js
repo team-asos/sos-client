@@ -110,7 +110,6 @@ export const Board = ({
         backgroundColor: '#E5E5E5',
         borderRadius: '4px',
       };
-    //else if (type === FACILITY) return { backgroundColor: '#f5df4d' };
     else if (type === SELECTION)
       return {
         backgroundColor: 'rgb(199, 43, 43)',

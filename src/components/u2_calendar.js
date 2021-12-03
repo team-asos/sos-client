@@ -4,7 +4,6 @@ import { ko } from 'date-fns/esm/locale';
 import * as FaIcon from 'react-icons/fa';
 import 'react-datepicker/dist/react-datepicker.css';
 import { addDays } from 'date-fns';
-import AddParticipant from './u2_addParticipant';
 import RoomTimeTable from './u2_roomTimeTable';
 import { useMediaQuery } from 'react-responsive';
 import * as moment from 'moment';
@@ -14,8 +13,7 @@ const Calendar = props => {
   const isPc = useMediaQuery({
     query: '(min-width:768px)',
   });
-  const isMobile = useMediaQuery({ query: '(max-width:767px)' });
-  const [startDate, setStartDate] = useState(new Date()); //DatePicker
+  const [startDate, setStartDate] = useState(new Date());
   const roomMAXUSER = props.roomMAXUSER;
   const roomID = props.roomID;
   const MyCustom = forwardRef(({ value, onClick }, ref) => (
@@ -35,32 +33,30 @@ const Calendar = props => {
     <div style={{ width: '100%' }}>
       {isPc ? (
         <div className="roomDatePicker">
-          {/* <div className="pickersTextStyle">날짜 선택</div> */}
           <DatePicker
             selected={startDate}
             onChange={date => setStartDate(date)}
             locale={ko}
             dateFormat="yyyy-MM-dd"
-            minDate={new Date()} //오늘 이전 날짜 선택 안되게
-            maxDate={addDays(new Date(), 6)} //일주일 뒤는 예약 못함
+            minDate={new Date()}
+            maxDate={addDays(new Date(), 6)}
             placeholderText="예약 날짜 선택"
-            closeOnScroll={true} //스크롤 했을 때 닫힘
+            closeOnScroll={true}
             customInput={<MyCustom />}
           />
         </div>
       ) : (
         <>
           <div className="m_customPicker">
-            {/* <p className="pickerText"></p> */}
             <DatePicker
               selected={startDate}
               onChange={date => setStartDate(date)}
               locale={ko}
               dateFormat="yyyy-MM-dd"
-              minDate={new Date()} //오늘 이전 날짜 선택 안되게
-              maxDate={addDays(new Date(), 6)} //일주일 뒤는 예약 못함
+              minDate={new Date()}
+              maxDate={addDays(new Date(), 6)}
               placeholderText="예약 날짜 선택"
-              closeOnScroll={true} //스크롤 했을 때 닫힘
+              closeOnScroll={true}
               customInput={<MyCustom />}
             />
           </div>

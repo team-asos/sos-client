@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useCookies } from 'react-cookie';
 import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
-import { Link } from 'react-router-dom';
-import { getMonth, getDate, getYear, addDays } from 'date-fns';
+import { addDays } from 'date-fns';
 import * as moment from 'moment';
 
 import { useMediaQuery } from 'react-responsive';
@@ -17,7 +16,6 @@ const RoomInfoTable = () => {
   const isPc = useMediaQuery({
     query: '(min-width:768px)',
   });
-  const isMobile = useMediaQuery({ query: '(max-width:767px)' });
 
   const history = useHistory();
 

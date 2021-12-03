@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useCookies } from 'react-cookie';
 import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
 import { OverlayTrigger, Tooltip, Modal, Button } from 'react-bootstrap';
 import { useMediaQuery } from 'react-responsive';
@@ -13,8 +12,6 @@ const SeatReservationInfo = props => {
   const isPc = useMediaQuery({
     query: '(min-width:768px)',
   });
-  //쿠키 생성
-  const [cookie] = useCookies(['access_token']);
   //예약내역 불러오기
   const [reservation, setReservation] = useState([]);
 
@@ -63,7 +60,6 @@ const SeatReservationInfo = props => {
     finishHandler();
   };
 
-  //예외처리
   useEffect(() => {
     if (props.user.id !== 'undefined') res();
   }, [props.user.id]);

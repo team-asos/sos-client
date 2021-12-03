@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import DateTimeForm from './u5_dateTimeForm';
 import { Board } from './u5_board';
-import UserSearchForm from './u5_userSearchForm';
 
 import './BoardContainer/index.scss';
 import {
@@ -27,9 +26,6 @@ export const BoardContainer = ({
 
   const [searchUserId, setSearchUserId] = useState(0);
 
-  const getUserId = id => {
-    setSearchUserId(id);
-  };
   const [board, setBoard] = useState([]);
 
   const [seats, setSeats] = useState([]);
@@ -210,7 +206,6 @@ export const BoardContainer = ({
         }
       >
         <DateTimeForm selection={selection} userId={userId} />
-        {/* {isPc ? <UserSearchForm getUserId={getUserId} /> : null} */}
       </div>
     </div>
   );
