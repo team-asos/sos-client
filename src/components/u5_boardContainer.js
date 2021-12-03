@@ -3,7 +3,6 @@ import { useMediaQuery } from 'react-responsive';
 import DateTimeForm from './u5_dateTimeForm';
 import { Board } from './u5_board';
 
-import './BoardContainer/index.scss';
 import {
   EMPTY,
   SEAT,
@@ -16,7 +15,15 @@ import useSeats from '../hooks/useSeats';
 import useRooms from '../hooks/useRooms';
 import useFacilities from '../hooks/useFacilities';
 
-export const BoardContainer = ({ floor, userId, isToggleOn }) => {
+import './BoardContainer/index.scss';
+
+export const BoardContainer = ({
+  floor,
+  userId,
+  isToggleOn,
+  setSeatCount,
+  setUsedSeatCount,
+}) => {
   const isPc = useMediaQuery({
     query: '(min-width:768px)',
   });
@@ -35,6 +42,14 @@ export const BoardContainer = ({ floor, userId, isToggleOn }) => {
   });
 
   useEffect(() => {
+    setSeatCount(seats.reduce(count => count + 1, 0));
+    setUsedSeatCount(
+      seats.reduce(
+        (count, seat) => count + (seat.reservations.length !== 0),
+        0,
+      ),
+    );
+
     let newBoard = Array.from({ length: floor.height }, () =>
       Array.from({ length: floor.width }, () => {
         return { type: EMPTY, id: -1, name: '', width: 1, height: 1 };

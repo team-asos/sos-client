@@ -34,4 +34,5 @@
 }
 .u_boardSeatItem:hover {
   cursor: pointer;
+  background-color: #c72b2b !important;
 }
