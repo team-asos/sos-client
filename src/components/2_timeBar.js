@@ -39,8 +39,10 @@ const DateTimeBox = () => {
         color: 'white',
       }}
     >
-      <p style={{ fontWeight: 'bold', marginBottom: '25%' }}>
-        {time.format('YYYY. MM. D.')}
+      <p
+        style={{ fontWeight: 'bold', marginBottom: '25%', fontSize: '0.85em' }}
+      >
+        {time.format('YYYY. MM. D')}
       </p>
       <p style={{ fontWeight: 'bold', marginBottom: '25%' }}>
         {time.format('dddd')}

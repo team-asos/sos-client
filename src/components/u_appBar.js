@@ -5,6 +5,7 @@ import AccountIcon from './icons/u_accountIcon';
 import SeatReservationIcon from './icons/u_seatReservationIcon';
 import RoomReservationIcon from './icons/u_roomReservationIcon';
 import InquireIcon from './icons/u_inquireIcon';
+import SearchIcon from './icons/u_searchIcon';
 
 const AppBox = () => {
   return (
@@ -14,6 +15,9 @@ const AppBox = () => {
       </Link>
       <Link to="/room-check" style={{ color: 'black' }}>
         <RoomReservationIcon />
+      </Link>
+      <Link to="/search" style={{ color: 'black' }}>
+        <SearchIcon />
       </Link>
       <Link to="/inquire" style={{ color: 'black' }}>
         <InquireIcon />

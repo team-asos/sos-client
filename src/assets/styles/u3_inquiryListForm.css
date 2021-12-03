@@ -56,6 +56,7 @@
 }
 .newInquiryIcon {
   margin-left: 3%;
+
   cursor: pointer;
 }
 .newInquiryIcon:hover {
@@ -66,17 +67,11 @@
 }
 /*문의가 존재하지 않을 경우*/
 .noInquiryList {
-  width: 90%;
-  height: 85%;
-
-  margin-left: 5%;
-  /* padding-top: 12%; */
-  padding-top: 20%;
+  width: fit-content;
+  height: fit-content;
+  margin-top: 15%;
+  margin-left: 37%;
   text-align: center;
-
-  border-top: 1px solid gray;
-  border-bottom: 1px solid gray;
-  border-radius: 2px;
 }
 .m_noInquiryList {
   display: flex;
@@ -92,8 +87,12 @@
   font-weight: bold;
   font-size: 1em;
 
+  margin-top: 2%;
+
   color: rgb(77, 77, 77);
   text-align: center;
+
+  text-shadow: 1px 1px rgb(231, 231, 231);
 }
 
 .u3_accordion {

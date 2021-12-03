@@ -1,12 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import {
-  EMPTY,
-  SEAT,
-  ROOM,
-  FACILITY,
-  SELECTION,
-} from '../../const/object-type.const';
+import { EMPTY, SEAT, ROOM, FACILITY } from '../../const/object-type.const';
 
 export const Minimap = ({ size, seatId, roomId, floorId }) => {
   const [board, setBoard] = useState([]);
@@ -257,15 +251,14 @@ export const Minimap = ({ size, seatId, roomId, floorId }) => {
       <div
         style={{
           height: '100%',
-          marginBottom: '10px',
+          display: 'flex',
+          flexDirection: 'column',
         }}
       >
         <div
           style={{
             display: 'flex',
-            justifyContent: 'end',
             alignItems: 'center',
-            marginRight: '10px',
             marginBottom: '10px',
           }}
         >
@@ -284,12 +277,11 @@ export const Minimap = ({ size, seatId, roomId, floorId }) => {
           style={{
             overflow: 'auto',
             height: '90%',
-            margin: '0 10px',
           }}
         >
           <div
             style={{
-              width: `${size}px`,
+              width: `860px`,
               height: '100%',
               position: 'relative',
             }}
