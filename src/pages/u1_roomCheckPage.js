@@ -31,9 +31,13 @@ const RoomCheckPage = () => {
             <div>
               {isMobile ? (
                 <FiMenu
-                  size={40}
+                  size={30}
                   onClick={navClick}
-                  style={{ color: 'firebrick' }}
+                  style={{
+                    color: 'firebrick',
+                    marginLeft: '10px',
+                    marginTop: '-4px',
+                  }}
                 />
               ) : null}
             </div>

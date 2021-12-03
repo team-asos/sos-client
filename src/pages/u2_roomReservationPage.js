@@ -31,9 +31,13 @@ const RoomReservationPage = props => {
           <div className="m_reservationHeader">
             <div>
               <FiMenu
-                size={40}
+                size={30}
                 onClick={navClick}
-                style={{ color: 'firebrick' }}
+                style={{
+                  color: 'firebrick',
+                  marginLeft: '10px',
+                  marginTop: '-4px',
+                }}
               />
             </div>
             <div className="m_roomCheck_titleTextStyle">회의실 예약</div>

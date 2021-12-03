@@ -1,0 +1,29 @@
+.userSearchPage {
+  font-family: NotoSansRegular;
+
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+  flex-direction: row;
+}
+.u6-search-main {
+  width: 95vw;
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(240, 240, 240);
+}
+.m-u6-search-main {
+  width: 100%;
+  background-color: rgb(240, 240, 240);
+}
+.m-search-header {
+  display: flex;
+  position: relative;
+  height: 10%;
+  align-items: center;
+}
+.u6-search-contents {
+  height: 100%;
+  flex: 1;
+}

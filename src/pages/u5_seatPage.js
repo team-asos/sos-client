@@ -84,9 +84,13 @@ const SeatPage = () => {
           <div className="m_u_seatHeader">
             <div>
               <FiMenu
-                size={40}
+                size={30}
                 onClick={navClick}
-                style={{ color: 'firebrick' }}
+                style={{
+                  color: 'firebrick',
+                  marginLeft: '10px',
+                  marginTop: '-4px',
+                }}
               />
             </div>
             <div className="m_u_seatHeaderTextStyle">좌석 예약</div>

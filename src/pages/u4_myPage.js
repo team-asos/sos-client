@@ -86,9 +86,13 @@ const UserMyPage = props => {
             {/* Mobile - NavBar(위쪽) */}
             <div>
               <FiMenu
-                size={40}
+                size={30}
                 onClick={navClick}
-                style={{ color: 'firebrick' }}
+                style={{
+                  color: 'firebrick',
+                  marginLeft: '10px',
+                  marginTop: '-4px',
+                }}
               />
             </div>
             {/* PC - Header Text(오른쪽 위 텍스트) */}
