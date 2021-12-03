@@ -226,8 +226,9 @@ const SeatReservationInfo = props => {
                     item.endTime !== null ? (
                       <tr key={idx}>
                         <td>
-                          {moment(item.startTime).format('YYYY-MM-DD HH:mm:ss')}
-                          -{moment(item.endTime).format('YYYY-MM-DD HH:mm:ss')}
+                          {moment(item.startTime).format('YYYY-MM-DD HH:mm')}
+                          {'  ~  '}
+                          {moment(item.endTime).format('YYYY-MM-DD HH:mm')}
                         </td>
                         <td>
                           {item.seat.floor.name} {item.seat.name}
