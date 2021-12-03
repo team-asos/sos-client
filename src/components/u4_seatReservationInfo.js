@@ -152,7 +152,7 @@ const SeatReservationInfo = props => {
                   item.status === 1 &&
                   item.seat !== null &&
                   item.endTime === null ? (
-                    <tr key={idx}>
+                    <tr key={item.id}>
                       <td>
                         {moment(item.startTime).format('YYYY-MM-DD HH:mm:ss')}
                       </td>

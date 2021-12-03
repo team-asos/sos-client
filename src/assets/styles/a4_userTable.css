@@ -3,6 +3,9 @@
   display: flex;
   justify-content: center;
 }
+.pagination-button {
+  width: 30px;
+}
 .page-item {
   width: 30px;
   margin-left: 5%;
