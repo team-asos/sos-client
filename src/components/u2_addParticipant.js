@@ -61,13 +61,7 @@ const AddParticipant = ({
   useEffect(() => {
     res();
   }, []);
-  // useEffect(() => {
-  //   if (myId !== null) {
-  //     setUsers(users.filter(user => user.id !== myId));
-  //   }
-  // }, [myId]);
-  // console.log(users);
-  /*참석자 선택 */
+
   const handleChange = e => {
     setUsers(users.filter(user => user.id !== e.value));
     setSelectedMembers([
@@ -75,23 +69,7 @@ const AddParticipant = ({
       users.find(user => user.id === e.value),
     ]);
   };
-  /*회원 검색 */
-  // useEffect(() => {
-  //   const res = async () => {
-  //     await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/users/search`, {
-  //       headers: {
-  //         Authorization: `Bearer ${cookie.access_token}`,
-  //       },
-  //       method: 'GET',
-  //     })
-  //       .then(response => response.json())
-  //       .then(json => {
-  //         setUsers(json.filter(user => user.id !== myId));
-  //       });
-  //   };
-  //   res();
-  // }, []);
-  console.log(users);
+
   /*테이블에서 선택한 시간으로 예약할 때 */
   const getStartTime = () => {
     setStart(START);
@@ -183,7 +161,7 @@ const AddParticipant = ({
             variant="secondary"
             id="dropdown-basic"
             className={isPc ? 'dropDownToggle' : 'm_dropDownToggle'}
-            disabled="true"
+            disabled={true}
           >
             {start}
           </Dropdown.Toggle>
@@ -193,7 +171,10 @@ const AddParticipant = ({
               선택 안함
             </Dropdown.Item>
             {timeTable.map((time, idx) => (
-              <Dropdown.Item onClick={() => setStartThisClick(time.start_time)}>
+              <Dropdown.Item
+                key={idx}
+                onClick={() => setStartThisClick(time.start_time)}
+              >
                 {time.start_time}
               </Dropdown.Item>
             ))}
@@ -205,7 +186,7 @@ const AddParticipant = ({
             variant="secondary"
             id="dropdown-basic"
             className={isPc ? 'dropDownToggle' : 'm_dropDownToggle'}
-            disabled="true"
+            disabled={true}
           >
             {end}
           </Dropdown.Toggle>
@@ -215,7 +196,10 @@ const AddParticipant = ({
               선택 안함
             </Dropdown.Item>
             {timeTable.map((time, idx) => (
-              <Dropdown.Item onClick={() => setEndThisClick(time.end_time)}>
+              <Dropdown.Item
+                key={idx}
+                onClick={() => setEndThisClick(time.end_time)}
+              >
                 {time.end_time}
               </Dropdown.Item>
             ))}

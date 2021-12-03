@@ -130,13 +130,13 @@ const UserSearchForm = ({ getUserId }) => {
             />
           </div>
           <div className="userLocation">
-            {users.map(item =>
+            {users.map((item, idx) =>
               item.id === ID ? (
                 <>
                   <div className="searchUserInfoText">회원 정보</div>
                   <Table striped hover className="userLocationInfo">
                     <thead>
-                      <tr>
+                      <tr key={idx}>
                         <th></th>
                         <th>이름</th>
                         <th>이메일</th>

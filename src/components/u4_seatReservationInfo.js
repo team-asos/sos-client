@@ -148,11 +148,11 @@ const SeatReservationInfo = props => {
             </MDBTableHead>
             <MDBTableBody>
               {reservation.length !== 0 &&
-                reservation.map(item =>
+                reservation.map((item, idx) =>
                   item.status === 1 &&
                   item.seat !== null &&
                   item.endTime === null ? (
-                    <tr>
+                    <tr key={idx}>
                       <td>
                         {moment(item.startTime).format('YYYY-MM-DD HH:mm:ss')}
                       </td>
@@ -219,11 +219,11 @@ const SeatReservationInfo = props => {
                 sortedReservation
                   .slice(0)
                   .reverse()
-                  .map(item =>
+                  .map((item, idx) =>
                     item.status === 2 &&
                     item.seat !== null &&
                     item.endTime !== null ? (
-                      <tr>
+                      <tr key={idx}>
                         <td>
                           {moment(item.startTime).format('YYYY-MM-DD HH:mm:ss')}
                           -{moment(item.endTime).format('YYYY-MM-DD HH:mm:ss')}

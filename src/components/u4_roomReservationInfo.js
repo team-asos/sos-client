@@ -79,7 +79,7 @@ const RoomReservationInfo = props => {
                 ? { width: '90%', marginLeft: '5%' }
                 : { width: '90%', marginLeft: '5%', fontSize: '0.8em' }
             }
-            scrollY="true"
+            scrollY={true}
             maxHeight={isPc ? '40vh' : '53vh'}
           >
             <MDBTableHead style={{ fontSize: '0.9em' }}>
@@ -96,9 +96,9 @@ const RoomReservationInfo = props => {
                 sortedReservation
                   .slice(0)
                   .reverse()
-                  .map(item =>
+                  .map((item, idx) =>
                     item.room !== null ? (
-                      <tr>
+                      <tr key={idx}>
                         <td>{moment(item.startTime).format('YYYY-MM-DD')}</td>
                         <td>
                           {item.room.floor.name} {item.room.name}

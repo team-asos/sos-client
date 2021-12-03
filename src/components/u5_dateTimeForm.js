@@ -47,6 +47,7 @@ const DateTimeForm = ({ selection, userId }) => {
     );
     if (response.status === 201) {
       alert('좌석 사용이 시작되었습니다!');
+      window.location.href = '/seat-reservation';
     } else {
       alert(response.status);
     }
@@ -64,7 +65,7 @@ const DateTimeForm = ({ selection, userId }) => {
             <Button variant="secondary" onClick={handleClose}>
               취소
             </Button>
-            <Button variant="success" onClick={reservationClickHandler}>
+            <Button variant="danger" onClick={reservationClickHandler}>
               확인
             </Button>
           </Modal.Footer>
