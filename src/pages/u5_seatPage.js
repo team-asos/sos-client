@@ -96,7 +96,6 @@ const SeatPage = () => {
         {open ? <MobileNavBar open={open} /> : null}
 
         <div className="u_seatFormUpper">
-          {/*층 이름, 시설 아이콘, 좌석 현황 */}
           <div className="u_selectFloor">
             <Dropdown className="u_dropdownFloor">
               <Dropdown.Toggle variant="secondary" id="dropdown-basic">
@@ -122,14 +121,12 @@ const SeatPage = () => {
 
           <div className={isPc ? 'statusForm' : 'm_statusForm'}>
             <div className="showFacility">
-              {/*시설 아이콘*/}
               <BsIcon.BsFillInfoCircleFill
                 className={isPc ? 'facilityicon' : 'm_facilityIcon'}
                 onClick={handleClick}
                 style={{ cursor: 'pointer' }}
               ></BsIcon.BsFillInfoCircleFill>
             </div>
-            {/*좌석 현황*/}
             {isPc ? (
               <>
                 <div className="reservedSeats">

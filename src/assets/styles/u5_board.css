@@ -5,20 +5,19 @@
 .mobileBoardContainer {
   display: flex;
   flex-direction: column;
+  height: -webkit-fill-available;
 }
 .u_boardCover {
   margin-left: 2%;
   margin-right: 2%;
-  /* width: 70vw; */
   width: 100%;
   height: 100%;
   overflow: auto;
-  /* background-color: ; */
   border-radius: 3px;
 }
 .mobileBoardCover {
   width: 95%;
-  height: 600px;
+  height: 550px;
   margin-left: 2.5%;
   overflow: auto;
 }

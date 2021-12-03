@@ -14,12 +14,9 @@ import RoomReservationInfo from '../components/u4_roomReservationInfo';
 
 import '../assets/styles/u4_myPage.css';
 
-//유저 마이페이지
-const UserMyPage = props => {
-  //쿠키 생성
+const UserMyPage = () => {
   const [cookie] = useCookies(['access_token']);
 
-  //유저 정보 가져오기
   const [user, setUser] = useState({});
   useEffect(() => {
     const res = async () => {
@@ -37,19 +34,16 @@ const UserMyPage = props => {
     res();
   }, []);
 
-  //isMobile Nav 창 열기
   const [open, setOpen] = useState(false);
   const navClick = () => {
     setOpen(!open);
   };
 
-  //isMobile, isPc 미디어쿼리 사이즈 설정
   const isPc = useMediaQuery({
     query: '(min-width:768px)',
   });
   const isMobile = useMediaQuery({ query: '(max-width:767px)' });
 
-  //나의 예약내역, 나의 로그인 정보 탭 이동
   const tabBar = {
     0: (
       <>
@@ -57,14 +51,13 @@ const UserMyPage = props => {
         <RoomReservationInfo user={user} />
       </>
     ),
-    1: <MyPageBox user={user} />, //나중에 email 받아서 인증해야해서
+    1: <MyPageBox user={user} />,
   };
   const [state, setState] = useState(0);
   const clickHandler = id => {
     setState(id);
   };
 
-  //페이지 불러오기
   const getPage = () => {
     if (state === 0) {
       return tabBar[0];
@@ -74,16 +67,11 @@ const UserMyPage = props => {
   };
 
   return (
-    //전체 페이지
     <div className="userMyPage">
-      {/* PC - NavBar(왼쪽) */}
       <div>{isPc ? <NavBarUser /> : null}</div>
-      {/* PC - Box(오른쪽) */}
       <div className={isPc ? 'u_myPageForm' : 'm_u_myPageForm'}>
-        {/* 페이지(위쪽)  */}
         {isPc ? null : (
           <div className="m_u_myPageHeader">
-            {/* Mobile - NavBar(위쪽) */}
             <div>
               <FiMenu
                 size={30}
@@ -95,10 +83,8 @@ const UserMyPage = props => {
                 }}
               />
             </div>
-            {/* PC - Header Text(오른쪽 위 텍스트) */}
             <div className="m_u_myPageHeaderTextStyle">마이페이지</div>
 
-            {/* Mobile - Tab Text(오른쪽 위 탭 텍스트) */}
             <div onClick={() => clickHandler(0)} className="m_myPageMenuText">
               예약 내역
             </div>
@@ -108,10 +94,8 @@ const UserMyPage = props => {
           </div>
         )}
 
-        {/* Mobile - Menu */}
         {open ? <MobileNavBar open={open} /> : null}
-        {/* Mobile - 컨텐츠 */}
-        <div className="myPageContents">
+        <div className={isPc ? 'myPageContents' : 'm_myPageContents'}>
           {isMobile ? getPage() : <MyPageBox user={user} />}
         </div>
       </div>

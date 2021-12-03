@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useReducer } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Table } from 'react-bootstrap';
 import { useMediaQuery } from 'react-responsive';
 import * as moment from 'moment';
@@ -11,7 +11,6 @@ const RoomTimeTable = ({ MAXUSER, selectedDate, roomId }) => {
     query: '(min-width:768px)',
   });
   const [timeTable, setTimeTable] = useState([]);
-  const [isReserved, setIsReserved] = useState([]); //예약 되어있는지 확인
   const [start, setStart] = useState(''); //진짜 예약할 시간 보내줘야함
   const [end, setEnd] = useState(''); //진짜 예약할 시간
   const [deleteClick, setDeleteClick] = useState(0); //선택취소가 눌렸는지 안눌렸는지
@@ -82,8 +81,8 @@ const RoomTimeTable = ({ MAXUSER, selectedDate, roomId }) => {
   }, [firstClick, secondClick]);
 
   const reset = () => {
-    setFirstClick({ Start: '', End: '', isClicked: 0, idx: null }); //초기화
-    setSecondClick({ Start: '', End: '', isClicked: 0, idx: null }); //초기화
+    setFirstClick({ Start: '', End: '', isClicked: 0, idx: null });
+    setSecondClick({ Start: '', End: '', isClicked: 0, idx: null });
     setStart('시작');
     setEnd('종료');
     setClickes([]);
@@ -130,8 +129,6 @@ const RoomTimeTable = ({ MAXUSER, selectedDate, roomId }) => {
   };
   //선택 삭제 버튼 눌렀을 때
   const deleteSelection = () => {
-    // if (firstClick.idx===null && secondClick.idx===null)
-    //   alert('시간을 선택해주세요.');
     setDeleteClick(!deleteClick);
     reset();
   };
@@ -183,70 +180,59 @@ const RoomTimeTable = ({ MAXUSER, selectedDate, roomId }) => {
           <tbody>
             {timeTable &&
               selectedDate &&
-              // timeTable[0] &&
-              // timeTable[0].start_time.length < 10 &&
-              timeTable.map(
-                (item, idx) => (
-                  <>
-                    <tr key={idx}>
-                      {/*시간 */}
-                      <td
-                        className={item.id ? 'isReserved' : 'isNotReserved'}
-                        onClick={
-                          !item.id
-                            ? e =>
-                                clickHandler(
-                                  item.start_time,
-                                  item.end_time,
-                                  idx,
-                                  e,
-                                )
-                            : null
-                        }
-                        style={
-                          clickes.includes(idx)
-                            ? {
-                                backgroundColor: 'firebrick',
-                                color: 'whitesmoke',
-                              }
-                            : clickes.includes(idx) && deleteClick
-                            ? { backgroundColor: 'rgb(240, 240, 240)' }
-                            : { backgroundColor: 'rgb(240, 240, 240)' }
-                        }
-                      >
-                        {item.start_time}-{item.end_time}
+              timeTable.map((item, idx) => (
+                <>
+                  <tr key={idx}>
+                    <td
+                      className={item.id ? 'isReserved' : 'isNotReserved'}
+                      onClick={
+                        !item.id
+                          ? e =>
+                              clickHandler(
+                                item.start_time,
+                                item.end_time,
+                                idx,
+                                e,
+                              )
+                          : null
+                      }
+                      style={
+                        clickes.includes(idx)
+                          ? {
+                              backgroundColor: 'firebrick',
+                              color: 'whitesmoke',
+                            }
+                          : clickes.includes(idx) && deleteClick
+                          ? { backgroundColor: 'rgb(240, 240, 240)' }
+                          : { backgroundColor: 'rgb(240, 240, 240)' }
+                      }
+                    >
+                      {item.start_time}-{item.end_time}
+                    </td>
+                    {item.id ? (
+                      <td className="isReserved">{item.topic}</td>
+                    ) : (
+                      <td></td>
+                    )}
+                    {item.id ? (
+                      <td className="isReserved">{item.user.name}</td>
+                    ) : (
+                      <td></td>
+                    )}
+                    {isPc && item.id ? (
+                      <td className="isReserved">
+                        {item.participants.map((users, idx) =>
+                          idx === item.participants.length - 1
+                            ? users.user.name
+                            : users.user.name + ', ',
+                        )}
                       </td>
-                      {/*회의주제 추가해야함 */}
-                      {item.id ? (
-                        <td className="isReserved">{item.topic}</td>
-                      ) : (
-                        /*예약되어있지는 않지만 지금 시간보다 전이면 */
-                        <td></td>
-                      )}
-                      {item.id ? (
-                        <td className="isReserved">{item.user.name}</td>
-                      ) : (
-                        /*예약되어있지는 않지만 지금 시간보다 전이면 */
-                        <td></td>
-                      )}
-                      {isPc && item.id ? (
-                        <td className="isReserved">
-                          {item.participants.map((users, idx) =>
-                            idx === item.participants.length - 1
-                              ? users.user.name
-                              : users.user.name + ', ',
-                          )}
-                        </td>
-                      ) : isPc ? (
-                        /*예약되어있지는 않지만 지금 시간보다 전이면 */
-                        <td></td>
-                      ) : !isPc ? null : null}
-                    </tr>
-                  </>
-                ),
-                // ) : null,
-                /*여기 가 map끝 */
-              )}
+                    ) : isPc ? (
+                      <td></td>
+                    ) : !isPc ? null : null}
+                  </tr>
+                </>
+              ))}
           </tbody>
         </Table>
       </div>

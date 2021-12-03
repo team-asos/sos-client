@@ -2,8 +2,6 @@
 .inquiryListTotal {
   width: 100%;
   height: 100%;
-
-  /* padding-top: 2%; */
 }
 .m_inquiryListTotal {
   width: 100%;
@@ -28,6 +26,8 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  height: 7vh;
+  margin-top: 1vh;
 }
 .m_inquiryHeader {
   display: flex;
@@ -96,15 +96,11 @@
 
 .u3_accordion {
   width: 90%;
-  /* height: 80vh; */
   margin-left: 5%;
-  margin-top: 2%;
-  /* border-top: 1px solid gray;
-  border-bottom: 1px solid gray;
-  border-radius: 3px; */
+  margin-top: 1%;
+
   box-shadow: 1px 1px 2px 0.1px rgb(202, 202, 202);
-  /* border: 1px solid rgb(182, 182, 182); */
-  /* border: none; */
+
   border-radius: 5px;
   overflow: auto;
   max-height: 80vh;
@@ -118,7 +114,6 @@
   overflow: auto;
   max-height: 85vh;
 }
-/*제목 폼에서 화살표 버튼 제외한 부분*/
 .inquiryTitleMain {
   display: flex;
   flex-direction: column;
@@ -126,15 +121,10 @@
   flex: 1;
 }
 
-/*인덱스*/
-.index {
-}
-/*답변 여부*/
 .isReply {
   color: rgb(40, 40, 40);
   width: 10%;
 }
-/*제목*/
 .inquiryTitleStyle {
   width: 75%;
   font-size: 1em;
@@ -151,7 +141,6 @@
   flex-direction: row;
   position: relative;
   justify-content: space-between;
-  /* background-color: #c4c4c415; */
 }
 .inquiryMsg {
   width: 95%;

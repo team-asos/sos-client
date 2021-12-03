@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useCookies } from 'react-cookie';
 import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
 import { OverlayTrigger, Tooltip, Modal, Button } from 'react-bootstrap';
 import { useMediaQuery } from 'react-responsive';
@@ -13,8 +12,6 @@ const SeatReservationInfo = props => {
   const isPc = useMediaQuery({
     query: '(min-width:768px)',
   });
-  //쿠키 생성
-  const [cookie] = useCookies(['access_token']);
   //예약내역 불러오기
   const [reservation, setReservation] = useState([]);
 
@@ -54,6 +51,7 @@ const SeatReservationInfo = props => {
       );
       if (res.status === 200) {
         alert('좌석 사용이 종료되었습니다.');
+        window.location.href = '/user-mypage';
       } else {
         const json = await res.json();
         alert(json.message);
@@ -62,7 +60,6 @@ const SeatReservationInfo = props => {
     finishHandler();
   };
 
-  //예외처리
   useEffect(() => {
     if (props.user.id !== 'undefined') res();
   }, [props.user.id]);
@@ -225,8 +222,9 @@ const SeatReservationInfo = props => {
                     item.endTime !== null ? (
                       <tr key={idx}>
                         <td>
-                          {moment(item.startTime).format('YYYY-MM-DD HH:mm:ss')}
-                          -{moment(item.endTime).format('YYYY-MM-DD HH:mm:ss')}
+                          {moment(item.startTime).format('YYYY-MM-DD HH:mm')}
+                          {'  ~  '}
+                          {moment(item.endTime).format('YYYY-MM-DD HH:mm')}
                         </td>
                         <td>
                           {item.seat.floor.name} {item.seat.name}

@@ -131,7 +131,7 @@ const MyReservationListForm = props => {
                           ? '사용중'
                           : '사용완료'}
                       </td>
-                      {item.status === 0 ? ( //예약완료 상태면(좌석/회의실 예약을 구분할 수 있는 상태가 필요?)
+                      {item.status === 0 ? (
                         <td style={{ marginLeft: '10vw' }}>
                           <button
                             className="reservationCancelBtn"
@@ -195,9 +195,7 @@ const MyReservationListForm = props => {
                       )}
                     </tr>
                   </tbody>
-                ) : (
-                  ''
-                ),
+                ) : null,
               )}
           </Table>
         </div>
@@ -210,7 +208,6 @@ const MyReservationListForm = props => {
           >
             <thead>
               <tr>
-                {/* <th></th> */}
                 <th>이용 날짜</th>
                 <th>이용 시간</th>
                 <th>예약 정보</th>
@@ -238,7 +235,7 @@ const MyReservationListForm = props => {
                           ? '사용중'
                           : '사용완료'}
                       </td>
-                      {item.status === 0 ? ( //예약완료 상태면(좌석/회의실 예약을 구분할 수 있는 상태가 필요?)
+                      {item.status === 0 ? (
                         <td style={{ marginLeft: '10vw' }}>
                           <button
                             className="reservationCancelBtn"
@@ -297,9 +294,7 @@ const MyReservationListForm = props => {
                       )}
                     </tr>
                   </tbody>
-                ) : (
-                  ''
-                ),
+                ) : null,
               )}
           </Table>
         </div>

@@ -4,7 +4,6 @@ import { useCookies } from 'react-cookie';
 import { Table, Dropdown } from 'react-bootstrap';
 import * as AiIcon from 'react-icons/ai';
 import { useMediaQuery } from 'react-responsive';
-import * as moment from 'moment';
 import '../assets/styles/u2_addParticipant.css';
 //회의실 인원 검색해서 추가
 const AddParticipant = ({
@@ -95,6 +94,15 @@ const AddParticipant = ({
   }, [selectedDate]);
   /*예약하기 */
   const reservationClickHandler = async () => {
+    if (startTime.length <= 11 || endTime.length <= 11) {
+      alert('시간을 선택해주세요.');
+      return;
+    }
+    if (topic.length === 0) {
+      alert('회의 주제를 입력해주세요.');
+      return;
+    }
+
     for (let i = 0; i < selectedMembers.length; i++) {
       //setMembersId(selectedMembers[i].value);
       membersId.push(selectedMembers[i].id);
@@ -118,6 +126,7 @@ const AddParticipant = ({
     );
     if (response.status === 201) {
       alert('예약이 완료되었습니다.');
+      window.location.href = `/room-reservation/${ROOMID}`;
     } else {
       alert(response.status);
     }
@@ -218,7 +227,7 @@ const AddParticipant = ({
       <div className={isPc ? 'addAndButtonForm' : 'mAddAndButtonForm'}>
         <div className={isPc ? 'addParticipantForm' : 'mParticipantForm'}>
           <p className={isPc ? 'rrp_centerTextStyle' : 'mrrp_centerTextStyle'}>
-            회의 참석자를 입력하세요. [ 사용 가능 인원 : {MAXUSER}명 ]
+            회의 참석자를 입력하세요. [ 사용 가능 인원 : {MAXUSER - 1}명 ]
           </p>
 
           <div className={isPc ? 'searchForm' : 'mSearchForm'}>
@@ -231,7 +240,7 @@ const AddParticipant = ({
               placeholder="회원 검색"
               onChange={e => handleChange(e)}
               noOptionsMessage={() => '검색 결과가 없습니다.'}
-              isDisabled={selectedMembers.length < MAXUSER ? 0 : 1}
+              isDisabled={selectedMembers.length < MAXUSER - 1 ? 0 : 1}
             />
           </div>
           <div className="participantForm">

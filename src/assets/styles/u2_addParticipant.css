@@ -31,6 +31,30 @@
   color: black;
   font-size: 0.9em;
 }
+.meetingTopicForm {
+  width: 100%;
+  margin-bottom: 2vh;
+}
+.m_meetingTopicForm {
+  width: 100%;
+  margin-bottom: 1%;
+}
+.topicInput {
+  border: none;
+  background-color: white;
+  height: 4vh;
+  border-radius: 5px;
+  width: 100%;
+}
+.m_topicInput {
+  width: 340px;
+  border: none;
+  background-color: white;
+  height: 40px;
+  border-radius: 5px;
+  font-size: 0.8em;
+  margin-left: 2%;
+}
 .addAndButtonForm {
   display: flex;
   flex-direction: column;
@@ -64,10 +88,12 @@
   font-size: 0.9em;
   font-weight: bold;
 }
-.mSearchForm {
+/*참석자 리스트*/
+.participantForm {
+  max-height: 45vh;
+  overflow: auto;
 }
-.selectedMembersList {
-}
+
 .mSelectedMembersList {
   font-size: 0.7em;
   height: 50px;
@@ -80,10 +106,7 @@
   width: fit-content;
   height: 5vh;
   margin-top: 2vh;
-  /*
-  margin-left: 10vw;
-  padding-left: 2vw;
-  padding-right: 2vw; */
+
   font-size: 1.2em;
   background-color: firebrick;
   color: white;
@@ -106,33 +129,4 @@
   border-radius: 10px;
   outline: 0;
   border: 0;
-}
-/*참석자 리스트*/
-.participantForm {
-  max-height: 45vh;
-  overflow: auto;
-}
-.meetingTopicForm {
-  width: 100%;
-  margin-bottom: 2vh;
-}
-.m_meetingTopicForm {
-  width: 100%;
-  margin-bottom: 1%;
-}
-.topicInput {
-  border: none;
-  background-color: white;
-  height: 4vh;
-  border-radius: 5px;
-  width: 100%;
-}
-.m_topicInput {
-  width: 340px;
-  border: none;
-  background-color: white;
-  height: 40px;
-  border-radius: 5px;
-  font-size: 0.8em;
-  margin-left: 2%;
 }

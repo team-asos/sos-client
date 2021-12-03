@@ -49,7 +49,7 @@ const UsePagination = ({ totalUsers, usersPerPage, paginate, currentPage }) => {
   return (
     <div className="usePaginationBox">
       <button
-        className="pagination-button"
+        className="pagination-button-left"
         onClick={() => {
           prevPage(currentPage);
         }}
@@ -58,7 +58,10 @@ const UsePagination = ({ totalUsers, usersPerPage, paginate, currentPage }) => {
       </button>
       <ul className="pagination">
         {pages.map(page => (
-          <li key={page} className="page-item">
+          <li
+            key={page}
+            style={page % pages.length === 0 ? {} : { marginRight: '4px' }}
+          >
             <button
               onClick={() => paginate(page)}
               className="page-link"
@@ -74,7 +77,7 @@ const UsePagination = ({ totalUsers, usersPerPage, paginate, currentPage }) => {
         ))}
       </ul>
       <button
-        className="pagination-button"
+        className="pagination-button-right"
         onClick={() => {
           nextPage(currentPage);
         }}

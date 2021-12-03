@@ -8,16 +8,13 @@ import Calendar from './u2_calendar';
 import { useMediaQuery } from 'react-responsive';
 
 import '../assets/styles/u2_selectedRoomTable.css';
-//회의실 예약 페이지-> 선택된 회의실 설명 테이블(room-check에서 정보 받아오기)
 const SelectedRoomTable = props => {
   const isPc = useMediaQuery({
     query: '(min-width:768px)',
   });
-  const isMobile = useMediaQuery({ query: '(max-width:767px)' });
   const [cookie] = useCookies(['access_token']);
-  const today = new Date();
-  const roomID = props.roomID; //선택한 회의실 id
-  const [data, setData] = useState([]); //db 회의실 정보
+  const roomID = props.roomID;
+  const [data, setData] = useState([]);
   useEffect(() => {
     const res = async () => {
       await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/rooms/${roomID}`, {

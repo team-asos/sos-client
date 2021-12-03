@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import { useMediaQuery } from 'react-responsive';
-import { FiMenu } from 'react-icons/fi';
-import * as AiIcon from 'react-icons/ai';
 
 import MobileNavBar from '../components/u_m_navBar';
 import NavBarUser from '../components/u_navBar';
@@ -18,19 +15,11 @@ const InquirePage = () => {
     query: '(min-width:768px)',
   });
 
-  const isMobile = useMediaQuery({ query: '(max-width:767px)' });
-
-  const navClick = () => {
-    setOpen(!open);
-  };
-
   //쿠키 생성
   const [cookie] = useCookies(['access_token']);
 
   //내 계정 가져오기
   const [user, setUser] = useState({});
-
-  const [addInquiryClick, setAddInquiryClick] = useState(0);
 
   useEffect(() => {
     const res = async () => {
@@ -59,7 +48,7 @@ const InquirePage = () => {
         {open ? <MobileNavBar open={open} /> : null}
 
         {/* 내용이 담기는 content */}
-        <div className="myPageContents">
+        <div className="u3_myPageContents">
           <InquiryListForm user={user} />
         </div>
       </div>

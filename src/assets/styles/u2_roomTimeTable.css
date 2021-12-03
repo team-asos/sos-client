@@ -17,5 +17,5 @@ Table .isNotReserved:hover {
 }
 .resetSelectTime {
   cursor: pointer;
-  margin-left: 1vw;
+  margin-left: 4px;
 }
