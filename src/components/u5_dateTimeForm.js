@@ -21,13 +21,13 @@ const DateTimeForm = ({ selection, userId }) => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const isClickedOnMobile = () => {
-    if (!isPc && selection.name.length > 0) {
+  const isClicked = () => {
+    if (selection.name.length > 0) {
       handleShow();
     }
   };
   useEffect(() => {
-    if (selection !== null) isClickedOnMobile();
+    if (selection !== null) isClicked();
   }, [selection]);
   /*좌석 사용 시작 */
   const reservationClickHandler = async () => {
@@ -54,52 +54,7 @@ const DateTimeForm = ({ selection, userId }) => {
 
   return (
     <>
-      {isPc ? (
-        <div
-          className={isPc ? 'reservationAndSearch' : 'm_reservationAndSearch'}
-        >
-          <div className={isPc ? 'dateTimeAndBtnForm' : 'm_dateTimeAndBtnForm'}>
-            <div className={isPc ? 'dateTimeForm' : 'm_dateTimeForm'}>
-              <div
-                className={isPc ? 'seatNameTextStyle' : 'm_seatNameTextStyle'}
-              >
-                좌석 {selection.name}
-              </div>
-
-              <div
-                className={
-                  isPc
-                    ? 'seatReservationButtonForm'
-                    : 'm_seatReservationButtonForm'
-                }
-              >
-                <button
-                  className={
-                    isPc ? 'seatReservationBtn' : 'm_seatReservationBtn'
-                  }
-                  onClick={handleShow}
-                >
-                  사용 시작
-                </button>
-              </div>
-              <Modal show={show} onHide={handleClose}>
-                <Modal.Header closeButton>
-                  <Modal.Title>좌석 {selection.name}</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>사용 하시겠습니까?</Modal.Body>
-                <Modal.Footer>
-                  <Button variant="secondary" onClick={handleClose}>
-                    취소
-                  </Button>
-                  <Button variant="success" onClick={reservationClickHandler}>
-                    확인
-                  </Button>
-                </Modal.Footer>
-              </Modal>
-            </div>
-          </div>
-        </div>
-      ) : selection.name.length > 0 ? (
+      {selection.name.length > 0 ? (
         <Modal show={show} onHide={handleClose}>
           <Modal.Header closeButton>
             <Modal.Title>좌석 {selection.name}</Modal.Title>

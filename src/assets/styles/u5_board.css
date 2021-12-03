@@ -8,7 +8,9 @@
 }
 .u_boardCover {
   margin-left: 1%;
-  width: 70vw;
+  margin-right: 1%;
+  /* width: 70vw; */
+  width: 100%;
   height: 100%;
   overflow: auto;
   background-color: white;
@@ -16,7 +18,7 @@
 }
 .mobileBoardCover {
   width: 95%;
-  height: 500px;
+  height: 600px;
   margin-left: 2.5%;
   overflow: auto;
 }

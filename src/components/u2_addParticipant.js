@@ -31,22 +31,42 @@ const AddParticipant = ({
   const [end, setEnd] = useState('종료'); //props로 받아온 END 저장할 변수
   const [topic, setTopic] = useState(''); //회의 주제
   const [isSelected, setIsSelected] = useState([0]);
-  /*내 정보 */
-  useEffect(() => {
-    const res = async () => {
-      await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/auth`, {
+
+  const res = async () => {
+    const response = await fetch(
+      `${process.env.REACT_APP_SERVER_BASE_URL}/auth`,
+      {
         headers: {
           Authorization: `Bearer ${cookie.access_token}`,
         },
         method: 'GET',
-      })
-        .then(response => response.json())
-        .then(json => {
-          setMyId(json.id);
-        });
-    };
+      },
+    );
+
+    const authJson = await response.json();
+
+    await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/users/search`, {
+      headers: {
+        Authorization: `Bearer ${cookie.access_token}`,
+      },
+      method: 'GET',
+    })
+      .then(response => response.json())
+      .then(json => {
+        setUsers(json.filter(user => user.id !== authJson.id));
+      });
+  };
+
+  /*내 정보 */
+  useEffect(() => {
     res();
   }, []);
+  // useEffect(() => {
+  //   if (myId !== null) {
+  //     setUsers(users.filter(user => user.id !== myId));
+  //   }
+  // }, [myId]);
+  // console.log(users);
   /*참석자 선택 */
   const handleChange = e => {
     setUsers(users.filter(user => user.id !== e.value));
@@ -56,21 +76,22 @@ const AddParticipant = ({
     ]);
   };
   /*회원 검색 */
-  useEffect(() => {
-    const res = async () => {
-      await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/users/search`, {
-        headers: {
-          Authorization: `Bearer ${cookie.access_token}`,
-        },
-        method: 'GET',
-      })
-        .then(response => response.json())
-        .then(json => {
-          setUsers(json);
-        });
-    };
-    res();
-  }, []);
+  // useEffect(() => {
+  //   const res = async () => {
+  //     await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/users/search`, {
+  //       headers: {
+  //         Authorization: `Bearer ${cookie.access_token}`,
+  //       },
+  //       method: 'GET',
+  //     })
+  //       .then(response => response.json())
+  //       .then(json => {
+  //         setUsers(json.filter(user => user.id !== myId));
+  //       });
+  //   };
+  //   res();
+  // }, []);
+  console.log(users);
   /*테이블에서 선택한 시간으로 예약할 때 */
   const getStartTime = () => {
     setStart(START);
