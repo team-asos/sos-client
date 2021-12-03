@@ -1,5 +1,3 @@
-.roomInfoTableDiv {
-}
 .infoTable {
   position: relative;
 
@@ -23,7 +21,6 @@
   color: black;
 }
 .roomReservationButton:hover {
-  /* background: #8f0202; */
   background-color: firebrick;
   color: white;
 

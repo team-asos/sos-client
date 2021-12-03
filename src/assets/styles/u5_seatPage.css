@@ -50,27 +50,7 @@
   font-weight: bold;
   margin-left: 30%;
 }
-.userSeatReservationForm {
-  display: flex;
-  flex-direction: column;
-}
 
-.u_seatReservationButton {
-  background: #155924;
-  font-size: 1.7em;
-  font-weight: bold;
-  color: white;
-  width: fit-content;
-  height: 13%;
-  align-self: center;
-}
-/*leftForm*/
-.seatForm {
-  width: 65vw;
-  height: 88vh;
-  display: flex;
-  flex-direction: column;
-}
 /*시설, 예약가능, 사용중*/
 .u_seatFormUpper {
   display: flex;
@@ -78,8 +58,6 @@
   height: 10%;
   justify-content: space-between;
   width: 100%;
-  /*
-  align-items: flex-end; */
 }
 .u_selectFloor {
   display: flex;
@@ -89,22 +67,6 @@
   margin-left: 2vw;
 }
 
-.showFacilityButton {
-  font-size: 1.4em;
-  font-weight: bold;
-  border: none;
-  width: 6vw;
-  height: max-content;
-
-  margin-left: 1vw;
-  border-radius: 100%;
-}
-.selectFloorTextStyle {
-  margin-left: 0.5vw;
-  margin-top: 1.5vh;
-  font-weight: bold;
-  color: #c00000;
-}
 .statusForm {
   display: flex;
   align-items: center;
@@ -173,12 +135,7 @@
   width: 100%;
   margin-left: 5%;
 }
-.u_seatFormBottom {
-  width: 63vw;
-  height: 100vh;
-  background-color: #820101;
-  margin-left: 1vw;
-}
+
 .seatContent {
   height: 90%;
 }

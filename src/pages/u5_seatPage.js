@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import NavBarUser from '../components/u_navBar';
 import { useCookies } from 'react-cookie';
 import { Dropdown } from 'react-bootstrap';
@@ -15,7 +14,6 @@ const SeatPage = () => {
   const isPc = useMediaQuery({
     query: '(min-width:768px)',
   });
-  const isMobile = useMediaQuery({ query: '(max-width:767px)' });
   const navClick = () => {
     setOpen(!open);
   };

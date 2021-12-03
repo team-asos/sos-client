@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import { useCookies } from 'react-cookie';
-import { useHistory } from 'react-router-dom';
 import NavBarUser from '../components/u_navBar';
 import MobileNavBar from '../components/u_m_navBar';
 import { useMediaQuery } from 'react-responsive';
