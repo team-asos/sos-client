@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import NavBarUser from '../components/u_navBar';
 import { useCookies } from 'react-cookie';
 import { Dropdown } from 'react-bootstrap';
-import { BoardContainer } from '../components/u5_boardContainer';
-import * as BsIcon from 'react-icons/bs';
 import { useMediaQuery } from 'react-responsive';
+import * as BsIcon from 'react-icons/bs';
 import { FiMenu } from 'react-icons/fi';
+
+import { BoardContainer } from '../components/u5_boardContainer';
 import MobileNavBar from '../components/u_m_navBar';
+import NavBarUser from '../components/u_navBar';
+
 import '../assets/styles/u5_seatPage.css';
+
 //좌석 예약 페이지
 const SeatPage = () => {
   const [open, setOpen] = useState(false);
@@ -22,14 +25,17 @@ const SeatPage = () => {
   const [isToggleOn, setIsToggleOn] = useState(0);
   const [floors, setFloors] = useState([]);
   const [selectedFloor, setSelectedFloor] = useState([]);
-  const [reservedSeatsCnt, setReservedSeatsCnt] = useState(0);
-  const [seatsCnt, setSeatsCnt] = useState(0);
+
+  const [seatCount, setSeatCount] = useState(0);
+  const [usedSeatCount, setUsedSeatCount] = useState(0);
+
   const handleClick = e => {
     setIsToggleOn(!isToggleOn);
     !isToggleOn
       ? (e.target.style.color = '#820101')
       : (e.target.style.color = 'black');
   };
+
   /*내 정보 */
   useEffect(() => {
     const res = async () => {
@@ -57,21 +63,13 @@ const SeatPage = () => {
         },
       );
 
-      setFloors(await result.json());
+      const json = await result.json();
+
+      setFloors(json);
     };
 
     fetchFloors();
   }, []);
-
-  const getReservedSeatsCnt = cnt => {
-    setReservedSeatsCnt(cnt);
-  };
-  const getSeatsCnt = cnt => {
-    setSeatsCnt(cnt);
-  };
-  useEffect(() => {
-    setReservedSeatsCnt(0);
-  }, [selectedFloor]);
 
   return (
     <div className="userSeatPage">
@@ -110,7 +108,7 @@ const SeatPage = () => {
                 {floors.map(floor => (
                   <Dropdown.Item
                     key={floor.id}
-                    onClick={e => {
+                    onClick={() => {
                       setSelectedFloor(floor);
                     }}
                   >
@@ -134,13 +132,13 @@ const SeatPage = () => {
                 <div className="reservedSeats">
                   <div className="reservedSeatShape"></div>
                   <div className="reservedSeatsTextStyle">
-                    사용 중 {reservedSeatsCnt}석
+                    사용 중 {usedSeatCount}석
                   </div>
                 </div>
                 <div className="ableSeats">
                   <div className="ableSeatShape"></div>
                   <div className="ableSeatsTextStyle">
-                    예약 가능 {seatsCnt - reservedSeatsCnt}석
+                    예약 가능 {seatCount - usedSeatCount}석
                   </div>
                 </div>
               </>
@@ -149,14 +147,14 @@ const SeatPage = () => {
                 <div className="reservedSeats">
                   <div className="m_reservedSeatShape"></div>
                   <div className="m_reservedSeatsTextStyle">
-                    사용 중<br></br> {reservedSeatsCnt}석
+                    사용 중<br></br> {usedSeatCount}석
                   </div>
                 </div>
                 <div className="ableSeats">
                   <div className="m_ableSeatShape"></div>
                   <div className="m_ableSeatsTextStyle">
                     예약 가능 <br></br>
-                    {seatsCnt - reservedSeatsCnt}석
+                    {seatCount - usedSeatCount}석
                   </div>
                 </div>
               </>
@@ -169,9 +167,9 @@ const SeatPage = () => {
               <BoardContainer
                 floor={floors[0]}
                 userId={myId}
-                getSeatsCnt={getSeatsCnt}
-                getReservedSeatsCnt={getReservedSeatsCnt}
                 isToggleOn={isToggleOn}
+                setSeatCount={setSeatCount}
+                setUsedSeatCount={setUsedSeatCount}
               />
             </>
           ) : (
@@ -179,9 +177,9 @@ const SeatPage = () => {
               <BoardContainer
                 floor={selectedFloor}
                 userId={myId}
-                getSeatsCnt={getSeatsCnt}
-                getReservedSeatsCnt={getReservedSeatsCnt}
                 isToggleOn={isToggleOn}
+                setSeatCount={setSeatCount}
+                setUsedSeatCount={setUsedSeatCount}
               />
             </>
           )}
