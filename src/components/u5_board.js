@@ -24,7 +24,6 @@ export const Board = ({
   setBoard,
   board,
   seats,
-  searchUserId,
   isToggleOn,
 }) => {
   const isPc = useMediaQuery({
@@ -81,17 +80,6 @@ export const Board = ({
       });
     }
   };
-  const showSearchUser = (x, y) => {
-    searchUserId.map(item => {
-      if (item.room === null && item.status === 1) {
-        if (item.endTime === null) {
-          if (board[y][x].id === item.seat.id) {
-            board[y][x].type = SEARCH_USER_SEAT;
-          }
-        }
-      }
-    });
-  };
 
   const transformLength = (type, length) => {
     if (type === ROOM) {
@@ -110,7 +98,6 @@ export const Board = ({
         backgroundColor: '#E5E5E5',
         borderRadius: '4px',
       };
-    //else if (type === FACILITY) return { backgroundColor: '#f5df4d' };
     else if (type === SELECTION)
       return {
         backgroundColor: 'rgb(199, 43, 43)',
@@ -134,9 +121,6 @@ export const Board = ({
   const Item = ({ board }) => {
     return board.map((row, y) =>
       row.map((col, x) => {
-        if (searchUserId !== 0) {
-          showSearchUser(x, y);
-        }
         return (
           <div
             className={col.type === SEAT ? 'u_boardSeatItem' : 'u_boardItem'}

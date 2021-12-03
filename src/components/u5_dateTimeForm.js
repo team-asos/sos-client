@@ -1,23 +1,12 @@
-import React, { useState, forwardRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Modal, Button } from 'react-bootstrap';
-import DatePicker from 'react-datepicker';
-import { useMediaQuery } from 'react-responsive';
-import { ko } from 'date-fns/esm/locale';
-import { addDays, formatISO, formatISO9075 } from 'date-fns';
+
 import '../assets/styles/u5_dateTimeForm.css';
 import 'react-datepicker/dist/react-datepicker.css';
 import '../assets/styles/u2_calendar.css';
-import * as FaIcon from 'react-icons/fa';
-import UserSearchForm from './u5_userSearchForm';
-import formatISODuration from 'date-fns/formatISODuration';
-import { SELECTION_SECOND } from '../const/selection-type.const';
 
 //좌석 예약 페이지->이용 시간 선택
 const DateTimeForm = ({ selection, userId }) => {
-  const isPc = useMediaQuery({
-    query: '(min-width:768px)',
-  });
-  const now = new Date();
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -26,9 +15,11 @@ const DateTimeForm = ({ selection, userId }) => {
       handleShow();
     }
   };
+
   useEffect(() => {
     if (selection !== null) isClicked();
   }, [selection]);
+
   /*좌석 사용 시작 */
   const reservationClickHandler = async () => {
     handleClose();

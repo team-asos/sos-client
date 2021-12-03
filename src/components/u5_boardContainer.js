@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import DateTimeForm from './u5_dateTimeForm';
 import { Board } from './u5_board';
-import UserSearchForm from './u5_userSearchForm';
 
 import './BoardContainer/index.scss';
 import {
@@ -25,11 +24,6 @@ export const BoardContainer = ({
     query: '(min-width:768px)',
   });
 
-  const [searchUserId, setSearchUserId] = useState(0);
-
-  const getUserId = id => {
-    setSearchUserId(id);
-  };
   const [board, setBoard] = useState([]);
 
   const [seats, setSeats] = useState([]);
@@ -117,6 +111,7 @@ export const BoardContainer = ({
         return col;
       }),
     );
+
     for (let seat of seats) {
       getSeatsCnt(seats.length);
       if (seat.reservations.length === 0)
@@ -165,6 +160,7 @@ export const BoardContainer = ({
         }),
       );
     }
+
     for (let facility of facilities) {
       newMap[facility.y][facility.x] = {
         type: FACILITY,
@@ -174,6 +170,7 @@ export const BoardContainer = ({
         height: 1,
       };
     }
+
     setBoard(newMap);
   }, [facilities]);
 
@@ -191,6 +188,7 @@ export const BoardContainer = ({
 
     getReservedSeatsCnt(count);
   }, [seats]);
+
   return (
     <div className={isPc ? 'u_boardContainer' : 'mobileBoardContainer'}>
       <Board
@@ -199,7 +197,6 @@ export const BoardContainer = ({
         board={board}
         setBoard={setBoard}
         seats={seats}
-        searchUserId={searchUserId}
         isToggleOn={isToggleOn}
       />
       <div
@@ -210,7 +207,6 @@ export const BoardContainer = ({
         }
       >
         <DateTimeForm selection={selection} userId={userId} />
-        {/* {isPc ? <UserSearchForm getUserId={getUserId} /> : null} */}
       </div>
     </div>
   );
