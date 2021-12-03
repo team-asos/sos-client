@@ -52,7 +52,7 @@ const RoomInfoTable = () => {
       <MDBTable
         hover
         className={isPc ? 'infoTable' : 'mobileInfoTable'}
-        maxHeight={isPc ? '85vh' : '80vh'}
+        maxHeight={isPc ? '93vh' : '80vh'}
         scrollY="true"
       >
         <MDBTableHead className="rHeader">

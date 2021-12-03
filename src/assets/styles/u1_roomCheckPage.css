@@ -56,9 +56,9 @@
 .roomInfoTable {
   background-color: white;
   border-radius: 10px;
-  width: 90%;
-  margin-left: 5%;
-  margin-top: 3%;
+  width: 96%;
+  margin-left: 2%;
+  margin-top: 2%;
   box-shadow: 1px 1px 5px 0.1px rgb(202, 202, 202);
 }
 .m_roomInfoTable {

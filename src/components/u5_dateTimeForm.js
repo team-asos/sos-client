@@ -69,9 +69,7 @@ const DateTimeForm = ({ selection, userId }) => {
             </Button>
           </Modal.Footer>
         </Modal>
-      ) : (
-        ''
-      )}
+      ) : null}
     </>
   );
 };
