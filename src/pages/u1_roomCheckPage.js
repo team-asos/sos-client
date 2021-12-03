@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useState } from 'react';
 
 import { useMediaQuery } from 'react-responsive';
 import { FiMenu } from 'react-icons/fi';
@@ -19,7 +18,6 @@ const RoomCheckPage = () => {
   const navClick = () => {
     setOpen(!open);
   };
-  const history = useHistory();
 
   return (
     <div className="roomCheckPage">
@@ -31,9 +29,13 @@ const RoomCheckPage = () => {
             <div>
               {isMobile ? (
                 <FiMenu
-                  size={40}
+                  size={30}
                   onClick={navClick}
-                  style={{ color: 'firebrick' }}
+                  style={{
+                    color: 'firebrick',
+                    marginLeft: '10px',
+                    marginTop: '-4px',
+                  }}
                 />
               ) : null}
             </div>

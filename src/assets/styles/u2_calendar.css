@@ -23,36 +23,7 @@
   display: flex;
   margin-left: 2%;
 }
-/*이용시간*/
-.pickersTextStyle {
-  font-size: 1.3em;
-  font-weight: bold;
-  margin-top: 1vh;
-  /*margin-bottom: 1vh;
-  margin-left: 2vw; */
-  margin-right: 1vw;
-}
 
-/*datepicker 두개*/
-.pickers {
-  display: flex;
-  margin-left: 2vw;
-}
-.mPickers {
-  margin-top: 2vh;
-  display: flex;
-  flex-direction: column;
-}
-.mPicker {
-  display: flex;
-}
-.pickerText {
-  margin-left: 10px;
-  margin-right: 20px;
-  font-size: 1.1em;
-  font-weight: bold;
-  color: firebrick;
-}
 .timeTableAndAddParticipant {
   display: flex;
   flex: 1;

@@ -1,6 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { useCookies } from 'react-cookie';
-import { useHistory } from 'react-router-dom';
+import React, { useState } from 'react';
 import NavBarUser from '../components/u_navBar';
 import MobileNavBar from '../components/u_m_navBar';
 import { useMediaQuery } from 'react-responsive';
@@ -14,13 +12,10 @@ const RoomReservationPage = props => {
   const isPc = useMediaQuery({
     query: '(min-width:768px)',
   });
-  const isMobile = useMediaQuery({ query: '(max-width:767px)' });
   const navClick = () => {
     setOpen(!open);
   };
   const roomId = props.match.params.idx;
-  const [cookie] = useCookies(['access_token']);
-  const history = useHistory();
 
   return (
     <div className="roomReservationPage">
@@ -31,9 +26,13 @@ const RoomReservationPage = props => {
           <div className="m_reservationHeader">
             <div>
               <FiMenu
-                size={40}
+                size={30}
                 onClick={navClick}
-                style={{ color: 'firebrick' }}
+                style={{
+                  color: 'firebrick',
+                  marginLeft: '10px',
+                  marginTop: '-4px',
+                }}
               />
             </div>
             <div className="m_roomCheck_titleTextStyle">회의실 예약</div>

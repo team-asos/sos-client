@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useCookies } from 'react-cookie';
 import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
 import { OverlayTrigger, Tooltip, Modal, Button } from 'react-bootstrap';
 import { useMediaQuery } from 'react-responsive';
@@ -9,12 +8,10 @@ import * as ai from 'react-icons/ai';
 
 import '../assets/styles/u4_reservationInfo.css';
 
-const SeatReservationInfo = props => {
+const SeatReservationInfo = ({ user }) => {
   const isPc = useMediaQuery({
     query: '(min-width:768px)',
   });
-  //쿠키 생성
-  const [cookie] = useCookies(['access_token']);
   //예약내역 불러오기
   const [reservation, setReservation] = useState([]);
 
@@ -29,7 +26,7 @@ const SeatReservationInfo = props => {
   const seathandleShow = () => setseatShow(true);
 
   const res = async () => {
-    const id = Number(props.user.id);
+    const id = Number(user.id);
     await fetch(
       `${process.env.REACT_APP_SERVER_BASE_URL}/reservations/search?userId=${id}`,
       {
@@ -54,6 +51,7 @@ const SeatReservationInfo = props => {
       );
       if (res.status === 200) {
         alert('좌석 사용이 종료되었습니다.');
+        setReservation([]);
       } else {
         const json = await res.json();
         alert(json.message);
@@ -62,10 +60,9 @@ const SeatReservationInfo = props => {
     finishHandler();
   };
 
-  //예외처리
   useEffect(() => {
-    if (props.user.id !== 'undefined') res();
-  }, [props.user.id]);
+    if (user.id !== 'undefined') res();
+  }, [user.id]);
 
   const sortedReservation =
     reservation !== null &&
@@ -147,50 +144,46 @@ const SeatReservationInfo = props => {
               </tr>
             </MDBTableHead>
             <MDBTableBody>
-              {reservation.length !== 0 &&
-                reservation.map(item =>
-                  item.status === 1 &&
-                  item.seat !== null &&
-                  item.endTime === null ? (
-                    <tr>
-                      <td>
-                        {moment(item.startTime).format('YYYY-MM-DD HH:mm:ss')}
-                      </td>
-                      <td>
-                        {item.seat.floor.name} {item.seat.name}
-                      </td>
+              {reservation.map(item =>
+                item.status === 1 &&
+                item.seat !== null &&
+                item.endTime === null ? (
+                  <tr key={item.id}>
+                    <td>
+                      {moment(item.startTime).format('YYYY-MM-DD HH:mm:ss')}
+                    </td>
+                    <td>
+                      {item.seat.floor.name} {item.seat.name}
+                    </td>
 
-                      <td>
-                        <button
-                          className="seatUseEndButton"
-                          onClick={seathandleShow}
-                        >
-                          사용종료
-                        </button>
-                        <Modal show={seatshow} onHide={seathandleClose}>
-                          <Modal.Header closeButton>
-                            <Modal.Title>좌석 {item.seat.name}</Modal.Title>
-                          </Modal.Header>
-                          <Modal.Body>사용을 종료하시겠습니까?</Modal.Body>
-                          <Modal.Footer>
-                            <Button
-                              variant="secondary"
-                              onClick={seathandleClose}
-                            >
-                              취소
-                            </Button>
-                            <Button
-                              variant="danger"
-                              onClick={() => finishClick(item.id)}
-                            >
-                              확인
-                            </Button>
-                          </Modal.Footer>
-                        </Modal>
-                      </td>
-                    </tr>
-                  ) : null,
-                )}
+                    <td>
+                      <button
+                        className="seatUseEndButton"
+                        onClick={seathandleShow}
+                      >
+                        사용종료
+                      </button>
+                      <Modal show={seatshow} onHide={seathandleClose}>
+                        <Modal.Header closeButton>
+                          <Modal.Title>좌석 {item.seat.name}</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>사용을 종료하시겠습니까?</Modal.Body>
+                        <Modal.Footer>
+                          <Button variant="secondary" onClick={seathandleClose}>
+                            취소
+                          </Button>
+                          <Button
+                            variant="danger"
+                            onClick={() => finishClick(item.id)}
+                          >
+                            확인
+                          </Button>
+                        </Modal.Footer>
+                      </Modal>
+                    </td>
+                  </tr>
+                ) : null,
+              )}
             </MDBTableBody>
           </MDBTable>
         </div>
@@ -219,14 +212,15 @@ const SeatReservationInfo = props => {
                 sortedReservation
                   .slice(0)
                   .reverse()
-                  .map(item =>
+                  .map((item, idx) =>
                     item.status === 2 &&
                     item.seat !== null &&
                     item.endTime !== null ? (
-                      <tr>
+                      <tr key={idx}>
                         <td>
-                          {moment(item.startTime).format('YYYY-MM-DD HH:mm:ss')}
-                          -{moment(item.endTime).format('YYYY-MM-DD HH:mm:ss')}
+                          {moment(item.startTime).format('YYYY-MM-DD HH:mm')}
+                          {'  ~  '}
+                          {moment(item.endTime).format('YYYY-MM-DD HH:mm')}
                         </td>
                         <td>
                           {item.seat.floor.name} {item.seat.name}

@@ -80,9 +80,13 @@ const InquiryListForm = props => {
         <div className={isPc ? 'inquiryListUpper' : 'm_inquiryHeader'}>
           {isMobile ? (
             <FiMenu
-              size={40}
+              size={30}
               onClick={navClick}
-              style={{ color: 'firebrick' }}
+              style={{
+                color: 'firebrick',
+                marginLeft: '10px',
+                marginTop: '-4px',
+              }}
             />
           ) : null}
           {open ? <MobileNavBar open={open} /> : null}
@@ -146,6 +150,7 @@ const InquiryListForm = props => {
                   .reverse()
                   .map((item, idx) => (
                     <Accordion.Item
+                      key={idx}
                       eventKey={item.id}
                       className="inquiryTitleAndAnswer"
                     >

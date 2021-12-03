@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useCookies } from 'react-cookie';
-import * as ai from 'react-icons/ai';
 import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
-import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import * as moment from 'moment';
 import { useMediaQuery } from 'react-responsive';
 
@@ -12,16 +9,9 @@ const RoomReservationInfo = props => {
   const isPc = useMediaQuery({
     query: '(min-width:768px)',
   });
-  //쿠키 생성
-  const [cookie] = useCookies(['access_token']);
 
   //예약내역 불러오기
   const [reservation, setReservation] = useState([]);
-
-  //예약내역 모달창
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
 
   const res = async () => {
     const id = Number(props.user.id);
@@ -41,7 +31,6 @@ const RoomReservationInfo = props => {
   useEffect(() => {
     if (props.user.id !== 'undefined') res();
   }, [props.user.id]);
-  /* 예약 날짜 정렬 */
   const sortedReservation = reservation.sort((a, b) =>
     a.startTime.split('-').join().localeCompare(b.startTime.split('-').join()),
   );
@@ -79,7 +68,7 @@ const RoomReservationInfo = props => {
                 ? { width: '90%', marginLeft: '5%' }
                 : { width: '90%', marginLeft: '5%', fontSize: '0.8em' }
             }
-            scrollY="true"
+            scrollY={true}
             maxHeight={isPc ? '40vh' : '53vh'}
           >
             <MDBTableHead style={{ fontSize: '0.9em' }}>
@@ -96,16 +85,16 @@ const RoomReservationInfo = props => {
                 sortedReservation
                   .slice(0)
                   .reverse()
-                  .map(item =>
+                  .map((item, idx) =>
                     item.room !== null ? (
-                      <tr>
+                      <tr key={idx}>
                         <td>{moment(item.startTime).format('YYYY-MM-DD')}</td>
                         <td>
                           {item.room.floor.name} {item.room.name}
                         </td>
-                        <td>{moment(item.startTime).format('HH:mm:ss')}</td>
+                        <td>{moment(item.startTime).format('HH:mm')}</td>
 
-                        <td>{moment(item.endTime).format('HH:mm:ss')}</td>
+                        <td>{moment(item.endTime).format('HH:mm')}</td>
                         <td>
                           {item.status === 0
                             ? '예약 완료'

@@ -2,8 +2,8 @@
   width: 100%;
   height: 100%;
 
-  padding-top: 1%;
-  padding-left: 1%;
+  padding-top: 1.5%;
+  padding-left: 1.5%;
 
   display: flex;
   flex-direction: column;
@@ -11,5 +11,113 @@
   background-color: rgb(240, 240, 240);
 }
 .search-user-input-bar {
-  width: 60%;
+  width: 40%;
+  margin-top: 0.5%;
+  margin-left: 0.5%;
+}
+.u6-user-detail {
+  width: 98%;
+  height: 100%;
+
+  margin-top: 2%;
+  margin-left: 1%;
+
+  display: flex;
+  flex-direction: row;
+}
+.u6-left {
+  width: 35%;
+  height: 100%;
+}
+
+.u6-right {
+  width: 65%;
+  height: 100%;
+
+  padding-top: 1%;
+}
+.u6-user-detail-text {
+  width: 100%;
+
+  margin-top: 1.5%;
+  margin-left: 1.5%;
+  margin-bottom: 1%;
+
+  display: flex;
+  flex-direction: row;
+
+  align-items: center;
+}
+.u6-search-user-detail p {
+  font-size: 1.1em;
+  margin-bottom: 1%;
+}
+.u6-user-status {
+  width: 13%;
+  height: fit-content;
+
+  padding-top: 0.2%;
+  margin-top: 0.2%;
+  margin-left: 2%;
+
+  font-size: 0.9em;
+  text-align: center;
+  vertical-align: middle;
+
+  color: rgb(151, 32, 32);
+
+  border: 1px solid rgb(151, 32, 32);
+  border-radius: 2px;
+}
+.u6-user-detail-table {
+  width: 90%;
+  margin-left: 2%;
+
+  background-color: whitesmoke;
+  border-radius: 4px;
+}
+.u6-no-seat {
+  width: 98%;
+  height: 94%;
+
+  text-align: center;
+  font-style: italic;
+  color: rgba(128, 128, 128, 0.89);
+  padding-top: 30%;
+
+  border: 1px dotted rgba(128, 128, 128, 0.534);
+
+  border-radius: 4px;
+}
+/* 반응형 */
+.m-search-user-input-bar {
+  width: 90%;
+
+  margin-left: 5%;
+}
+.m-u6-user-detail {
+  width: 98%;
+  height: 90%;
+
+  display: flex;
+  flex-direction: column;
+}
+.m-u6-right {
+  width: 95%;
+  height: 100%;
+
+  margin-left: 3%;
+}
+.m-u6-left {
+  width: 100%;
+  height: fit-content;
+
+  padding-top: 3%;
+  padding-left: 5%;
+}
+.m-search-user-box {
+  width: 100%;
+  height: 100%;
+
+  background-color: rgb(240, 240, 240);
 }

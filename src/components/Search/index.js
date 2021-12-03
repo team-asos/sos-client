@@ -2,9 +2,9 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { Table } from 'react-bootstrap';
 import { useCookies } from 'react-cookie';
 import Select from 'react-select';
+import { useMediaQuery } from 'react-responsive';
 
 import { Minimap } from './Minimap';
-
 import MobileNavBar from '../u_m_navBar';
 
 import '../../assets/styles/u6_search.css';
@@ -23,6 +23,11 @@ export const Search = () => {
   const navClick = () => {
     setOpen(!open);
   };
+
+  const isPc = useMediaQuery({
+    query: '(min-width:768px)',
+  });
+
   const fetchUsers = useCallback(async () => {
     const response = await fetch(
       `${process.env.REACT_APP_SERVER_BASE_URL}/users/search`,
@@ -72,20 +77,11 @@ export const Search = () => {
     if (userId !== 0) fetchReservations();
   }, [searchUser]);
 
-  const pStyle = {
-    fontSize: '1.1em',
-    fontWeight: 'bold',
-    color: '#820101',
-    marginBottom: '0px',
-  };
-
   return (
-    <div className="search-user-box">
-      <div className="search-user-input-bar">
-        {/*햄버거*/}
-        {/* <FiMenu size={40} onClick={navClick} style={{ color: 'firebrick' }} /> */}
-        {open ? <MobileNavBar open={open} /> : null}
-        {/* <div style={{ width: '80%', marginLeft: '5%' }}> */}
+    <div className={isPc ? 'search-user-box' : 'm-search-user-box'}>
+      <div
+        className={isPc ? 'search-user-input-bar' : 'm-search-user-input-bar'}
+      >
         <Select
           menuPosition={'center'}
           options={users.map(user => ({
@@ -96,72 +92,87 @@ export const Search = () => {
           onChange={e => setUserId(e.value)}
           noOptionsMessage={() => '검색 결과가 없습니다.'}
         />
-        {/* </div> */}
       </div>
-      <div
-        style={{
-          width: '100%',
-        }}
-      >
-        {searchUser && <p style={pStyle}>회원 정보</p>}
-        <Table>
-          <tbody>
-            {searchUser && (
-              <>
-                <tr>
-                  <td>사원 번호</td>
-                  <td>{searchUser.employeeId}</td>
-                </tr>
-                <tr>
-                  <td>이름</td>
-                  <td>
-                    {roomReservation
-                      ? `${searchUser.name} (회의중)`
-                      : `${searchUser.name}`}
-                  </td>
-                </tr>
-                <tr>
-                  <td>부서</td>
-                  <td>{searchUser.department}</td>
-                </tr>
-                <tr>
-                  <td>직책</td>
-                  <td>{searchUser.position}</td>
-                </tr>
-                <tr>
-                  <td>이메일</td>
-                  <td>{searchUser.email}</td>
-                </tr>
-                <tr>
-                  <td>연락처</td>
-                  <td>{searchUser.tel}</td>
-                </tr>
-              </>
-            )}
-            {seatReservation && (
-              <tr>
-                <td>좌석 위치</td>
-                <td>{`${seatReservation.seat.floor.name} - ${seatReservation.seat.name}`}</td>
-              </tr>
-            )}
-            {roomReservation && (
-              <tr>
-                <td>회의실 위치</td>
-                <td>{`${roomReservation.room.floor.name} - ${roomReservation.room.name}`}</td>
-              </tr>
-            )}
-          </tbody>
-        </Table>
-      </div>
+      <div className={isPc ? 'u6-user-detail' : 'm-u6-user-detail'}>
+        <div className={isPc ? 'u6-left' : 'm-u6-left'}>
+          {searchUser && (
+            <div>
+              <div className="u6-user-detail-text">
+                <div>
+                  <span style={{ fontWeight: 'bold', fontSize: '1.6em' }}>
+                    {searchUser.name}{' '}
+                  </span>
+                  님
+                </div>
+                {roomReservation ? (
+                  <div className="u6-user-status">회의중</div>
+                ) : (
+                  ''
+                )}
+              </div>
+              <div className="u6-user-detail-table">
+                <Table>
+                  <tbody>
+                    {searchUser && (
+                      <>
+                        <tr>
+                          <th>사원 번호</th>
+                          <td>{searchUser.employeeId}</td>
+                        </tr>
 
-      {seatReservation && (
-        <Minimap
-          size={window.innerWidth}
-          seatId={seatReservation.seat.id}
-          roomId={roomReservation ? roomReservation.room.id : null}
-          floorId={seatReservation.seat.floor.id}
-        />
-      )}
+                        <tr>
+                          <th>부서</th>
+                          <td>{searchUser.department}</td>
+                        </tr>
+                        <tr>
+                          <th>직책</th>
+                          <td>{searchUser.position}</td>
+                        </tr>
+                        <tr>
+                          <th>이메일</th>
+                          <td>{searchUser.email}</td>
+                        </tr>
+                        <tr>
+                          <th>연락처</th>
+                          <td>{searchUser.tel}</td>
+                        </tr>
+                      </>
+                    )}
+                    {seatReservation && (
+                      <tr>
+                        <th>좌석 위치</th>
+                        <td>{`${seatReservation.seat.floor.name} - ${seatReservation.seat.name}`}</td>
+                      </tr>
+                    )}
+                    {roomReservation && (
+                      <tr>
+                        <th>회의실 위치</th>
+                        <td>{`${roomReservation.room.floor.name} - ${roomReservation.room.name}`}</td>
+                      </tr>
+                    )}
+                  </tbody>
+                </Table>
+              </div>
+            </div>
+          )}
+        </div>
+        <div className={isPc ? 'u6-right' : 'm-u6-right'}>
+          {seatReservation ? (
+            <Minimap
+              size={window.innerWidth}
+              seatId={seatReservation.seat.id}
+              roomId={roomReservation ? roomReservation.room.id : null}
+              floorId={seatReservation.seat.floor.id}
+            />
+          ) : searchUser ? (
+            <div className="u6-no-seat">
+              <p>사용자가 사용중인 좌석이 이곳에 보여집니다.</p>
+            </div>
+          ) : (
+            ''
+          )}
+        </div>
+      </div>
     </div>
   );
 };

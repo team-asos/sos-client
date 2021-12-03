@@ -7,6 +7,7 @@
 
   display: flex;
   flex-direction: row;
+  background-color: rgb(240, 240, 240);
 }
 /*네비바 제외한 페이지*/
 .userSeatForm {
@@ -14,7 +15,6 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  background-color: rgb(240, 240, 240);
 }
 .m_userSeatForm {
   width: 100%;
@@ -50,35 +50,14 @@
   font-weight: bold;
   margin-left: 30%;
 }
-.userSeatReservationForm {
-  display: flex;
-  flex-direction: column;
-}
 
-.u_seatReservationButton {
-  background: #155924;
-  font-size: 1.7em;
-  font-weight: bold;
-  color: white;
-  width: fit-content;
-  height: 13%;
-  align-self: center;
-}
-/*leftForm*/
-.seatForm {
-  width: 65vw;
-  height: 88vh;
-  display: flex;
-  flex-direction: column;
-}
 /*시설, 예약가능, 사용중*/
 .u_seatFormUpper {
   display: flex;
   flex-direction: row;
   height: 10%;
   justify-content: space-between;
-  /*
-  align-items: flex-end; */
+  width: 100%;
 }
 .u_selectFloor {
   display: flex;
@@ -88,26 +67,9 @@
   margin-left: 2vw;
 }
 
-.showFacilityButton {
-  font-size: 1.4em;
-  font-weight: bold;
-  border: none;
-  width: 6vw;
-  height: max-content;
-
-  margin-left: 1vw;
-  border-radius: 100%;
-}
-.selectFloorTextStyle {
-  margin-left: 0.5vw;
-  margin-top: 1.5vh;
-  font-weight: bold;
-  color: #c00000;
-}
 .statusForm {
   display: flex;
   align-items: center;
-  margin-left: 35%;
 }
 .m_statusForm {
   display: flex;
@@ -120,7 +82,6 @@
   margin-right: 1vw;
 }
 .m_facilityIcon {
-  margin-top: 7px;
   margin-right: 10px;
   margin-left: 20px;
   width: 30px;
@@ -144,8 +105,8 @@
   border-radius: 4px;
 }
 .m_reservedSeatShape {
-  width: 9vw;
-  height: 4vh;
+  width: 40px;
+  height: 30px;
   background-color: rgb(160, 160, 160);
   border-radius: 4px;
 }
@@ -156,8 +117,8 @@
   border-radius: 4px;
 }
 .m_ableSeatShape {
-  width: 9vw;
-  height: 4vh;
+  width: 40px;
+  height: 30px;
   background-color: #51bf60;
   border-radius: 4px;
 }
@@ -169,16 +130,12 @@
 }
 .m_reservedSeatsTextStyle,
 .m_ableSeatsTextStyle {
-  font-size: 1em;
+  font-size: 0.8em;
   font-weight: bold;
   width: 100%;
+  margin-left: 5%;
 }
-.u_seatFormBottom {
-  width: 63vw;
-  height: 100vh;
-  background-color: #820101;
-  margin-left: 1vw;
-}
+
 .seatContent {
   height: 90%;
 }
