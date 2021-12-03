@@ -4,6 +4,8 @@ const useSeats = (floorId = null) => {
   const [data, setData] = useState([]);
 
   const fetchSeats = useCallback(async () => {
+    if (floorId === null) return;
+
     const response = await fetch(
       `${process.env.REACT_APP_SERVER_BASE_URL}/seats/search?floorId=${floorId}`,
       {

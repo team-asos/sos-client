@@ -4,6 +4,8 @@ const useRooms = (floorId = null) => {
   const [data, setData] = useState([]);
 
   const fetchRooms = useCallback(async () => {
+    if (floorId === null) return;
+
     const response = await fetch(
       `${process.env.REACT_APP_SERVER_BASE_URL}/rooms/search?floorId=${floorId}`,
       {

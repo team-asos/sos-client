@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import NavBarUser from '../components/u_navBar';
 import { useCookies } from 'react-cookie';
 import { Dropdown } from 'react-bootstrap';
@@ -64,16 +63,6 @@ const SeatPage = () => {
 
     fetchFloors();
   }, []);
-
-  const getReservedSeatsCnt = cnt => {
-    setReservedSeatsCnt(cnt);
-  };
-  const getSeatsCnt = cnt => {
-    setSeatsCnt(cnt);
-  };
-  useEffect(() => {
-    setReservedSeatsCnt(0);
-  }, [selectedFloor]);
 
   return (
     <div className="userSeatPage">
@@ -169,20 +158,11 @@ const SeatPage = () => {
           </div>
         </div>
         <div className={isPc ? 'seatContent' : 'm_seatContent'}>
-          {/* <BoardContainer
-            floor={selectedFloor}
-            userId={myId}
-            getSeatsCnt={getSeatsCnt}
-            getReservedSeatsCnt={getReservedSeatsCnt}
-            isToggleOn={isToggleOn}
-          /> */}
           {selectedFloor.length === 0 && floors[0] ? (
             <>
               <BoardContainer
                 floor={floors[0]}
                 userId={myId}
-                getSeatsCnt={getSeatsCnt}
-                getReservedSeatsCnt={getReservedSeatsCnt}
                 isToggleOn={isToggleOn}
               />
             </>
@@ -191,8 +171,6 @@ const SeatPage = () => {
               <BoardContainer
                 floor={selectedFloor}
                 userId={myId}
-                getSeatsCnt={getSeatsCnt}
-                getReservedSeatsCnt={getReservedSeatsCnt}
                 isToggleOn={isToggleOn}
               />
             </>

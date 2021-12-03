@@ -1,28 +1,25 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 
 import '../assets/styles/u5_dateTimeForm.css';
 import 'react-datepicker/dist/react-datepicker.css';
 import '../assets/styles/u2_calendar.css';
 
-//좌석 예약 페이지->이용 시간 선택
 const DateTimeForm = ({ selection, userId }) => {
   const [show, setShow] = useState(false);
+
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const isClicked = () => {
-    if (selection.name.length > 0) {
-      handleShow();
-    }
-  };
+
+  const isClicked = useCallback(() => {
+    if (selection.name !== '') handleShow();
+  }, [selection]);
 
   useEffect(() => {
     if (selection !== null) isClicked();
-  }, [selection]);
+  }, [isClicked, selection]);
 
-  /*좌석 사용 시작 */
-  const reservationClickHandler = async () => {
-    handleClose();
+  const reserveSeat = async () => {
     const response = await fetch(
       `${process.env.REACT_APP_SERVER_BASE_URL}/reservations/seat`,
       {
@@ -36,12 +33,17 @@ const DateTimeForm = ({ selection, userId }) => {
         }),
       },
     );
+
     if (response.status === 201) {
       alert('좌석 사용이 시작되었습니다!');
-      window.location.href = '/seat-reservation';
     } else {
-      alert(response.status);
+      alert('좌석을 사용할 수 없습니다.');
     }
+  };
+
+  const reservationClickHandler = async () => {
+    reserveSeat();
+    handleClose();
   };
 
   return (

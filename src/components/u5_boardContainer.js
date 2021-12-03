@@ -9,22 +9,14 @@ import {
   SEAT,
   ROOM,
   FACILITY,
-  SELECTION,
   RESERVED_SEAT,
 } from '../const/object-type.const';
-import { SELECTION_FIRST } from '../const/selection-type.const';
 
 import useSeats from '../hooks/useSeats';
 import useRooms from '../hooks/useRooms';
 import useFacilities from '../hooks/useFacilities';
 
-export const BoardContainer = ({
-  floor,
-  userId,
-  getSeatsCnt,
-  getReservedSeatsCnt,
-  isToggleOn,
-}) => {
+export const BoardContainer = ({ floor, userId, isToggleOn }) => {
   const isPc = useMediaQuery({
     query: '(min-width:768px)',
   });
@@ -40,21 +32,12 @@ export const BoardContainer = ({
     name: '',
     x: -1,
     y: -1,
-    stage: SELECTION_FIRST,
   });
 
   useEffect(() => {
     let newBoard = Array.from({ length: floor.height }, () =>
       Array.from({ length: floor.width }, () => {
         return { type: EMPTY, id: -1, name: '', width: 1, height: 1 };
-      }),
-    );
-
-    newBoard = newBoard.map(row =>
-      row.map(col => {
-        if (col.type === SELECTION)
-          return { type: EMPTY, id: -1, name: '', width: 1, height: 1 };
-        return col;
       }),
     );
 
@@ -122,10 +105,8 @@ export const BoardContainer = ({
   return (
     <div className={isPc ? 'u_boardContainer' : 'mobileBoardContainer'}>
       <Board
-        selection={selection}
         setSelection={setSelection}
         board={board}
-        setBoard={setBoard}
         seats={seats}
         isToggleOn={isToggleOn}
       />
