@@ -45,6 +45,8 @@ const AddParticipant = ({
 
     const authJson = await response.json();
 
+    setMyId(authJson.id);
+
     await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/users/search`, {
       headers: {
         Authorization: `Bearer ${cookie.access_token}`,
