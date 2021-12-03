@@ -39,7 +39,8 @@ const UsePagination = ({ totalUsers, usersPerPage, paginate, currentPage }) => {
       setPage({
         ...page,
         currentMin: page.currentMax + 1,
-        currentMax: page.currentMax + 5 > page.max ? page.max : page.currentMax,
+        currentMax:
+          page.currentMax + 5 > page.max ? page.max : page.currentMax + 5,
       });
 
     paginate(currentPage + 1);
