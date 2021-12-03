@@ -13,32 +13,13 @@ import * as ri from 'react-icons/ri';
 
 import '../assets/styles/u4_myPageBox.css';
 
-const MyPageBox = props => {
+const MyPageBox = ({ user }) => {
   const isPc = useMediaQuery({
     query: '(min-width:768px)',
   });
   //쿠키 생성
   const [cookie, removeCookie] = useCookies(['access_token']);
 
-  //유저 불러오기
-  const [user, setUser] = useState({});
-  useEffect(() => {
-    const fetchUser = async () => {
-      await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/auth`, {
-        headers: {
-          Authorization: `Bearer ${cookie.access_token}`,
-        },
-        method: 'GET',
-      })
-        .then(response => response.json())
-        .then(json => {
-          setUser(json);
-        });
-    };
-    fetchUser();
-  }, []);
-
-  const [myData, setMyData] = useState([]);
   const [editData, setEditData] = useState({
     name: '',
     email: '',
@@ -51,7 +32,10 @@ const MyPageBox = props => {
   });
 
   const res = async () => {
-    const id = Number(props.user.id);
+    const id = Number(user.id);
+
+    if (!id) return;
+
     await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/users/${id}`, {
       headers: {
         Authorization: `Bearer ${cookie.access_token}`,
@@ -60,7 +44,6 @@ const MyPageBox = props => {
     })
       .then(response => response.json())
       .then(json => {
-        setMyData(json);
         setEditData({
           name: json.name,
           email: json.email,
@@ -88,7 +71,7 @@ const MyPageBox = props => {
         },
         method: 'POST',
         body: JSON.stringify({
-          email: props.user.email,
+          email: user.email,
           password: pw,
         }),
       },
@@ -110,7 +93,7 @@ const MyPageBox = props => {
       alert('8자리 이상의 비밀번호를 입력해주세요.');
       return;
     }
-    const id = Number(props.user.id);
+    const id = Number(user.id);
     const response = await fetch(
       `${process.env.REACT_APP_SERVER_BASE_URL}/users/${id}`,
       {
@@ -137,8 +120,8 @@ const MyPageBox = props => {
   };
 
   useEffect(() => {
-    if (props.user.id !== 'undefined') res();
-  }, [props.user.id]);
+    if (user.id !== 'undefined') res();
+  }, [user.id]);
 
   //Input Onchange : 정보 수정 함수
   const editName = e => {
@@ -208,7 +191,7 @@ const MyPageBox = props => {
     handleClose();
     const dropUser = async () => {
       const response = await fetch(
-        `${process.env.REACT_APP_SERVER_BASE_URL}/users/${props.user.id}`,
+        `${process.env.REACT_APP_SERVER_BASE_URL}/users/${user.id}`,
         {
           headers: {
             'Content-type': 'application/json',
@@ -232,7 +215,7 @@ const MyPageBox = props => {
     if (cookie.access_token === 'undefined') {
       history.push('/');
     }
-  }, [cookie]);
+  }, [cookie, history]);
 
   return (
     <div className="myPageBox">
@@ -440,11 +423,11 @@ const MyPageBox = props => {
       {isPc ? (
         <div className="myPageBox-right">
           <div className="myPageBox-right-seat">
-            <SeatReservationInfo user={props.user} />
+            <SeatReservationInfo user={user} />
           </div>
 
           <div className="myPageBox-right-room">
-            <RoomReservationInfo user={props.user} />
+            <RoomReservationInfo user={user} />
           </div>
         </div>
       ) : null}

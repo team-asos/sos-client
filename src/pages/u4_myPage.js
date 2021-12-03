@@ -32,7 +32,7 @@ const UserMyPage = () => {
         });
     };
     res();
-  }, []);
+  }, [cookie.access_token]);
 
   const [open, setOpen] = useState(false);
   const navClick = () => {

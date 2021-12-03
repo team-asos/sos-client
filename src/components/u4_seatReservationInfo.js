@@ -8,7 +8,7 @@ import * as ai from 'react-icons/ai';
 
 import '../assets/styles/u4_reservationInfo.css';
 
-const SeatReservationInfo = props => {
+const SeatReservationInfo = ({ user }) => {
   const isPc = useMediaQuery({
     query: '(min-width:768px)',
   });
@@ -26,7 +26,7 @@ const SeatReservationInfo = props => {
   const seathandleShow = () => setseatShow(true);
 
   const res = async () => {
-    const id = Number(props.user.id);
+    const id = Number(user.id);
     await fetch(
       `${process.env.REACT_APP_SERVER_BASE_URL}/reservations/search?userId=${id}`,
       {
@@ -51,7 +51,7 @@ const SeatReservationInfo = props => {
       );
       if (res.status === 200) {
         alert('좌석 사용이 종료되었습니다.');
-        window.location.href = '/user-mypage';
+        setReservation([]);
       } else {
         const json = await res.json();
         alert(json.message);
@@ -61,8 +61,8 @@ const SeatReservationInfo = props => {
   };
 
   useEffect(() => {
-    if (props.user.id !== 'undefined') res();
-  }, [props.user.id]);
+    if (user.id !== 'undefined') res();
+  }, [user.id]);
 
   const sortedReservation =
     reservation !== null &&
@@ -144,50 +144,46 @@ const SeatReservationInfo = props => {
               </tr>
             </MDBTableHead>
             <MDBTableBody>
-              {reservation.length !== 0 &&
-                reservation.map((item, idx) =>
-                  item.status === 1 &&
-                  item.seat !== null &&
-                  item.endTime === null ? (
-                    <tr key={item.id}>
-                      <td>
-                        {moment(item.startTime).format('YYYY-MM-DD HH:mm:ss')}
-                      </td>
-                      <td>
-                        {item.seat.floor.name} {item.seat.name}
-                      </td>
+              {reservation.map(item =>
+                item.status === 1 &&
+                item.seat !== null &&
+                item.endTime === null ? (
+                  <tr key={item.id}>
+                    <td>
+                      {moment(item.startTime).format('YYYY-MM-DD HH:mm:ss')}
+                    </td>
+                    <td>
+                      {item.seat.floor.name} {item.seat.name}
+                    </td>
 
-                      <td>
-                        <button
-                          className="seatUseEndButton"
-                          onClick={seathandleShow}
-                        >
-                          사용종료
-                        </button>
-                        <Modal show={seatshow} onHide={seathandleClose}>
-                          <Modal.Header closeButton>
-                            <Modal.Title>좌석 {item.seat.name}</Modal.Title>
-                          </Modal.Header>
-                          <Modal.Body>사용을 종료하시겠습니까?</Modal.Body>
-                          <Modal.Footer>
-                            <Button
-                              variant="secondary"
-                              onClick={seathandleClose}
-                            >
-                              취소
-                            </Button>
-                            <Button
-                              variant="danger"
-                              onClick={() => finishClick(item.id)}
-                            >
-                              확인
-                            </Button>
-                          </Modal.Footer>
-                        </Modal>
-                      </td>
-                    </tr>
-                  ) : null,
-                )}
+                    <td>
+                      <button
+                        className="seatUseEndButton"
+                        onClick={seathandleShow}
+                      >
+                        사용종료
+                      </button>
+                      <Modal show={seatshow} onHide={seathandleClose}>
+                        <Modal.Header closeButton>
+                          <Modal.Title>좌석 {item.seat.name}</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>사용을 종료하시겠습니까?</Modal.Body>
+                        <Modal.Footer>
+                          <Button variant="secondary" onClick={seathandleClose}>
+                            취소
+                          </Button>
+                          <Button
+                            variant="danger"
+                            onClick={() => finishClick(item.id)}
+                          >
+                            확인
+                          </Button>
+                        </Modal.Footer>
+                      </Modal>
+                    </td>
+                  </tr>
+                ) : null,
+              )}
             </MDBTableBody>
           </MDBTable>
         </div>
