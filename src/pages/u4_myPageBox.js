@@ -228,7 +228,6 @@ const MyPageBox = props => {
     dropUser();
   };
 
-  //탈퇴 처리
   useEffect(() => {
     if (cookie.access_token === 'undefined') {
       history.push('/');
@@ -305,7 +304,6 @@ const MyPageBox = props => {
                     className="edit-form-control"
                     placeholder="수정 시에 보여집니다."
                     onChange={editPw}
-                    //value={password}
                     disabled={edit === false ? true : false}
                   />
                 </div>
@@ -317,7 +315,6 @@ const MyPageBox = props => {
                     placeholder="수정 시에 보여집니다."
                     onBlur={confirmPwHandler}
                     onChange={editConfirmPw}
-                    //value={confirmPw}
                     disabled={edit === false ? true : false}
                   />
                 </div>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { useHistory } from 'react-router-dom';
 import NavBarUser from '../components/u_navBar';
@@ -14,13 +14,10 @@ const RoomReservationPage = props => {
   const isPc = useMediaQuery({
     query: '(min-width:768px)',
   });
-  const isMobile = useMediaQuery({ query: '(max-width:767px)' });
   const navClick = () => {
     setOpen(!open);
   };
   const roomId = props.match.params.idx;
-  const [cookie] = useCookies(['access_token']);
-  const history = useHistory();
 
   return (
     <div className="roomReservationPage">

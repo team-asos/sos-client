@@ -7,10 +7,6 @@ import '../assets/styles/u2_calendar.css';
 
 //좌석 예약 페이지->이용 시간 선택
 const DateTimeForm = ({ selection, userId }) => {
-  const isPc = useMediaQuery({
-    query: '(min-width:768px)',
-  });
-  const now = new Date();
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
