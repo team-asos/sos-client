@@ -49,7 +49,12 @@ const RoomInfoTable = () => {
 
   return (
     <div className="roomInfoTableDiv">
-      <MDBTable hover className={isPc ? 'infoTable' : 'mobileInfoTable'}>
+      <MDBTable
+        hover
+        className={isPc ? 'infoTable' : 'mobileInfoTable'}
+        maxHeight={isPc ? '85vh' : '80vh'}
+        scrollY="true"
+      >
         <MDBTableHead className="rHeader">
           <tr>
             <th>층</th>

@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
 import { InputGroup, FormControl, Form } from 'react-bootstrap';
 
-import * as MdIcon from 'react-icons/md';
 import * as ai from 'react-icons/ai';
 import * as hi from 'react-icons/hi';
 import Logo from '../assets/images/new_logo_shadow_3.png';

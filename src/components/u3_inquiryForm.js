@@ -100,7 +100,9 @@ const InquiryForm = ({ show, handleClose }) => {
                 : alert('글자 수를 초과했습니다.')
             }
           ></textarea>
-          <div>{messageLength}/500</div>
+          <div style={{ marginLeft: '80%', color: 'gray' }}>
+            {messageLength} / 500
+          </div>
         </div>
       </Modal.Body>
       <Modal.Footer>

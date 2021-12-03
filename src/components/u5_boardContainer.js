@@ -210,7 +210,7 @@ export const BoardContainer = ({
         }
       >
         <DateTimeForm selection={selection} userId={userId} />
-        {isPc ? <UserSearchForm getUserId={getUserId} /> : null}
+        {/* {isPc ? <UserSearchForm getUserId={getUserId} /> : null} */}
       </div>
     </div>
   );

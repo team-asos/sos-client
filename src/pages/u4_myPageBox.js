@@ -238,7 +238,7 @@ const MyPageBox = props => {
               <p
                 style={
                   isPc
-                    ? { fontWeight: 'bold', fontSize: '1.6em' }
+                    ? { fontWeight: 'bold', fontSize: '1.7em' }
                     : { fontWeight: 'bold', fontSize: '1.2em' }
                 }
               >

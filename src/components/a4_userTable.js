@@ -38,85 +38,90 @@ export default function UserTable({ data }) {
 
   return (
     <div style={{ overflow: 'auto' }}>
-      <MDBTable
-        hover
-        className="userTable"
-        cellPadding={0}
-        cellSpacing={0}
-        maxHeight="80vh"
-      >
-        {/* 헤더 */}
-        <MDBTableHead>
-          <tr key={-1} style={{ fontSize: '0.8em' }}>
-            <th></th>
-            <th>이메일</th>
-            <th>이름</th>
-            <th>전화번호</th>
-            <th>사원번호</th>
-            <th>부서</th>
-            <th>직급</th>
-            <th>생성일자</th>
-            <th>수정일자</th>
-            <th></th>
-          </tr>
-        </MDBTableHead>
+      {currentUsers.length === 0 ? (
+        <p>검색 결과가 존재하지 않습니다.</p>
+      ) : (
+        <MDBTable
+          hover
+          className="userTable"
+          cellPadding={0}
+          cellSpacing={0}
+          maxHeight="80vh"
+        >
+          {/* 헤더 */}
+          <MDBTableHead>
+            <tr key={-1} style={{ fontSize: '1em' }}>
+              <th></th>
+              <th>이메일</th>
+              <th>이름</th>
+              <th>전화번호</th>
+              <th>사원번호</th>
+              <th>부서</th>
+              <th>직급</th>
+              <th>생성일자</th>
+              <th>수정일자</th>
+              <th></th>
+            </tr>
+          </MDBTableHead>
 
-        {/* 바디 */}
-        <MDBTableBody>
-          {currentUsers.map((row, idx) => (
-            <tr
-              key={row.id}
-              style={{
-                fontSize: '1em',
-                height: '8vh',
-              }}
-            >
-              <td>{idx + 1}</td>
-              <td>{row.email}</td>
-              <td>{row.name}</td>
-              <td>{row.tel}</td>
-              <td>{row.employeeId}</td>
-              <td>{row.department}</td>
-              <td>{row.position}</td>
-              <td>{row.createdAt.slice(0, 10)}</td>
-              <td>{row.updatedAt.slice(0, 10)}</td>
-
-              <td style={{ fontSize: '1em' }}>
-                <Button
-                  variant="outline-danger"
-                  size="sm"
-                  animation="false"
-                  onClick={e => {
-                    setModalInfo(row);
-                    toggleTrueFalse();
+          {/* 바디 */}
+          <MDBTableBody>
+            {currentUsers.map((row, idx) =>
+              row.role !== 0 ? (
+                ''
+              ) : (
+                <tr
+                  key={row.id}
+                  style={{
+                    fontSize: '1em',
                   }}
                 >
-                  조회하기
-                </Button>
+                  <td>{(currentPage - 1) * 10 + idx + 1}</td>
+                  <td>{row.email}</td>
+                  <td>{row.name}</td>
+                  <td>{row.tel}</td>
+                  <td>{row.employeeId}</td>
+                  <td>{row.department}</td>
+                  <td>{row.position}</td>
+                  <td>{row.createdAt.slice(0, 10)}</td>
+                  <td>{row.updatedAt.slice(0, 10)}</td>
 
-                {show ? (
-                  <UserDetailModalContent
-                    show={show}
-                    handleClose={handleClose}
-                    modalInfo={modalInfo}
-                    data={data}
-                    columns={columns}
-                  />
-                ) : (
-                  ''
-                )}
-              </td>
-            </tr>
-          ))}
-        </MDBTableBody>
-        <MDBTableBody>
-          <UsePagination
-            totalUsers={data.length}
-            usersPerPage={userPerPage}
-            paginate={paginate}
-          />
-        </MDBTableBody>
-      </MDBTable>
+                  <td style={{ fontSize: '1em' }}>
+                    <Button
+                      variant="outline-danger"
+                      size="sm"
+                      animation="false"
+                      onClick={e => {
+                        setModalInfo(row);
+                        toggleTrueFalse();
+                      }}
+                    >
+                      조회하기
+                    </Button>
+
+                    {show ? (
+                      <UserDetailModalContent
+                        show={show}
+                        handleClose={handleClose}
+                        modalInfo={modalInfo}
+                        data={data}
+                        columns={columns}
+                      />
+                    ) : (
+                      ''
+                    )}
+                  </td>
+                </tr>
+              ),
+            )}
+          </MDBTableBody>
+        </MDBTable>
+      )}
+      <UsePagination
+        totalUsers={data.length}
+        usersPerPage={userPerPage}
+        paginate={paginate}
+      />
     </div>
   );
 }

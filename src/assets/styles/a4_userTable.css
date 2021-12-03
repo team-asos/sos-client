@@ -15,12 +15,7 @@
   text-decoration: none;
   animation: none;
 }
-
 .userTable {
   width: 98%;
   overflow: auto;
-}
-
-.test:hover {
-  background-color: #fff !important;
 }
