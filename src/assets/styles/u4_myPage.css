@@ -1,5 +1,7 @@
 /* 전체 페이지 */
 .userMyPage {
+  font-family: NotoSansRegular;
+
   width: 100vw;
   height: 100vh;
 
@@ -12,8 +14,10 @@
 .u_myPageForm {
   width: 100%;
   height: 100%;
+
   display: flex;
   flex-direction: column;
+
   background-color: rgb(240, 240, 240);
 }
 /* PC - Header(오른쪽 위) */
@@ -59,7 +63,7 @@
 }
 /*마이페이지에서 헤더 빼고 나머지 부분*/
 .myPageContents {
-  height: 90%;
+  height: 95%;
   background-color: rgb(240, 240, 240);
 }
 
