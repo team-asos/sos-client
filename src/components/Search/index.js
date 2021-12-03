@@ -5,8 +5,9 @@ import Select from 'react-select';
 
 import { Minimap } from './Minimap';
 
-import { FiMenu } from 'react-icons/fi';
 import MobileNavBar from '../u_m_navBar';
+
+import '../../assets/styles/u6_search.css';
 
 export const Search = () => {
   const [cookie] = useCookies(['access_token']);
@@ -79,22 +80,8 @@ export const Search = () => {
   };
 
   return (
-    <div
-      style={{
-        padding: '10px 240px',
-        width: '100%',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        height: '100vh',
-        backgroundColor: 'rgb(240,240,240)',
-      }}
-    >
-      <div
-        style={{
-          width: '60%',
-        }}
-      >
+    <div className="search-user-box">
+      <div className="search-user-input-bar">
         {/*햄버거*/}
         {/* <FiMenu size={40} onClick={navClick} style={{ color: 'firebrick' }} /> */}
         {open ? <MobileNavBar open={open} /> : null}
@@ -105,7 +92,7 @@ export const Search = () => {
             value: user.id,
             label: `${user.name} / ${user.department} / ${user.position}`,
           }))}
-          placeholder="검색할 정보를 입력해주세요."
+          placeholder="검색할 사용자의 정보를 입력해주세요."
           onChange={e => setUserId(e.value)}
           noOptionsMessage={() => '검색 결과가 없습니다.'}
         />
