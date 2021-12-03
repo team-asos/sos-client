@@ -103,9 +103,9 @@ const RoomReservationInfo = props => {
                         <td>
                           {item.room.floor.name} {item.room.name}
                         </td>
-                        <td>{moment(item.startTime).format('HH:mm:ss')}</td>
+                        <td>{moment(item.startTime).format('HH:mm')}</td>
 
-                        <td>{moment(item.endTime).format('HH:mm:ss')}</td>
+                        <td>{moment(item.endTime).format('HH:mm')}</td>
                         <td>
                           {item.status === 0
                             ? '예약 완료'

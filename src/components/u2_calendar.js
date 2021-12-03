@@ -32,7 +32,7 @@ const Calendar = props => {
     </button>
   ));
   return (
-    <div style={{ width: '100%', backgroundColor: 'rgb(240,240,240)' }}>
+    <div style={{ width: '100%' }}>
       {isPc ? (
         <div className="roomDatePicker">
           {/* <div className="pickersTextStyle">날짜 선택</div> */}

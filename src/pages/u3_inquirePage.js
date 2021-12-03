@@ -59,7 +59,7 @@ const InquirePage = () => {
         {open ? <MobileNavBar open={open} /> : null}
 
         {/* 내용이 담기는 content */}
-        <div className="myPageContents">
+        <div className="u3_myPageContents">
           <InquiryListForm user={user} />
         </div>
       </div>

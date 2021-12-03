@@ -111,7 +111,7 @@ const UserMyPage = props => {
         {/* Mobile - Menu */}
         {open ? <MobileNavBar open={open} /> : null}
         {/* Mobile - 컨텐츠 */}
-        <div className="myPageContents">
+        <div className={isPc ? 'myPageContents' : 'm_myPageContents'}>
           {isMobile ? getPage() : <MyPageBox user={user} />}
         </div>
       </div>

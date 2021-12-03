@@ -52,7 +52,11 @@ const InquiryForm = ({ show, handleClose }) => {
   };
   const submitHandler = async () => {
     if (title.length === 0) {
-      alert('제목을 입력해주세요');
+      alert('제목을 입력해주세요.');
+      return;
+    }
+    if (message.length === 0) {
+      alert('내용을 입력해주세요.');
       return;
     }
     const res = await fetch(

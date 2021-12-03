@@ -54,6 +54,7 @@ const SeatReservationInfo = props => {
       );
       if (res.status === 200) {
         alert('좌석 사용이 종료되었습니다.');
+        window.location.href = '/user-mypage';
       } else {
         const json = await res.json();
         alert(json.message);

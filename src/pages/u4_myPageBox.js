@@ -106,6 +106,10 @@ const MyPageBox = props => {
 
   /*정보 수정 */
   const confirmHandler = async () => {
+    if (editData.password.length < 8) {
+      alert('8자리 이상의 비밀번호를 입력해주세요.');
+      return;
+    }
     const id = Number(props.user.id);
     const response = await fetch(
       `${process.env.REACT_APP_SERVER_BASE_URL}/users/${id}`,
@@ -126,8 +130,10 @@ const MyPageBox = props => {
         }),
       },
     );
-    if (response.status === 200) alert('수정이 완료되었습니다.');
-    else alert(response.message);
+    if (response.status === 200) {
+      alert('수정이 완료되었습니다.');
+      removeCookie('access_token');
+    } else alert(response.message);
   };
 
   useEffect(() => {
@@ -235,15 +241,11 @@ const MyPageBox = props => {
         <div className="myPageBox-left-myinfo">
           <div className="myPageBox-left-myinfo-content">
             <div className="myPageBox-text-info">
-              <p
-                style={
-                  isPc
-                    ? { fontWeight: 'bold', fontSize: '1.7em' }
-                    : { fontWeight: 'bold', fontSize: '1.2em' }
-                }
-              >
-                나의 정보
-              </p>
+              {isPc ? (
+                <p style={{ fontWeight: 'bold', fontSize: '1.7em' }}>
+                  나의 정보
+                </p>
+              ) : null}
               <OverlayTrigger
                 key="right"
                 placement="right"
