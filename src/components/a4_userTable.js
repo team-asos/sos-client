@@ -117,11 +117,14 @@ export default function UserTable({ data }) {
           </MDBTableBody>
         </MDBTable>
       )}
-      <UsePagination
-        totalUsers={data.length}
-        usersPerPage={userPerPage}
-        paginate={paginate}
-      />
+      {data.length > 0 && (
+        <UsePagination
+          totalUsers={data.length}
+          usersPerPage={userPerPage}
+          paginate={paginate}
+          currentPage={currentPage}
+        />
+      )}
     </div>
   );
 }
