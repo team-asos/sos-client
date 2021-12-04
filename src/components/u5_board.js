@@ -35,7 +35,7 @@ export const Board = React.memo(
     };
 
     const itemStyle = type => {
-      if (type === EMPTY)
+      if (type === EMPTY || type === FACILITY)
         return { backgroundColor: 'rgb(245, 245, 245)', borderRadius: '4px' };
       else if (type === SEAT)
         return {
@@ -43,8 +43,6 @@ export const Board = React.memo(
           color: '#fff',
           borderRadius: '4px',
         };
-      else if (type === FACILITY)
-        return { backgroundColor: 'rgb(245, 245, 245)', borderRadius: '4px' };
       else if (type === ROOM)
         return {
           backgroundColor: '#E5E5E5',

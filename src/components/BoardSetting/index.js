@@ -102,24 +102,26 @@ export const BoardSetting = ({
                 층 정보
               </p>
               <table>
-                <tr>
-                  <th>층 이름</th>
-                  <td>{floor.name}</td>
-                </tr>
-                <tr>
-                  <th>층 크기(가로, 세로)</th>
-                  <td>
-                    ({floor.width},{floor.height})
-                  </td>
-                </tr>
-                <tr>
-                  <th>좌석 개수</th>
-                  <td>{seats.length}</td>
-                </tr>
-                <tr>
-                  <th>회의실 개수</th>
-                  <td>{rooms.length}</td>
-                </tr>
+                <tbody>
+                  <tr>
+                    <th>층 이름</th>
+                    <td>{floor.name}</td>
+                  </tr>
+                  <tr>
+                    <th>층 크기(가로, 세로)</th>
+                    <td>
+                      ({floor.width},{floor.height})
+                    </td>
+                  </tr>
+                  <tr>
+                    <th>좌석 개수</th>
+                    <td>{seats.length}</td>
+                  </tr>
+                  <tr>
+                    <th>회의실 개수</th>
+                    <td>{rooms.length}</td>
+                  </tr>
+                </tbody>
               </table>
             </div>
           )}
