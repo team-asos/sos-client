@@ -20,16 +20,11 @@ export const Board = React.memo(
     tab,
     setTab,
     board,
+    setBoard,
     seats,
     rooms,
     facilities,
   }) => {
-    const [map, setMap] = useState([]);
-
-    useEffect(() => {
-      setMap(board);
-    }, [board]);
-
     const [scale, setScale] = useState(false);
 
     const scaleHandler = () => {
@@ -38,8 +33,8 @@ export const Board = React.memo(
     };
 
     const clearBoard = () => {
-      setMap(
-        map.map(row =>
+      setBoard(
+        board.map(row =>
           row.map(col => {
             return { ...col, select: false };
           }),
@@ -65,8 +60,8 @@ export const Board = React.memo(
       if (selection.stage === SELECTION_FIRST) {
         clearBoard();
       } else {
-        setMap(
-          map.map((row, rowIndex) =>
+        setBoard(
+          board.map((row, rowIndex) =>
             row.map((col, colIndex) => {
               if (
                 colIndex >= selection.x &&
@@ -83,20 +78,20 @@ export const Board = React.memo(
     }, [selection]);
 
     const handleSelection = (x, y) => {
-      if (map[y][x].type !== EMPTY) {
+      if (board[y][x].type !== EMPTY) {
         // 기존 배치 선택
         if (selection.stage === SELECTION_FIRST) {
-          const TYPE = map[y][x].type;
+          const TYPE = board[y][x].type;
           const TAB_TYPE = TYPE - 1;
           let selectedItem;
 
           if (TYPE === SEAT)
-            selectedItem = seats.find(seat => seat.id === map[y][x].id);
+            selectedItem = seats.find(seat => seat.id === board[y][x].id);
           else if (TYPE === ROOM)
-            selectedItem = rooms.find(room => room.id === map[y][x].id);
+            selectedItem = rooms.find(room => room.id === board[y][x].id);
           else if (TYPE === FACILITY)
             selectedItem = facilities.find(
-              facility => facility.id === map[y][x].id,
+              facility => facility.id === board[y][x].id,
             );
 
           setTab(TAB_TYPE);
@@ -138,44 +133,38 @@ export const Board = React.memo(
       }
     };
 
-    const Board = () => {
-      return (
-        <div className="board-cover">
-          <GiExpand
-            className="scale-icon"
-            size={25}
-            onClick={() => scaleHandler()}
-          />
-          <div
-            className={
-              scale === false
-                ? 'board-item-container'
-                : 'board-item-container-scale'
-            }
-          >
-            {map ? (
-              <div
-                className={
-                  scale === false
-                    ? 'board-item-cover '
-                    : 'board-item-cover-scale'
-                }
-                style={{
-                  position: 'relative',
-                }}
-              >
-                <Item map={map} handleSelection={handleSelection} />
-              </div>
-            ) : (
-              <div className="board-no-item-text">
-                <p>상단의 층 선택을 통해 층을 선택해주세요.</p>
-              </div>
-            )}
-          </div>
+    return (
+      <div className="board-cover">
+        <GiExpand
+          className="scale-icon"
+          size={25}
+          onClick={() => scaleHandler()}
+        />
+        <div
+          className={
+            scale === false
+              ? 'board-item-container'
+              : 'board-item-container-scale'
+          }
+        >
+          {board ? (
+            <div
+              className={
+                scale === false ? 'board-item-cover ' : 'board-item-cover-scale'
+              }
+              style={{
+                position: 'relative',
+              }}
+            >
+              <Item map={board} handleSelection={handleSelection} />
+            </div>
+          ) : (
+            <div className="board-no-item-text">
+              <p>상단의 층 선택을 통해 층을 선택해주세요.</p>
+            </div>
+          )}
         </div>
-      );
-    };
-
-    return <Board />;
+      </div>
+    );
   },
 );
