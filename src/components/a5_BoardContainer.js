@@ -112,6 +112,7 @@ export const BoardContainer = ({ floor }) => {
         tab={tab}
         setTab={setTab}
         board={board}
+        setBoard={setBoard}
         seats={seats}
         rooms={rooms}
         facilities={facilities}
