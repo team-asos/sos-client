@@ -25,7 +25,7 @@ const useFacility = (floorId = null) => {
     fetchFacilities();
   }, [fetchFacilities]);
 
-  return data;
+  return [data, setData];
 };
 
 export default useFacility;

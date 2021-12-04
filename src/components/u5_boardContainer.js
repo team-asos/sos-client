@@ -30,9 +30,9 @@ export const BoardContainer = ({
 
   const [board, setBoard] = useState([]);
 
-  const seats = useSeats(floor.id);
-  const rooms = useRooms(floor.id);
-  const facilities = useFacilities(floor.id);
+  const [seats] = useSeats(floor.id);
+  const [rooms] = useRooms(floor.id);
+  const [facilities] = useFacilities(floor.id);
 
   const [selection, setSelection] = useState({
     id: -1,
