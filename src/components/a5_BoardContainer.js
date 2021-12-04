@@ -8,12 +8,16 @@ import { EMPTY, SEAT, ROOM, FACILITY } from '../const/object-type.const';
 
 import { SELECTION_FIRST } from '../const/selection-type.const';
 
+import useSeats from '../hooks/useSeats';
+import useRooms from '../hooks/useRooms';
+import useFacilities from '../hooks/useFacilities';
+
 export const BoardContainer = ({ floor }) => {
   const [board, setBoard] = useState([]);
 
-  const [seats, setSeats] = useState([]);
-  const [rooms, setRooms] = useState([]);
-  const [facilities, setFacilities] = useState([]);
+  const [seats, setSeats] = useSeats(floor.id);
+  const [rooms, setRooms] = useRooms(floor.id);
+  const [facilities, setFacilities] = useFacilities(floor.id);
 
   const [selection, setSelection] = useState({
     id: -1,
@@ -27,82 +31,10 @@ export const BoardContainer = ({ floor }) => {
     type: EMPTY,
   });
 
-  const getFacilityType = type => {
-    return `/images/${type}.png`;
-  };
-
   const [tab, setTab] = useState(0);
 
   useEffect(() => {
-    setBoard(
-      Array.from({ length: floor.height }, () =>
-        Array.from({ length: floor.width }, () => {
-          return {
-            type: EMPTY,
-            id: -1,
-            name: '',
-            width: 1,
-            height: 1,
-            select: false,
-          };
-        }),
-      ),
-    );
-
-    const fetchSeats = async () => {
-      const result = await fetch(
-        `${process.env.REACT_APP_SERVER_BASE_URL}/seats/search?floorId=${floor.id}`,
-        {
-          method: 'GET',
-          headers: {
-            'Content-type': 'application/json',
-            Accept: 'application/json',
-          },
-        },
-      );
-
-      setSeats(await result.json());
-    };
-
-    const fetchRooms = async () => {
-      const result = await fetch(
-        `${process.env.REACT_APP_SERVER_BASE_URL}/rooms/search?floorId=${floor.id}`,
-        {
-          method: 'GET',
-          headers: {
-            'Content-type': 'application/json',
-            Accept: 'application/json',
-          },
-        },
-      );
-
-      setRooms(await result.json());
-    };
-
-    const fetchFacilities = async () => {
-      const result = await fetch(
-        `${process.env.REACT_APP_SERVER_BASE_URL}/facilities/search?floorId=${floor.id}`,
-        {
-          method: 'GET',
-          headers: {
-            'Content-type': 'application/json',
-            Accept: 'application/json',
-          },
-        },
-      );
-
-      setFacilities(await result.json());
-    };
-
-    fetchSeats();
-    fetchRooms();
-    fetchFacilities();
-  }, [floor.id]);
-
-  useEffect(() => {
-    let newMap = board;
-
-    newMap = Array.from({ length: floor.height }, () =>
+    let newBoard = Array.from({ length: floor.height }, () =>
       Array.from({ length: floor.width }, () => {
         return {
           type: EMPTY,
@@ -116,7 +48,7 @@ export const BoardContainer = ({ floor }) => {
     );
 
     for (let seat of seats) {
-      newMap[seat.y][seat.x] = {
+      newBoard[seat.y][seat.x] = {
         type: SEAT,
         id: seat.id,
         name: seat.name,
@@ -127,7 +59,7 @@ export const BoardContainer = ({ floor }) => {
     }
 
     for (let room of rooms) {
-      newMap = newMap.map((row, rowIndex) =>
+      newBoard = newBoard.map((row, rowIndex) =>
         row.map((col, colIndex) => {
           if (colIndex === room.x && rowIndex === room.y)
             return {
@@ -152,18 +84,18 @@ export const BoardContainer = ({ floor }) => {
     }
 
     for (let facility of facilities) {
-      newMap[facility.y][facility.x] = {
+      newBoard[facility.y][facility.x] = {
         type: FACILITY,
         id: facility.id,
-        name: getFacilityType(facility.type),
+        name: `/images/${facility.type}.png`,
         width: 1,
         height: 1,
         select: false,
       };
     }
 
-    setBoard(newMap);
-  }, [seats, rooms, facilities]);
+    setBoard(newBoard);
+  }, [floor, seats, rooms, facilities]);
 
   return (
     <div
@@ -180,7 +112,6 @@ export const BoardContainer = ({ floor }) => {
         tab={tab}
         setTab={setTab}
         board={board}
-        setBoard={setBoard}
         seats={seats}
         rooms={rooms}
         facilities={facilities}
