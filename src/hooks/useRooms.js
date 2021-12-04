@@ -25,7 +25,7 @@ const useRooms = (floorId = null) => {
     fetchRooms();
   }, [fetchRooms]);
 
-  return data;
+  return [data, setData];
 };
 
 export default useRooms;

@@ -181,57 +181,50 @@ const RoomTimeTable = ({ MAXUSER, selectedDate, roomId }) => {
             {timeTable &&
               selectedDate &&
               timeTable.map((item, idx) => (
-                <>
-                  <tr key={idx}>
-                    <td
-                      className={item.id ? 'isReserved' : 'isNotReserved'}
-                      onClick={
-                        !item.id
-                          ? e =>
-                              clickHandler(
-                                item.start_time,
-                                item.end_time,
-                                idx,
-                                e,
-                              )
-                          : null
-                      }
-                      style={
-                        clickes.includes(idx)
-                          ? {
-                              backgroundColor: 'firebrick',
-                              color: 'whitesmoke',
-                            }
-                          : clickes.includes(idx) && deleteClick
-                          ? { backgroundColor: 'rgb(240, 240, 240)' }
-                          : { backgroundColor: 'rgb(240, 240, 240)' }
-                      }
-                    >
-                      {item.start_time}-{item.end_time}
+                <tr key={idx}>
+                  <td
+                    className={item.id ? 'isReserved' : 'isNotReserved'}
+                    onClick={
+                      !item.id
+                        ? e =>
+                            clickHandler(item.start_time, item.end_time, idx, e)
+                        : null
+                    }
+                    style={
+                      clickes.includes(idx)
+                        ? {
+                            backgroundColor: 'firebrick',
+                            color: 'whitesmoke',
+                          }
+                        : clickes.includes(idx) && deleteClick
+                        ? { backgroundColor: 'rgb(240, 240, 240)' }
+                        : { backgroundColor: 'rgb(240, 240, 240)' }
+                    }
+                  >
+                    {item.start_time}-{item.end_time}
+                  </td>
+                  {item.id ? (
+                    <td className="isReserved">{item.topic}</td>
+                  ) : (
+                    <td></td>
+                  )}
+                  {item.id ? (
+                    <td className="isReserved">{item.user.name}</td>
+                  ) : (
+                    <td></td>
+                  )}
+                  {isPc && item.id ? (
+                    <td className="isReserved">
+                      {item.participants.map((users, idx) =>
+                        idx === item.participants.length - 1
+                          ? users.user.name
+                          : users.user.name + ', ',
+                      )}
                     </td>
-                    {item.id ? (
-                      <td className="isReserved">{item.topic}</td>
-                    ) : (
-                      <td></td>
-                    )}
-                    {item.id ? (
-                      <td className="isReserved">{item.user.name}</td>
-                    ) : (
-                      <td></td>
-                    )}
-                    {isPc && item.id ? (
-                      <td className="isReserved">
-                        {item.participants.map((users, idx) =>
-                          idx === item.participants.length - 1
-                            ? users.user.name
-                            : users.user.name + ', ',
-                        )}
-                      </td>
-                    ) : isPc ? (
-                      <td></td>
-                    ) : !isPc ? null : null}
-                  </tr>
-                </>
+                  ) : isPc ? (
+                    <td></td>
+                  ) : !isPc ? null : null}
+                </tr>
               ))}
           </tbody>
         </Table>

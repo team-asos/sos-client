@@ -25,7 +25,7 @@ const useSeats = (floorId = null) => {
     fetchSeats();
   }, [fetchSeats]);
 
-  return data;
+  return [data, setData];
 };
 
 export default useSeats;
