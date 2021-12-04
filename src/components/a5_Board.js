@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { GiExpand } from 'react-icons/gi';
 
+import { Item } from './a5_Item';
+
 import { EMPTY, SEAT, ROOM, FACILITY } from '../const/object-type.const';
 import {
   SELECTION_FIRST,
@@ -136,67 +138,6 @@ export const Board = React.memo(
       }
     };
 
-    const transformLength = (type, length) => {
-      if (type === ROOM) {
-        if (length === 0) return `0px`;
-        else return `${length * 50 + 10 * (length - 1)}px`;
-      } else return `${length * 50}px`;
-    };
-
-    const itemStyle = (type, select) => {
-      if (select)
-        return {
-          backgroundColor: 'rgb(199,43,43)',
-          color: 'whitesmoke',
-          borderRadius: '4px',
-        };
-
-      if (type === EMPTY || type === FACILITY)
-        return { backgroundColor: 'rgb(245, 245, 245)', borderRadius: '4px' };
-      else if (type === SEAT)
-        return {
-          backgroundColor: '#51bf60',
-          color: '#fff',
-          borderRadius: '4px',
-        };
-      else if (type === ROOM)
-        return {
-          backgroundColor: '#E5E5E5',
-          borderRadius: '4px',
-        };
-    };
-
-    const facilityStyle = { width: '100%', height: '100%', opacity: '60%' };
-
-    const Item = ({ map }) => {
-      return map.map((row, y) =>
-        row.map((col, x) => (
-          <div
-            className="board-item"
-            key={x + y * row.length}
-            onClick={() => {
-              handleSelection(x, y);
-            }}
-            style={{
-              ...itemStyle(col.type, col.select),
-              position: 'absolute',
-              width: transformLength(col.type, col.width),
-              height: transformLength(col.type, col.height),
-
-              left: `${x * 50 + 10 * x}px`,
-              top: `${y * 50 + 10 * y}px`,
-            }}
-          >
-            {col.type === FACILITY ? (
-              <img style={facilityStyle} src={col.name} alt="" />
-            ) : (
-              col.name
-            )}
-          </div>
-        )),
-      );
-    };
-
     const Board = () => {
       return (
         <div className="board-cover">
@@ -212,7 +153,7 @@ export const Board = React.memo(
                 : 'board-item-container-scale'
             }
           >
-            {map.length > 0 ? (
+            {map ? (
               <div
                 className={
                   scale === false
@@ -223,7 +164,7 @@ export const Board = React.memo(
                   position: 'relative',
                 }}
               >
-                <Item map={map} />
+                <Item map={map} handleSelection={handleSelection} />
               </div>
             ) : (
               <div className="board-no-item-text">
