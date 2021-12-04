@@ -220,9 +220,19 @@ const MyPageBox = ({ user }) => {
   return (
     <div className="myPageBox">
       <div className={isPc ? 'myPageBox-left' : 'm_myPageBox-left'}>
-        <div className="myPageBox-left-myinfo">
-          <div className="myPageBox-left-myinfo-content">
-            <div className="myPageBox-text-info">
+        <div
+          className={isPc ? 'myPageBox-left-myinfo' : 'm_myPageBox-left-myinfo'}
+        >
+          <div
+            className={
+              isPc
+                ? 'myPageBox-left-myinfo-content'
+                : 'm_myPageBox-left-myinfo-content'
+            }
+          >
+            <div
+              className={isPc ? 'myPageBox-text-info' : 'm_myPageBox-text-info'}
+            >
               {isPc ? (
                 <p style={{ fontWeight: 'bold', fontSize: '1.7em' }}>
                   나의 정보
@@ -259,7 +269,11 @@ const MyPageBox = ({ user }) => {
               </OverlayTrigger>
             </div>
             {showPwInput === false ? (
-              <div className="detail-info-container">
+              <div
+                className={
+                  isPc ? 'detail-info-container' : 'm_detail-info-container'
+                }
+              >
                 <div className={isPc ? 'detail-info' : 'm_detail-info'}>
                   <label>이름</label>
                   <input
