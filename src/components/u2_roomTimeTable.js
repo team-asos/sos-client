@@ -285,7 +285,13 @@ const RoomTimeTable = ({
           deleteClick={deleteClick}
         />
       ) : (
-        <div className="divButton">
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            marginTop: '2vh',
+          }}
+        >
           <button
             className="mRoomReservationBtn"
             onClick={reservationClickHandler}
