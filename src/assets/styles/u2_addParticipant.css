@@ -64,6 +64,9 @@
 .mAddAndButtonForm {
   display: flex;
   flex-direction: column;
+  background-color: rgb(240, 240, 240);
+  height: auto;
+  width: 99vw;
 }
 .addParticipantForm {
   display: flex;

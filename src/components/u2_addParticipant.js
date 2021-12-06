@@ -225,7 +225,7 @@ const AddParticipant = ({
       <div className={isPc ? 'addAndButtonForm' : 'mAddAndButtonForm'}>
         <div className={isPc ? 'addParticipantForm' : 'mParticipantForm'}>
           <p className={isPc ? 'rrp_centerTextStyle' : 'mrrp_centerTextStyle'}>
-            회의 참석자를 입력하세요. [ 사용 가능 인원 : {MAXUSER - 1}명 ]
+            회의 참석자를 입력하세요. [ 추가 가능 인원 : {MAXUSER - 1}명 ]
           </p>
 
           <div className={isPc ? 'searchForm' : 'mSearchForm'}>
