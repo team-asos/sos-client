@@ -14,10 +14,10 @@
   border: 0;
   font-size: 0.9em;
   font-weight: bold;
-  width: 120px;
+  width: 110px;
   height: 30px;
-  border-radius: 10px;
-  margin-left: 2%;
+  border-radius: 7px;
+  margin-left: 3%;
 }
 .roomDatePicker {
   display: flex;
@@ -33,4 +33,6 @@
 .m_timeTableAndAddParticipant {
   display: flex;
   flex-direction: column;
+  width: 95vw;
+  margin-left: 2%;
 }

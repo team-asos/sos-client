@@ -17,6 +17,7 @@
 }
 .m_reservationForm {
   width: 100%;
+  overflow: auto;
   background-color: rgb(240, 240, 240);
 }
 /*회의실 예약 페이지 헤더*/

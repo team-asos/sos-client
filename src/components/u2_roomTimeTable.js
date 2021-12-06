@@ -6,7 +6,15 @@ import AddParticipant from './u2_addParticipant';
 import * as GrIcon from 'react-icons/gr';
 
 import '../assets/styles/u2_roomTimeTable.css';
-const RoomTimeTable = ({ MAXUSER, selectedDate, roomId }) => {
+const RoomTimeTable = ({
+  MAXUSER,
+  selectedDate,
+  roomId,
+  selectedMembers,
+  myId,
+  membersId,
+  topic,
+}) => {
   const isPc = useMediaQuery({
     query: '(min-width:768px)',
   });
@@ -70,7 +78,44 @@ const RoomTimeTable = ({ MAXUSER, selectedDate, roomId }) => {
         );
       });
   };
+  /*예약하기 */
+  const reservationClickHandler = async () => {
+    if (start.length <= 2 || end.length <= 2) {
+      alert('시간을 선택해주세요.');
+      return;
+    }
+    if (topic.length === 0) {
+      alert('회의 주제를 입력해주세요.');
+      return;
+    }
 
+    for (let i = 0; i < selectedMembers.length; i++) {
+      membersId.push(selectedMembers[i].id);
+    }
+    const response = await fetch(
+      `${process.env.REACT_APP_SERVER_BASE_URL}/reservations/room`,
+      {
+        headers: {
+          'Content-type': 'application/json',
+        },
+        method: 'POST',
+        body: JSON.stringify({
+          startTime: selectedDate.slice(0, 11) + start,
+          endTime: selectedDate.slice(0, 11) + end,
+          userId: Number(myId),
+          roomId: Number(roomId),
+          participantIds: membersId,
+          topic,
+        }),
+      },
+    );
+    if (response.status === 201) {
+      alert('예약이 완료되었습니다.');
+      window.location.href = `/room-reservation/${roomId}`;
+    } else {
+      alert(response.status);
+    }
+  };
   useEffect(() => {
     if (secondClick.isClicked) {
       setEnd(secondClick.End);
@@ -229,15 +274,26 @@ const RoomTimeTable = ({ MAXUSER, selectedDate, roomId }) => {
           </tbody>
         </Table>
       </div>
-      <AddParticipant
-        START={start}
-        END={end}
-        MAXUSER={MAXUSER}
-        ROOMID={roomId}
-        selectedDate={selectedDate}
-        timeTable={timeTable}
-        deleteClick={deleteClick}
-      />
+      {isPc ? (
+        <AddParticipant
+          START={start}
+          END={end}
+          MAXUSER={MAXUSER}
+          ROOMID={roomId}
+          selectedDate={selectedDate}
+          timeTable={timeTable}
+          deleteClick={deleteClick}
+        />
+      ) : (
+        <div className="divButton">
+          <button
+            className="mRoomReservationBtn"
+            onClick={reservationClickHandler}
+          >
+            예약하기
+          </button>
+        </div>
+      )}
     </>
   );
 };
