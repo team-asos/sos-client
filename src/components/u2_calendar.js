@@ -7,6 +7,7 @@ import { addDays } from 'date-fns';
 import RoomTimeTable from './u2_roomTimeTable';
 import { useMediaQuery } from 'react-responsive';
 import * as moment from 'moment';
+import AddParticipant from './u2_addParticipant';
 import '../assets/styles/u2_calendar.css';
 //회의실 예약 페이지-> 이용시간 선택
 const Calendar = props => {
@@ -67,11 +68,19 @@ const Calendar = props => {
           isPc ? 'timeTableAndAddParticipant' : 'm_timeTableAndAddParticipant'
         }
       >
-        <RoomTimeTable
-          MAXUSER={roomMAXUSER}
-          selectedDate={moment(startDate).format('YYYY-MM-DD HH:mm')}
-          roomId={roomID}
-        />
+        {isPc ? (
+          <RoomTimeTable
+            MAXUSER={roomMAXUSER}
+            selectedDate={moment(startDate).format('YYYY-MM-DD HH:mm')}
+            roomId={roomID}
+          />
+        ) : (
+          <AddParticipant
+            MAXUSER={roomMAXUSER}
+            selectedDate={moment(startDate).format('YYYY-MM-DD HH:mm')}
+            ROOMID={roomID}
+          />
+        )}
       </div>
     </div>
   );

@@ -4,6 +4,8 @@ import { useCookies } from 'react-cookie';
 import { Table, Dropdown } from 'react-bootstrap';
 import * as AiIcon from 'react-icons/ai';
 import { useMediaQuery } from 'react-responsive';
+import RoomTimeTable from './u2_roomTimeTable';
+
 import '../assets/styles/u2_addParticipant.css';
 //회의실 인원 검색해서 추가
 const AddParticipant = ({
@@ -12,7 +14,6 @@ const AddParticipant = ({
   MAXUSER,
   ROOMID,
   selectedDate,
-  timeTable,
   deleteClick,
 }) => {
   const isPc = useMediaQuery({
@@ -29,8 +30,6 @@ const AddParticipant = ({
   const [start, setStart] = useState('시작'); //props로 받아온 START 저장할 변수
   const [end, setEnd] = useState('종료'); //props로 받아온 END 저장할 변수
   const [topic, setTopic] = useState(''); //회의 주제
-  const [isSelected, setIsSelected] = useState([0]);
-
   const res = async () => {
     const response = await fetch(
       `${process.env.REACT_APP_SERVER_BASE_URL}/auth`,
@@ -57,7 +56,6 @@ const AddParticipant = ({
         setUsers(json.filter(user => user.id !== authJson.id));
       });
   };
-
   /*내 정보 */
   useEffect(() => {
     res();
@@ -78,6 +76,7 @@ const AddParticipant = ({
     setEnd(END);
     setEndTime(selectedDate.slice(0, 11) + END);
   };
+
   useEffect(() => {
     if (START === '시작') setStart(START);
     else if (START !== null) getStartTime();
@@ -102,7 +101,6 @@ const AddParticipant = ({
     }
 
     for (let i = 0; i < selectedMembers.length; i++) {
-      //setMembersId(selectedMembers[i].value);
       membersId.push(selectedMembers[i].id);
     }
     const response = await fetch(
@@ -136,18 +134,7 @@ const AddParticipant = ({
     );
     users.push(user);
   };
-  /*드롭다운에서 선택 했을 때 예약할 때 보낼 값 */
-  const setStartThisClick = dropDownStartTime => {
-    setStart(dropDownStartTime); //드롭다운 value 값 변경하기 위해
-    setStartTime(
-      //예약할 때 보내기 위해 문자열 변환
-      selectedDate.slice(0, 11) + dropDownStartTime,
-    );
-  };
-  const setEndThisClick = dropDownEndTime => {
-    setEnd(dropDownEndTime); //드롭다운 value 값 변경하기 위해
-    setEndTime(selectedDate.slice(0, 11) + dropDownEndTime); //예약할 때 보내기 위해 문자열 변환
-  };
+
   /*선택취소 눌렸을 때 초기화 */
   const deleteClicked = () => {
     setStart('시작');
@@ -163,58 +150,32 @@ const AddParticipant = ({
   };
 
   return (
-    <div className="roomReservationFormRight">
-      <div className={isPc ? 'selectedTime' : 'm_selectedTime'}>
-        <Dropdown>
-          <Dropdown.Toggle
-            variant="secondary"
-            id="dropdown-basic"
-            className={isPc ? 'dropDownToggle' : 'm_dropDownToggle'}
-            disabled={true}
-          >
-            {start}
-          </Dropdown.Toggle>
-
-          <Dropdown.Menu style={{ height: '40vh', overflow: 'auto' }}>
-            <Dropdown.Item onClick={() => setStart('시작')}>
-              선택 안함
-            </Dropdown.Item>
-            {timeTable.map((time, idx) => (
-              <Dropdown.Item
-                key={idx}
-                onClick={() => setStartThisClick(time.start_time)}
-              >
-                {time.start_time}
-              </Dropdown.Item>
-            ))}
-          </Dropdown.Menu>
-        </Dropdown>
-        <p style={{ marginRight: '8%', marginLeft: '8%' }}>~</p>
-        <Dropdown>
-          <Dropdown.Toggle
-            variant="secondary"
-            id="dropdown-basic"
-            className={isPc ? 'dropDownToggle' : 'm_dropDownToggle'}
-            disabled={true}
-          >
-            {end}
-          </Dropdown.Toggle>
-
-          <Dropdown.Menu style={{ height: '40vh', overflow: 'auto' }}>
-            <Dropdown.Item onClick={() => setEnd('종료')}>
-              선택 안함
-            </Dropdown.Item>
-            {timeTable.map((time, idx) => (
-              <Dropdown.Item
-                key={idx}
-                onClick={() => setEndThisClick(time.end_time)}
-              >
-                {time.end_time}
-              </Dropdown.Item>
-            ))}
-          </Dropdown.Menu>
-        </Dropdown>
-      </div>
+    <div className={isPc ? 'roomReservationFormRight' : ''}>
+      {isPc ? (
+        <div className={isPc ? 'selectedTime' : 'm_selectedTime'}>
+          <Dropdown>
+            <Dropdown.Toggle
+              variant="secondary"
+              id="dropdown-basic"
+              className={isPc ? 'dropDownToggle' : 'm_dropDownToggle'}
+              disabled={true}
+            >
+              {start}
+            </Dropdown.Toggle>
+          </Dropdown>
+          <p style={{ marginRight: '8%', marginLeft: '8%' }}>~</p>
+          <Dropdown>
+            <Dropdown.Toggle
+              variant="secondary"
+              id="dropdown-basic"
+              className={isPc ? 'dropDownToggle' : 'm_dropDownToggle'}
+              disabled={true}
+            >
+              {end}
+            </Dropdown.Toggle>
+          </Dropdown>
+        </div>
+      ) : null}
       <div className={isPc ? 'meetingTopicForm' : 'm_meetingTopicForm'}>
         <input
           className={isPc ? 'topicInput' : 'm_topicInput'}
@@ -276,15 +237,29 @@ const AddParticipant = ({
             </Table>
           </div>
         </div>
-        <div className={isMobile ? 'divButton' : ''}>
-          <button
-            className={isPc ? 'roomReservationBtn' : 'mRoomReservationBtn'}
-            onClick={reservationClickHandler}
-          >
-            예약하기
-          </button>
-        </div>
+        {isPc ? (
+          <div className={isMobile ? 'divButton' : ''}>
+            <button
+              className={isPc ? 'roomReservationBtn' : 'mRoomReservationBtn'}
+              onClick={reservationClickHandler}
+            >
+              예약하기
+            </button>
+          </div>
+        ) : null}
       </div>
+      {isPc ? null : (
+        <RoomTimeTable
+          selectedDate={selectedDate}
+          roomId={ROOMID}
+          selectedMembers={selectedMembers}
+          myId={myId}
+          membersId={membersId}
+          topic={topic}
+          setStart={setStart}
+          setEnd={setEnd}
+        />
+      )}
     </div>
   );
 };
