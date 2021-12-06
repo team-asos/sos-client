@@ -27,6 +27,29 @@ const RoomReservationInfo = props => {
       });
   };
 
+  const deleteRoomReservationClick = reservationId => {
+    console.log(reservationId);
+    const deleteRoomReservation = async () => {
+      const response = await fetch(
+        `${process.env.REACT_APP_SERVER_BASE_URL}/reservations/${reservationId}`,
+        {
+          headers: {
+            'Content-type': 'application/json',
+          },
+          method: 'DELETE',
+        },
+      );
+      if (response.status === 200) {
+        alert('예약 취소가 완료되었습니다.');
+        window.location.href = '/user-mypage';
+      } else {
+        const json = await response.json();
+        alert(json.message);
+      }
+    };
+    deleteRoomReservation();
+  };
+
   //예외처리
   useEffect(() => {
     if (props.user.id !== 'undefined') res();
@@ -73,11 +96,22 @@ const RoomReservationInfo = props => {
           >
             <MDBTableHead style={{ fontSize: '0.9em' }}>
               <tr>
-                <th style={{ width: '20%' }}>이용 날짜</th>
-                <th style={{ width: '20%' }}>예약 정보</th>
-                <th style={{ width: '20%' }}>시작 시간</th>
-                <th style={{ width: '20%' }}>종료 시간</th>
-                <th style={{ width: '20%' }}>예약 상태</th>
+                <th style={isPc ? { width: '20%' } : { width: '20%' }}>
+                  {isPc ? '이용 날짜' : '날짜'}
+                </th>
+                <th style={isPc ? { width: '20%' } : { width: '20%' }}>
+                  {isPc ? '예약 정보' : '정보'}
+                </th>
+                <th style={isPc ? { width: '15%' } : { width: '10%' }}>
+                  {isPc ? '시작 시간' : '시작'}
+                </th>
+                <th style={isPc ? { width: '15%' } : { width: '10%' }}>
+                  {isPc ? '종료 시간' : '종료'}
+                </th>
+                <th style={isPc ? { width: '20%' } : { width: '20%' }}>
+                  {isPc ? '예약 상태' : '상태'}
+                </th>
+                <th style={isPc ? { width: '10%' } : { width: '20%' }}></th>
               </tr>
             </MDBTableHead>
             <MDBTableBody style={{ height: '100%' }}>
@@ -101,6 +135,18 @@ const RoomReservationInfo = props => {
                             : item.status === 1
                             ? '사용 중'
                             : '사용 완료'}
+                        </td>
+                        <td>
+                          {item.status === 0 ? (
+                            <button
+                              className="roomReservationDeleteBtn"
+                              onClick={() =>
+                                deleteRoomReservationClick(item.id)
+                              }
+                            >
+                              취소
+                            </button>
+                          ) : null}
                         </td>
                       </tr>
                     ) : null,
